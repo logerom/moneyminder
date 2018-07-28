@@ -5,6 +5,7 @@
             name="viewModel"
             type="de.logerbyte.moneyminder.cashsummary.CashSummaryViewModel"/>
     </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -26,38 +27,24 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_label_cash"
+                android:id="@+id/tv_label_spend_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start Guthaben" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_label_cash"
-                android:layout_marginStart="20dp"
-                tools:text="1.000€"/>
-
-            <TextView
-                android:id="@+id/tv_label_actual_cash"
-                android:layout_marginStart="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="Aktuelles Guthaben"/>
+                android:layout_gravity="center"
+                android:text="@string/spend_money_label"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/tv_label_actual_cash"
-                android:layout_marginEnd="20dp"
+                android:layout_gravity="center"
                 tools:text="500€"/>
-        </RelativeLayout>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -76,12 +63,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>-->
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="01.01.2018"/>
+                android:inputType="date"
+                android:hint="dd.mm.yy"/>
 
             <EditText
                 android:layout_width="wrap_content"
@@ -98,6 +86,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@()->viewModel.onClickAddCash()"
                 android:layout_weight="0.1"
                 android:text="Add"/>
         </LinearLayout>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoneyMinder</string>
+    <string name="spend_money_label">Ausgaben</string>
 </resources>
