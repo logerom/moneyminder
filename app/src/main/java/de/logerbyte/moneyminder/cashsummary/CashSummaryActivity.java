@@ -1,9 +1,11 @@
-package de.logerbyte.moneyminder;
+package de.logerbyte.moneyminder.cashsummary;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity {
+import de.logerbyte.moneyminder.R;
+
+public class CashSummaryActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

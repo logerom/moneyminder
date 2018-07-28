@@ -1,101 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="de.logerbyte.moneyminder.MainActivity">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_costs"
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="de.logerbyte.moneyminder.cashsummary.CashSummaryViewModel"/>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        tools:listitem="@layout/adapter_entry"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="de.logerbyte.moneyminder.cashsummary.CashSummaryActivity">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_costs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:listitem="@layout/adapter_entry"
+            android:layout_weight="1"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:id="@+id/tv_label_cash"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_label_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Guthaben" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_label_cash"
+                android:layout_marginStart="20dp"
+                tools:text="1.000€"/>
+
+            <TextView
+                android:id="@+id/tv_label_actual_cash"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Aktuelles Guthaben"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/tv_label_actual_cash"
+                android:layout_marginEnd="20dp"
+                tools:text="500€"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Guthaben" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_cash"
-            android:layout_marginStart="20dp"
-            tools:text="1.000€"/>
+            android:orientation="horizontal"
+            android:weightSum="8">
 
-        <TextView
-            android:id="@+id/tv_label_actual_cash"
-            android:layout_marginStart="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Aktuelles Guthaben"/>
+            <!--<DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/tv_label_actual_cash"
-            android:layout_marginEnd="20dp"
-            tools:text="500€"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="01.01.2018"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:hint="Eintrag"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="8">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:hint="Betrag in €"/>
 
-        <!--<DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>-->
-
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="01.01.2018"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:hint="Eintrag"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:hint="Betrag in €"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="Add"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:text="Add"/>
+        </LinearLayout>
     </LinearLayout>
-
-
-
-</LinearLayout>
+</layout>
