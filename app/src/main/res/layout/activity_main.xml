@@ -70,18 +70,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="date"
+                android:text="@={viewModel.cashDate}"
                 android:hint="dd.mm.yy"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
+                android:text="@={viewModel.cashName}"
+
                 android:hint="Eintrag"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
+                android:text="@={viewModel.cashInEuro}"
                 android:hint="Betrag in €"/>
 
             <Button
