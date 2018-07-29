@@ -6,6 +6,8 @@ import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by logerom on 28.07.18.
  */
@@ -15,13 +17,16 @@ public class CashSummaryViewModel extends ViewModel{
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashName = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
+    private ArrayList<CashItem> cashList;
 
     public CashSummaryViewModel() {
         cashAdapter = new CashAdapter();
     }
 
     public void onClickAddCash(View view){
-
+        // TODO: 29.07.18 add item to list + notify data set changed
+        cashAdapter.setList(cashList);
+        cashAdapter.notifyDataSetChanged();
     }
 
 
