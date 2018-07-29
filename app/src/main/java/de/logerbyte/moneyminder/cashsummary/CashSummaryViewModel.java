@@ -25,7 +25,7 @@ public class CashSummaryViewModel extends ViewModel{
     }
 
 
-    @BindingAdapter({"binding:adapter"})
+    @BindingAdapter({"adapter"})
     public static void setAdapter(RecyclerView recyclerView, CashAdapter cashAdapter) {
         recyclerView.setAdapter(cashAdapter);
     }
