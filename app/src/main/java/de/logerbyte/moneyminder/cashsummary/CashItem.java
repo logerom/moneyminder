@@ -1,11 +1,25 @@
 package de.logerbyte.moneyminder.cashsummary;
 
+import android.databinding.ObservableField;
+
 /**
  * Created by logerom on 29.07.18.
  */
 
-class CashItem {
-    String cashName;
-    String cashDate;
-    String cashInEuro;
+public class CashItem {
+    ObservableField<String> cashName = new ObservableField<>();
+    ObservableField<String> cashDate = new ObservableField<>();
+    ObservableField<String> cashInEuro = new ObservableField<>();
+
+    public ObservableField<String> getCashName() {
+        return cashName;
+    }
+
+    public ObservableField<String> getCashDate() {
+        return cashDate;
+    }
+
+    public ObservableField<String> getCashInEuro() {
+        return cashInEuro;
+    }
 }
