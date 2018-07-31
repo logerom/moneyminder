@@ -3,6 +3,7 @@ package de.logerbyte.moneyminder.cashsummary;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -17,22 +18,29 @@ public class CashSummaryViewModel extends ViewModel{
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashName = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
-    private ArrayList<CashItem> cashList;
+    private ArrayList<CashItem> cashList = new ArrayList<>();
 
     public CashSummaryViewModel() {
+        // TODO: 30.07.18 load cash list from database
         cashAdapter = new CashAdapter();
     }
 
     public void onClickAddCash(View view){
         // TODO: 29.07.18 add item to list + notify data set changed
+        setCashItem();
         cashAdapter.setList(cashList);
         cashAdapter.notifyDataSetChanged();
+    }
+
+    private void setCashItem() {
+        cashList.add(new CashItem(cashDate.get(), cashName.get(), cashInEuro.get()));
     }
 
 
     @BindingAdapter({"adapter"})
     public static void setAdapter(RecyclerView recyclerView, CashAdapter cashAdapter) {
         recyclerView.setAdapter(cashAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
     }
 
     public CashAdapter getCashAdapter() {

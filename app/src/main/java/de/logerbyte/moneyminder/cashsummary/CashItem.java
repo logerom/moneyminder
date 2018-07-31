@@ -11,6 +11,12 @@ public class CashItem {
     ObservableField<String> cashDate = new ObservableField<>();
     ObservableField<String> cashInEuro = new ObservableField<>();
 
+    public CashItem(String cashDate, String cashName, String cashInEuro) {
+        this.cashDate.set(cashDate);
+        this.cashName.set(cashName);
+        this.cashInEuro.set(cashInEuro);
+    }
+
     public ObservableField<String> getCashName() {
         return cashName;
     }
