@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="500€"/>
+                tools:text="@{viewModel.totalExpenses}" />
         </LinearLayout>
 
         <View
@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
                 android:text="@={viewModel.cashInEuro}"
+                android:inputType="number"
                 android:hint="Betrag in €"/>
 
             <Button

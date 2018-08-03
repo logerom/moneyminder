@@ -19,17 +19,25 @@ public class CashSummaryViewModel extends ViewModel{
     private ObservableField<String> cashName = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private ArrayList<CashItem> cashList = new ArrayList<>();
+    private ObservableField<String> totalExpenses = new ObservableField<>();
 
     public CashSummaryViewModel() {
         // TODO: 30.07.18 load cash list from database
         cashAdapter = new CashAdapter();
+        totalExpenses.set(String.valueOf(0));
     }
 
     public void onClickAddCash(View view){
         // TODO: 29.07.18 add item to list + notify data set changed
         setCashItem();
+        addCashToTotal();
         cashAdapter.setList(cashList);
         cashAdapter.notifyDataSetChanged();
+    }
+
+    private void addCashToTotal() {
+        Integer euro = Integer.valueOf(totalExpenses.get()) + Integer.valueOf(cashInEuro.get());
+        totalExpenses.set(String.valueOf(euro));
     }
 
     private void setCashItem() {
@@ -58,5 +66,7 @@ public class CashSummaryViewModel extends ViewModel{
     public ObservableField<String> getCashDate() {
         return cashDate;
     }
+
+    public ObservableField<String> getTotalExpenses() { return totalExpenses; }
 }
 
