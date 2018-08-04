@@ -39,7 +39,7 @@ public class CashSummaryViewModel extends ViewModel{
 
     private void addCashToTotal() {
         Double euro = Double.valueOf(DigitUtil.commaToDot(totalExpenses.get())) + Double.valueOf(DigitUtil.commaToDot(cashInEuro.get()));
-        totalExpenses.set(String.valueOf(euro));
+        totalExpenses.set(String.valueOf(Math.floor(euro * 100) / 100));
     }
 
     private void setCashItem() {
