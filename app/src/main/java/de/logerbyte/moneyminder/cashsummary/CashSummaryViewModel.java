@@ -30,7 +30,6 @@ public class CashSummaryViewModel extends ViewModel{
     }
 
     public void onClickAddCash(View view){
-        // TODO: 29.07.18 add item to list + notify data set changed
         setCashItem();
         addCashToTotal();
         cashAdapter.setList(cashList);
