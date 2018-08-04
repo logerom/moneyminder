@@ -9,6 +9,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import de.logerbyte.moneyminder.util.DigitUtil;
+
 /**
  * Created by logerom on 28.07.18.
  */
@@ -36,7 +38,7 @@ public class CashSummaryViewModel extends ViewModel{
     }
 
     private void addCashToTotal() {
-        Integer euro = Integer.valueOf(totalExpenses.get()) + Integer.valueOf(cashInEuro.get());
+        Double euro = Double.valueOf(DigitUtil.commaToDot(totalExpenses.get())) + Double.valueOf(DigitUtil.commaToDot(cashInEuro.get()));
         totalExpenses.set(String.valueOf(euro));
     }
 
@@ -67,6 +69,9 @@ public class CashSummaryViewModel extends ViewModel{
         return cashDate;
     }
 
-    public ObservableField<String> getTotalExpenses() { return totalExpenses; }
+    public ObservableField<String> getTotalExpenses() {
+        totalExpenses.set(DigitUtil.dotToComma(totalExpenses.get()));
+        return totalExpenses;
+    }
 }
 
