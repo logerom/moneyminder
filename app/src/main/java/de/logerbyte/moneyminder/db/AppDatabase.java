@@ -1,10 +1,10 @@
-package de.logerbyte.moneyminder.data.db;
+package de.logerbyte.moneyminder.db;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-import de.logerbyte.moneyminder.data.db.expense.Expense;
-import de.logerbyte.moneyminder.data.db.expense.ExpenseDao;
+import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.db.expense.ExpenseDao;
 
 /**
  * Created by logerom on 08.08.18.

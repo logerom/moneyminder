@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.data.db.expense;
+package de.logerbyte.moneyminder.db.expense;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;

@@ -13,6 +13,6 @@ public class CashSummaryActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setViewModel(new CashSummaryViewModel());
+        binding.setViewModel(new CashSummaryViewModel(this));
     }
 }

@@ -7,6 +7,7 @@ import android.databinding.ObservableField;
  */
 
 public class CashItem {
+    long entryId;
     ObservableField<String> cashName = new ObservableField<>();
     ObservableField<String> cashDate = new ObservableField<>();
     ObservableField<String> cashInEuro = new ObservableField<>();
