@@ -12,7 +12,7 @@ import de.logerbyte.moneyminder.db.expense.Expense;
 
 public class ConvertUtil {
     public static ArrayList<CashItem> convert(List<Expense> expenses) {
-
+// TODO: 09.08.18 convert db model to list entry
         return null;
     }
 }
