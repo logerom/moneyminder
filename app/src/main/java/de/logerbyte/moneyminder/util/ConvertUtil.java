@@ -11,8 +11,14 @@ import de.logerbyte.moneyminder.db.expense.Expense;
  */
 
 public class ConvertUtil {
-    public static ArrayList<CashItem> convert(List<Expense> expenses) {
-// TODO: 09.08.18 convert db model to list entry
-        return null;
+
+    public static ArrayList<CashItem> expensesToCashItems(List<Expense> expenses) {
+        ArrayList<CashItem> cashItems = new ArrayList<>();
+
+        for (Expense expense :expenses) {
+            CashItem item = new CashItem(expense.cashDate, expense.cashName, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
+            cashItems.add(item);
+        }
+        return cashItems;
     }
 }

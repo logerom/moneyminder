@@ -13,6 +13,6 @@ public class Expense {
     @PrimaryKey
     public Long id;
     public String cashName;
-    public long cashDate;
+    public String cashDate;
     public double cashInEuro;
 }
