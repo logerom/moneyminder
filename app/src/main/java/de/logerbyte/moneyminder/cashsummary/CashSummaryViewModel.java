@@ -41,9 +41,12 @@ public class CashSummaryViewModel extends ViewModel{
         appDatabaseManager.getAllExpense()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(expenses -> cashList = ConvertUtil.expensesToCashItems(expenses));
-        cashAdapter.setList(cashList);
-        cashAdapter.notifyDataSetChanged();
+                .subscribe(expenses -> {
+                    cashList = ConvertUtil.expensesToCashItems(expenses);
+                    cashAdapter.setList(cashList);
+                    cashAdapter.notifyDataSetChanged();
+                });
+
 
     }
 
