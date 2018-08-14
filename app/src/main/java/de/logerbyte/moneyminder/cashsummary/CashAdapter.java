@@ -40,6 +40,7 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return list.size();
+        // TODO: 14.08.18 will be called every time I switched in date - Enntry - CashInEuro
     }
 
     public void setList(ArrayList<CashItem> list) {

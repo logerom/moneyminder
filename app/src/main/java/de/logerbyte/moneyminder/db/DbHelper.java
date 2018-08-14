@@ -11,4 +11,6 @@ import io.reactivex.Observable;
 
 public interface DbHelper {
     Observable<List<Expense>> getAllExpense();
+
+    Observable<Boolean> insertCashItemIntoDB(Expense expense);
 }

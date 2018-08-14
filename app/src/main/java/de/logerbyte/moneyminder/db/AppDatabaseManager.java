@@ -25,4 +25,12 @@ public class AppDatabaseManager implements DbHelper{
     public Observable<List<Expense>> getAllExpense() {
         return Observable.fromCallable(() -> mAppDatabase.expenseDao().selectAll());
     }
+
+    @Override
+    public Observable<Boolean> insertCashItemIntoDB(Expense expense) {
+        return Observable.fromCallable(()-> {
+            mAppDatabase.expenseDao().insert(expense);
+            return true;
+        });
+    }
 }
