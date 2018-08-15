@@ -21,9 +21,10 @@ import io.reactivex.schedulers.Schedulers;
  * Created by logerom on 28.07.18.
  */
 
-public class CashSummaryViewModel extends ViewModel{
+public class CashSummaryViewModel extends ViewModel implements CashSummaryMVVM.Listener{
     private final CashAdapter cashAdapter;
     private final AppDatabaseManager appDatabaseManager;
+    // TODO: 15.08.18 observable from cashItem instead every own field?
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashName = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
@@ -35,7 +36,7 @@ public class CashSummaryViewModel extends ViewModel{
     public CashSummaryViewModel(CashSummaryActivity cashSummaryActivity) {
         appDatabaseManager = new AppDatabaseManager(cashSummaryActivity);
         cashAdapter = new CashAdapter();
-
+        cashAdapter.setCashViewModelListener(this);
         loadExpenseList();
         totalExpenses.set(String.valueOf(0));
     }
@@ -51,36 +52,21 @@ public class CashSummaryViewModel extends ViewModel{
                     cashAdapter.setList(cashList);
                     cashAdapter.notifyDataSetChanged();
                 });
-
-
     }
 
     public void onClickAddCash(View view){
-        setCashItem();
-        loadExpenseList();
-    }
-
-    private void addCashToTotal(List<Expense> cashList) {
-        double totalCash = 0.0;
-
-        for (Expense expense : cashList) {
-            totalCash = totalCash + expense.cashInEuro;
-        }
-
-        totalExpenses.set(String.valueOf(Math.floor(totalCash * 100) / 100));
-    }
-
-    private void setCashItem() {
-        CashItem cashItem = new CashItem(cashDate.get(), cashName.get(), cashInEuro.get());
         Expense expense = new Expense(null, cashName.get(), cashDate.get(), Double.valueOf(DigitUtil.commaToDot(cashInEuro.get())));
-        cashList.add(cashItem);
         appDatabaseManager.insertCashItemIntoDB(expense)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe();
+                .subscribe(
+                        aBoolean -> loadExpenseList());
         // TODO: 14.08.18 what is when error?
     }
 
+    private void addCashToTotal(List<Expense> cashList) {
+        totalExpenses.set(DigitUtil.getCashTotal(cashList));
+    }
 
     @BindingAdapter({"adapter"})
     public static void setAdapter(RecyclerView recyclerView, CashAdapter cashAdapter) {
@@ -107,6 +93,16 @@ public class CashSummaryViewModel extends ViewModel{
     public ObservableField<String> getTotalExpenses() {
         totalExpenses.set(DigitUtil.dotToComma(totalExpenses.get()));
         return totalExpenses;
+    }
+
+    @Override
+    public void onCashItemDeleteClicked(Long cashItemId) {
+        appDatabaseManager.deleteCashItem(cashItemId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aBoolean -> {
+                   loadExpenseList();
+                });
     }
 }
 

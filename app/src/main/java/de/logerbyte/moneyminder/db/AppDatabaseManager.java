@@ -33,4 +33,12 @@ public class AppDatabaseManager implements DbHelper{
             return true;
         });
     }
+
+    @Override
+    public Observable<Boolean> deleteCashItem(long id) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.expenseDao().delete(id);
+            return true;
+        });
+    }
 }

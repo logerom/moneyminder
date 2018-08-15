@@ -20,6 +20,7 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> {
 
     private ArrayList<CashItem> list = new ArrayList<>();
     private LayoutInflater layoutInflater;
+    CashSummaryMVVM.Listener cashViewModelListener;
 
     @NonNull
     @Override
@@ -34,7 +35,8 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CashItem cashItem = list.get(position);
-        holder.binding.setViewModel(cashItem);
+        holder.binding.setVmCashItem(cashItem);
+        holder.binding.setVmCashSummary(cashViewModelListener);
     }
 
     @Override
@@ -47,7 +49,9 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> {
         this.list = list;
     }
 
-    // TODO: 29.07.18 why an extra viewHolder?
+    public void setCashViewModelListener(CashSummaryMVVM.Listener cashViewModelListener) { this.cashViewModelListener = cashViewModelListener; }
+
+    // fixme: 29.07.18 why an extra viewHolder?
     protected static class ViewHolder extends RecyclerView.ViewHolder {
 
         AdapterEntryBinding binding;

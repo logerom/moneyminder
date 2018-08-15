@@ -19,4 +19,7 @@ public interface ExpenseDao {
 
     @Insert(onConflict = OnConflictStrategy.ROLLBACK)
     void insert(Expense expense);
+
+    @Query("DELETE FROM Expense where id = :entryId")
+    void delete(long entryId);
 }

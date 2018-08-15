@@ -2,8 +2,11 @@
 <layout>
     <data>
         <variable
-            name="viewModel"
+            name="vmCashItem"
             type="de.logerbyte.moneyminder.cashsummary.CashItem"/>
+        <variable
+            name="vmCashSummary"
+            type="de.logerbyte.moneyminder.cashsummary.CashSummaryMVVM.Listener"/>
     </data>
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -18,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@={viewModel.cashDate}"
+            android:text="@={vmCashItem.cashDate}"
             tools:hint="01.01.18"/>
 
         <EditText
@@ -26,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
-            android:text="@={viewModel.cashName}"
+            android:text="@={vmCashItem.cashName}"
             android:hint="Eintrag"/>
 
         <EditText
@@ -34,13 +37,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:text="@={viewModel.cashInEuro}"
+            android:text="@={vmCashItem.cashInEuro}"
             android:hint="Betrag in €"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:text="Edit"/>
+            android:onClick="@{() -> vmCashSummary.onCashItemDeleteClicked(vmCashItem.entryId)}"
+            android:text="Delete"/>
     </LinearLayout>
 </layout>

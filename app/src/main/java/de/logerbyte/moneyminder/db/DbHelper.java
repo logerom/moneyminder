@@ -13,4 +13,6 @@ public interface DbHelper {
     Observable<List<Expense>> getAllExpense();
 
     Observable<Boolean> insertCashItemIntoDB(Expense expense);
+
+    Observable<Boolean> deleteCashItem(long id);
 }

@@ -16,7 +16,7 @@ public class ConvertUtil {
         ArrayList<CashItem> cashItems = new ArrayList<>();
 
         for (Expense expense :expenses) {
-            CashItem item = new CashItem(expense.cashDate, expense.cashName, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
+            CashItem item = new CashItem(expense.id, expense.cashDate, expense.cashName, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
             cashItems.add(item);
         }
         return cashItems;

@@ -12,10 +12,15 @@ public class CashItem {
     ObservableField<String> cashDate = new ObservableField<>();
     ObservableField<String> cashInEuro = new ObservableField<>();
 
-    public CashItem(String cashDate, String cashName, String cashInEuro) {
+    public CashItem(long entryId, String cashDate, String cashName, String cashInEuro) {
+        this.entryId = entryId;
         this.cashDate.set(cashDate);
         this.cashName.set(cashName);
         this.cashInEuro.set(cashInEuro);
+    }
+
+    public long getEntryId() {
+        return entryId;
     }
 
     public ObservableField<String> getCashName() {
