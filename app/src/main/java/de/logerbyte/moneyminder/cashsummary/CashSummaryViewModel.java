@@ -24,14 +24,14 @@ import io.reactivex.schedulers.Schedulers;
 public class CashSummaryViewModel extends ViewModel implements CashSummaryMVVM.Listener{
     private final CashAdapter cashAdapter;
     private final AppDatabaseManager appDatabaseManager;
-    // TODO: 15.08.18 observable from cashItem instead every own field?
+    // fixme: 15.08.18 observable from cashItem instead every own field?
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashName = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private ArrayList<CashItem> cashList = new ArrayList<>();
     private ObservableField<String> totalExpenses = new ObservableField<>();
 
-    // TODO: 14.08.18 add live data in view and viewModel which updates the "view observable"
+    // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
 
     public CashSummaryViewModel(CashSummaryActivity cashSummaryActivity) {
         appDatabaseManager = new AppDatabaseManager(cashSummaryActivity);
@@ -61,7 +61,7 @@ public class CashSummaryViewModel extends ViewModel implements CashSummaryMVVM.L
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         aBoolean -> loadExpenseList());
-        // TODO: 14.08.18 what is when error?
+        // fixme: 14.08.18 what is when error?
     }
 
     private void addCashToTotal(List<Expense> cashList) {
