@@ -15,16 +15,15 @@ public class CashSummaryActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUpViewModelBehaviour();
-        setUpBinding();
-
+        bindViewModel();
+        bindView();
     }
 
-    private void setUpViewModelBehaviour() {
+    private void bindViewModel() {
         cashSummaryViewModel = ViewModelProviders.of(this).get(CashSummaryViewModel.class);
     }
 
-    private void setUpBinding() {
+    private void bindView() {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(cashSummaryViewModel);
     }
