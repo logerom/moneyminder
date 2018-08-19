@@ -1,8 +1,10 @@
 package de.logerbyte.moneyminder.cashsummary;
 
-import android.arch.lifecycle.ViewModel;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,8 +23,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by logerom on 28.07.18.
  */
 
-public class CashSummaryViewModel extends ViewModel implements CashSummaryMVVM.Listener{
-    private final CashAdapter cashAdapter;
+public class CashSummaryViewModel extends AndroidViewModel implements CashSummaryMVVM.Listener{
+    private final CashAdapter cashAdapter = new CashAdapter();
     private final AppDatabaseManager appDatabaseManager;
     // fixme: 15.08.18 observable from cashItem instead every own field?
     private ObservableField<String> cashDate = new ObservableField<>();
@@ -33,9 +35,9 @@ public class CashSummaryViewModel extends ViewModel implements CashSummaryMVVM.L
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
 
-    public CashSummaryViewModel(CashSummaryActivity cashSummaryActivity) {
-        appDatabaseManager = new AppDatabaseManager(cashSummaryActivity);
-        cashAdapter = new CashAdapter();
+    public CashSummaryViewModel(@NonNull Application application) {
+        super(application);
+        appDatabaseManager = new AppDatabaseManager(application);
         cashAdapter.setCashViewModelListener(this);
         loadExpenseList();
         totalExpenses.set(String.valueOf(0));

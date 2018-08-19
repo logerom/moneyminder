@@ -1,18 +1,31 @@
 package de.logerbyte.moneyminder.cashsummary;
 
-import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
 
-public class CashSummaryActivity extends Activity {
+public class CashSummaryActivity extends FragmentActivity {
+
+    private CashSummaryViewModel cashSummaryViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpViewModelBehaviour();
+        setUpBinding();
+
+    }
+
+    private void setUpViewModelBehaviour() {
+        cashSummaryViewModel = ViewModelProviders.of(this).get(CashSummaryViewModel.class);
+    }
+
+    private void setUpBinding() {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setViewModel(new CashSummaryViewModel(this));
+        binding.setViewModel(cashSummaryViewModel);
     }
 }

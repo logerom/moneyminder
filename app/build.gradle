@@ -46,6 +46,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
 
+    // viewModel
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
 
     /*implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support:support-vector-drawable:27.1.1'
