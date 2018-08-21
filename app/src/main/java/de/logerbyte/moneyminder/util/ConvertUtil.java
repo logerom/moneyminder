@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.logerbyte.moneyminder.cashsummary.CashItem;
+import de.logerbyte.moneyminder.cashsummary.CashAdapterItem;
 import de.logerbyte.moneyminder.db.expense.Expense;
 
 /**
@@ -12,13 +12,13 @@ import de.logerbyte.moneyminder.db.expense.Expense;
 
 public class ConvertUtil {
 
-    public static ArrayList<CashItem> expensesToCashItems(List<Expense> expenses) {
-        ArrayList<CashItem> cashItems = new ArrayList<>();
+    public static ArrayList<CashAdapterItem> expensesToCashItems(List<Expense> expenses) {
+        ArrayList<CashAdapterItem> cashAdapterItems = new ArrayList<>();
 
         for (Expense expense :expenses) {
-            CashItem item = new CashItem(expense.id, expense.cashDate, expense.cashName, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
-            cashItems.add(item);
+            CashAdapterItem item = new CashAdapterItem(expense.id, expense.cashDate, expense.cashName, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
+            cashAdapterItems.add(item);
         }
-        return cashItems;
+        return cashAdapterItems;
     }
 }

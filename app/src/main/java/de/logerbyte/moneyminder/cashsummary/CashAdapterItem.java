@@ -6,13 +6,13 @@ import android.databinding.ObservableField;
  * Created by logerom on 29.07.18.
  */
 
-public class CashItem {
+public class CashAdapterItem {
     long entryId;
     ObservableField<String> cashName = new ObservableField<>();
     ObservableField<String> cashDate = new ObservableField<>();
     ObservableField<String> cashInEuro = new ObservableField<>();
 
-    public CashItem(long entryId, String cashDate, String cashName, String cashInEuro) {
+    public CashAdapterItem(long entryId, String cashDate, String cashName, String cashInEuro) {
         this.entryId = entryId;
         this.cashDate.set(cashDate);
         this.cashName.set(cashName);

@@ -30,7 +30,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashName = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
-    private ArrayList<CashItem> cashList = new ArrayList<>();
+    private ArrayList<CashAdapterItem> cashList = new ArrayList<>();
     private ObservableField<String> totalExpenses = new ObservableField<>();
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"

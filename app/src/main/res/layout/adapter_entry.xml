@@ -3,7 +3,7 @@
     <data>
         <variable
             name="vmCashItem"
-            type="de.logerbyte.moneyminder.cashsummary.CashItem"/>
+            type="de.logerbyte.moneyminder.cashsummary.CashAdapterItem"/>
         <variable
             name="vmCashSummary"
             type="de.logerbyte.moneyminder.cashsummary.CashSummaryMVVM.Listener"/>
