@@ -64,6 +64,14 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
                 .subscribe(
                         aBoolean -> loadExpenseList());
         // fixme: 14.08.18 what is when error?
+
+        clearInputField();
+    }
+
+    private void clearInputField() {
+        cashDate.set("");
+        cashName.set("");
+        cashInEuro.set("");
     }
 
     private void addCashToTotal(List<Expense> cashList) {
