@@ -18,7 +18,7 @@ import de.logerbyte.moneyminder.databinding.AdapterEntryBinding;
 public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> {
 
 
-    private ArrayList<CashItem> list = new ArrayList<>();
+    private ArrayList<CashAdapterItem> list = new ArrayList<>();
     private LayoutInflater layoutInflater;
     CashSummaryMVVM.Listener cashViewModelListener;
 
@@ -33,27 +33,31 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> {
     }
 
     @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CashItem cashItem = list.get(position);
-        holder.binding.setVmCashItem(cashItem);
+        CashAdapterItem cashAdapterItem = list.get(position);
+        holder.binding.setVmCashItem(cashAdapterItem);
+
+        // TODO: 20.08.18 for callback in cashAdapterItem?
         holder.binding.setVmCashSummary(cashViewModelListener);
     }
 
     @Override
     public int getItemCount() {
         return list.size();
-        // fixme: 14.08.18 will be called every time I switched in date - Enntry - CashInEuro
     }
 
-    public void setList(ArrayList<CashItem> list) {
+    public void setList(ArrayList<CashAdapterItem> list) {
         this.list = list;
     }
 
     public void setCashViewModelListener(CashSummaryMVVM.Listener cashViewModelListener) { this.cashViewModelListener = cashViewModelListener; }
 
-    // fixme: 29.07.18 why an extra viewHolder?
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-
         AdapterEntryBinding binding;
 
         public ViewHolder(AdapterEntryBinding binding) {

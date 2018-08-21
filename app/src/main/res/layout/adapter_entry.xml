@@ -12,11 +12,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_entry_item"
         android:orientation="horizontal"
         android:weightSum="8"
+        android:padding="2dp"
+        android:layout_margin="2dp"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <EditText
+        <TextView
             android:id="@+id/et_cash_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,7 +27,7 @@
             android:text="@={vmCashItem.cashDate}"
             tools:hint="01.01.18"/>
 
-        <EditText
+        <TextView
             android:id="@+id/et_cash_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +35,7 @@
             android:text="@={vmCashItem.cashName}"
             android:hint="Eintrag"/>
 
-        <EditText
+        <TextView
             android:id="@+id/et_cash_in_euro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
