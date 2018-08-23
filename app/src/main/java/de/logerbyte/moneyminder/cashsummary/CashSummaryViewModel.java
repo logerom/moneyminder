@@ -7,6 +7,7 @@ import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -32,6 +33,9 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private ArrayList<CashAdapterItem> cashList = new ArrayList<>();
     private ObservableField<String> totalExpenses = new ObservableField<>();
+
+    public boolean dotDelete;
+    String newText = new String();
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
 
@@ -66,6 +70,31 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
         // fixme: 14.08.18 what is when error?
 
         clearInputField();
+    }
+
+    public void onTextChanged(Editable s) {
+        if (dotDelete) {
+            dotDelete = false;
+            return;
+        }
+
+        if (s.length() < newText.length()) {
+            char charAt = newText.toString().charAt(newText.toString().length()-1);
+            if (charAt == '.') {
+                dotDelete = true;
+                s.delete(s.toString().length() -1, s.toString().length());
+            }
+            newText = s.toString();
+            return;
+        }
+
+        if (s.toString().length() == 2 || s.toString().length() == 5) {
+            s.append(".");
+            newText = s.toString();
+            return;
+        }
+
+        newText = s.toString();
     }
 
     private void clearInputField() {
