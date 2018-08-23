@@ -71,6 +71,8 @@
                 android:layout_weight="1"
                 android:inputType="date"
                 android:text="@={viewModel.cashDate}"
+                android:onTextChanged="@{viewModel::onTextChanged}"
+                android:afterTextChanged="@{viewModel::afterTextChanged}"
                 android:hint="dd.mm.yy"/>
 
             <EditText
