@@ -65,14 +65,13 @@
                 android:layout_height="wrap_content"/>-->
 
             <EditText
-                android:id="@+id/tv_date"
+                android:id="@+id/et_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="date"
+                android:inputType="number"
                 android:text="@={viewModel.cashDate}"
-                android:onTextChanged="@{viewModel::onTextChanged}"
-                android:afterTextChanged="@{viewModel::afterTextChanged}"
+                android:maxLength="8"
                 android:hint="dd.mm.yy"/>
 
             <EditText

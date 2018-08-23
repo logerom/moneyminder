@@ -7,7 +7,6 @@ import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -68,39 +67,6 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
 
         clearInputField();
     }
-
-    public void onTextChanged(CharSequence s, int start, int before, int count){
-        boolean isDot = s.toString().contains(".");
-//        boolean isDotAtThird = count ==
-//        s.charAt(count) = "";
-//        if(
-    }
-
-    public void afterTextChanged(Editable s){
-        String string = s.toString();
-        int stringLenght = string.length();
-        if (stringLenght == 2 || stringLenght == 5) {
-            String cashWithDot = cashDate.get().concat(".");
-            cashDate.set(cashWithDot);
-        }
-
-        if (stringLenght == 8) {
-            cashDate.set(string);
-        }
-// TODO: 22.08.18 the third and fith char shuld be automatically a dot
-        // TODO: 23.08.18  ERROR: chars with soft input differ from string set in variable.
-        // - after set dot the cursor goes at the beginning of the edittext and and the last char.
-
-        // TODO: 23.08.18 https://gist.github.com/hidroh/77ca470bbb8b5b556901
-
-        /*        new Character("c");
-
-        if(string)
-
-        cashDate.set("99");
-        */
-    }
-
 
     private void clearInputField() {
         cashDate.set("");
