@@ -18,7 +18,9 @@ public class AppDatabaseManager implements DbHelper{
     private final AppDatabase mAppDatabase;
 
     public AppDatabaseManager(Context context) {
-        this.mAppDatabase = Room.databaseBuilder(context, AppDatabase.class, "moneyminder.db").build();
+        this.mAppDatabase = Room.databaseBuilder(context, AppDatabase.class, "moneyminder.db")
+                .addMigrations(DbMigration.MIGRATION_1_2)
+                .build();
     }
 
     @Override
