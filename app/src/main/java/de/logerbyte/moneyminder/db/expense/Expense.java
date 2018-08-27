@@ -13,6 +13,7 @@ public class Expense {
     @PrimaryKey
     public Long id;
     public String cashName;
+    public String category;
     public String cashDate;
     public double cashInEuro;
 
@@ -21,5 +22,7 @@ public class Expense {
         this.cashName = cashName;
         this.cashDate = cashDate;
         this.cashInEuro = cashInEuro;
+        this.category = category;
+        // TODO: 25.08.18 set category
     }
 }

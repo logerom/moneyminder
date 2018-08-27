@@ -11,7 +11,7 @@ import de.logerbyte.moneyminder.db.expense.ExpenseDao;
  */
 
 
-@Database(entities = Expense.class, version = 1)
+@Database(entities = Expense.class, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ExpenseDao expenseDao();
 }
