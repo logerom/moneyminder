@@ -7,10 +7,12 @@ import android.databinding.ObservableField;
  */
 
 public class CashAdapterItem {
+
     long entryId;
     ObservableField<String> cashName = new ObservableField<>();
     ObservableField<String> cashDate = new ObservableField<>();
     ObservableField<String> cashInEuro = new ObservableField<>();
+    private Listener cashAdapterItemListener;
 
     public CashAdapterItem(long entryId, String cashDate, String cashName, String cashInEuro) {
         this.entryId = entryId;
@@ -34,4 +36,18 @@ public class CashAdapterItem {
     public ObservableField<String> getCashInEuro() {
         return cashInEuro;
     }
+
+    public void onCashItemDeleteClicked(Long cashItemId) {
+        cashAdapterItemListener.onItemDeleteClicked(cashItemId);
+    }
+
+    public void setListener(Listener cashAdapter) {
+        cashAdapterItemListener = cashAdapter;
+    }
+
+    interface Listener {
+        void onItemDeleteClicked(Long cashItemId);
+    }
+
+
 }

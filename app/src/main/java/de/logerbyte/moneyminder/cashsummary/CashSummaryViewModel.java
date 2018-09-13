@@ -24,8 +24,9 @@ import io.reactivex.schedulers.Schedulers;
  * Created by logerom on 28.07.18.
  */
 
-public class CashSummaryViewModel extends AndroidViewModel implements CashSummaryMVVM.Listener{
-    private final CashAdapter cashAdapter = new CashAdapter();
+public class CashSummaryViewModel extends AndroidViewModel implements CashAdapter.Listener {
+
+    private final CashAdapter cashAdapter;
     private final AppDatabaseManager appDatabaseManager;
     // fixme: 15.08.18 observable from cashItem instead every own field?
     private ObservableField<String> cashDate = new ObservableField<>();
@@ -42,11 +43,12 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
     public CashSummaryViewModel(@NonNull Application application) {
         super(application);
         appDatabaseManager = new AppDatabaseManager(application);
-        cashAdapter.setCashViewModelListener(this);
-        loadExpenseList();
+        cashAdapter = new CashAdapter(appDatabaseManager);
+        cashAdapter.setLisener(this);
         totalExpenses.set(String.valueOf(0));
     }
 
+    // TODO: 13.09.18 source out loadExpesne from adapter and viewModel in base class
     private void loadExpenseList() {
         appDatabaseManager.getAllExpense()
                 .subscribeOn(Schedulers.io())
@@ -77,6 +79,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
             dotDelete = false;
             return;
         }
+        // TODO: 02.09.18 make util class with that dot delete logic
 
         if (s.length() < newText.length()) {
             char charAt = newText.toString().charAt(newText.toString().length()-1);
@@ -135,13 +138,8 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
     }
 
     @Override
-    public void onCashItemDeleteClicked(Long cashItemId) {
-        appDatabaseManager.deleteCashItem(cashItemId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> {
-                   loadExpenseList();
-                });
+    public void onLoadedExpenses(List<Expense> expenses) {
+        addCashToTotal(expenses);
     }
 }
 
