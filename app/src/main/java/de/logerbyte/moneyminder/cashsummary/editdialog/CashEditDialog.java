@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 
@@ -20,15 +19,6 @@ public class CashEditDialog extends DialogFragment {
     private Listener listener;
     private DialogViewModel dialogViewModel;
     private LayoutInflater inflater;
-
-    // TODO: 31.08.18 vm all logic in view model. Also for adapter entry and dialogs
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

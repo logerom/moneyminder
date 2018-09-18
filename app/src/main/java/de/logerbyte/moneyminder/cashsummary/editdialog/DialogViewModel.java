@@ -29,7 +29,8 @@ public class DialogViewModel extends AndroidViewModel implements CashEditDialog.
                 .subscribe(aBoolean -> viewInterface.onItemDeleted());
     }
 
-    // TODO: 18.09.18 set listener in dialog fragment + ViewModel or Presenter? No View interaction in class
+    // TODO: 18.09.18 set listener in dialog fragment + ViewModel or Presenter?
+    // TODO: 18.09.18 realy viewmodel? there is No View interaction in class
     public void setListener(ViewInterface viewInterface) {
         this.viewInterface = viewInterface;
     }

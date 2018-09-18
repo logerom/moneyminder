@@ -16,7 +16,7 @@ public class CashAdapterItemViewModel {
     private AdapterListener cashAdapterItemAdapterListener;
     private ActivityListener mActivityListener;
 
-    // FIXME: 17.09.18 no constructor for if we extend from AndroidViewModel
+    // FIXME: 17.09.18 only default constructor if we extend from AndroidViewModel. Use factory
     public CashAdapterItemViewModel(long entryId, String cashDate, String cashName, String cashInEuro) {
         this.entryId = entryId;
         this.cashDate.set(cashDate);
@@ -45,7 +45,6 @@ public class CashAdapterItemViewModel {
     }
 
     public void onCashItemClicked(View view) {
-        // TODO: 14.09.18 create dialog from view model? Better to create view from view!?
           mActivityListener.onItemClicked(this);
     }
 
@@ -53,7 +52,6 @@ public class CashAdapterItemViewModel {
         cashAdapterItemAdapterListener = cashAdapter;
     }
 
-    // TODO: 17.09.18 set activity listener in adapter view model
     public void setActivityListener(ActivityListener activityListener) {
         mActivityListener = activityListener;
     }
