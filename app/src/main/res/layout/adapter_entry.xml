@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="vmCashItem" type="de.logerbyte.moneyminder.cashsummary.CashAdapterItem"/>
+        <variable name="vmCashItem" type="de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel"/>
     </data>
 
     <LinearLayout
@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_entry_item"
+        android:onClick="@{vmCashItem::onCashItemClicked}"
         android:orientation="horizontal"
         android:weightSum="8"
         android:padding="2dp"

@@ -13,6 +13,8 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapter;
+import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel;
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
 import de.logerbyte.moneyminder.util.ConvertUtil;
@@ -32,11 +34,12 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashName = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
-    private ArrayList<CashAdapterItem> cashList = new ArrayList<>();
+    private ArrayList<CashAdapterItemViewModel> cashList = new ArrayList<>();
     private ObservableField<String> totalExpenses = new ObservableField<>();
 
     public boolean dotDelete;
     String newText = new String();
+    private CashAdapterItemViewModel.ActivityListener cashSummaryActivity;
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
 
@@ -140,6 +143,12 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     @Override
     public void onLoadedExpenses(List<Expense> expenses) {
         addCashToTotal(expenses);
+    }
+
+    public void setCashSummaryActivity(
+            CashAdapterItemViewModel.ActivityListener cashSummaryActivity) {
+        this.cashSummaryActivity = cashSummaryActivity;
+        cashAdapter.setActivityListener(cashSummaryActivity);
     }
 }
 
