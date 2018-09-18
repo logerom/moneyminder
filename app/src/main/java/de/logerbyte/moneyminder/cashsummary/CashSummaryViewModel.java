@@ -51,7 +51,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         totalExpenses.set(String.valueOf(0));
     }
 
-    // TODO: 13.09.18 source out loadExpesne from adapter and viewModel in base class
+    // FIXME: 13.09.18 source out loadExpesne from adapter and viewModel in base class
     private void loadExpenseList() {
         appDatabaseManager.getAllExpense()
                 .subscribeOn(Schedulers.io())
