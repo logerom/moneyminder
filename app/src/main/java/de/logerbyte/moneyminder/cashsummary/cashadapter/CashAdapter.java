@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashsummary;
+package de.logerbyte.moneyminder.cashsummary.cashadapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.logerbyte.moneyminder.R;
+import de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel;
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding;
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
@@ -22,12 +23,13 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> implements
-        CashAdapterItem.Listener {
+        CashAdapterItemViewModel.AdapterListener, DialogViewModel.ViewInterface {
 
-    private ArrayList<CashAdapterItem> list = new ArrayList<>();
+    private ArrayList<CashAdapterItemViewModel> list = new ArrayList<>();
     private LayoutInflater layoutInflater;
     private AppDatabaseManager appDatabaseManager;
     private Listener mAdapterListener;
+    private CashAdapterItemViewModel.ActivityListener cashSummaryActivity;
 
     public CashAdapter(AppDatabaseManager appDatabaseManager) {
         this.appDatabaseManager = appDatabaseManager;
@@ -57,9 +59,10 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CashAdapterItem cashAdapterItem = list.get(position);
-        cashAdapterItem.setListener(this);
-        holder.binding.setVmCashItem(cashAdapterItem);
+        CashAdapterItemViewModel cashAdapterItemViewModel = list.get(position);
+        cashAdapterItemViewModel.setAdapterListener(this);
+        cashAdapterItemViewModel.setActivityListener(cashSummaryActivity);
+        holder.binding.setVmCashItem(cashAdapterItemViewModel);
     }
 
     @Override
@@ -67,11 +70,11 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
         return list.size();
     }
 
-    public void setList(ArrayList<CashAdapterItem> list) {
+    public void setList(ArrayList<CashAdapterItemViewModel> list) {
         this.list = list;
     }
 
-    void setLisener(CashAdapter.Listener adapterListener) {
+    public void setLisener(CashAdapter.Listener adapterListener) {
         mAdapterListener = adapterListener;
     }
 
@@ -80,12 +83,19 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
         appDatabaseManager.deleteCashItem(cashItemId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> {
-                    loadExpenseList();
-                });
+                .subscribe(aBoolean -> loadExpenseList());
     }
 
-    interface Listener {
+    @Override
+    public void onItemDeleted() {
+        loadExpenseList();
+    }
+
+    public void setActivityListener(CashAdapterItemViewModel.ActivityListener cashSummaryActivity) {
+        this.cashSummaryActivity = cashSummaryActivity;
+    }
+
+    public interface Listener {
         void onLoadedExpenses(List<Expense> expenses);
     }
 
