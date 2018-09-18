@@ -23,6 +23,7 @@ public class DialogViewModel extends AndroidViewModel implements CashEditDialog.
 
     @Override
     public void onEditClick(CashAdapterItemViewModel item) {
+        // TODO: 18.09.18 update item in db
         appDatabaseManager.deleteCashItem(item.getEntryId())
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
