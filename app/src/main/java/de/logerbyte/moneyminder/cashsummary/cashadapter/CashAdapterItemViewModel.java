@@ -9,10 +9,10 @@ import android.view.View;
 
 public class CashAdapterItemViewModel {
 
-    long entryId;
-    ObservableField<String> cashName = new ObservableField<>();
-    ObservableField<String> cashDate = new ObservableField<>();
-    ObservableField<String> cashInEuro = new ObservableField<>();
+    private long entryId;
+    private ObservableField<String> cashName = new ObservableField<>();
+    private ObservableField<String> cashDate = new ObservableField<>();
+    private ObservableField<String> cashInEuro = new ObservableField<>();
     private AdapterListener cashAdapterItemAdapterListener;
     private ActivityListener mActivityListener;
 
