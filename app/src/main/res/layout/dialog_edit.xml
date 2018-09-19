@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable name="vm" type="de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel"/>
+    </data>
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:padding="2dp"
+        android:layout_margin="2dp">
+
+        <EditText
+            android:id="@+id/et_cash_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@={vm.cashDate}"
+            tools:hint="01.01.18"/>
+
+        <EditText
+            android:id="@+id/et_cash_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@={vm.cashName}"
+            android:hint="Eintrag"/>
+
+        <EditText
+            android:id="@+id/et_cash_in_euro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="@={vm.cashInEuro}"
+            android:hint="Betrag in €"/>
+    </LinearLayout>
+</layout>

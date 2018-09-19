@@ -9,31 +9,27 @@ import android.view.LayoutInflater;
 
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel;
-import de.logerbyte.moneyminder.databinding.AdapterEntryBinding;
-//import de.logerbyte.moneyminder.databinding.AdapterEntryBinding;
+import de.logerbyte.moneyminder.databinding.DialogEditBinding;
 
 public class CashEditDialog extends DialogFragment {
 
-    private AdapterEntryBinding binding;
-    private CashAdapterItemViewModel cashAdapterItemViewModel;
+    private DialogEditBinding binding;
     private Listener listener;
-    private DialogViewModel dialogViewModel;
     private LayoutInflater inflater;
+    private DialogViewModel vm;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         inflater = getActivity().getLayoutInflater();
-        binding = DataBindingUtil.inflate(inflater, R.layout.adapter_entry,null, false);
+        vm.initAppDatabaseManager(getActivity().getApplication());
+        binding = DataBindingUtil.inflate(inflater, R.layout.dialog_edit,null, false);
 
-        binding.setVmCashItem(cashAdapterItemViewModel);
-        //        // FIXME: 17.09.18 doesnt need!?
-//        dialogViewModel = ViewModelProviders.of(this).get(DialogViewModel.class);
+        binding.setVmCashItem(vm);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(binding.getRoot());
-        builder.setPositiveButton("Edit", (dialog, which) -> listener.onEditClick(
-                cashAdapterItemViewModel));
+        builder.setPositiveButton("Edit", (dialog, which) -> listener.onEditClick(vm));
         builder.setNegativeButton("Cancel", null);
 
         return builder.create();
@@ -42,10 +38,17 @@ public class CashEditDialog extends DialogFragment {
     // TODO: 31.08.18 transfer file to kotlin
 
     public void bindViewModel(CashAdapterItemViewModel item) {
-        cashAdapterItemViewModel = item;
+        vm = new DialogViewModel(
+                item.getEntryId(), item.getCashDate().get(),
+                item.getCashName().get(), item.getCashInEuro().get());
+        setListener(vm);
+    }
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
     }
 
     public interface Listener{
-        void onEditClick(CashAdapterItemViewModel item);
+        void onEditClick(DialogViewModel item);
     }
 }

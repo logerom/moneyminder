@@ -1,42 +1,60 @@
 package de.logerbyte.moneyminder.cashsummary.editdialog;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.support.annotation.NonNull;
+import android.databinding.ObservableField;
 
-import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel;
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
-public class DialogViewModel extends AndroidViewModel implements CashEditDialog.Listener {
+public class DialogViewModel implements CashEditDialog.Listener {
 
-    private final AppDatabaseManager appDatabaseManager;
+    private long entryId;
+    private ObservableField<String> cashName = new ObservableField<>();
+    private ObservableField<String> cashDate = new ObservableField<>();
+    private ObservableField<String> cashInEuro = new ObservableField<>();
 
+    private AppDatabaseManager appDatabaseManager;
     ViewInterface viewInterface;
 
-    public DialogViewModel(@NonNull Application application) {
-        super(application);
-        appDatabaseManager = new AppDatabaseManager(application);
-
+    public DialogViewModel(long entryId, String cashDate, String cashName, String cashInEuro) {
+        this.entryId = entryId;
+        this.cashDate.set(cashDate);
+        this.cashName.set(cashName);
+        this.cashInEuro.set(cashInEuro);
     }
 
     @Override
-    public void onEditClick(CashAdapterItemViewModel item) {
+    public void onEditClick(DialogViewModel item) {
         // TODO: 18.09.18 update item in db
-        appDatabaseManager.deleteCashItem(item.getEntryId())
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> viewInterface.onItemDeleted());
+//        appDatabaseManager.deleteCashItem(item.getEntryId())
+//                .subscribeOn(Schedulers.computation())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(aBoolean -> viewInterface.onItemDeleted());
     }
 
-    // TODO: 18.09.18 set listener in dialog fragment + ViewModel or Presenter?
-    // TODO: 18.09.18 realy viewmodel? there is No View interaction in class
+    // TODO: 18.09.18 set listener in dialog fragment?
+
     public void setListener(ViewInterface viewInterface) {
         this.viewInterface = viewInterface;
     }
 
+    public void initAppDatabaseManager(Application application) {
+        appDatabaseManager = new AppDatabaseManager(application);
+    }
+
     public interface ViewInterface {
+
         void onItemDeleted();
+    }
+
+    public ObservableField<String> getCashName() {
+        return cashName;
+    }
+
+    public ObservableField<String> getCashDate() {
+        return cashDate;
+    }
+
+    public ObservableField<String> getCashInEuro() {
+        return cashInEuro;
     }
 }
