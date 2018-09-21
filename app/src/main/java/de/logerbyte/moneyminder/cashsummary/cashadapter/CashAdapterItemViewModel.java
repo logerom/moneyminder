@@ -3,6 +3,8 @@ package de.logerbyte.moneyminder.cashsummary.cashadapter;
 import android.databinding.ObservableField;
 import android.view.View;
 
+import de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel;
+
 /**
  * Created by logerom on 29.07.18.
  */
@@ -15,6 +17,7 @@ public class CashAdapterItemViewModel {
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private AdapterListener cashAdapterItemAdapterListener;
     private ActivityListener mActivityListener;
+    private DialogViewModel.ViewInterface dialogVmListener;
 
     // FIXME: 17.09.18 only default constructor if we extend from AndroidViewModel. Use factory
     public CashAdapterItemViewModel(long entryId, String cashDate, String cashName, String cashInEuro) {
@@ -45,7 +48,7 @@ public class CashAdapterItemViewModel {
     }
 
     public void onCashItemClicked(View view) {
-          mActivityListener.onItemClicked(this);
+          mActivityListener.onItemClicked(this, dialogVmListener);
     }
 
     public void setAdapterListener(AdapterListener cashAdapter) {
@@ -56,12 +59,16 @@ public class CashAdapterItemViewModel {
         mActivityListener = activityListener;
     }
 
+    public void setDialogViewModelListener(DialogViewModel.ViewInterface dialogVmListener) {
+        this.dialogVmListener = dialogVmListener;
+    }
+
     interface AdapterListener {
         void onItemDeleteClicked(Long cashItemId);
     }
 
     public interface ActivityListener {
-        void onItemClicked(CashAdapterItemViewModel item);
+        void onItemClicked(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener);
     }
 
 

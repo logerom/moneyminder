@@ -14,9 +14,10 @@ import de.logerbyte.moneyminder.databinding.DialogEditBinding;
 public class CashEditDialog extends DialogFragment {
 
     private DialogEditBinding binding;
-    private Listener listener;
+    private Listener callback;
     private LayoutInflater inflater;
     private DialogViewModel vm;
+    private DialogViewModel.ViewInterface dialogVmListener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,11 +26,11 @@ public class CashEditDialog extends DialogFragment {
         vm.initAppDatabaseManager(getActivity().getApplication());
         binding = DataBindingUtil.inflate(inflater, R.layout.dialog_edit,null, false);
 
-        binding.setVmCashItem(vm);
+        binding.setVm(vm);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(binding.getRoot());
-        builder.setPositiveButton("Edit", (dialog, which) -> listener.onEditClick(vm));
+        builder.setPositiveButton("Edit", (dialog, which) -> callback.onEditClick(vm));
         builder.setNegativeButton("Cancel", null);
 
         return builder.create();
@@ -41,7 +42,15 @@ public class CashEditDialog extends DialogFragment {
         vm = new DialogViewModel(
                 item.getEntryId(), item.getCashDate().get(),
                 item.getCashName().get(), item.getCashInEuro().get());
-        listener = (Listener) item;
+        callback = vm;
+    }
+
+    // FIXME: 21.09.18 prevent pass throw callback from adapter to dialog viewmodel. Better callback from
+    // model to model (layer to layer)
+
+    public void setAdapterCallback(DialogViewModel.ViewInterface dialogVmListener) {
+        this.dialogVmListener = dialogVmListener;
+        vm.setViewInterface(dialogVmListener);
     }
 
     public interface Listener{

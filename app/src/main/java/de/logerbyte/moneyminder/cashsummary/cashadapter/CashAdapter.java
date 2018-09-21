@@ -61,6 +61,7 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CashAdapterItemViewModel cashAdapterItemViewModel = list.get(position);
         cashAdapterItemViewModel.setAdapterListener(this);
+        cashAdapterItemViewModel.setDialogViewModelListener(this);
         cashAdapterItemViewModel.setActivityListener(cashSummaryActivity);
         holder.binding.setVmCashItem(cashAdapterItemViewModel);
     }
@@ -88,6 +89,11 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
 
     @Override
     public void onItemDeleted() {
+        loadExpenseList();
+    }
+
+    @Override
+    public void onUpdateItem() {
         loadExpenseList();
     }
 

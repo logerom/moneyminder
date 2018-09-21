@@ -5,6 +5,7 @@ import android.databinding.ObservableField;
 
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.util.DigitUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -16,6 +17,11 @@ public class DialogViewModel implements CashEditDialog.Listener {
     private ObservableField<String> cashInEuro = new ObservableField<>();
 
     private AppDatabaseManager appDatabaseManager;
+
+    public void setViewInterface(ViewInterface viewInterface) {
+        this.viewInterface = viewInterface;
+    }
+
     ViewInterface viewInterface;
 
     public DialogViewModel(long entryId, String cashDate, String cashName, String cashInEuro) {
@@ -28,15 +34,12 @@ public class DialogViewModel implements CashEditDialog.Listener {
     @Override
     public void onEditClick(DialogViewModel item) {
         Expense expenseToUpdate = new Expense(item.entryId, item.cashName.get(), item.cashDate.get(),
-                Double.valueOf(item.cashInEuro.get()));
+                Double.valueOf(DigitUtil.commaToDot(item.cashInEuro.get())));
 
-        // TODO: 21.09.18 update and reload adapter: is there an automatic reload mechanism for adapter when
-        // db entry changes?
-
-        appDatabaseManager.updateCashItem(expenseToUpdate)
+    appDatabaseManager.updateCashItem(expenseToUpdate)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> viewInterface.onItemDeleted());
+                .subscribe(aBoolean -> viewInterface.onUpdateItem());
     }
 
     public void initAppDatabaseManager(Application application) {
@@ -46,6 +49,9 @@ public class DialogViewModel implements CashEditDialog.Listener {
     public interface ViewInterface {
 
         void onItemDeleted();
+
+        // FIXME: 21.09.18 delete interface
+        void onUpdateItem();
     }
 
     public ObservableField<String> getCashName() {
