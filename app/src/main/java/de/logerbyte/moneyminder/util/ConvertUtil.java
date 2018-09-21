@@ -10,7 +10,7 @@ import de.logerbyte.moneyminder.db.expense.Expense;
  * Created by logerom on 09.08.18.
  */
 
-// TODO: 18.09.18 that are not an util
+// fixme: 18.09.18 that are not an util
 public class ConvertUtil {
 
     public static ArrayList<CashAdapterItemViewModel> expensesToCashItems(List<Expense> expenses) {

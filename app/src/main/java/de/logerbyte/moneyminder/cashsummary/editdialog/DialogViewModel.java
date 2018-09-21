@@ -4,6 +4,9 @@ import android.app.Application;
 import android.databinding.ObservableField;
 
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
+import de.logerbyte.moneyminder.db.expense.Expense;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class DialogViewModel implements CashEditDialog.Listener {
 
@@ -24,17 +27,16 @@ public class DialogViewModel implements CashEditDialog.Listener {
 
     @Override
     public void onEditClick(DialogViewModel item) {
-        // TODO: 18.09.18 update item in db
-//        appDatabaseManager.deleteCashItem(item.getEntryId())
-//                .subscribeOn(Schedulers.computation())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(aBoolean -> viewInterface.onItemDeleted());
-    }
+        Expense expenseToUpdate = new Expense(item.entryId, item.cashName.get(), item.cashDate.get(),
+                Double.valueOf(item.cashInEuro.get()));
 
-    // TODO: 18.09.18 set listener in dialog fragment?
+        // TODO: 21.09.18 update and reload adapter: is there an automatic reload mechanism for adapter when
+        // db entry changes?
 
-    public void setListener(ViewInterface viewInterface) {
-        this.viewInterface = viewInterface;
+        appDatabaseManager.updateCashItem(expenseToUpdate)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aBoolean -> viewInterface.onItemDeleted());
     }
 
     public void initAppDatabaseManager(Application application) {
