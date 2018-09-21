@@ -43,4 +43,12 @@ public class AppDatabaseManager implements DbHelper{
             return true;
         });
     }
+
+    @Override
+    public Observable<Boolean> updateCashItem(Expense expense) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.expenseDao().update(expense);
+            return true;
+        });
+    }
 }

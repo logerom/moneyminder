@@ -35,17 +35,13 @@ public class CashEditDialog extends DialogFragment {
         return builder.create();
     }
 
-    // TODO: 31.08.18 transfer file to kotlin
+    // fixme: 31.08.18 transfer file to kotlin
 
     public void bindViewModel(CashAdapterItemViewModel item) {
         vm = new DialogViewModel(
                 item.getEntryId(), item.getCashDate().get(),
                 item.getCashName().get(), item.getCashInEuro().get());
-        setListener(vm);
-    }
-
-    public void setListener(Listener listener) {
-        this.listener = listener;
+        listener = (Listener) item;
     }
 
     public interface Listener{

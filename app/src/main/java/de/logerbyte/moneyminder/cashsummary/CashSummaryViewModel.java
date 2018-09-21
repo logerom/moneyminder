@@ -108,7 +108,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
             dotDelete = false;
             return;
         }
-        // TODO: 02.09.18 make util class with that dot delete logic
+        // fixme: 02.09.18 make util class with that dot delete logic
 
         if (s.length() < newText.length()) {
             char charAt = newText.toString().charAt(newText.toString().length()-1);
