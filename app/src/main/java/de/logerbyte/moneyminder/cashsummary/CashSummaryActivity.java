@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel;
 import de.logerbyte.moneyminder.cashsummary.editdialog.CashEditDialog;
+import de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
 
 public class CashSummaryActivity extends FragmentActivity
@@ -33,9 +34,10 @@ public class CashSummaryActivity extends FragmentActivity
     }
 
     @Override
-    public void onItemClicked(CashAdapterItemViewModel item) {
+    public void onItemClicked(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener) {
         CashEditDialog cashEditDialog = new CashEditDialog();
         cashEditDialog.bindViewModel(item);
+        cashEditDialog.setAdapterCallback(dialogVmListener);
 
         cashEditDialog.show(getSupportFragmentManager(), "Edit_Dialog");
     }
