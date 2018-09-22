@@ -10,7 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.view.View;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
@@ -50,6 +54,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
     private void loadExpenseList() {
         appDatabaseManager.getAllExpense()
                 .subscribeOn(Schedulers.io())
+                .map(expenses -> sortExpenses(expenses))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(expenses -> {
                     cashList = ConvertUtil.expensesToCashItems(expenses);
@@ -60,8 +65,29 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashSummar
                 });
     }
 
+    private List<Expense> sortExpenses(List<Expense> expenses) {
+        // FIXME: 22.09.18 sort as util class
+        Collections.sort(expenses, (o1, o2) -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+            Date d1 = null, d2 = null;
+
+            try{
+                d1 = sdf.parse(o1.cashDate);
+                d2 = sdf.parse(o2.cashDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return d1.compareTo(d2);
+        });
+        Collections.reverse(expenses);
+        return expenses;
+    }
+
     public void onClickAddCash(View view){
-        Expense expense = new Expense(null, cashName.get(), cashDate.get(), Double.valueOf(DigitUtil.commaToDot(cashInEuro.get())));
+        Double date = DigitUtil.commaToDot(cashInEuro.get()) == "" ? 0.00 :
+                Double.valueOf(DigitUtil.commaToDot(cashInEuro.get()));
+
+        Expense expense = new Expense(null, cashName.get(), cashDate.get(),date);
         appDatabaseManager.insertCashItemIntoDB(expense)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

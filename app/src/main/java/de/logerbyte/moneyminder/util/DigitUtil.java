@@ -10,7 +10,7 @@ import de.logerbyte.moneyminder.db.expense.Expense;
 
 public class DigitUtil {
     public static String commaToDot(String commaString) {
-        return commaString.replace(",", ".");
+        return commaString == null ? "" : commaString.replace(",", ".");
     }
 
     public static String dotToComma(String commaString) {
