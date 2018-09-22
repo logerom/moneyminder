@@ -33,7 +33,7 @@ public class DialogViewModel implements CashEditDialog.Listener {
 
     @Override
     public void onEditClick(DialogViewModel item) {
-        Expense expenseToUpdate = new Expense(item.entryId, item.cashName.get(), item.cashDate.get(),
+        Expense expenseToUpdate = new Expense(item.entryId, item.cashName.get(), null, item.cashDate.get(),
                 Double.valueOf(DigitUtil.commaToDot(item.cashInEuro.get())));
 
     appDatabaseManager.updateCashItem(expenseToUpdate)

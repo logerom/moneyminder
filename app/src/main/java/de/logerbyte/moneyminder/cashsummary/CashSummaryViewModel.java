@@ -33,6 +33,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     // fixme: 15.08.18 observable from cashItem instead every own field?
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashName = new ObservableField<>();
+    private ObservableField<String> cashCategory = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private ArrayList<CashAdapterItemViewModel> cashList = new ArrayList<>();
     private ObservableField<String> totalExpenses = new ObservableField<>();
@@ -66,7 +67,9 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     }
 
     public void onClickAddCash(View view){
-        Expense expense = new Expense(null, cashName.get(), cashDate.get(), Double.valueOf(DigitUtil.commaToDot(cashInEuro.get())));
+        Expense expense = new Expense(null, cashName.get(), cashCategory.get(), cashDate.get(), Double.valueOf
+                (DigitUtil
+                .commaToDot(cashInEuro.get())));
         appDatabaseManager.insertCashItemIntoDB(expense)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -138,6 +141,10 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     public ObservableField<String> getTotalExpenses() {
         totalExpenses.set(DigitUtil.dotToComma(totalExpenses.get()));
         return totalExpenses;
+    }
+
+    public ObservableField<String> getCashCategory() {
+        return cashCategory;
     }
 
     @Override

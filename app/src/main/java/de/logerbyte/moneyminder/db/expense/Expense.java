@@ -17,12 +17,12 @@ public class Expense {
     public String cashDate;
     public double cashInEuro;
 
-    public Expense(Long id, String cashName, String cashDate, double cashInEuro) {
+    public Expense(Long id, String cashName, String category, String cashDate, double cashInEuro) {
         this.id = id;
         this.cashName = cashName;
         this.cashDate = cashDate;
         this.cashInEuro = cashInEuro;
         this.category = category;
-        // TODO: 25.08.18 set category
+        // TODO: 25.08.18 set category in dialog view model + in all layout
     }
 }
