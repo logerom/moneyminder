@@ -6,7 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import de.logerbyte.moneyminder.R;
@@ -36,15 +40,35 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
         loadExpenseList();
     }
 
+    // FIXME: 23.09.18 2 same loadExpense functions. base it.
     public void loadExpenseList() {
         appDatabaseManager.getAllExpense()
                 .subscribeOn(Schedulers.io())
+                .map(expenses -> sortExpenses(expenses))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(expenses -> {
                     list = ConvertUtil.expensesToCashItems(expenses);
                     mAdapterListener.onLoadedExpenses(expenses);
                     notifyDataSetChanged();
                 });
+    }
+
+    private List<Expense> sortExpenses(List<Expense> expenses) {
+        // FIXME: 22.09.18 sort as util class
+        Collections.sort(expenses, (o1, o2) -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+            Date d1 = null, d2 = null;
+
+            try{
+                d1 = sdf.parse(o1.cashDate);
+                d2 = sdf.parse(o2.cashDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return d1.compareTo(d2);
+        });
+        Collections.reverse(expenses);
+        return expenses;
     }
 
     @NonNull
