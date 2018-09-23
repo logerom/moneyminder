@@ -17,7 +17,8 @@ public class ConvertUtil {
         ArrayList<CashAdapterItemViewModel> cashAdapterItemViewModels = new ArrayList<>();
 
         for (Expense expense :expenses) {
-            CashAdapterItemViewModel item = new CashAdapterItemViewModel(expense.id, expense.cashDate, expense.cashName, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
+            CashAdapterItemViewModel item = new CashAdapterItemViewModel(expense.id, expense.cashDate,
+                    expense.cashName, expense.category, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
             cashAdapterItemViewModels.add(item);
         }
         return cashAdapterItemViewModels;
