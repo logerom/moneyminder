@@ -133,6 +133,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     private void clearInputField() {
         cashDate.set("");
         cashName.set("");
+        cashCategory.set("");
         cashInEuro.set("");
     }
 
