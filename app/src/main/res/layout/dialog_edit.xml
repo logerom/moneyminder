@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="8"
+        android:weightSum="2.2"
         android:padding="2dp"
         android:layout_margin="2dp">
 
@@ -19,7 +19,7 @@
             android:id="@+id/et_cash_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.1"
             android:text="@={vm.cashDate}"
             tools:hint="01.01.18"/>
 
@@ -27,9 +27,17 @@
             android:id="@+id/et_cash_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
+            android:layout_weight="1"
             android:text="@={vm.cashName}"
             android:hint="Eintrag"/>
+
+        <EditText
+            android:id="@+id/et_cash_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@={vm.cashCategory}"
+            android:hint="Kategory"/>
 
         <EditText
             android:id="@+id/et_cash_in_euro"
@@ -37,6 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
             android:text="@={vm.cashInEuro}"
-            android:hint="Betrag in €"/>
+            android:hint="0,00"/>
     </LinearLayout>
 </layout>

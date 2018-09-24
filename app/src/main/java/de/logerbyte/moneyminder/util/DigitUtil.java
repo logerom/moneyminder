@@ -23,7 +23,6 @@ public class DigitUtil {
         for (Expense expense : cashList) {
             totalCash = totalCash + expense.cashInEuro;
         }
-        // TODO: 15.08.18 runden funzt nicht!
         return String.valueOf(Math.floor(totalCash * 100) / 100);
     }
 }

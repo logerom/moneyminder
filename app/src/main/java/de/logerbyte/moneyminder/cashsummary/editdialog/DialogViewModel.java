@@ -13,6 +13,7 @@ public class DialogViewModel implements CashEditDialog.Listener {
 
     private long entryId;
     private ObservableField<String> cashName = new ObservableField<>();
+    private ObservableField<String> cashCategory = new ObservableField<>();
     private ObservableField<String> cashDate = new ObservableField<>();
     private ObservableField<String> cashInEuro = new ObservableField<>();
 
@@ -33,8 +34,8 @@ public class DialogViewModel implements CashEditDialog.Listener {
 
     @Override
     public void onEditClick(DialogViewModel item) {
-        Expense expenseToUpdate = new Expense(item.entryId, item.cashName.get(), null, item.cashDate.get(),
-                Double.valueOf(DigitUtil.commaToDot(item.cashInEuro.get())));
+        Expense expenseToUpdate = new Expense(item.entryId, item.cashName.get(), item.cashCategory.get(),
+                item.cashDate.get(), Double.valueOf(DigitUtil.commaToDot(item.cashInEuro.get())));
 
     appDatabaseManager.updateCashItem(expenseToUpdate)
                 .subscribeOn(Schedulers.computation())
@@ -56,6 +57,10 @@ public class DialogViewModel implements CashEditDialog.Listener {
 
     public ObservableField<String> getCashName() {
         return cashName;
+    }
+
+    public ObservableField<String> getCashCategory() {
+        return cashCategory;
     }
 
     public ObservableField<String> getCashDate() {

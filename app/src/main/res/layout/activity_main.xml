@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="de.logerbyte.moneyminder.cashsummary.CashSummaryViewModel"/>
@@ -17,16 +19,16 @@
             android:id="@+id/rv_costs"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:listitem="@layout/adapter_entry"
+            android:layout_weight="1"
             binding:adapter="@{viewModel.cashAdapter}"
-            android:layout_weight="1"/>
+            tools:listitem="@layout/adapter_entry"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/black"
+            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:background="@android:color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,61 +46,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="@{viewModel.totalExpenses}" />
+                tools:text="@{viewModel.totalExpenses}"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/black"
+            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:background="@android:color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="8">
-
-            <!--<DatePicker
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>-->
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/et_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"
-                android:digits="0123456789."
-                android:text="@={viewModel.cashDate}"
                 android:afterTextChanged="@{viewModel.onTextChanged}"
+                android:digits="0123456789."
+                android:hint="dd.mm.yy"
+                android:inputType="number"
                 android:maxLength="8"
-                android:hint="dd.mm.yy"/>
+                android:text="@={viewModel.cashDate}"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:text="@={viewModel.cashName}"
-
-                android:hint="Eintrag"/>
+                android:hint="Arbeitsasflusg"
+                android:text="@={viewModel.cashName}"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:text="@={viewModel.cashInEuro}"
-                android:inputType="numberDecimal"
+                android:hint="Kategory"
+                android:text="@={viewModel.cashCategory}"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:digits="0123456789,"
-                android:hint="Betrag in €"/>
+                android:hint="0,00"
+                android:inputType="numberDecimal"
+                android:text="@={viewModel.cashInEuro}"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{viewModel::onClickAddCash}"
-                android:layout_weight="0.1"
-                android:text="Add"/>
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@android:drawable/ic_input_add"
+                android:onClick="@{viewModel::onClickAddCash}"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

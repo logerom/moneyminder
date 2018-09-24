@@ -21,6 +21,7 @@
             android:id="@+id/et_cash_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@={vmCashItem.cashDate}"
             tools:hint="01.01.18"/>
@@ -29,23 +30,34 @@
             android:id="@+id/et_cash_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:text="@={vmCashItem.cashName}"
-            android:hint="Eintrag"/>
+            android:hint="Arbeitsausflug"/>
+
+        <TextView
+            android:id="@+id/et_cash_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@={vmCashItem.cashCategory}"
+            android:hint="Kategory"/>
 
         <TextView
             android:id="@+id/et_cash_in_euro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:text="@={vmCashItem.cashInEuro}"
-            android:hint="Betrag in €"/>
+            android:hint="0,00"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:onClick="@{() -> vmCashItem.onCashItemDeleteClicked(vmCashItem.entryId)}"
-            android:text="Delete"/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_delete"
+            android:onClick="@{() -> vmCashItem.onCashItemDeleteClicked(vmCashItem.entryId)}"/>
     </LinearLayout>
 </layout>
