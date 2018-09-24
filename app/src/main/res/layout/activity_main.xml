@@ -69,22 +69,31 @@
                 android:digits="0123456789."
                 android:hint="dd.mm.yy"
                 android:inputType="number"
+                android:singleLine="true"
+                android:nextFocusDown="@id/et_cash_name"
                 android:maxLength="8"
                 android:text="@={viewModel.cashDate}"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/et_cash_name"
+                android:layout_width="124dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:nextFocusDown="@+id/et_cash_category"
                 android:hint="Arbeitsasflusg"
                 android:text="@={viewModel.cashName}"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/et_cash_category"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:nextFocusDown="@+id/et_cash_amount"
                 android:hint="Kategory"
                 android:text="@={viewModel.cashCategory}"/>
 
             <EditText
+                android:id="@+id/et_cash_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:digits="0123456789,"
