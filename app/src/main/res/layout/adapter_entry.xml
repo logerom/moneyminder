@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@={vmCashItem.cashDate}"
-            tools:hint="01.01.18"/>
+            tools:text="01.01.18"/>
 
         <TextView
             android:id="@+id/et_cash_name"
@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@={vmCashItem.cashName}"
-            android:hint="Arbeitsausflug"/>
+            tools:text="Arbeitsausflug"/>
 
         <TextView
             android:id="@+id/et_cash_category"
@@ -42,7 +42,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@={vmCashItem.cashCategory}"
-            android:hint="Kategory"/>
+            tools:text="Kategory"/>
 
         <TextView
             android:id="@+id/et_cash_in_euro"
@@ -51,7 +51,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@={vmCashItem.cashInEuro}"
-            android:hint="0,00"/>
+            tools:text="0,00"/>
 
         <ImageButton
             android:layout_width="30dp"
