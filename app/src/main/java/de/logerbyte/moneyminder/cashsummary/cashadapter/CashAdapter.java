@@ -43,7 +43,7 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
     // FIXME: 23.09.18 2 same loadExpense functions. base it.
     public void loadExpenseList() {
         appDatabaseManager.getAllExpense()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .map(expenses -> sortExpenses(expenses))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(expenses -> {
@@ -105,10 +105,7 @@ public class CashAdapter extends RecyclerView.Adapter<CashAdapter.ViewHolder> im
 
     @Override
     public void onItemDeleteClicked(Long cashItemId) {
-        appDatabaseManager.deleteCashItem(cashItemId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> loadExpenseList());
+        loadExpenseList();
     }
 
     @Override
