@@ -12,12 +12,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Gesamt:"/>
+                android:text="Gesamt: "/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="..."/>
+                android:text="@{vmSummary.cost}"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,17 +28,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="..."/>
+                android:text="@{vmSummary.saldo}"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Gesamt: "/>
+                android:text="Gesparrt: "/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="..."/>
+                android:text="@{vmSummary.saving}"/>
         </LinearLayout>
 </layout>
