@@ -56,7 +56,7 @@ dependencies {
 
     // database
     implementation "android.arch.persistence.room:rxjava2:${rootProject.ext.roomDatabase}"
-    annotationProcessor "android.arch.persistence.room:compiler:${rootProject.ext.roomDatabase}"
+    kapt "android.arch.persistence.room:compiler:${rootProject.ext.roomDatabase}"
     debugImplementation "com.amitshekhar.android:debug-db:${rootProject.ext.roomDatabase}"
 
     // reactive
