@@ -6,11 +6,6 @@
         <variable name="vmCashItem" type="de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel"/>
     </data>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
     <LinearLayout
         android:id="@+id/ll_item"
         android:layout_width="match_parent"
@@ -18,7 +13,6 @@
         android:background="@drawable/shape_entry_item"
         android:onClick="@{vmCashItem::onCashItemClicked}"
         android:orientation="horizontal"
-        android:weightSum="8"
         android:padding="2dp"
         android:layout_margin="2dp">
 
@@ -65,6 +59,4 @@
             android:src="@android:drawable/ic_delete"
             android:onClick="@{() -> vmCashItem.onCashItemDeleteClicked(vmCashItem.entryId)}"/>
     </LinearLayout>
-
-</LinearLayout>
 </layout>
