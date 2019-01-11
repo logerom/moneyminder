@@ -66,7 +66,9 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
                     cashList = ConvertUtil.expensesToCashItems(expenses);
                     addCashToTotal(expenses);
 
+                    // TODO: 22.12.18 adapter should load expenses and not the view model
                     cashAdapter.setList(cashList);
+                    cashAdapter.createViewTypeList(cashList);
                     cashAdapter.notifyDataSetChanged();
                 });
     }

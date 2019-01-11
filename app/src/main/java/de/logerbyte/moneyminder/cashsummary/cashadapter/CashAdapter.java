@@ -24,6 +24,7 @@ import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding;
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
 import de.logerbyte.moneyminder.util.ConvertUtil;
+import de.logerbyte.moneyminder.util.DigitUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -57,14 +58,13 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     public CashAdapter(AppDatabaseManager appDatabaseManager) {
         this.appDatabaseManager = appDatabaseManager;
-        loadExpenseList();
         calendar = Calendar.getInstance();
-        createViewTypeList();
+        loadExpenseList();
     }
 
-    //    private void setUpDayList() {
     //        for (int i = 0; i < list.size(); i++) {
     //            Calendar parsedDate = parseDate(i);
+    //    private void setUpDayList() {
     //            Date day = parsedDate.getTime();
     //            dateMap.put(day, list.get(i));
     //        }
@@ -76,6 +76,8 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 expenses -> sortExpenses(expenses)).observeOn(AndroidSchedulers.mainThread()).subscribe(expenses -> {
             list = ConvertUtil.expensesToCashItems(expenses);
             mAdapterListener.onLoadedExpenses(expenses);
+            createWeekDates();
+            createViewTypeList(list);
             notifyDataSetChanged();
         });
     }
@@ -94,7 +96,6 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             }
             return d1.compareTo(d2);
         });
-        Collections.reverse(expenses);
         return expenses;
     }
 
@@ -133,7 +134,7 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 itemPosition = itemPosition + 1;
 
                 if (itemPosition == position) {
-                    // TODO: 20.12.18 Here is the searched item
+                    // Here is the searched item
                     initDayWeek(weekList.get(i).get(j), viewHolder);
                     return;
                 }
@@ -142,7 +143,7 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             // plus 1 for summary line
             itemPosition = itemPosition + 1;
             if (itemPosition == position) {
-                // TODO: 19.12.18 create summary from that week list
+                // Summary line
                 initCashSummaryLine(weekList.get(i), viewHolder);
                 return;
             }
@@ -161,18 +162,16 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     private void initCashSummaryLine(LinkedList<CashAdapterItemViewModel> week, RecyclerView.ViewHolder holder) {
-        int cashSummary = 0;
+        // 1. weeklist has all 52 weeks, but should only has these weeks where entries are.
+        double cashSummary = 0.0;
         for (CashAdapterItemViewModel vm : week) {
-            cashSummary = cashSummary + Integer.parseInt(vm.getCashInEuro().get());
+            cashSummary = cashSummary + Double.parseDouble(DigitUtil.commaToDot(vm.getCashInEuro().get()));
         }
 
-        ((ViewHolderSummary) holder).binding.setVmSummary(new ItemSummaryViewModel(cashSummary));
-        // TODO: 20.12.18 get all dates from week and sum it
-        // TODO: 12.12.18 init new week with listener and view model
+        ((ViewHolderSummary) holder).binding.setVmSummary(new ItemSummaryViewModel(String.valueOf(cashSummary)));
     }
 
     private void initDayWeek(CashAdapterItemViewModel cashAdapterItemViewModel, RecyclerView.ViewHolder holder) {
-        // TODO: 18.12.18 init dates
         cashAdapterItemViewModel.setAdapterListener(this);
         cashAdapterItemViewModel.setDialogViewModelListener(this);
         cashAdapterItemViewModel.setActivityListener(cashSummaryActivity);
@@ -182,6 +181,34 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @Override
     public int getItemViewType(int position) {
         return viewtypeList.get(position).ordinal();
+    }
+
+    private void createWeekDates() {
+        calendar.clear();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        Date actualDate = null;
+
+        for (int i = 0; i < 52; i++) {
+            int week = i + 1;
+            weekList.add(new LinkedList<>());
+            for (CashAdapterItemViewModel itemViewModel : list) {
+                String dateString = itemViewModel.getCashDate().get();
+
+                try {
+                    actualDate = sdf.parse(dateString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                calendar.setTime(actualDate);
+                // add date item to week
+                if (week == calendar.get(Calendar.WEEK_OF_YEAR)) {
+                    weekList.get(i).add(itemViewModel);
+                } else {
+                    break;
+                }
+            }
+        }
     }
 
     //    private int bla(int position) {
@@ -210,7 +237,7 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     //        }
     //    }
 
-    private void createViewTypeList() {
+    public void createViewTypeList(ArrayList<CashAdapterItemViewModel> list) {
         for (List<CashAdapterItemViewModel> dayList : weekList) {
             for (CashAdapterItemViewModel day : dayList) {
                 viewtypeList.add(ViewType.SAME_WEEK);
