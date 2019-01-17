@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -59,6 +58,7 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public CashAdapter(AppDatabaseManager appDatabaseManager) {
         this.appDatabaseManager = appDatabaseManager;
         calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
         loadExpenseList();
     }
 
@@ -76,7 +76,7 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 expenses -> sortExpenses(expenses)).observeOn(AndroidSchedulers.mainThread()).subscribe(expenses -> {
             list = ConvertUtil.expensesToCashItems(expenses);
             mAdapterListener.onLoadedExpenses(expenses);
-            createWeekDates();
+            createWeekDates(list);
             createViewTypeList(list);
             notifyDataSetChanged();
         });
@@ -84,7 +84,7 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     private List<Expense> sortExpenses(List<Expense> expenses) {
         // FIXME: 22.09.18 sort as util class
-        Collections.sort(expenses, (o1, o2) -> {
+        expenses.sort((o1, o2) -> {
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
             Date d1 = null, d2 = null;
 
@@ -125,9 +125,20 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         initItemAtPosition(holder, position);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return viewtypeList.get(position).ordinal();
+    }
+
+    @Override
+    public int getItemCount() {
+        return viewtypeList.size();
+    }
+
     private void initItemAtPosition(RecyclerView.ViewHolder viewHolder, int position) {
         int itemPosition = -1;
-
+        // TODO: 17.01.19 Silvester is first item cause of first week. It should be as first item in new year not as
+        // first item in old year.
         for (int i = 0; i < weekList.size(); i++) {
 
             for (int j = 0; j < weekList.get(i).size(); j++) {
@@ -162,7 +173,7 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     private void initCashSummaryLine(LinkedList<CashAdapterItemViewModel> week, RecyclerView.ViewHolder holder) {
-        // 1. weeklist has all 52 weeks, but should only has these weeks where entries are.
+        // TODO: 15.01.19  week-list has all 52 weeks, but should only has these weeks where entries are.
         double cashSummary = 0.0;
         for (CashAdapterItemViewModel vm : week) {
             cashSummary = cashSummary + Double.parseDouble(DigitUtil.commaToDot(vm.getCashInEuro().get()));
@@ -178,17 +189,17 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         ((ViewHolder) holder).binding.setVmCashItem(cashAdapterItemViewModel);
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return viewtypeList.get(position).ordinal();
+    private void isSameWeek() {
     }
 
-    private void createWeekDates() {
+    private void createWeekDates(ArrayList<CashAdapterItemViewModel> list) {
         calendar.clear();
-        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        weekList.clear();
+
         Date actualDate = null;
 
         for (int i = 0; i < 52; i++) {
+            // todo: 17.01.19 This would be only work for a period of one year
             int week = i + 1;
             weekList.add(new LinkedList<>());
             for (CashAdapterItemViewModel itemViewModel : list) {
@@ -204,40 +215,40 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 // add date item to week
                 if (week == calendar.get(Calendar.WEEK_OF_YEAR)) {
                     weekList.get(i).add(itemViewModel);
-                } else {
-                    break;
                 }
             }
         }
     }
-
-    //    private int bla(int position) {
-    //        Iterator<LinkedList<CashAdapterItemViewModel>> iteratorWeek = weekList.iterator();
-    //
-    //        if (iteratorWeek.hasNext()) {
-    //            Iterator<CashAdapterItemViewModel> iteratorDay = iteratorWeek.next().iterator();
-    //            viewtypeList.add(ViewType.SAME_WEEK);
-    //        } else {
-    //            viewtypeList.add(ViewType.SUMMARY_LINE);
     //        }
-    //
-    //        //        CashAdapterItemViewModel firstDate = ((LinkedList<CashAdapterItemViewModel>) firstWeek).getFirst();
-    //        //        if (firstDate != null) {
-    //        //
-    //        //        }
-    //
-    //        // cost in that week.
-    //        int[] summaryLinesIndex = {7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133, 140,
-    //                147, 154, 161, 168, 175, 182, 189, 196, 203, 210, 217, 224, 231, 238, 245, 252, 259, 266};
-    //        List days = Arrays.asList(summaryLinesIndex);
-    //        if (days.contains(position)) {
-    //            return SUMMARY_LINE;
-    //        } else {
     //            return SAME_WEEK;
+    //        } else {
+    //            return SUMMARY_LINE;
+    //        if (days.contains(position)) {
+    //        List days = Arrays.asList(summaryLinesIndex);
+    //                147, 154, 161, 168, 175, 182, 189, 196, 203, 210, 217, 224, 231, 238, 245, 252, 259, 266};
+    //        int[] summaryLinesIndex = {7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133, 140,
+    //        // cost in that week.
+    //
+    //        //        }
+    //        //
+    //        //        if (firstDate != null) {
+    //        //        CashAdapterItemViewModel firstDate = ((LinkedList<CashAdapterItemViewModel>) firstWeek).getFirst();
+    //
     //        }
+    //            viewtypeList.add(ViewType.SUMMARY_LINE);
+    //        } else {
+    //            viewtypeList.add(ViewType.SAME_WEEK);
+    //            Iterator<CashAdapterItemViewModel> iteratorDay = iteratorWeek.next().iterator();
+    //        if (iteratorWeek.hasNext()) {
+    //
+    //        Iterator<LinkedList<CashAdapterItemViewModel>> iteratorWeek = weekList.iterator();
+    //    private int bla(int position) {
+
     //    }
 
     public void createViewTypeList(ArrayList<CashAdapterItemViewModel> list) {
+        createWeekDates(list);
+        viewtypeList.clear();
         for (List<CashAdapterItemViewModel> dayList : weekList) {
             for (CashAdapterItemViewModel day : dayList) {
                 viewtypeList.add(ViewType.SAME_WEEK);
@@ -245,30 +256,25 @@ public class CashAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             viewtypeList.add(ViewType.SUMMARY_LINE);
         }
     }
-
-    //    @NonNull
-    //    private Calendar parseDate(int position) {
-    //        CashAdapterItemViewModel cashAdapterItemViewModel = list.get(position);
-    //        String dateString = cashAdapterItemViewModel.getCashDate().get();
-    //        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-    //        Date actualDate = null;
-    //
-    //        try {
-    //            actualDate = sdf.parse(dateString);
-    //        } catch (ParseException e) {
-    //            e.printStackTrace();
-    //        }
-    //
-    //        Calendar calendar = Calendar.getInstance();
-    //        calendar.setTime(actualDate);
-    //        calendar.setFirstDayOfWeek(Calendar.MONDAY);
     //        return calendar;
-    //    }
+    //        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+    //        calendar.setTime(actualDate);
+    //        Calendar calendar = Calendar.getInstance();
+    //
+    //        }
+    //            e.printStackTrace();
+    //        } catch (ParseException e) {
+    //            actualDate = sdf.parse(dateString);
+    //        try {
+    //
+    //        Date actualDate = null;
+    //        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+    //        String dateString = cashAdapterItemViewModel.getCashDate().get();
+    //        CashAdapterItemViewModel cashAdapterItemViewModel = list.get(position);
+    //    private Calendar parseDate(int position) {
+    //    @NonNull
 
-    @Override
-    public int getItemCount() {
-        return viewtypeList.size();
-    }
+    //    }
 
     public void setList(ArrayList<CashAdapterItemViewModel> list) {
         this.list = list;
