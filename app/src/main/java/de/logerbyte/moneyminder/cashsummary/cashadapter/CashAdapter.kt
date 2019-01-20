@@ -68,7 +68,10 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     private fun sortExpenses(expenses: List<Expense>): List<Expense> {
         // FIXME: 22.09.18 sort as util class
-        return expenses.sortedBy { expense -> expense.cashDate }
+        return expenses.sortedBy { expense ->
+            val sdf = SimpleDateFormat("dd.MM.yy")
+            sdf.parse(expense.cashDate)
+        }
 
         /*(compareByDescending {  }) {it.
             val sdf = SimpleDateFormat("dd.MM.yy")
