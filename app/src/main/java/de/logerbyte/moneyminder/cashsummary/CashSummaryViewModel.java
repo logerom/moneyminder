@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -175,8 +177,9 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     }
 
     @Override
-    public void onLoadedExpenses(List<Expense> expenses) {
-        addCashToTotal(expenses);
+    public void onLoadedExpenses(@NotNull List<? extends Expense> expenses) {
+        addCashToTotal((List) expenses);
+
     }
 
     public void setCashSummaryActivity(
