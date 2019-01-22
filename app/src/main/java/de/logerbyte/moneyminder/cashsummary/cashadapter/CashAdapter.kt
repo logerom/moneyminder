@@ -167,6 +167,36 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     private fun isSameWeek() {}
 
+
+    private fun createWeekDates2(list: ArrayList<CashAdapterItemViewModel>) {
+        calendar.clear()
+        calendar.firstDayOfWeek = Calendar.MONDAY
+        var actualDate: Date? = null
+
+        for (i in 0..51) {
+            val week = i + 1
+
+            for (itemViewModel in list) {
+                val dateString = itemViewModel.cashDate.get()
+                try {
+                    actualDate = sdf.parse(dateString)
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+
+                calendar.time = actualDate
+                val weekYear = calendar.weekYear
+
+                // add date item to week
+                if (week == weekYear) {
+                    weekList[i].add(itemViewModel)
+                } else {
+                    return
+                }
+            }
+        }
+    }
+
     private fun createWeekDates(list: ArrayList<CashAdapterItemViewModel>) {
         var weekInCurrentDate: Int
         var actualDate: Date? = null
@@ -180,6 +210,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         // FIXME: 20.01.19 could be efficienter when we delete this item from the root item list which is already
         // signed to a week
         for (itemViewModel0 in list) {
+
             actualDate = getDate(actualDate, itemViewModel0)
             calendar.time = actualDate
             weekInCurrentDate = calendar.get(Calendar.WEEK_OF_YEAR)
