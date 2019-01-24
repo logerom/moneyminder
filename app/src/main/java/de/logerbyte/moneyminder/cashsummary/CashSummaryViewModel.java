@@ -60,19 +60,17 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
 
     // FIXME: 13.09.18 source out loadExpesne from adapter and viewModel in base class
     private void loadExpenseList() {
-        appDatabaseManager.getAllExpense()
-                .subscribeOn(Schedulers.io())
-                .map(expenses -> sortExpenses(expenses))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(expenses -> {
-                    cashList = ConvertUtil.expensesToCashItems(expenses);
-                    addCashToTotal(expenses);
+        appDatabaseManager.getAllExpense().subscribeOn(Schedulers.io()).map(
+                expenses -> sortExpenses(expenses)).observeOn(AndroidSchedulers.mainThread()).subscribe(expenses -> {
+            cashList = ConvertUtil.expensesToCashItems(expenses);
+            addCashToTotal(expenses);
 
-                    // TODO: 22.12.18 adapter should load expenses and not the view model
-                    cashAdapter.setList(cashList);
-                    cashAdapter.createViewTypeList(cashList);
-                    cashAdapter.notifyDataSetChanged();
-                });
+            // TODO: 22.12.18 adapter should load expenses and not the view model
+            // TODO: 24.01.19 recreate weekDates. Failing for reload weekList after adding new cash item
+            cashAdapter.setList(cashList);
+            cashAdapter.createViewTypeList(cashList);
+            cashAdapter.notifyDataSetChanged();
+        });
     }
 
     private List<Expense> sortExpenses(List<Expense> expenses) {
@@ -81,7 +79,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
             Date d1 = null, d2 = null;
 
-            try{
+            try {
                 d1 = sdf.parse(o1.cashDate);
                 d2 = sdf.parse(o2.cashDate);
             } catch (ParseException e) {
@@ -93,16 +91,13 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         return expenses;
     }
 
-    public void onClickAddCash(View view){
-        Double date = DigitUtil.commaToDot(cashInEuro.get()) == "" ? 0.00 :
-                Double.valueOf(DigitUtil.commaToDot(cashInEuro.get()));
+    public void onClickAddCash(View view) {
+        Double date = DigitUtil.commaToDot(cashInEuro.get()) == "" ? 0.00 : Double.valueOf(
+                DigitUtil.commaToDot(cashInEuro.get()));
 
-        Expense expense = new Expense(null, cashName.get(), cashCategory.get(), cashDate.get(),date);
-        appDatabaseManager.insertCashItemIntoDB(expense)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        aBoolean -> loadExpenseList());
+        Expense expense = new Expense(null, cashName.get(), cashCategory.get(), cashDate.get(), date);
+        appDatabaseManager.insertCashItemIntoDB(expense).subscribeOn(Schedulers.io()).observeOn(
+                AndroidSchedulers.mainThread()).subscribe(aBoolean -> loadExpenseList());
         // fixme: 14.08.18 what is when error?
 
         clearInputField();
@@ -116,10 +111,10 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         // fixme: 02.09.18 make util class with that dot delete logic
 
         if (s.length() < newText.length()) {
-            char charAt = newText.toString().charAt(newText.toString().length()-1);
+            char charAt = newText.toString().charAt(newText.toString().length() - 1);
             if (charAt == '.') {
                 dotDelete = true;
-                s.delete(s.toString().length() -1, s.toString().length());
+                s.delete(s.toString().length() - 1, s.toString().length());
             }
             newText = s.toString();
             return;
@@ -179,11 +174,9 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     @Override
     public void onLoadedExpenses(@NotNull List<? extends Expense> expenses) {
         addCashToTotal((List) expenses);
-
     }
 
-    public void setCashSummaryActivity(
-            CashAdapterItemViewModel.ActivityListener cashSummaryActivity) {
+    public void setCashSummaryActivity(CashAdapterItemViewModel.ActivityListener cashSummaryActivity) {
         this.cashSummaryActivity = cashSummaryActivity;
         cashAdapter.setActivityListener(cashSummaryActivity);
     }
