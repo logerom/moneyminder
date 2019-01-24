@@ -17,6 +17,7 @@ import io.reactivex.schedulers.Schedulers
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by logerom on 28.07.18.
@@ -61,7 +62,9 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         list = ConvertUtil.expensesToCashItems(expenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
 
-        createWeekDates(list)
+//        createWeekDates(list)
+        // // TODO: 24.01.19 exchange createWeekDates with createList
+        createList(list)
         createViewTypeList(list)
         notifyDataSetChanged()
     }
@@ -203,7 +206,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         calendar.clear()
         weekList.clear()
 
-
         weekList.add(LinkedList())
         var currentWeek = weekList.last
 
@@ -215,14 +217,12 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             calendar.time = actualDate
             weekInCurrentDate = calendar.get(Calendar.WEEK_OF_YEAR)
 
+
             for (itemViewModel in list) {
                 val dateToCompare = getDate(actualDate, itemViewModel)
                 calendar.time = dateToCompare
                 val weekToCompare = calendar.get(Calendar.WEEK_OF_YEAR)
 
-                // TODO: 20.01.19
-                //      1. take iterator and delete item from list.
-                //      2. when week to compare is lower then actual week, its a new year
                 if (weekInCurrentDate == weekToCompare) {
                     currentWeek.add(itemViewModel)
                 }
@@ -232,8 +232,48 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
                     break
                 }
             }
+        }
+    }
 
+    private fun createList(list: ArrayList<CashAdapterItemViewModel>) {
+        var again = true
+        var toDeleteFromRoot = ArrayList<CashAdapterItemViewModel>()
+        var actualDate: Date? = null
+        var newDate = null
+        var actualDateInYear: Int
+        var actualWeek: Int? = null
+        var datesToDelete = ArrayList<CashAdapterItemViewModel>()
 
+        calendar.clear()
+        weekList.clear()
+
+        while (again) {
+
+            weekList.add(LinkedList())
+            for (item: CashAdapterItemViewModel in list) {
+                // actual date and week
+                if (list.indexOf(item) == 0) {
+                    actualDate = getDate(actualDate, item)
+                    calendar.time = actualDate
+                    actualWeek = calendar.get(Calendar.WEEK_OF_YEAR)
+                }
+                // date and week to compare with actual date
+                val dateToCompare = getDate(actualDate, item)
+                calendar.time = dateToCompare
+                val weekToCompare = calendar.get(Calendar.WEEK_OF_YEAR)
+
+                if (weekToCompare == actualWeek) {
+                    weekList.last.add(item)
+                    datesToDelete.add(item)
+                } else {
+                    break
+                }
+            }
+            list.removeAll(datesToDelete)
+
+            if (list.isEmpty()) {
+                again = false
+            }
         }
     }
 
