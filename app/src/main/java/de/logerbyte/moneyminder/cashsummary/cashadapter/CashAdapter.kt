@@ -62,9 +62,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         list = ConvertUtil.expensesToCashItems(expenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
 
-//        createWeekDates(list)
-        // // TODO: 24.01.19 exchange createWeekDates with createList
-        createList(list)
+        createWeeDateList(list)
         createViewTypeList(list)
         notifyDataSetChanged()
     }
@@ -75,22 +73,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             val sdf = SimpleDateFormat("dd.MM.yy")
             sdf.parse(expense.cashDate)
         }
-
-        /*(compareByDescending {  }) {it.
-            val sdf = SimpleDateFormat("dd.MM.yy")
-            var d1: Date? = null
-            var d2: Date? = null
-
-            try {
-                d1 = sdf.parse(o1.cashDate)
-                d2 = sdf.parse(o2.cashDate)
-            } catch (e: ParseException) {
-                e.printStackTrace()
-            }
-
-            d1!!.compareTo(d2)
-        }*/
-        // return expenses
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -122,7 +104,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         for (i in weekList.indices) {
 
             for (j in 0 until weekList[i].size) {
-                itemPosition = itemPosition + 1
+                itemPosition += 1
 
                 if (itemPosition == position) {
                     // Here is the searched item
@@ -132,7 +114,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             }
 
             // plus 1 for summary line
-            itemPosition = itemPosition + 1
+            itemPosition += 1
             if (itemPosition == position) {
                 // Summary line
                 initCashSummaryLine(weekList[i], viewHolder)
@@ -155,7 +137,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     private fun initCashSummaryLine(week: LinkedList<CashAdapterItemViewModel>, holder: RecyclerView.ViewHolder) {
         var cashSummary = 0.0
         for (vm in week) {
-            cashSummary = cashSummary + java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
+            cashSummary += java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
         }
 
         (holder as ViewHolderSummary).binding.vmSummary = ItemSummaryViewModel(cashSummary.toString())
@@ -168,81 +150,11 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         (holder as ViewHolder).binding.vmCashItem = cashAdapterItemViewModel
     }
 
-    private fun isSameWeek() {}
-
-
-    private fun createWeekDates2(list: ArrayList<CashAdapterItemViewModel>) {
-        calendar.clear()
-        calendar.firstDayOfWeek = Calendar.MONDAY
-        var actualDate: Date? = null
-
-        for (i in 0..51) {
-            val week = i + 1
-
-            for (itemViewModel in list) {
-                val dateString = itemViewModel.cashDate.get()
-                try {
-                    actualDate = sdf.parse(dateString)
-                } catch (e: ParseException) {
-                    e.printStackTrace()
-                }
-
-                calendar.time = actualDate
-                val weekYear = calendar.weekYear
-
-                // add date item to week
-                if (week == weekYear) {
-                    weekList[i].add(itemViewModel)
-                } else {
-                    return
-                }
-            }
-        }
-    }
-
-    private fun createWeekDates(list: ArrayList<CashAdapterItemViewModel>) {
-        var weekInCurrentDate: Int
-        var actualDate: Date? = null
-        calendar.clear()
-        weekList.clear()
-
-        weekList.add(LinkedList())
-        var currentWeek = weekList.last
-
-        // FIXME: 20.01.19 could be efficienter when we delete this item from the root item list which is already
-        // signed to a week
-        for (itemViewModel0 in list) {
-
-            actualDate = getDate(actualDate, itemViewModel0)
-            calendar.time = actualDate
-            weekInCurrentDate = calendar.get(Calendar.WEEK_OF_YEAR)
-
-
-            for (itemViewModel in list) {
-                val dateToCompare = getDate(actualDate, itemViewModel)
-                calendar.time = dateToCompare
-                val weekToCompare = calendar.get(Calendar.WEEK_OF_YEAR)
-
-                if (weekInCurrentDate == weekToCompare) {
-                    currentWeek.add(itemViewModel)
-                }
-                if (weekInCurrentDate < weekToCompare) {
-                    weekList.add(LinkedList())
-                    currentWeek = weekList.last
-                    break
-                }
-            }
-        }
-    }
-
-    private fun createList(list: ArrayList<CashAdapterItemViewModel>) {
+    private fun createWeeDateList(list: ArrayList<CashAdapterItemViewModel>) {
         var again = true
-        var toDeleteFromRoot = ArrayList<CashAdapterItemViewModel>()
         var actualDate: Date? = null
-        var newDate = null
-        var actualDateInYear: Int
         var actualWeek: Int? = null
-        var datesToDelete = ArrayList<CashAdapterItemViewModel>()
+        val datesToDelete = ArrayList<CashAdapterItemViewModel>()
 
         calendar.clear()
         weekList.clear()
@@ -289,32 +201,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
         return actualDate
     }
-    //        }
-    //            return SAME_WEEK;
-    //        } else {
-    //            return SUMMARY_LINE;
-    //        if (days.contains(position)) {
-    //        List days = Arrays.asList(summaryLinesIndex);
-    //                147, 154, 161, 168, 175, 182, 189, 196, 203, 210, 217, 224, 231, 238, 245, 252, 259, 266};
-    //        int[] summaryLinesIndex = {7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, 105, 112, 119, 126, 133, 140,
-    //        // cost in that week.
-    //
-    //        //        }
-    //        //
-    //        //        if (firstDate != null) {
-    //        //        CashAdapterItemViewModel firstDate = ((LinkedList<CashAdapterItemViewModel>) firstWeek).getFirst();
-    //
-    //        }
-    //            viewtypeList.add(ViewType.SUMMARY_LINE);
-    //        } else {
-    //            viewtypeList.add(ViewType.SAME_WEEK);
-    //            Iterator<CashAdapterItemViewModel> iteratorDay = iteratorWeek.next().iterator();
-    //        if (iteratorWeek.hasNext()) {
-    //
-    //        Iterator<LinkedList<CashAdapterItemViewModel>> iteratorWeek = weekList.iterator();
-    //    private int bla(int position) {
-
-    //    }
 
     fun createViewTypeList(list: ArrayList<CashAdapterItemViewModel>) {
         viewtypeList.clear()
@@ -325,25 +211,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             viewtypeList.add(ViewType.SUMMARY_LINE)
         }
     }
-    //        return calendar;
-    //        calendar.setFirstDayOfWeek(Calendar.MONDAY);
-    //        calendar.setTime(actualDate);
-    //        Calendar calendar = Calendar.getInstance();
-    //
-    //        }
-    //            e.printStackTrace();
-    //        } catch (ParseException e) {
-    //            actualDate = sdf.parse(dateString);
-    //        try {
-    //
-    //        Date actualDate = null;
-    //        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-    //        String dateString = cashAdapterItemViewModel.getCashDate().get();
-    //        CashAdapterItemViewModel cashAdapterItemViewModel = list.get(position);
-    //    private Calendar parseDate(int position) {
-    //    @NonNull
-
-    //    }
 
     fun setList(list: ArrayList<CashAdapterItemViewModel>) {
         this.list = list
