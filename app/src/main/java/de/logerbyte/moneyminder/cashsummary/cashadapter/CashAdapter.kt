@@ -55,10 +55,15 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     // FIXME: 23.09.18 2 same loadExpense functions. base it.
     fun loadExpenseList() {
-        appDatabaseManager.allExpense.subscribeOn(Schedulers.io()).map { expenses -> sortExpenses(expenses) }.observeOn(AndroidSchedulers.mainThread()).subscribe { expenses -> initList(expenses) }
+        appDatabaseManager.allExpense
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { expenses -> initList(expenses) }
     }
 
-    private fun initList(expenses: List<Expense>) {
+    fun initList(expenses: List<Expense>) {
+//        sortExpenses(expenses)
+        sortExpensesOld(expenses)
         list = ConvertUtil.expensesToCashItems(expenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
 
@@ -84,6 +89,26 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             SAME_WEEK -> layoutDateItem(parent)
             else -> layoutSummaryLine(parent)
         }
+    }
+
+    private fun sortExpensesOld(expenses: List<Expense>): List<Expense> {
+        // FIXME: 22.09.18 sort as util class
+        Collections.sort(expenses) { o1, o2 ->
+            val sdf = SimpleDateFormat("dd.MM.yy")
+            var d1: Date? = null
+            var d2: Date? = null
+
+            try {
+                d1 = sdf.parse(o1.cashDate)
+                d2 = sdf.parse(o2.cashDate)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+
+            d1!!.compareTo(d2)
+        }
+        Collections.reverse(expenses)
+        return expenses
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
