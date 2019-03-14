@@ -67,7 +67,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         list = ConvertUtil.expensesToCashItems(expenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
 
-        createWeeDateList(list)
+        createWeekDateList(list)
         createViewTypeList(list)
         notifyDataSetChanged()
     }
@@ -85,6 +85,10 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
+        return chooseViewHolder(viewType, parent)
+    }
+
+    private fun chooseViewHolder(viewType: Int, parent: ViewGroup): RecyclerView.ViewHolder {
         return when (viewType) {
             SAME_WEEK -> layoutDateItem(parent)
             else -> layoutSummaryLine(parent)
@@ -133,7 +137,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
                 if (itemPosition == position) {
                     // Here is the searched item
-                    initDayWeek(weekList[i][j], viewHolder)
+                    initDayInList(weekList[i][j], viewHolder)
                     return
                 }
             }
@@ -168,14 +172,14 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         (holder as ViewHolderSummary).binding.vmSummary = ItemSummaryViewModel(cashSummary.toString())
     }
 
-    private fun initDayWeek(cashAdapterItemViewModel: CashAdapterItemViewModel, holder: RecyclerView.ViewHolder) {
+    private fun initDayInList(cashAdapterItemViewModel: CashAdapterItemViewModel, holder: RecyclerView.ViewHolder) {
         cashAdapterItemViewModel.setAdapterListener(this)
         cashAdapterItemViewModel.setDialogViewModelListener(this)
         cashAdapterItemViewModel.setActivityListener(cashSummaryActivity)
         (holder as ViewHolder).binding.vmCashItem = cashAdapterItemViewModel
     }
 
-    private fun createWeeDateList(list: ArrayList<CashAdapterItemViewModel>) {
+    private fun createWeekDateList(list: ArrayList<CashAdapterItemViewModel>) {
         var again = true
         var actualDate: Date? = null
         var actualWeek: Int? = null
@@ -190,12 +194,12 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             for (item: CashAdapterItemViewModel in list) {
                 // actual date and week
                 if (list.indexOf(item) == 0) {
-                    actualDate = getDate(actualDate, item)
+                    actualDate = getDateFromViewModel(actualDate, item)
                     calendar.time = actualDate
                     actualWeek = calendar.get(Calendar.WEEK_OF_YEAR)
                 }
                 // date and week to compare with actual date
-                val dateToCompare = getDate(actualDate, item)
+                val dateToCompare = getDateFromViewModel(actualDate, item)
                 calendar.time = dateToCompare
                 val weekToCompare = calendar.get(Calendar.WEEK_OF_YEAR)
 
@@ -214,7 +218,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         }
     }
 
-    private fun getDate(actualDate: Date?, itemViewModel: CashAdapterItemViewModel): Date? {
+    private fun getDateFromViewModel(actualDate: Date?, itemViewModel: CashAdapterItemViewModel): Date? {
         var actualDate = actualDate
         val dateString = itemViewModel.cashDate.get()
 
