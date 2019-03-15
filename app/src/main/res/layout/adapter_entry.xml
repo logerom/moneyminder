@@ -54,9 +54,8 @@
 
         <ImageButton
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_delete"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_delete"
             android:onClick="@{() -> vmCashItem.onCashItemDeleteClicked(vmCashItem.entryId)}"/>
     </LinearLayout>
 </layout>
