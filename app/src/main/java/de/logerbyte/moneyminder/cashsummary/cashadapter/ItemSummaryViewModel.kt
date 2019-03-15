@@ -1,24 +1,14 @@
 package de.logerbyte.moneyminder.cashsummary.cashadapter
 
-import android.databinding.ObservableField
-
 class ItemSummaryViewModel(cost: String) {
     companion object {
         val weekLimit = 70
     }
-    
-    var _cost = ObservableField<String>()
-    var cost: String = cost
-        // TODO: 14.03.19 when set cost, create saldo: weekLimit - cost
-        set(v) = _cost.set(v)
 
-
-    var _saldo = ObservableField<String>()
-    var saldo: String = "99"
-        set(value) = _saldo.set(value)
-
-
-    var _saving = ObservableField<String>()
-    var saving = "999"
-        set(value) = _saving.set(value)
+    var cost = cost
+    var saldo = (weekLimit - cost.toDouble()).toString()
+    // TODO: 15.03.19 saving = first cashout (in all) until last cashout in week
+    // 1. which count of week ( ? x weekLimit = sum)
+    // 2. sum - all cashOuts from first cashOut until last cashOut in actual week
+    var saving = saldo
 }
