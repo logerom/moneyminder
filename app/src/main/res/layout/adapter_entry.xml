@@ -10,7 +10,6 @@
         android:id="@+id/ll_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_entry_item"
         android:onClick="@{vmCashItem::onCashItemClicked}"
         android:orientation="horizontal"
         android:padding="2dp"
@@ -53,8 +52,8 @@
             tools:text="0,00"/>
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="24dp"
             android:src="@android:drawable/ic_menu_delete"
             android:onClick="@{() -> vmCashItem.onCashItemDeleteClicked(vmCashItem.entryId)}"/>
     </LinearLayout>
