@@ -23,6 +23,5 @@ public class Expense {
         this.cashDate = cashDate;
         this.cashInEuro = cashInEuro;
         this.category = category;
-        // TODO: 25.08.18 set category in dialog view model + in all layout
     }
 }

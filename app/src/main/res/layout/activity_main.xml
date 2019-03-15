@@ -15,6 +15,13 @@
         android:orientation="vertical"
         tools:context="de.logerbyte.moneyminder.cashsummary.CashSummaryActivity">
 
+        <Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_costs"
             android:layout_width="match_parent"
@@ -59,12 +66,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="5"
             android:orientation="horizontal">
 
             <EditText
+                android:layout_weight="1"
                 android:id="@+id/et_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:afterTextChanged="@{viewModel.onTextChanged}"
                 android:digits="0123456789."
                 android:hint="dd.mm.yy"
@@ -75,35 +84,39 @@
                 android:text="@={viewModel.cashDate}"/>
 
             <EditText
+                android:layout_weight="1"
                 android:id="@+id/et_cash_name"
                 android:layout_width="124dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:singleLine="true"
-                android:nextFocusDown="@+id/et_cash_category"
+                android:nextFocusDown="@id/et_cash_category"
                 android:hint="Arbeitsasflusg"
                 android:text="@={viewModel.cashName}"/>
 
             <EditText
+                android:layout_weight="1"
                 android:id="@+id/et_cash_category"
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:singleLine="true"
-                android:nextFocusDown="@+id/et_cash_amount"
+                android:nextFocusDown="@id/et_cash_amount"
                 android:hint="Kategory"
                 android:text="@={viewModel.cashCategory}"/>
 
             <EditText
+                android:layout_weight="1"
                 android:id="@+id/et_cash_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:digits="0123456789,"
                 android:hint="0,00"
                 android:inputType="numberDecimal"
                 android:text="@={viewModel.cashInEuro}"/>
 
             <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@android:drawable/ic_input_add"
                 android:onClick="@{viewModel::onClickAddCash}"/>
         </LinearLayout>

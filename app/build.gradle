@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -23,6 +25,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    // Max Error lines for Kotlin
+    kapt {
+        javacOptions {
+            // Increase the max count of errors from annotation processors.
+            // Default is 100.
+            option("-Xmaxerrs", 5000)
+        }
+    }
+
+    // Max Error lines for Java
+    afterEvaluate {
+        tasks.withType(JavaCompile.class) {
+            options.compilerArgs << "-Xmaxerrs" << "5000"
+        }
+    }
 }
 
 /*configurations.all {
@@ -39,7 +56,7 @@ dependencies {
 
     // database
     implementation "android.arch.persistence.room:rxjava2:${rootProject.ext.roomDatabase}"
-    annotationProcessor "android.arch.persistence.room:compiler:${rootProject.ext.roomDatabase}"
+    kapt "android.arch.persistence.room:compiler:${rootProject.ext.roomDatabase}"
     debugImplementation "com.amitshekhar.android:debug-db:${rootProject.ext.roomDatabase}"
 
     // reactive
@@ -56,4 +73,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

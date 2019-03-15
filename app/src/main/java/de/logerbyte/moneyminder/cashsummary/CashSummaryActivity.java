@@ -21,6 +21,7 @@ public class CashSummaryActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         bindViewModel();
         bindView();
+        setActionBar(findViewById(R.id.my_toolbar));
     }
 
     private void bindViewModel() {
