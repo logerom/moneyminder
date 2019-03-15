@@ -25,10 +25,11 @@ public class DialogViewModel implements CashEditDialog.Listener {
 
     ViewInterface viewInterface;
 
-    public DialogViewModel(long entryId, String cashDate, String cashName, String cashInEuro) {
+    public DialogViewModel(long entryId, String cashDate, String cashName, String cashInEuro, String cashCategory) {
         this.entryId = entryId;
         this.cashDate.set(cashDate);
         this.cashName.set(cashName);
+        this.cashCategory.set(cashCategory);
         this.cashInEuro.set(cashInEuro);
     }
 

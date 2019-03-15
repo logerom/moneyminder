@@ -40,8 +40,8 @@ public class CashEditDialog extends DialogFragment {
 
     public void bindViewModel(CashAdapterItemViewModel item) {
         vm = new DialogViewModel(
-                item.getEntryId(), item.getCashDate().get(),
-                item.getCashName().get(), item.getCashInEuro().get());
+                item.getEntryId(), item.getCashDate().get(), item.getCashName().get(), item.getCashInEuro().get(),
+                item.getCashCategory().get());
         callback = vm;
     }
 
