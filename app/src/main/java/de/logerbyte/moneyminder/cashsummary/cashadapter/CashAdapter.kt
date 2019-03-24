@@ -39,6 +39,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         SAME_WEEK
     }
 
+
     init {
         calendar = Calendar.getInstance()
         calendar.firstDayOfWeek = Calendar.MONDAY
@@ -79,7 +80,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        initItemAtPosition(holder, position)
+        findAndInitItemAtPosition(holder, position)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -90,7 +91,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         return viewtypeList.size
     }
 
-    private fun initItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
+    private fun findAndInitItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
         var itemPosition = -1
         // first item in old year.
         for (i in weeksWithExpenses.indices) {
@@ -100,7 +101,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
                 if (itemPosition == position) {
                     // Here is the searched item
-                    initDayInList(weeksWithExpenses[i][j], viewHolder)
+                    initDayItem(weeksWithExpenses[i][j], viewHolder)
                     return
                 }
             }
@@ -109,7 +110,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             itemPosition += 1
             if (itemPosition == position) {
                 // Summary line
-                initCashSummaryLine(weeksWithExpenses[i], viewHolder)
+                initCashSummaryItem(weeksWithExpenses[i], viewHolder)
                 return
             }
         }
@@ -126,7 +127,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         return ViewHolder(binding)
     }
 
-    private fun initCashSummaryLine(week: LinkedList<CashAdapterItemViewModel>, holder: RecyclerView.ViewHolder) {
+    private fun initCashSummaryItem(week: LinkedList<CashAdapterItemViewModel>, holder: RecyclerView.ViewHolder) {
         var cashSummary = 0.0
         for (vm in week) {
             cashSummary += java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
@@ -135,9 +136,9 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         (holder as ViewHolderSummary).binding.vmSummary = ItemSummaryViewModel(cashSummary.toString())
     }
 
-    private fun initDayInList(cashAdapterItemViewModel: CashAdapterItemViewModel, holder: RecyclerView.ViewHolder) {
-        cashAdapterItemViewModel.setAdapterListener(this)
-        cashAdapterItemViewModel.setDialogViewModelListener(this)
+    private fun initDayItem(cashAdapterItemViewModel: CashAdapterItemViewModel, holder: RecyclerView.ViewHolder) {
+        cashAdapterItemViewModel.setItemListener(this)
+        cashAdapterItemViewModel.setDialogListener(this)
         cashAdapterItemViewModel.setActivityListener(cashSummaryActivity)
         (holder as ViewHolder).binding.vmCashItem = cashAdapterItemViewModel
     }
