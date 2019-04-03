@@ -35,7 +35,7 @@ public class CashSummaryActivity extends FragmentActivity
     }
 
     @Override
-    public void onItemClicked(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener) {
+    public void showEditDialog(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener) {
         CashEditDialog cashEditDialog = new CashEditDialog();
         cashEditDialog.bindViewModel(item);
         cashEditDialog.setAdapterCallback(dialogVmListener);

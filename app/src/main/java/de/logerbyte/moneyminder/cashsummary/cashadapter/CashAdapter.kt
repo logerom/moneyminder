@@ -14,7 +14,6 @@ import de.logerbyte.moneyminder.util.ConvertUtil
 import de.logerbyte.moneyminder.util.DigitUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -26,7 +25,7 @@ import kotlin.collections.ArrayList
 class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), CashAdapterItemViewModel.AdapterListener, DialogViewModel.ViewInterface {
     private val viewtypeList = ArrayList<ViewType>()
     private val calendar: Calendar
-    private var adapterItemList = ArrayList<CashAdapterItemViewModel>()
+    private var cashList = ArrayList<CashAdapterItemViewModel>()
     private var layoutInflater: LayoutInflater? = null
     private var mAdapterListener: Listener? = null
     private var cashSummaryActivity: CashAdapterItemViewModel.ActivityListener? = null
@@ -56,11 +55,11 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     fun initList(expenses: List<Expense>) {
         val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
-        adapterItemList = ConvertUtil.expensesToCashItems(sortedExpenses)
+        cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
 
-        createWeeksWithExpenses(adapterItemList)
-        createViewTypeList(adapterItemList)
+        createWeeksWithExpenses(cashList)
+        createViewTypeList(cashList)
         notifyDataSetChanged()
     }
 
@@ -143,9 +142,9 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         (holder as ViewHolder).binding.vmCashItem = cashAdapterItemViewModel
     }
 
-    private fun createWeeksWithExpenses(list: ArrayList<CashAdapterItemViewModel>) {
+    private fun createWeeksWithExpenses(cashList: ArrayList<CashAdapterItemViewModel>) {
         var again = true
-        var actualDate: Date? = null
+        var firstDate: Date? = null
         var actualWeek: Int? = null
         val datesToDelete = ArrayList<CashAdapterItemViewModel>()
 
@@ -155,44 +154,36 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         while (again) {
 
             weeksWithExpenses.add(LinkedList())
-            for (item: CashAdapterItemViewModel in list) {
+            for (expense: CashAdapterItemViewModel in cashList) {
                 // actual date and week
-                if (list.indexOf(item) == 0) {
-                    actualDate = getDateFromViewModel(actualDate, item)
-                    calendar.time = actualDate
+                if (cashList.indexOf(expense) == 0) {
+                    firstDate = getDateFromViewModel(expense)
+                    calendar.time = firstDate
                     actualWeek = calendar.get(Calendar.WEEK_OF_YEAR)
                 }
                 // date and week to compare with actual date
-                val dateToCompare = getDateFromViewModel(actualDate, item)
+                val dateToCompare = getDateFromViewModel(expense)
                 calendar.time = dateToCompare
                 val weekToCompare = calendar.get(Calendar.WEEK_OF_YEAR)
 
                 if (weekToCompare == actualWeek) {
-                    weeksWithExpenses.last.add(item)
-                    datesToDelete.add(item)
+                    weeksWithExpenses.last.add(expense)
+                    datesToDelete.add(expense)
                 } else {
                     break
                 }
             }
-            list.removeAll(datesToDelete)
+            cashList.removeAll(datesToDelete)
 
-            if (list.isEmpty()) {
+            if (cashList.isEmpty()) {
                 again = false
             }
         }
     }
 
-    private fun getDateFromViewModel(actualDate: Date?, itemViewModel: CashAdapterItemViewModel): Date? {
-        var actualDate = actualDate
+    private fun getDateFromViewModel(itemViewModel: CashAdapterItemViewModel): Date? {
         val dateString = itemViewModel.cashDate.get()
-
-        try {
-            actualDate = sdf.parse(dateString)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-
-        return actualDate
+        return sdf.parse(dateString)
     }
 
     fun createViewTypeList(list: ArrayList<CashAdapterItemViewModel>) {

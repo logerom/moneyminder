@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply from: 'jacoco.gradle'
+
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -16,7 +18,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dataBinding{
+    dataBinding {
         enabled = true
     }
     buildTypes {
@@ -66,7 +68,6 @@ dependencies {
     // viewModel
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
-
     /*implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'com.android.support:support-vector-drawable:27.1.1'
     */
@@ -75,6 +76,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
 repositories {
     mavenCentral()
 }

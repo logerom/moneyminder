@@ -54,7 +54,7 @@ public class CashAdapterItemViewModel {
     }
 
     public void onCashItemClicked(View view) {
-          mActivityListener.onItemClicked(this, dialogVmListener);
+        mActivityListener.showEditDialog(this, dialogVmListener);
     }
 
     public void setItemListener(AdapterListener cashAdapter) {
@@ -74,7 +74,8 @@ public class CashAdapterItemViewModel {
     }
 
     public interface ActivityListener {
-        void onItemClicked(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener);
+
+        void showEditDialog(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener);
     }
 
 
