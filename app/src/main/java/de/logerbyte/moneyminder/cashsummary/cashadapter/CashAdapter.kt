@@ -31,7 +31,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     private var cashSummaryActivity: CashAdapterItemViewModel.ActivityListener? = null
     private val dateMap = HashMap<Date, CashAdapterItemViewModel>()
     internal var sdf = SimpleDateFormat("dd.MM.yy")
-    private val weeksWithExpenses = LinkedList<LinkedList<CashAdapterItemViewModel>>()
+    private val weeksAndDaysWithExpenses = ArrayList<ArrayList<CashAdapterItemViewModel>>()
 
     private enum class ViewType {
         SUMMARY_LINE,
@@ -58,7 +58,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
 
-        createWeeksWithExpenses(cashList)
+        createWeekListWithDayExpenses(cashList)
         createViewTypeList(cashList)
         notifyDataSetChanged()
     }
@@ -93,14 +93,14 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     private fun findAndInitItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
         var itemPosition = -1
         // first item in old year.
-        for (i in weeksWithExpenses.indices) {
+        for (i in weeksAndDaysWithExpenses.indices) {
 
-            for (j in 0 until weeksWithExpenses[i].size) {
+            for (j in 0 until weeksAndDaysWithExpenses[i].size) {
                 itemPosition += 1
 
                 if (itemPosition == position) {
                     // Here is the searched item
-                    initDayItem(weeksWithExpenses[i][j], viewHolder)
+                    initDayItem(weeksAndDaysWithExpenses[i][j], viewHolder)
                     return
                 }
             }
@@ -109,7 +109,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
             itemPosition += 1
             if (itemPosition == position) {
                 // Summary line
-                initCashSummaryItem(weeksWithExpenses[i], viewHolder)
+                initCashSummaryItem(weeksAndDaysWithExpenses[i], viewHolder)
                 return
             }
         }
@@ -126,7 +126,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         return ViewHolder(binding)
     }
 
-    private fun initCashSummaryItem(week: LinkedList<CashAdapterItemViewModel>, holder: RecyclerView.ViewHolder) {
+    private fun initCashSummaryItem(week: ArrayList<CashAdapterItemViewModel>, holder: RecyclerView.ViewHolder) {
         var cashSummary = 0.0
         for (vm in week) {
             cashSummary += java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
@@ -142,18 +142,18 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         (holder as ViewHolder).binding.vmCashItem = cashAdapterItemViewModel
     }
 
-    private fun createWeeksWithExpenses(cashList: ArrayList<CashAdapterItemViewModel>) {
+    private fun createWeekListWithDayExpenses(cashList: ArrayList<CashAdapterItemViewModel>) {
         var again = true
-        var firstDate: Date? = null
+        var firstDate: Date?
         var actualWeek: Int? = null
         val datesToDelete = ArrayList<CashAdapterItemViewModel>()
 
         calendar.clear()
-        weeksWithExpenses.clear()
+        weeksAndDaysWithExpenses.clear()
 
         while (again) {
 
-            weeksWithExpenses.add(LinkedList())
+            weeksAndDaysWithExpenses.add(ArrayList())
             for (expense: CashAdapterItemViewModel in cashList) {
                 // actual date and week
                 if (cashList.indexOf(expense) == 0) {
@@ -167,7 +167,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
                 val weekToCompare = calendar.get(Calendar.WEEK_OF_YEAR)
 
                 if (weekToCompare == actualWeek) {
-                    weeksWithExpenses.last.add(expense)
+                    weeksAndDaysWithExpenses.last().add(expense)
                     datesToDelete.add(expense)
                 } else {
                     break
@@ -188,7 +188,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     fun createViewTypeList(list: ArrayList<CashAdapterItemViewModel>) {
         viewtypeList.clear()
-        for (expenses in weeksWithExpenses) {
+        for (expenses in weeksAndDaysWithExpenses) {
             for (expense in expenses) {
                 viewtypeList.add(ViewType.SAME_WEEK)
             }
