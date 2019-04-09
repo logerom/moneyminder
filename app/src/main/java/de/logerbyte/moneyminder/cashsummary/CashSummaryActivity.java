@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import de.logerbyte.moneyminder.R;
-import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel;
+import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.cashsummary.editdialog.CashEditDialog;
 import de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
 
-public class CashSummaryActivity extends FragmentActivity
-    implements CashAdapterItemViewModel.ActivityListener {
+public class CashSummaryActivity extends FragmentActivity implements DayExpenseViewModel.ActivityListener {
 
     private CashSummaryViewModel cashSummaryViewModel;
 
@@ -35,7 +34,7 @@ public class CashSummaryActivity extends FragmentActivity
     }
 
     @Override
-    public void showEditDialog(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener) {
+    public void showEditDialog(DayExpenseViewModel item, DialogViewModel.ViewInterface dialogVmListener) {
         CashEditDialog cashEditDialog = new CashEditDialog();
         cashEditDialog.bindViewModel(item);
         cashEditDialog.setAdapterCallback(dialogVmListener);

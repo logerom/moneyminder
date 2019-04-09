@@ -9,7 +9,7 @@ import de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel;
  * Created by logerom on 29.07.18.
  */
 
-public class CashAdapterItemViewModel {
+public class DayExpenseViewModel {
 
     private long entryId;
     private ObservableField<String> cashName = new ObservableField<>();
@@ -21,7 +21,7 @@ public class CashAdapterItemViewModel {
     private DialogViewModel.ViewInterface dialogVmListener;
 
     // FIXME: 17.09.18 only default constructor if we extend from AndroidViewModel. Use factory
-    public CashAdapterItemViewModel(long entryId, String cashDate, String cashName, String cashCategory,
+    public DayExpenseViewModel(long entryId, String cashDate, String cashName, String cashCategory,
             String cashInEuro) {
         this.entryId = entryId;
         this.cashDate.set(cashDate);
@@ -75,7 +75,7 @@ public class CashAdapterItemViewModel {
 
     public interface ActivityListener {
 
-        void showEditDialog(CashAdapterItemViewModel item, DialogViewModel.ViewInterface dialogVmListener);
+        void showEditDialog(DayExpenseViewModel item, DialogViewModel.ViewInterface dialogVmListener);
     }
 
 

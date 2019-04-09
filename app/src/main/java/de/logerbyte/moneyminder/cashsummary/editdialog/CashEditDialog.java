@@ -8,7 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 
 import de.logerbyte.moneyminder.R;
-import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel;
+import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.databinding.DialogEditBinding;
 
 public class CashEditDialog extends DialogFragment {
@@ -38,7 +38,7 @@ public class CashEditDialog extends DialogFragment {
 
     // fixme: 31.08.18 transfer file to kotlin
 
-    public void bindViewModel(CashAdapterItemViewModel item) {
+    public void bindViewModel(DayExpenseViewModel item) {
         vm = new DialogViewModel(
                 item.getEntryId(), item.getCashDate().get(), item.getCashName().get(), item.getCashInEuro().get(),
                 item.getCashCategory().get());
