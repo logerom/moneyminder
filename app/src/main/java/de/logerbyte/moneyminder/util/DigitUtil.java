@@ -23,6 +23,10 @@ public class DigitUtil {
         for (Expense expense : cashList) {
             totalCash = totalCash + expense.cashInEuro;
         }
-        return String.valueOf(Math.floor(totalCash * 100) / 100);
+        return String.valueOf(roundFloatingPoint(totalCash));
+    }
+
+    public static Double roundFloatingPoint(double value) {
+        return (Math.floor(value * 100) / 100);
     }
 }

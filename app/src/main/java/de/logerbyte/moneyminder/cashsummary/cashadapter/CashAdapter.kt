@@ -17,21 +17,23 @@ import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 /**
  * Created by logerom on 28.07.18.
  */
 
-class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), CashAdapterItemViewModel.AdapterListener, DialogViewModel.ViewInterface {
+class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, DialogViewModel.ViewInterface {
     private val viewtypeList = ArrayList<ViewType>()
     private val calendar: Calendar
-    private var cashList = ArrayList<CashAdapterItemViewModel>()
+    private var cashList = ArrayList<DayExpenseViewModel>()
     private var layoutInflater: LayoutInflater? = null
     private var mAdapterListener: Listener? = null
-    private var cashSummaryActivity: CashAdapterItemViewModel.ActivityListener? = null
-    private val dateMap = HashMap<Date, CashAdapterItemViewModel>()
-    internal var sdf = SimpleDateFormat("dd.MM.yy")
-    private val weeksAndDaysWithExpenses = ArrayList<ArrayList<CashAdapterItemViewModel>>()
+    private var cashSummaryActivity: DayExpenseViewModel.ActivityListener? = null
+    private val dateMap = HashMap<Date, DayExpenseViewModel>()
+    var sdf = SimpleDateFormat("dd.MM.yy")
+    private val weeksAndDaysWithExpenses = ArrayList<ArrayList<DayExpenseViewModel>>()
+    private lateinit var weeksAndDaysExpense: LinkedHashMap<WeekSummaryViewModel, ArrayList<DayExpenseViewModel>>
 
     private enum class ViewType {
         SUMMARY_LINE,
@@ -57,9 +59,8 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
         cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
-
-        createWeekListWithDayExpenses(cashList)
-        createViewTypeList(cashList)
+        weeksAndDaysExpense = ExpenseManager().createWeeksAndDaysExpense(cashList)
+        createViewTypeList(weeksAndDaysExpense)
         notifyDataSetChanged()
     }
 
@@ -79,7 +80,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        findAndInitItemAtPosition(holder, position)
+        getItemAtPosition(holder, position)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -90,29 +91,25 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         return viewtypeList.size
     }
 
-    private fun findAndInitItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
+    private fun getItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
         var itemPosition = -1
-        // first item in old year.
-        for (i in weeksAndDaysWithExpenses.indices) {
+        for (weeks in weeksAndDaysExpense) {
+            val dayList = weeks.value
 
-            for (j in 0 until weeksAndDaysWithExpenses[i].size) {
-                itemPosition += 1
-
+            // days
+            for (day in dayList) {
+                itemPosition++
                 if (itemPosition == position) {
-                    // Here is the searched item
-                    initDayItem(weeksAndDaysWithExpenses[i][j], viewHolder)
-                    return
+                    initDayItem(day, viewHolder)
                 }
             }
-
-            // plus 1 for summary line
-            itemPosition += 1
+            // weeks
+            itemPosition++
             if (itemPosition == position) {
-                // Summary line
-                initCashSummaryItem(weeksAndDaysWithExpenses[i], viewHolder)
-                return
+                initCashSummaryItem(weeks.key, viewHolder)
             }
         }
+
     }
 
     private fun layoutSummaryLine(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -126,67 +123,37 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         return ViewHolder(binding)
     }
 
-    private fun initCashSummaryItem(week: ArrayList<CashAdapterItemViewModel>, holder: RecyclerView.ViewHolder) {
+    private fun initCashSummaryItem(week: WeekSummaryViewModel, holder: RecyclerView.ViewHolder) {
+        (holder as ViewHolderSummary).binding.vmSummary = week
+    }
+
+    private fun aggregateExpenses(week: java.util.ArrayList<DayExpenseViewModel>): Double {
         var cashSummary = 0.0
         for (vm in week) {
             cashSummary += java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
         }
-
-        (holder as ViewHolderSummary).binding.vmSummary = ItemSummaryViewModel(cashSummary.toString())
+        return cashSummary
     }
 
-    private fun initDayItem(cashAdapterItemViewModel: CashAdapterItemViewModel, holder: RecyclerView.ViewHolder) {
-        cashAdapterItemViewModel.setItemListener(this)
-        cashAdapterItemViewModel.setDialogListener(this)
-        cashAdapterItemViewModel.setActivityListener(cashSummaryActivity)
-        (holder as ViewHolder).binding.vmCashItem = cashAdapterItemViewModel
+    private fun initDayItem(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
+        dayExpenseViewModel.setItemListener(this)
+        dayExpenseViewModel.setDialogListener(this)
+        dayExpenseViewModel.setActivityListener(cashSummaryActivity)
+        (holder as ViewHolder).binding.vmCashItem = dayExpenseViewModel
     }
 
-    private fun createWeekListWithDayExpenses(cashList: ArrayList<CashAdapterItemViewModel>) {
-        var again = true
-        var firstDate: Date?
-        var actualWeek: Int? = null
-        val datesToDelete = ArrayList<CashAdapterItemViewModel>()
+    fun createViewTypeList(weeksWithDayExpense: LinkedHashMap<WeekSummaryViewModel, ArrayList<DayExpenseViewModel>>) {
+        viewtypeList.clear()
 
-        calendar.clear()
-        weeksAndDaysWithExpenses.clear()
-
-        while (again) {
-
-            weeksAndDaysWithExpenses.add(ArrayList())
-            for (expense: CashAdapterItemViewModel in cashList) {
-                // actual date and week
-                if (cashList.indexOf(expense) == 0) {
-                    firstDate = getDateFromViewModel(expense)
-                    calendar.time = firstDate
-                    actualWeek = calendar.get(Calendar.WEEK_OF_YEAR)
-                }
-                // date and week to compare with actual date
-                val dateToCompare = getDateFromViewModel(expense)
-                calendar.time = dateToCompare
-                val weekToCompare = calendar.get(Calendar.WEEK_OF_YEAR)
-
-                if (weekToCompare == actualWeek) {
-                    weeksAndDaysWithExpenses.last().add(expense)
-                    datesToDelete.add(expense)
-                } else {
-                    break
-                }
+        for ((week, days) in weeksWithDayExpense) {
+            for (day: DayExpenseViewModel in days) {
+                viewtypeList.add(CashAdapter.ViewType.SAME_WEEK)
             }
-            cashList.removeAll(datesToDelete)
-
-            if (cashList.isEmpty()) {
-                again = false
-            }
+            viewtypeList.add(CashAdapter.ViewType.SUMMARY_LINE)
         }
     }
 
-    private fun getDateFromViewModel(itemViewModel: CashAdapterItemViewModel): Date? {
-        val dateString = itemViewModel.cashDate.get()
-        return sdf.parse(dateString)
-    }
-
-    fun createViewTypeList(list: ArrayList<CashAdapterItemViewModel>) {
+    fun createViewTypeList(list: ArrayList<DayExpenseViewModel>) {
         viewtypeList.clear()
         for (expenses in weeksAndDaysWithExpenses) {
             for (expense in expenses) {
@@ -213,7 +180,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         loadExpenseList()
     }
 
-    fun setActivityListener(cashSummaryActivity: CashAdapterItemViewModel.ActivityListener) {
+    fun setActivityListener(cashSummaryActivity: DayExpenseViewModel.ActivityListener) {
         this.cashSummaryActivity = cashSummaryActivity
     }
 
