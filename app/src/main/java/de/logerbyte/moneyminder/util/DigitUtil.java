@@ -9,6 +9,7 @@ import de.logerbyte.moneyminder.db.expense.Expense;
  */
 
 public class DigitUtil {
+
     public static String commaToDot(String commaString) {
         return commaString == null ? "" : commaString.replace(",", ".");
     }
@@ -23,6 +24,6 @@ public class DigitUtil {
         for (Expense expense : cashList) {
             totalCash = totalCash + expense.cashInEuro;
         }
-        return String.valueOf(Math.floor(totalCash * 100) / 100);
+        return String.format("%.2f", totalCash);
     }
 }

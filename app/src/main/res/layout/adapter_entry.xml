@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="vmCashItem" type="de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel"/>
+
+        <variable
+            name="vmCashItem"
+            type="de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel"/>
     </data>
 
     <LinearLayout

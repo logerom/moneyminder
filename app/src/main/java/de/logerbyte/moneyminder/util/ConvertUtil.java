@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapterItemViewModel;
+import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.db.expense.Expense;
 
 /**
@@ -13,14 +13,14 @@ import de.logerbyte.moneyminder.db.expense.Expense;
 // fixme: 18.09.18 that are not an util
 public class ConvertUtil {
 
-    public static ArrayList<CashAdapterItemViewModel> expensesToCashItems(List<Expense> expenses) {
-        ArrayList<CashAdapterItemViewModel> cashAdapterItemViewModels = new ArrayList<>();
+    public static ArrayList<DayExpenseViewModel> expensesToCashItems(List<Expense> expenses) {
+        ArrayList<DayExpenseViewModel> dayExpenseViewModels = new ArrayList<>();
 
         for (Expense expense :expenses) {
-            CashAdapterItemViewModel item = new CashAdapterItemViewModel(expense.id, expense.cashDate,
+            DayExpenseViewModel item = new DayExpenseViewModel(expense.id, expense.cashDate,
                     expense.cashName, expense.category, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
-            cashAdapterItemViewModels.add(item);
+            dayExpenseViewModels.add(item);
         }
-        return cashAdapterItemViewModels;
+        return dayExpenseViewModels;
     }
 }
