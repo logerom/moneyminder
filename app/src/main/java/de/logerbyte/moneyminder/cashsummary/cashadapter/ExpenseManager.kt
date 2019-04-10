@@ -1,6 +1,7 @@
 package de.logerbyte.moneyminder.cashsummary.cashadapter
 
 import de.logerbyte.moneyminder.util.DigitUtil
+import java.lang.Double.parseDouble
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,11 +49,8 @@ class ExpenseManager {
                     // no more expense days in this week -> next week + summary line
                     val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
                     val weekSaldo = expenseLimit - expensesOfWeek
-                    // TODO: 10.04.19 round error = SummaryLine_B = SummaryLine_A + ExpensesInWeek
-                    addedExpenseLimitEoverhead = DigitUtil.roundFloatingPoint(addedExpenseLimitEoverhead + DigitUtil.roundFloatingPoint
-                    (expenseLimit - expensesOfWeek))
-                    val summaryWeek = WeekSummaryViewModel(firstWeek!!, expensesOfWeek, weekSaldo,
-                            addedExpenseLimitEoverhead)
+                    addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
+                    val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, addedExpenseLimitEoverhead)
                     map[summaryWeek] = subExpenseDays
 
                     break
@@ -76,7 +74,7 @@ class ExpenseManager {
     private fun sumExpensesOfWeek(week: ArrayList<DayExpenseViewModel>): Double {
         var cashSummary = 0.0
         for (vm in week) {
-            cashSummary += java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
+            cashSummary += parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
         }
         return cashSummary
     }
