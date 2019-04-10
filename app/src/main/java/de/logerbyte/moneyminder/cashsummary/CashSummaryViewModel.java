@@ -51,7 +51,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         appDatabaseManager = new AppDatabaseManager(application);
         cashAdapter = new CashAdapter(appDatabaseManager);
         cashAdapter.setLisener(this);
-        totalExpenses.set(String.format("%.2f", 0));
+        totalExpenses.set(String.format("%.2f", 0f));
     }
 
     // FIXME: 13.09.18 source out loadExpesne from adapter and viewModel in base class / USE CASE
