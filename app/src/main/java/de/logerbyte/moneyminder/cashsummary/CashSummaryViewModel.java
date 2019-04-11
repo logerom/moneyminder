@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.logerbyte.moneyminder.ErrorHandling;
 import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapter;
 import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
@@ -64,18 +65,25 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         });
     }
 
-
-
+    // FIXME: 11.04.19 handle with binding adapter? didnt want view context in class
     public void onClickAddCash(View view) {
-        Double date = DigitUtil.commaToDot(cashInEuro.get()) == "" ? 0.00 : Double.valueOf(
-                DigitUtil.commaToDot(cashInEuro.get()));
+        if (!areInputFieldsNotNull()) {
+            ErrorHandling.Companion.showToast(view.getContext(), "Input should not be null");
+            return;
+        }
+
+        Double date = DigitUtil.commaToDot(cashInEuro.get()) == "" ? 0.00 : Double.valueOf(DigitUtil.commaToDot(cashInEuro.get()));
 
         Expense expense = new Expense(null, cashName.get(), cashCategory.get(), cashDate.get(), date);
-        appDatabaseManager.insertCashItemIntoDB(expense).subscribeOn(Schedulers.io()).observeOn(
-                AndroidSchedulers.mainThread()).subscribe(aBoolean -> loadExpenseList());
+        appDatabaseManager.insertCashItemIntoDB(expense).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> loadExpenseList());
         // fixme: 14.08.18 what is when error?
 
         clearInputField();
+    }
+
+    public boolean areInputFieldsNotNull() {
+        return cashDate.get() != null && cashCategory.get() != null && cashName.get() != null &&
+               cashInEuro.get() != null;
     }
 
     public void onTextChanged(Editable s) {
