@@ -5,7 +5,6 @@ import java.lang.Double.parseDouble
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.LinkedHashMap
 
 
 class ExpenseManager {
@@ -18,17 +17,17 @@ class ExpenseManager {
     }
 
 
-    fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): LinkedHashMap<WeekSummaryViewModel, ArrayList<DayExpenseViewModel>> {
-        val map = LinkedHashMap<WeekSummaryViewModel, ArrayList<DayExpenseViewModel>>()
+    fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
+
         var again = true
         var firstDate: Date?
         var firstWeek: Int? = null
+        var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
         val datesToDelete = ArrayList<DayExpenseViewModel>()
         var subExpenseDays = ArrayList<DayExpenseViewModel>()
         var addedExpenseLimitEoverhead = 0.00
 
         actualCalendar.clear()
-        map.clear()
 
         while (again) {
 
@@ -53,8 +52,8 @@ class ExpenseManager {
                     val weekSaldo = expenseLimit - expensesOfWeek
                     addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
                     val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, addedExpenseLimitEoverhead,
-                            sdf.parse(subExpenseDays[0].cashDate.get()))
-                    map[summaryWeek] = subExpenseDays
+                            subExpenseDays)
+                    expenseListNaturalOrder.add(summaryWeek)
                     break
                 }
             }
@@ -65,7 +64,7 @@ class ExpenseManager {
                 again = false
             }
         }
-        return map
+        return descendWeekExpenses(expenseListNaturalOrder)
     }
 
     private fun getDateFromViewModel(itemViewModel: DayExpenseViewModel): Date? {
@@ -79,6 +78,14 @@ class ExpenseManager {
             cashSummary += parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
         }
         return cashSummary
+    }
+
+    private fun descendWeekExpenses(expenseListNaturalOrder: ArrayList<WeekSummaryViewModel>): ArrayList<WeekSummaryViewModel> {
+        val expenseDescend = ArrayList<WeekSummaryViewModel>()
+        for (i in expenseListNaturalOrder.indices.reversed()) {
+            expenseDescend.add(expenseListNaturalOrder[i])
+        }
+        return expenseDescend
     }
 
 }
