@@ -67,7 +67,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
 
     // FIXME: 11.04.19 handle with binding adapter? didnt want view context in class
     public void onClickAddCash(View view) {
-        if (!areInputFieldsNotNull()) {
+        if (isInputCorrect()) {
             ErrorHandling.Companion.showToast(view.getContext(), "Input should not be null");
             return;
         }
@@ -79,6 +79,10 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         // fixme: 14.08.18 what is when error?
 
         clearInputField();
+    }
+
+    public boolean isInputCorrect() {
+        return !areInputFieldsNotNull();
     }
 
     public boolean areInputFieldsNotNull() {
