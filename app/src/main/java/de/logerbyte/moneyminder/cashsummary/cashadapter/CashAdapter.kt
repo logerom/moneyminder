@@ -56,12 +56,20 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     fun initList(expenses: List<Expense>) {
-        val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
+        val sortedExpenses = sortExpenses(expenses).reversed()
         cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
         mAdapterListener!!.onLoadedExpenses(expenses)
         weeksAndDaysExpense = ExpenseManager().createWeeksAndDaysExpense(cashList)
         createViewTypeList(weeksAndDaysExpense)
         notifyDataSetChanged()
+    }
+
+    private fun sortExpenses(expenses: List<Expense>): List<Expense> {
+        // FIXME: 22.09.18 sort as util class
+        return expenses.sortedBy { expense ->
+            val sdf = SimpleDateFormat("dd.MM.yy")
+            sdf.parse(expense.cashDate)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

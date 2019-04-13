@@ -4,6 +4,8 @@ import de.logerbyte.moneyminder.util.DigitUtil
 import java.lang.Double.parseDouble
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.LinkedHashMap
 
 
 class ExpenseManager {
@@ -50,9 +52,9 @@ class ExpenseManager {
                     val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
                     val weekSaldo = expenseLimit - expensesOfWeek
                     addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
-                    val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, addedExpenseLimitEoverhead)
+                    val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, addedExpenseLimitEoverhead,
+                            sdf.parse(subExpenseDays[0].cashDate.get()))
                     map[summaryWeek] = subExpenseDays
-
                     break
                 }
             }
