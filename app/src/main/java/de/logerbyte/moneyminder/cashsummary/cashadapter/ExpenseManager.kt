@@ -74,7 +74,7 @@ class ExpenseManager {
         val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
         val weekSaldo = expenseLimit - expensesOfWeek
         this.addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
-        val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, addedExpenseLimitEoverhead,
+        val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, this.addedExpenseLimitEoverhead,
                 subExpenseDays)
         expenseListNaturalOrder.add(summaryWeek)
     }
