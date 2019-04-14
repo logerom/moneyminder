@@ -11,6 +11,7 @@ class ExpenseManager {
 
     var sdf = SimpleDateFormat("dd.MM.yy")
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
+    private var addedExpenseLimitEoverhead = 0.00
 
     companion object {
         val expenseLimit = 70
@@ -25,7 +26,6 @@ class ExpenseManager {
         var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
         val datesToDelete = ArrayList<DayExpenseViewModel>()
         var subExpenseDays = ArrayList<DayExpenseViewModel>()
-        var addedExpenseLimitEoverhead = 0.00
 
         actualCalendar.clear()
 
@@ -48,23 +48,35 @@ class ExpenseManager {
                     datesToDelete.add(expense)
                 } else {
                     // no more expense days in this week -> next week + summary line
-                    val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
-                    val weekSaldo = expenseLimit - expensesOfWeek
-                    addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
-                    val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, addedExpenseLimitEoverhead,
-                            subExpenseDays)
-                    expenseListNaturalOrder.add(summaryWeek)
+                    addExpenseToSummaryWeek(subExpenseDays, addedExpenseLimitEoverhead, expenseListNaturalOrder)
                     break
                 }
             }
+
             sortedExpenses.removeAll(datesToDelete)
-            subExpenseDays = ArrayList()
 
             if (sortedExpenses.isEmpty()) {
+                // is list empty add last remaining expense to week
+                if (subExpenseDays.isNotEmpty()) {
+                    addExpenseToSummaryWeek(subExpenseDays, addedExpenseLimitEoverhead, expenseListNaturalOrder)
+                }
                 again = false
             }
+
+            subExpenseDays = ArrayList()
+
         }
         return descendWeekExpenses(expenseListNaturalOrder)
+    }
+
+    private fun addExpenseToSummaryWeek(subExpenseDays: ArrayList<DayExpenseViewModel>, addedExpenseLimitEoverhead:
+    Double, expenseListNaturalOrder: ArrayList<WeekSummaryViewModel>) {
+        val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
+        val weekSaldo = expenseLimit - expensesOfWeek
+        this.addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
+        val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, addedExpenseLimitEoverhead,
+                subExpenseDays)
+        expenseListNaturalOrder.add(summaryWeek)
     }
 
     private fun getDateFromViewModel(itemViewModel: DayExpenseViewModel): Date? {
