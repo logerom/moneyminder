@@ -10,8 +10,8 @@ android {
         applicationId "de.logerbyte.moneyminder"
         minSdkVersion 24
         targetSdkVersion 27
-        versionCode 107
-        versionName "1.0.7"
+        versionCode 108
+        versionName "1.0.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
