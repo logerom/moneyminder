@@ -40,7 +40,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         SAME_WEEK
     }
 
-
     init {
         calendar = Calendar.getInstance()
         calendar.firstDayOfWeek = Calendar.MONDAY
@@ -63,7 +62,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         createViewTypeList(weeksAndDaysExpense)
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (layoutInflater == null) {
