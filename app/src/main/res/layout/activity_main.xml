@@ -90,7 +90,7 @@
                 android:layout_height="48dp"
                 android:singleLine="true"
                 android:nextFocusDown="@id/et_cash_category"
-                android:hint="Arbeitsasflusg"
+                android:hint="Ausgabe"
                 android:text="@={viewModel.cashName}"/>
 
             <EditText
