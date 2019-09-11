@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,10 +41,15 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private ArrayList<DayExpenseViewModel> cashList = new ArrayList<>();
     private ObservableField<String> totalExpenses = new ObservableField<>();
+    private ObservableInt cashCategorySelectedItem = new ObservableInt();
+    private ArrayList<String> cashCategoryList = new ArrayList<>();
 
     public boolean dotDelete;
     String newText = new String();
     private DayExpenseViewModel.ActivityListener cashSummaryActivity;
+    private boolean isNewSpinnerValue = false;
+    private int newSpinnerIndex;
+    private String newSCategoryName;
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
 
@@ -53,6 +59,13 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         cashAdapter = new CashAdapter(appDatabaseManager);
         cashAdapter.setLisener(this);
         totalExpenses.set(String.format("%.2f", 0f));
+        initList();
+    }
+
+    private void initList() {
+        cashCategoryList.add("Essen");
+        cashCategoryList.add("Sonstiges");
+        cashCategoryList.add("Beauty");
     }
 
     // FIXME: 13.09.18 source out loadExpesne from adapter and viewModel in base class / USE CASE
@@ -74,7 +87,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
 
         Double date = DigitUtil.commaToDot(cashInEuro.get()) == "" ? 0.00 : Double.valueOf(DigitUtil.commaToDot(cashInEuro.get()));
 
-        Expense expense = new Expense(null, cashName.get(), cashCategory.get(), cashDate.get(), date);
+        Expense expense = new Expense(null, cashName.get(), newSCategoryName, cashDate.get(), date);
         appDatabaseManager.insertCashItemIntoDB(expense).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> loadExpenseList());
         // fixme: 14.08.18 what is when error?
 
@@ -86,7 +99,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     }
 
     public boolean areInputFieldsNotNull() {
-        return cashDate.get() != null && cashCategory.get() != null && cashName.get() != null &&
+        return cashDate.get() != null && cashName.get() != null &&
                cashInEuro.get() != null;
     }
 
@@ -119,7 +132,6 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     private void clearInputField() {
         cashDate.set("");
         cashName.set("");
-        cashCategory.set("");
         cashInEuro.set("");
     }
 
@@ -154,8 +166,21 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         return totalExpenses;
     }
 
-    public ObservableField<String> getCashCategory() {
-        return cashCategory;
+    public ObservableInt getCashCategorySelectedItem() {
+
+        if (isNewSpinnerValue) {
+            newSpinnerIndex = cashCategorySelectedItem.get();
+            newSCategoryName = cashCategoryList.get(newSpinnerIndex);
+            isNewSpinnerValue = false;
+        } else {
+            isNewSpinnerValue = true;
+        }
+
+        return cashCategorySelectedItem;
+    }
+
+    public ArrayList<String> getCashCategoryList() {
+        return cashCategoryList;
     }
 
     @Override
