@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="de.logerbyte.moneyminder.cashsummary.CashSummaryViewModel"/>
+            type="de.logerbyte.moneyminder.cashsummary.summaryList.CashSummaryViewModel"/>
     </data>
 
     <LinearLayout

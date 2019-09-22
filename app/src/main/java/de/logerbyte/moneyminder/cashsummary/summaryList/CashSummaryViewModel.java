@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashsummary;
+package de.logerbyte.moneyminder.cashsummary.summaryList;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

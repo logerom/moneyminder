@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cashsummary.CashSummaryActivity">
+        <activity android:name=".cashsummary.summaryList.CashSummaryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

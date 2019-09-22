@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashsummary;
+package de.logerbyte.moneyminder.cashsummary.summaryList;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
