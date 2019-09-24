@@ -3,4 +3,8 @@
     <string name="spend_money_label">Ausgaben</string>
     <string name="cancel">Abbrechen</string>
     <string name="edit">Ändern</string>
+    <string name="date">Date</string>
+    <string name="cashName">Cash Name</string>
+    <string name="cashCategory">Cash Category</string>
+    <string name="cash">Cash Amount</string>
 </resources>
