@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="de.logerbyte.moneyminder.viewModels.CashViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date" />
+
+            <EditText
+                android:layout_weight="1"
+                android:id="@+id/et_date"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:afterTextChanged="@{viewModel.onTextChanged}"
+                android:digits="0123456789."
+                android:hint="dd.mm.yy"
+                android:inputType="number"
+                android:singleLine="true"
+                android:nextFocusDown="@id/et_cash_name"
+                android:maxLength="8"
+                android:text="@={viewModel.cashDate}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cashName" />
+
+            <EditText
+                android:layout_weight="1"
+                android:id="@+id/et_cash_name"
+                android:layout_width="124dp"
+                android:layout_height="48dp"
+                android:singleLine="true"
+                android:nextFocusDown="@id/sp_cash_category"
+                android:hint="Ausgabe"
+                android:text="@={viewModel.cashName}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cashCategory" />
+
+            <Spinner
+                android:id="@+id/sp_cash_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:nextFocusDown="@id/et_cash_amount"
+                android:entries="@{viewModel.cashCategoryList}"
+                android:selectedItemPosition="@={viewModel.cashCategorySelectedItem}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cash" />
+
+            <EditText
+                android:layout_weight="1"
+                android:id="@+id/et_cash_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:digits="0123456789,"
+                android:hint="0,00"
+                android:inputType="numberDecimal"
+                android:text="@={viewModel.cashAmount}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
