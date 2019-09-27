@@ -7,4 +7,5 @@
     <string name="cashName">Cash Name</string>
     <string name="cashCategory">Cash Category</string>
     <string name="cash">Cash Amount</string>
+    <string name="ok">Ok</string>
 </resources>

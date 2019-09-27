@@ -36,9 +36,15 @@ public class CashSummaryActivity extends FragmentActivity implements DayExpenseV
     @Override
     public void showEditDialog(DayExpenseViewModel item, DialogViewModel.ViewInterface dialogVmListener) {
         CashEditDialog cashEditDialog = new CashEditDialog();
-        cashEditDialog.bindViewModel(item);
-        cashEditDialog.setAdapterCallback(dialogVmListener);
-
+        cashEditDialog.setArguments(getBundle());
         cashEditDialog.show(getSupportFragmentManager(), "Edit_Dialog");
+        cashEditDialog.setCash(item);
+        cashEditDialog.setAdapterCallback(dialogVmListener);
+    }
+
+    private Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        // TODO: 2019-09-27 implement parceable
+        return null;
     }
 }

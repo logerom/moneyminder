@@ -29,7 +29,7 @@
                 android:id="@+id/et_date"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:afterTextChanged="@{viewModel.onTextChanged}"
+                android:afterTextChanged="@{viewModel::onTextChanged}"
                 android:digits="0123456789."
                 android:hint="dd.mm.yy"
                 android:inputType="number"
