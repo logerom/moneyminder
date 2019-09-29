@@ -7,11 +7,11 @@ import android.text.Editable
 import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel
 
 class CashViewModel : ViewModel() {
-    val cashCategoryList = ArrayList<String>()
+    val cashCategoryList = ArrayList(listOf("Essen", "Sonstiges", "Beauty"))
     var entryId: Long = 0
     val cashDate = ObservableField<String>()
     val cashName = ObservableField<String>()
-    var cashCategory = ""
+    lateinit var cashCategory: String
     val cashAmount = ObservableField<String>()
 
 
@@ -21,33 +21,13 @@ class CashViewModel : ViewModel() {
         this.cashName.set(item.getCashName().get())
         this.cashAmount.set(item.getCashInEuro().get())
         this.cashCategory = item.getCashCategory().get().orEmpty()
-    }
-
-    init {
-        cashCategoryList.add("Essen")
-        cashCategoryList.add("Sonstiges")
-        cashCategoryList.add("Beauty")
+        cashCategorySelectedItem.set(cashCategoryList.indexOf(this.cashCategory))
     }
 
     var newText = ""
-
     var dotDelete = false
 
-    private var isNewSpinnerValue = false
-    private var newSpinnerIndex: Int = 0
-    private var newSCategoryName: String? = null
-    val cashCategorySelectedItem: ObservableInt
-        get() {
-            if (isNewSpinnerValue) {
-                newSpinnerIndex = cashCategorySelectedItem.get()
-                newSCategoryName = cashCategoryList[newSpinnerIndex]
-                isNewSpinnerValue = false
-            } else {
-                isNewSpinnerValue = true
-            }
-            return cashCategorySelectedItem
-
-        }
+    var cashCategorySelectedItem = ObservableInt()
 
     fun onTextChanged(s: Editable) {
         if (dotDelete) {

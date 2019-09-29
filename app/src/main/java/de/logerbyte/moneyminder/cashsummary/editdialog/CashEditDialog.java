@@ -21,7 +21,8 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
     private LayoutInflater inflater;
     private DialogViewModel dialogViewModel;
     private DialogViewModel.ViewInterface dialogVmListener;
-    private CashViewModel cashViewModel;
+    private CashViewModel cashViewModel = new CashViewModel();
+
 
     @Override
     public void onAttach(Context context) {
@@ -31,17 +32,17 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
 
     private void bindViewModel(Context context) {
         dialogViewModel = new DialogViewModel(((Activity) context).getApplication(), this);
-        cashViewModel = new CashViewModel();
+        dialogViewModel.setViewInterface(dialogVmListener);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         inflater = getActivity().getLayoutInflater();
-        dialogViewModel.initAppDatabaseManager(getActivity().getApplication());
         binding = DataBindingUtil.inflate(inflater, R.layout.dialog, null, false);
         // TODO: 2019-09-25 databinding doesnt fit layout. Make database operation in dialog and delete DialogVIewModel or make a root layout that include the cash_lane layout
         binding.setDialogVM(dialogViewModel);
+        binding.setCashVM(cashViewModel);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(binding.getRoot());
@@ -63,7 +64,6 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
 
     public void setAdapterCallback(DialogViewModel.ViewInterface dialogVmListener) {
         this.dialogVmListener = dialogVmListener;
-        dialogViewModel.setViewInterface(dialogVmListener);
     }
 
     @Override

@@ -30,11 +30,9 @@ public class DialogViewModel extends AndroidViewModel implements DialogListener 
         this.viewInterface = viewInterface;
     }
 
-    public void initAppDatabaseManager(Application application) {
-    }
-
     @Override
     public void onClickOk(@NotNull View view) {
+        // TODO: 2019-09-29  cashviemodel is not initialized. Get it over xml or from class
         Expense expenseToUpdate = new Expense(cashViewModel.getEntryId(),
                 cashViewModel.getCashName().get(), cashViewModel.getCashCategory(),
                 cashViewModel.getCashDate().get(),
