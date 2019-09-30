@@ -10,4 +10,5 @@ interface DialogListener {
 
 interface DialogListenerView {
     fun onClickCancel(view: View)
+    fun onClickOk(view: View)
 }

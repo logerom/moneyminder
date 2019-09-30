@@ -11,6 +11,7 @@ class CashViewModel : ViewModel() {
     var entryId: Long = 0
     val cashDate = ObservableField<String>()
     val cashName = ObservableField<String>()
+    // TODO: 2019-09-29 new cash category would not be saved
     lateinit var cashCategory: String
     val cashAmount = ObservableField<String>()
 

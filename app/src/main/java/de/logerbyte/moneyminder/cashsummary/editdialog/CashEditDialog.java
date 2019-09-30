@@ -10,6 +10,8 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.databinding.DialogBinding;
@@ -33,6 +35,8 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
     private void bindViewModel(Context context) {
         dialogViewModel = new DialogViewModel(((Activity) context).getApplication(), this);
         dialogViewModel.setViewInterface(dialogVmListener);
+        dialogViewModel.setDialogViewListener(this);
+        dialogViewModel.setCashViewModel(cashViewModel);
     }
 
     @Override
@@ -58,16 +62,21 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
     // FIXME: 21.09.18 prevent pass throw callback from adapter to dialog viewmodel. Better callback from
     // model to model (layer to layer)
 
-    public void onClickOk(View view) {
-
-    }
-
     public void setAdapterCallback(DialogViewModel.ViewInterface dialogVmListener) {
         this.dialogVmListener = dialogVmListener;
     }
 
+    public void dismissDialog() {
+        dismiss();
+    }
+
     @Override
     public void onClickCancel(View view) {
-        dismiss();
+        dismissDialog();
+    }
+
+    @Override
+    public void onClickOk(@NotNull View view) {
+        dismissDialog();
     }
 }
