@@ -44,7 +44,6 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
 
         inflater = getActivity().getLayoutInflater();
         binding = DataBindingUtil.inflate(inflater, R.layout.dialog, null, false);
-        // TODO: 2019-09-25 databinding doesnt fit layout. Make database operation in dialog and delete DialogVIewModel or make a root layout that include the cash_lane layout
         binding.setDialogVM(dialogViewModel);
         binding.setCashVM(cashViewModel);
 
