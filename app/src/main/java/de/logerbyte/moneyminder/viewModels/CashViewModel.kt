@@ -16,11 +16,11 @@ class CashViewModel : ViewModel() {
     var cashAmount = ObservableField<String>()
 
     fun setCash(item: DayExpenseViewModel) {
-        this.entryId = item.getEntryId()
-        this.cashDate.set(item.getCashDate().get())
-        this.cashName.set(item.getCashName().get())
-        this.cashAmount.set(item.getCashInEuro().get())
-        val cashCategory = item.getCashCategory().get().orEmpty()
+        this.entryId = item.entryId
+        this.cashDate.set(item.cashDate.get())
+        this.cashName.set(item.cashName.get())
+        this.cashAmount.set(item.cashInEuro.get())
+        val cashCategory = item.cashCategory.get().orEmpty()
         this.cashCategory = cashCategory
         cashCategorySelectedItem.set(cashCategoryList.indexOf(cashCategory))
     }
@@ -30,7 +30,7 @@ class CashViewModel : ViewModel() {
 
     var cashCategorySelectedItem = ObservableInt()
         get() {
-            cashCategory = cashCategoryList[field.get()]
+            if (field.get() != -1) cashCategory = cashCategoryList[field.get()]
             return field
         }
 
