@@ -7,14 +7,16 @@ import android.text.Editable
 import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel
 
 class CashViewModel : ViewModel() {
+    // TODO: 2019-10-01 cash categories as string resources
     val cashCategoryList = ArrayList(listOf("Essen", "Sonstiges", "Beauty"))
     var entryId: Long = 0
     val cashDate = ObservableField<String>()
     val cashName = ObservableField<String>()
-    // TODO: 2019-09-29 new cash category would not be saved
     lateinit var cashCategory: String
-    val cashAmount = ObservableField<String>()
-
+    var cashAmount = ObservableField<String>()
+        get() {
+            return field
+        }
 
     fun setCash(item: DayExpenseViewModel) {
         this.entryId = item.getEntryId()
@@ -29,13 +31,17 @@ class CashViewModel : ViewModel() {
     var dotDelete = false
 
     var cashCategorySelectedItem = ObservableInt()
+        get() {
+            cashCategory = cashCategoryList[field.get()]
+            return field
+        }
 
     fun onTextChanged(s: Editable) {
         if (dotDelete) {
             dotDelete = false
             return
         }
-        // todo: 02.09.18 make util class with that dot delete logic
+        // fixme: 02.09.18 make util class with that dot delete logic
 
         if (s.length < newText.length) {
             val charAt = newText.toString().get(newText.toString().length - 1)

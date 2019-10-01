@@ -10,6 +10,8 @@ import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
 import de.logerbyte.moneyminder.util.DigitUtil;
 import de.logerbyte.moneyminder.viewModels.CashViewModel;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class DialogViewModel extends AndroidViewModel implements DialogListener {
 
@@ -39,13 +41,12 @@ public class DialogViewModel extends AndroidViewModel implements DialogListener 
                 cashViewModel.getCashName().get(), cashViewModel.getCashCategory(),
                 cashViewModel.getCashDate().get(),
                 Double.valueOf(DigitUtil.commaToDot(cashViewModel.getCashAmount().get())));
-        // TODO: 2019-09-30 uncomment data base save
+
         dialogListenerView.onClickOk(view);
 
-        //        appDatabaseManager.updateCashItem(expenseToUpdate)
-        //                .subscribeOn(Schedulers.computation())
-        //                .observeOn(AndroidSchedulers.mainThread())
-        //                .subscribe(aBoolean -> viewInterface.onUpdateItem());
+        appDatabaseManager.updateCashItem(expenseToUpdate).subscribeOn(
+                Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                aBoolean -> viewInterface.onUpdateItem());
     }
 
     @Override
