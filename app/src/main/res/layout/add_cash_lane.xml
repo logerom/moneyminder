@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:binding="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="viewModel"
-            type="de.logerbyte.moneyminder.cashsummary.summaryList.CashSummaryViewModel"/>
+            type="de.logerbyte.moneyminder.screens.cashsummary.summaryList.CashSummaryViewModel" />
     </data>
 
     <LinearLayout

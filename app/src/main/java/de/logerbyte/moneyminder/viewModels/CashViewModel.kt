@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.text.Editable
-import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 
 class CashViewModel : ViewModel() {
     // TODO: 2019-10-01 cash categories as string resources

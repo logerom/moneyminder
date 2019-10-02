@@ -4,7 +4,7 @@
 
         <variable
             name="vmSummary"
-            type="de.logerbyte.moneyminder.cashsummary.cashadapter.WeekSummaryViewModel"/>
+            type="de.logerbyte.moneyminder.screens.cashsummary.cashadapter.WeekSummaryViewModel" />
     </data>
 
         <LinearLayout

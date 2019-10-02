@@ -7,7 +7,7 @@
 
         <variable
             name="dialogVM"
-            type="de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel" />
+            type="de.logerbyte.moneyminder.screens.cashsummary.editdialog.DialogViewModel" />
 
         <variable
             name="cashVM"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            tools:context="de.logerbyte.moneyminder.cashsummary.summaryList.CashSummaryActivity">
+            tools:context=".screens.cashsummary.summaryList.CashSummaryActivity">
 
             <Button
                 android:layout_width="wrap_content"

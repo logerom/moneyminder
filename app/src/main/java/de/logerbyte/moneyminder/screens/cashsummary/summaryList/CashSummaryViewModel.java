@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashsummary.summaryList;
+package de.logerbyte.moneyminder.screens.cashsummary.summaryList;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.logerbyte.moneyminder.ErrorHandling;
-import de.logerbyte.moneyminder.cashsummary.cashadapter.CashAdapter;
-import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter;
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.util.ConvertUtil;
 import de.logerbyte.moneyminder.util.DigitUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;

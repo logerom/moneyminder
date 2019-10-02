@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashsummary.editdialog;
+package de.logerbyte.moneyminder.screens.cashsummary.editdialog;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;

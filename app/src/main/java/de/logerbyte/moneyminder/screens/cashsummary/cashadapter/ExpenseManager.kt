@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashsummary.cashadapter
+package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
 import de.logerbyte.moneyminder.util.DigitUtil
 import java.lang.Double.parseDouble

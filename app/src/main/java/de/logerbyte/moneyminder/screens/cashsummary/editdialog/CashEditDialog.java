@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashsummary.editdialog;
+package de.logerbyte.moneyminder.screens.cashsummary.editdialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,8 +13,8 @@ import android.view.View;
 import org.jetbrains.annotations.NotNull;
 
 import de.logerbyte.moneyminder.R;
-import de.logerbyte.moneyminder.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.databinding.DialogBinding;
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.viewModels.CashViewModel;
 
 public class CashEditDialog extends DialogFragment implements DialogListenerView {

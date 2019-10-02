@@ -1,15 +1,15 @@
-package de.logerbyte.moneyminder.cashsummary.cashadapter
+package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.cashsummary.editdialog.DialogViewModel
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
+import de.logerbyte.moneyminder.screens.cashsummary.editdialog.DialogViewModel
 import de.logerbyte.moneyminder.util.ConvertUtil
 import de.logerbyte.moneyminder.util.DigitUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
