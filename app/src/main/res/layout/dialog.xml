@@ -32,13 +32,13 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{dialogVM::onClickCancel}"
+                android:onClick="@{()->dialogVM.editCashCancel()}"
                 android:text="@string/cancel" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{dialogVM::onClickOk}"
+                android:onClick="@{()->dialogVM.editCash()}"
                 android:text="@string/ok" />
 
         </LinearLayout>

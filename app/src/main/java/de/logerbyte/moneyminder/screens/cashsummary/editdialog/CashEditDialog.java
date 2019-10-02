@@ -8,9 +8,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
-import android.view.View;
-
-import org.jetbrains.annotations.NotNull;
 
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.DialogBinding;
@@ -65,17 +62,8 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
         this.dialogVmListener = dialogVmListener;
     }
 
+    @Override
     public void dismissDialog() {
         dismiss();
-    }
-
-    @Override
-    public void onClickCancel(View view) {
-        dismissDialog();
-    }
-
-    @Override
-    public void onClickOk(@NotNull View view) {
-        dismissDialog();
     }
 }

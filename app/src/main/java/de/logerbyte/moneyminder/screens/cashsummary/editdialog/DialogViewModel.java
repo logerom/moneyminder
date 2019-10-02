@@ -2,9 +2,6 @@ package de.logerbyte.moneyminder.screens.cashsummary.editdialog;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.view.View;
-
-import org.jetbrains.annotations.NotNull;
 
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
@@ -36,13 +33,13 @@ public class DialogViewModel extends AndroidViewModel implements DialogListener 
     }
 
     @Override
-    public void onClickOk(@NotNull View view) {
+    public void editCash() {
         Expense expenseToUpdate = new Expense(cashViewModel.getEntryId(),
                 cashViewModel.getCashName().get(), cashViewModel.getCashCategory(),
                 cashViewModel.getCashDate().get(),
                 Double.valueOf(DigitUtil.commaToDot(cashViewModel.getCashAmount().get())));
 
-        dialogListenerView.onClickOk(view);
+        dialogListenerView.dismissDialog();
 
         appDatabaseManager.updateCashItem(expenseToUpdate).subscribeOn(
                 Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(
@@ -50,8 +47,8 @@ public class DialogViewModel extends AndroidViewModel implements DialogListener 
     }
 
     @Override
-    public void onClickCancel(@NotNull View view) {
-        callback.onClickCancel(view);
+    public void editCashCancel() {
+        callback.dismissDialog();
     }
 
     public void setDialogViewListener(DialogListenerView dialogListenerView) {
