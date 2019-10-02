@@ -156,6 +156,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     override fun onItemDeleteClicked(cashItemId: Long?) {
+        // TODO: 2019-10-01 add delete dialog
         appDatabaseManager.deleteCashItem(cashItemId!!).subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe { aBoolean -> loadExpenseList() }
     }
