@@ -13,7 +13,10 @@ import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.logerbyte.moneyminder.ErrorHandling;
@@ -60,12 +63,20 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         cashAdapter.setLisener(this);
         totalExpenses.set(String.format("%.2f", 0f));
         initList();
+        setActualDate();
     }
 
     private void initList() {
         cashCategoryList.add("Essen");
         cashCategoryList.add("Sonstiges");
         cashCategoryList.add("Beauty");
+    }
+
+    private void setActualDate() {
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM.yy");
+        cashDate.set(df.format(date));
     }
 
     // FIXME: 13.09.18 source out loadExpesne from adapter and viewModel in base class / USE CASE
