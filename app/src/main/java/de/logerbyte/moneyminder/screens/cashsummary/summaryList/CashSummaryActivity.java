@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentActivity;
 
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
+import de.logerbyte.moneyminder.dialogs.editDialog.CashEditDialog;
+import de.logerbyte.moneyminder.dialogs.editDialog.DialogViewModel;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
-import de.logerbyte.moneyminder.screens.cashsummary.editdialog.CashEditDialog;
-import de.logerbyte.moneyminder.screens.cashsummary.editdialog.DialogViewModel;
 
 public class CashSummaryActivity extends FragmentActivity implements DayExpenseViewModel.ActivityListener {
 

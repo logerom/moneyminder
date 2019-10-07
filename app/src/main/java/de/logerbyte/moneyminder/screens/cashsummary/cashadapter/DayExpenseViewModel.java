@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.screens.cashsummary.cashadapter;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import de.logerbyte.moneyminder.screens.cashsummary.editdialog.DialogViewModel;
+import de.logerbyte.moneyminder.dialogs.editDialog.DialogViewModel;
 
 /**
  * Created by logerom on 29.07.18.
