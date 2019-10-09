@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dialogViewModelListener"
+            type="de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/dialogContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:context=".screens.cashsummary.summaryList.CashSummaryActivity">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->dialogViewModelListener.onClickCancel()}"
+                android:text="@string/cancel"
+                android:layout_toLeftOf="@id/bu_ok" />
+
+            <Button
+                android:id="@+id/bu_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->dialogViewModelListener.onClickOk()}"
+                android:text="@string/ok"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
