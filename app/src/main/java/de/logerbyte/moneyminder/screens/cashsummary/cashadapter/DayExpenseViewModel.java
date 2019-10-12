@@ -3,8 +3,6 @@ package de.logerbyte.moneyminder.screens.cashsummary.cashadapter;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import de.logerbyte.moneyminder.dialogs.editDialog.EditDialogViewModel;
-
 /**
  * Created by logerom on 29.07.18.
  */
@@ -18,7 +16,7 @@ public class DayExpenseViewModel {
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private AdapterListener cashAdapterItemAdapterListener;
     private ActivityListener mActivityListener;
-    private EditDialogViewModel.ViewInterface dialogVmListener;
+    private ViewInterface dialogVmListener;
 
     // FIXME: 17.09.18 only default constructor if we extend from AndroidViewModel. Use factory
     public DayExpenseViewModel(long entryId, String cashDate, String cashName, String cashCategory,
@@ -65,7 +63,7 @@ public class DayExpenseViewModel {
         mActivityListener = activityListener;
     }
 
-    public void setDialogListener(EditDialogViewModel.ViewInterface dialogVmListener) {
+    public void setDialogListener(ViewInterface dialogVmListener) {
         this.dialogVmListener = dialogVmListener;
     }
 
@@ -76,7 +74,7 @@ public class DayExpenseViewModel {
     public interface ActivityListener {
 
         void showEditDialog(DayExpenseViewModel item,
-                EditDialogViewModel.ViewInterface dialogVmListener);
+                ViewInterface dialogVmListener);
     }
 
 

@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface;
 import de.logerbyte.moneyminder.util.DigitUtil;
 import de.logerbyte.moneyminder.viewModels.CashViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -55,11 +56,4 @@ public class EditDialogViewModel extends AndroidViewModel implements BseDialogLi
         this.baseDialogListenerView = baseDialogListenerView;
     }
 
-    public interface ViewInterface {
-
-        void onItemDeleted();
-
-        // TODO: 2019-09-30 check listener
-        void onUpdateItem();
-    }
 }

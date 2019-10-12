@@ -12,6 +12,8 @@ import de.logerbyte.moneyminder.databinding.Dialog1Binding
 
 abstract class BaseDialog1 : DialogFragment(), BaseDialog1ViewListener {
 
+    protected lateinit var binding: Dialog1Binding
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return createDialog()
     }
@@ -24,8 +26,8 @@ abstract class BaseDialog1 : DialogFragment(), BaseDialog1ViewListener {
     }
 
     private fun initBinding(): Dialog1Binding? {
+        binding = createBinding(R.layout.dialog1) as Dialog1Binding
         additionalBinding()
-        val binding = createBinding(R.layout.dialog1) as Dialog1Binding
         binding!!.dialogViewModelListener = setViewModelListener()
         return binding
     }

@@ -16,6 +16,7 @@ import de.logerbyte.moneyminder.databinding.DialogBinding;
 import de.logerbyte.moneyminder.dialogs.BaseDialog1;
 import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface;
 import de.logerbyte.moneyminder.viewModels.CashViewModel;
 
 public class EditDialogJava extends BaseDialog1 implements BaseDialogListenerView {
@@ -23,7 +24,7 @@ public class EditDialogJava extends BaseDialog1 implements BaseDialogListenerVie
     private DialogBinding binding;
     protected LayoutInflater inflater;
     private EditDialogViewModel editDialogViewModel;
-    private EditDialogViewModel.ViewInterface dialogVmListener;
+    private ViewInterface dialogVmListener;
     private CashViewModel cashViewModel = new CashViewModel();
 
 
@@ -68,7 +69,7 @@ public class EditDialogJava extends BaseDialog1 implements BaseDialogListenerVie
     // FIXME: 21.09.18 prevent pass throw callback from adapter to dialog viewmodel. Better callback from
     // model to model (layer to layer)
 
-    public void setAdapterCallback(EditDialogViewModel.ViewInterface dialogVmListener) {
+    public void setAdapterCallback(ViewInterface dialogVmListener) {
         this.dialogVmListener = dialogVmListener;
     }
 
