@@ -4,9 +4,10 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.text.Editable
+import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 
-class CashViewModel : ViewModel() {
+class CashViewModel() : ViewModel() {
     // TODO: 2019-10-01 cash categories as string resources
     val cashCategoryList = ArrayList(listOf("Essen", "Sonstiges", "Beauty"))
     var entryId: Long = 0
@@ -14,6 +15,8 @@ class CashViewModel : ViewModel() {
     val cashName = ObservableField<String>()
     lateinit var cashCategory: String
     var cashAmount = ObservableField<String>()
+
+    constructor(dialogViewListener: BaseDialog1ViewListener) : this()
 
     fun setCash(item: DayExpenseViewModel) {
         this.entryId = item.entryId

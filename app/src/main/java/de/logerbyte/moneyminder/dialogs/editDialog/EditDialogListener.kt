@@ -1,11 +1,11 @@
 package de.logerbyte.moneyminder.dialogs.editDialog
 
 
-interface DialogListener {
+interface BseDialogListenerViewModel {
     fun editCash()
     fun editCashCancel()
 }
 
-interface DialogListenerView {
+interface BaseDialogListenerView {
     fun dismissDialog()
 }

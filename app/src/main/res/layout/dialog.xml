@@ -7,11 +7,15 @@
 
         <variable
             name="dialogVM"
-            type="de.logerbyte.moneyminder.dialogs.editDialog.DialogViewModel" />
+            type="de.logerbyte.moneyminder.dialogs.editDialog.EditDialogViewModel" />
 
         <variable
             name="cashVM"
             type="de.logerbyte.moneyminder.viewModels.CashViewModel" />
+
+        <variable
+            name="dialogViewListener"
+            type="de.logerbyte.moneyminder.dialogs.editDialog.BaseDialogListenerView" />
     </data>
 
     <LinearLayout
@@ -32,7 +36,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->dialogVM.editCashCancel()}"
+                android:onClick="@{()->dialogViewListener.dismissDialog()}"
                 android:text="@string/cancel" />
 
             <Button

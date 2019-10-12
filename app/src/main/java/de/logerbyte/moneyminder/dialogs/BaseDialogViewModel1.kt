@@ -1,10 +1,8 @@
-package de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
+package de.logerbyte.moneyminder.dialogs
 
 import android.arch.lifecycle.ViewModel
-import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewListener
-import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener
 
-class BaseDialogViewModel1(
+abstract class BaseDialogViewModel1(
         private val dialogViewListener: BaseDialog1ViewListener)
     : ViewModel(), BaseDialog1ViewModelListener {
     override fun onClickOk() {

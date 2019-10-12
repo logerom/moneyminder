@@ -6,20 +6,24 @@ import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
+
+import org.jetbrains.annotations.NotNull;
 
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.DialogBinding;
+import de.logerbyte.moneyminder.dialogs.BaseDialog1;
+import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.viewModels.CashViewModel;
 
-public class CashEditDialog extends DialogFragment implements DialogListenerView {
+public class EditDialogJava extends BaseDialog1 implements BaseDialogListenerView {
 
     private DialogBinding binding;
-    private LayoutInflater inflater;
-    private DialogViewModel dialogViewModel;
-    private DialogViewModel.ViewInterface dialogVmListener;
+    protected LayoutInflater inflater;
+    private EditDialogViewModel editDialogViewModel;
+    private EditDialogViewModel.ViewInterface dialogVmListener;
     private CashViewModel cashViewModel = new CashViewModel();
 
 
@@ -29,24 +33,30 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
         bindViewModel(context);
     }
 
-    private void bindViewModel(Context context) {
-        dialogViewModel = new DialogViewModel(((Activity) context).getApplication(), this);
-        dialogViewModel.setViewInterface(dialogVmListener);
-        dialogViewModel.setDialogViewListener(this);
-        dialogViewModel.setCashViewModel(cashViewModel);
+    protected void bindViewModel(Context context) {
+        // TODO: 2019-10-08 include view programmatically into a container in dialog.xml
+        editDialogViewModel = new EditDialogViewModel(((Activity) context).getApplication(), this);
+        editDialogViewModel.setViewInterface(dialogVmListener);
+        editDialogViewModel.setDialogViewListener(this);
+        editDialogViewModel.setCashViewModel(cashViewModel);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         inflater = getActivity().getLayoutInflater();
-        binding = DataBindingUtil.inflate(inflater, R.layout.dialog, null, false);
-        binding.setDialogVM(dialogViewModel);
+        binding = DataBindingUtil.inflate(inflater, getLayout(), null, false);
+        binding.setDialogVM(editDialogViewModel);
         binding.setCashVM(cashViewModel);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(binding.getRoot());
         return builder.create();
+    }
+
+    protected @LayoutRes
+    int getLayout() {
+        return R.layout.dialog;
     }
 
     // fixme: 31.08.18 transfer file to kotlin
@@ -58,12 +68,23 @@ public class CashEditDialog extends DialogFragment implements DialogListenerView
     // FIXME: 21.09.18 prevent pass throw callback from adapter to dialog viewmodel. Better callback from
     // model to model (layer to layer)
 
-    public void setAdapterCallback(DialogViewModel.ViewInterface dialogVmListener) {
+    public void setAdapterCallback(EditDialogViewModel.ViewInterface dialogVmListener) {
         this.dialogVmListener = dialogVmListener;
     }
 
     @Override
     public void dismissDialog() {
         dismiss();
+    }
+
+    @NotNull
+    @Override
+    public BaseDialog1ViewModelListener setViewModelListener() {
+        return null;
+    }
+
+    @Override
+    public void additionalBinding() {
+
     }
 }

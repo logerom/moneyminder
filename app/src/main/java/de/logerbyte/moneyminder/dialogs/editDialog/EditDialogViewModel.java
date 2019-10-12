@@ -10,15 +10,15 @@ import de.logerbyte.moneyminder.viewModels.CashViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class DialogViewModel extends AndroidViewModel implements DialogListener {
+public class EditDialogViewModel extends AndroidViewModel implements BseDialogListenerViewModel {
 
-    private final DialogListenerView callback;
+    private final BaseDialogListenerView callback;
     private AppDatabaseManager appDatabaseManager;
     CashViewModel cashViewModel;
     ViewInterface viewInterface;
-    private DialogListenerView dialogListenerView;
+    private BaseDialogListenerView baseDialogListenerView;
 
-    public DialogViewModel(Application application, DialogListenerView listener) {
+    public EditDialogViewModel(Application application, BaseDialogListenerView listener) {
         super(application);
         appDatabaseManager = new AppDatabaseManager(application.getBaseContext());
         callback = listener;
@@ -39,7 +39,7 @@ public class DialogViewModel extends AndroidViewModel implements DialogListener 
                 cashViewModel.getCashDate().get(),
                 Double.valueOf(DigitUtil.commaToDot(cashViewModel.getCashAmount().get())));
 
-        dialogListenerView.dismissDialog();
+        baseDialogListenerView.dismissDialog();
 
         appDatabaseManager.updateCashItem(expenseToUpdate).subscribeOn(
                 Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(
@@ -51,8 +51,8 @@ public class DialogViewModel extends AndroidViewModel implements DialogListener 
         callback.dismissDialog();
     }
 
-    public void setDialogViewListener(DialogListenerView dialogListenerView) {
-        this.dialogListenerView = dialogListenerView;
+    public void setDialogViewListener(BaseDialogListenerView baseDialogListenerView) {
+        this.baseDialogListenerView = baseDialogListenerView;
     }
 
     public interface ViewInterface {
