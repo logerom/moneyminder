@@ -1,6 +1,9 @@
 package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
+import android.app.Activity
 import android.databinding.DataBindingUtil
+import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +12,7 @@ import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
+import de.logerbyte.moneyminder.dialogs.deleteDialog.DeleteDialog
 import de.logerbyte.moneyminder.util.ConvertUtil
 import de.logerbyte.moneyminder.util.DigitUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,7 +26,10 @@ import kotlin.collections.HashMap
  * Created by logerom on 28.07.18.
  */
 
+const val BUNDLE_CASHITEM_ID = "cash_item_id"
+
 class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, ViewInterface {
+    lateinit var attechedActivity: FragmentActivity
     private val viewtypeList = ArrayList<ViewType>()
     private val calendar: Calendar
     private var cashList = ArrayList<DayExpenseViewModel>()
@@ -62,7 +69,9 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         notifyDataSetChanged()
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        attechedActivity = parent.context as FragmentActivity
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.context)
         }
@@ -155,9 +164,11 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     override fun onItemDeleteClicked(cashItemId: Long?) {
-        // TODO: 2019-10-01 add delete dialog
-        appDatabaseManager.deleteCashItem(cashItemId!!).subscribeOn(Schedulers.io()).observeOn(
-                AndroidSchedulers.mainThread()).subscribe { aBoolean -> loadExpenseList() }
+        DeleteDialog().let {
+            it.arguments = Bundle().apply { this.putLong(BUNDLE_CASHITEM_ID, cashItemId!!) }
+            it.setAdapterCallback(this)
+            it.show(attechedActivity.supportFragmentManager, "delete_tag")
+        }
     }
 
     override fun onItemDeleted() {

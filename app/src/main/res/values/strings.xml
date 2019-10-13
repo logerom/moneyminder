@@ -8,4 +8,5 @@
     <string name="cashCategory">Cash Category</string>
     <string name="cash">Cash Amount</string>
     <string name="ok">Ok</string>
+    <string name="question_delete">Wirklich löschen?</string>
 </resources>

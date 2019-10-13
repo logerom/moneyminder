@@ -12,7 +12,7 @@ import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 
 
-class EditDialog : BaseDialog1(), BaseDialog1ViewListener {
+class EditDialog : BaseDialog1() {
 
     lateinit var adapterCallback: ViewInterface
     lateinit var cash: DayExpenseViewModel
