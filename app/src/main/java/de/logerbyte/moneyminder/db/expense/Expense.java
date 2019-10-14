@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.db.expense;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
  * Created by logerom on 08.08.18.

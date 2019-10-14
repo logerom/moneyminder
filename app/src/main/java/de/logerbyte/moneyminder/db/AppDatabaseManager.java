@@ -1,10 +1,10 @@
 package de.logerbyte.moneyminder.db;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import java.util.List;
 
+import androidx.room.Room;
 import de.logerbyte.moneyminder.db.expense.Expense;
 import io.reactivex.Observable;
 

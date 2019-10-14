@@ -1,9 +1,9 @@
 package de.logerbyte.moneyminder.viewModels
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
-import android.databinding.ObservableInt
 import android.text.Editable
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
+import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 

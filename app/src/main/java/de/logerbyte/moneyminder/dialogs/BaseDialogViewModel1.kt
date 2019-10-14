@@ -1,6 +1,6 @@
 package de.logerbyte.moneyminder.dialogs
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 abstract class BaseDialogViewModel1(
         private val dialogViewListener: BaseDialog1ViewListener)

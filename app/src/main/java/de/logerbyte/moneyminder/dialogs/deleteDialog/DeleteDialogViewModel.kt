@@ -1,7 +1,6 @@
 package de.logerbyte.moneyminder.dialogs.deleteDialog
 
 import android.content.Context
-import android.support.v7.widget.util.SortedListAdapterCallback
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewListener
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1

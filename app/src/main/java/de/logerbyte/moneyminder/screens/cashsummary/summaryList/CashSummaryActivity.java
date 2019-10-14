@@ -1,10 +1,10 @@
 package de.logerbyte.moneyminder.screens.cashsummary.summaryList;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
 import de.logerbyte.moneyminder.dialogs.editDialog.EditDialog;

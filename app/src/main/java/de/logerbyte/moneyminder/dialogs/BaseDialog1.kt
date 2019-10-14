@@ -2,10 +2,10 @@ package de.logerbyte.moneyminder.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.Dialog1Binding
 

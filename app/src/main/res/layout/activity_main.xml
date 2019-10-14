@@ -22,7 +22,7 @@
             android:background="?attr/colorPrimary"
             android:elevation="4dp"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_costs"
             android:layout_width="match_parent"
             android:layout_height="0dp"

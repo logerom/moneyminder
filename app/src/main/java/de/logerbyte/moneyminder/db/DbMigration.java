@@ -1,8 +1,8 @@
 package de.logerbyte.moneyminder.db;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.migration.Migration;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 public class DbMigration {
 

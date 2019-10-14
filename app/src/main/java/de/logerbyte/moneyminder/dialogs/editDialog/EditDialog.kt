@@ -1,11 +1,10 @@
 package de.logerbyte.moneyminder.dialogs.editDialog
 
-import android.databinding.DataBindingUtil
 import android.view.LayoutInflater
+import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialog1
-import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewListener
 import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface
