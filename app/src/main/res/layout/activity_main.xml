@@ -39,12 +39,11 @@
                     binding:adapter="@{viewModel.cashAdapter}"
                     tools:listitem="@layout/adapter_entry" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                <de.logerbyte.moneyminder.view.FloatingImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom||right"
-                    android:src="@drawable/ic_plus_circle_outline"
-                    binding:fabSize="normal" />
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_plus_circle_outline" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </LinearLayout>
