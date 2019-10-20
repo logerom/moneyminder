@@ -2,6 +2,7 @@ package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
@@ -28,6 +29,10 @@ import kotlin.collections.HashMap
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
 class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, ViewInterface {
+    lateinit var dependencyView: View
+    var floatingDepedencyViewID = 0
+    private lateinit var recView: RecyclerView
+    var floating = false
     lateinit var attechedActivity: FragmentActivity
     private val viewtypeList = ArrayList<ViewType>()
     private val calendar: Calendar
@@ -85,8 +90,23 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         }
     }
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        recView = recyclerView
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         getItemAtPosition(holder, position)
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+//        floating = !((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() ==
+//                "diesdas")
+
+        if ((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() == "diesdas") {
+            floating = false
+        }
+
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -146,6 +166,16 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         dayExpenseViewModel.setDialogListener(this)
         dayExpenseViewModel.setActivityListener(cashSummaryActivity)
         (holder as ViewHolder).binding.vmCashItem = dayExpenseViewModel
+        checkFloating(dayExpenseViewModel, holder)
+    }
+
+    private fun checkFloating(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
+        if (dayExpenseViewModel.cashName.get() == "diesdas") {
+            floatingDepedencyViewID = View.generateViewId()
+            dependencyView = holder.itemView
+            dependencyView.id = floatingDepedencyViewID
+            floating = true
+        }
     }
 
     fun createViewTypeList(list: ArrayList<WeekSummaryViewModel>) {
