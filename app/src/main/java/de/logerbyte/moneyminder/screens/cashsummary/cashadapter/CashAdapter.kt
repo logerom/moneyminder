@@ -1,6 +1,8 @@
 package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +31,9 @@ import kotlin.collections.HashMap
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
 class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, ViewInterface {
-    lateinit var dependencyView: View
+    var dependencyView: View? = null
     var floatingDepedencyViewID = 0
-    private lateinit var recView: RecyclerView
+    lateinit var recView: RecyclerView
     var floating = false
     lateinit var attechedActivity: FragmentActivity
     private val viewtypeList = ArrayList<ViewType>()
@@ -100,7 +102,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         super.onViewRecycled(holder)
-//        floating = !((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() ==
+        //        floating = !((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() ==
 //                "diesdas")
 
         if ((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() == "diesdas") {
@@ -162,6 +164,11 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     private fun initDayItem(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
+        Log.d("Scroll", "Init: ${dayExpenseViewModel.cashDate.get()} visible: ${holder.itemView
+                .visibility == View.VISIBLE}")
+
+        test(dayExpenseViewModel, holder)
+
         dayExpenseViewModel.setItemListener(this)
         dayExpenseViewModel.setDialogListener(this)
         dayExpenseViewModel.setActivityListener(cashSummaryActivity)
@@ -169,11 +176,20 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         checkFloating(dayExpenseViewModel, holder)
     }
 
+    private fun test(dayExpenseViewModel: DayExpenseViewModel, holder1: RecyclerView.ViewHolder) {
+        val rec = Rect()
+        recView.getHitRect(rec)
+
+        if (holder1.itemView.getLocalVisibleRect(rec)) {
+            // view is in the visible rectangle
+        }
+    }
+
     private fun checkFloating(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
-        if (dayExpenseViewModel.cashName.get() == "diesdas") {
+        if (dayExpenseViewModel.cashName.get() == "Raketen") {
             floatingDepedencyViewID = View.generateViewId()
             dependencyView = holder.itemView
-            dependencyView.id = floatingDepedencyViewID
+            dependencyView!!.id = floatingDepedencyViewID
             floating = true
         }
     }
