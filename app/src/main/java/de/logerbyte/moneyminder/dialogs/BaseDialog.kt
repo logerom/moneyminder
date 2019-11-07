@@ -10,7 +10,7 @@ import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.Dialog1Binding
 
 
-abstract class BaseDialog1 : DialogFragment(), BaseDialog1ViewListener {
+abstract class BaseDialog : DialogFragment(), BaseDialogViewListener {
 
     protected lateinit var binding: Dialog1Binding
 

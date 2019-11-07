@@ -6,6 +6,6 @@ interface BaseDialog1ViewModelListener {
     fun onClickCancel()
 }
 
-interface BaseDialog1ViewListener {
+interface BaseDialogViewListener {
     fun dismissDialog()
 }

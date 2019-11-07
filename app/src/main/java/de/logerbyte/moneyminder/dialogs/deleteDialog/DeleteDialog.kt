@@ -4,14 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.TextView
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.dialogs.BaseDialog1
+import de.logerbyte.moneyminder.dialogs.BaseDialog
 import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.BUNDLE_CASHITEM_ID
-import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface
-import java.util.*
 
-class DeleteDialog : BaseDialog1() {
+class DeleteDialog : BaseDialog() {
     private lateinit var adapterCallback: ViewInterface
     var cashItemId: Long = 0L
     lateinit var deleteDialogViewModel: DeleteDialogViewModel

@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModelProviders;
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
 import de.logerbyte.moneyminder.dialogs.editDialog.EditDialog;
+import de.logerbyte.moneyminder.screens.cashsummary.ViewListener;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface;
 
-public class CashSummaryActivity extends FragmentActivity implements DayExpenseViewModel.ActivityListener {
+public class CashSummaryActivity extends FragmentActivity implements
+        DayExpenseViewModel.ActivityListener, ViewListener {
 
     private CashSummaryViewModel cashSummaryViewModel;
 
@@ -31,6 +33,8 @@ public class CashSummaryActivity extends FragmentActivity implements DayExpenseV
     private void bindView() {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(cashSummaryViewModel);
+        binding.setViewListener(this);
+
     }
 
     @Override
@@ -42,5 +46,10 @@ public class CashSummaryActivity extends FragmentActivity implements DayExpenseV
                 // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
                 baseDialog.setCash(item);
                 baseDialog.setAdapterCallback(dialogVmListener);
+    }
+
+    @Override
+    public void onCLickFab() {
+        // TODO: 2019-11-07 open dialog
     }
 }

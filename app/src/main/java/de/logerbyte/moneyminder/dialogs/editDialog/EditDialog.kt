@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
-import de.logerbyte.moneyminder.dialogs.BaseDialog1
+import de.logerbyte.moneyminder.dialogs.BaseDialog
 import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 
 
-class EditDialog : BaseDialog1() {
+class EditDialog : BaseDialog() {
 
     lateinit var adapterCallback: ViewInterface
     lateinit var cash: DayExpenseViewModel

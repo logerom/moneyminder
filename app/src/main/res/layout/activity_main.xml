@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="de.logerbyte.moneyminder.screens.cashsummary.summaryList.CashSummaryViewModel" />
+
+        <variable
+            name="viewListener"
+            type="de.logerbyte.moneyminder.screens.cashsummary.ViewListener" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
