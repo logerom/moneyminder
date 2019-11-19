@@ -7,12 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.databinding.Dialog1Binding
+import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 
 
 abstract class BaseDialog : DialogFragment(), BaseDialogViewListener {
 
-    protected lateinit var binding: Dialog1Binding
+    protected lateinit var binding: BaseDialogBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return createDialog()
@@ -25,8 +25,8 @@ abstract class BaseDialog : DialogFragment(), BaseDialogViewListener {
         }
     }
 
-    private fun initBinding(): Dialog1Binding? {
-        binding = createBinding(R.layout.dialog1) as Dialog1Binding
+    private fun initBinding(): BaseDialogBinding? {
+        binding = createBinding(R.layout.base_dialog) as BaseDialogBinding
         additionalBinding()
         binding!!.dialogViewModelListener = setViewModelListener()
         return binding

@@ -18,6 +18,7 @@ class EditDialog : BaseDialog() {
     val cashViewModel = CashViewModel()
     lateinit var editDialogViewModel1: EditDialogViewModel1
 
+    // TODO: 2019-11-07 use same for add cash + set name of button generally
     override fun additionalBinding() {
         editDialogViewModel1 = EditDialogViewModel1(this, context, cashViewModel)
         val cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
