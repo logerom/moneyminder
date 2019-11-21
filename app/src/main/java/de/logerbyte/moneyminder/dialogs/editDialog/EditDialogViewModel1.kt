@@ -3,8 +3,8 @@ package de.logerbyte.moneyminder.dialogs.editDialog
 import android.content.Context
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
-import de.logerbyte.moneyminder.dialogs.BaseDialogViewListener
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
+import de.logerbyte.moneyminder.dialogs.DialogCallback
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface
 import de.logerbyte.moneyminder.util.DigitUtil
 import de.logerbyte.moneyminder.viewModels.CashViewModel
@@ -12,8 +12,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.lang.Double
 
-class EditDialogViewModel1(baseDialogViewListener: BaseDialogViewListener, val context: Context?, val cashViewModel: CashViewModel) : BaseDialogViewModel1
-(baseDialogViewListener) {
+class EditDialogViewModel1(dialogCallback: DialogCallback, val context: Context?, val cashViewModel: CashViewModel) : BaseDialogViewModel1
+(dialogCallback) {
     private lateinit var viewInterface: ViewInterface
 
     override fun onClickOk() {

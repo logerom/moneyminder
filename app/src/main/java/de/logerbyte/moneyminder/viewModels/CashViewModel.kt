@@ -4,7 +4,7 @@ import android.text.Editable
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.ViewModel
-import de.logerbyte.moneyminder.dialogs.BaseDialogViewListener
+import de.logerbyte.moneyminder.dialogs.DialogCallback
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 
 class CashViewModel() : ViewModel() {
@@ -16,7 +16,7 @@ class CashViewModel() : ViewModel() {
     lateinit var cashCategory: String
     var cashAmount = ObservableField<String>()
 
-    constructor(dialogViewListener: BaseDialogViewListener) : this()
+    constructor(dialogCallback: DialogCallback) : this()
 
     fun setCash(item: DayExpenseViewModel) {
         this.entryId = item.entryId

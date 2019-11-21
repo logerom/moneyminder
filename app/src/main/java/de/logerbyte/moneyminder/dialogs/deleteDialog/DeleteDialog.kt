@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.dialogs.BaseDialog
-import de.logerbyte.moneyminder.dialogs.BaseDialog1ViewModelListener
+import de.logerbyte.moneyminder.dialogs.DialogViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.BUNDLE_CASHITEM_ID
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface
 
@@ -19,15 +19,15 @@ class DeleteDialog : BaseDialog() {
         return super.onCreateDialog(savedInstanceState)
     }
 
-    override fun additionalBinding() {
+    override fun createContentBinding() {
         deleteDialogViewModel = DeleteDialogViewModel(adapterCallback, cashItemId, this, context)
         val question = TextView(context).apply {
-            this.setText(R.string.question_delete)
+            setText(R.string.question_delete)
         }
         binding.dialogContainer.addView(question)
     }
 
-    override fun setViewModelListener(): BaseDialog1ViewModelListener {
+    override fun setDialogBaseActionButtonListener(): DialogViewListener {
         return deleteDialogViewModel
     }
 

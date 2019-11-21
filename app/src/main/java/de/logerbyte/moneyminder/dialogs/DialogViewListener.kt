@@ -1,11 +1,11 @@
 package de.logerbyte.moneyminder.dialogs
 
 
-interface BaseDialog1ViewModelListener {
+interface DialogViewListener {
     fun onClickOk()
     fun onClickCancel()
 }
 
-interface BaseDialogViewListener {
+interface DialogCallback {
     fun dismissDialog()
 }

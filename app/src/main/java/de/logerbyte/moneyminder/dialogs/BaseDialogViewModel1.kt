@@ -3,14 +3,14 @@ package de.logerbyte.moneyminder.dialogs
 import androidx.lifecycle.ViewModel
 
 abstract class BaseDialogViewModel1(
-        private val dialogViewListener: BaseDialogViewListener)
-    : ViewModel(), BaseDialog1ViewModelListener {
+        private val dialogCallback: DialogCallback)
+    : ViewModel(), DialogViewListener {
     override fun onClickOk() {
-        dialogViewListener.dismissDialog()
+        dialogCallback.dismissDialog()
     }
 
     override fun onClickCancel() {
-        dialogViewListener.dismissDialog()
+        dialogCallback.dismissDialog()
     }
 
 }

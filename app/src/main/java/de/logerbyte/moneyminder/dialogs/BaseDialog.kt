@@ -10,7 +10,7 @@ import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 
 
-abstract class BaseDialog : DialogFragment(), BaseDialogViewListener {
+abstract class BaseDialog : DialogFragment(), DialogCallback {
 
     protected lateinit var binding: BaseDialogBinding
 
@@ -18,7 +18,7 @@ abstract class BaseDialog : DialogFragment(), BaseDialogViewListener {
         return createDialog()
     }
 
-    protected fun createDialog(): Dialog {
+    private fun createDialog(): Dialog {
         return AlertDialog.Builder(activity).let {
             it.setView(initBinding()!!.root)
             it.create()
@@ -27,20 +27,25 @@ abstract class BaseDialog : DialogFragment(), BaseDialogViewListener {
 
     private fun initBinding(): BaseDialogBinding? {
         binding = createBinding(R.layout.base_dialog) as BaseDialogBinding
-        additionalBinding()
-        binding!!.dialogViewModelListener = setViewModelListener()
+        createContentBinding()
+        binding!!.dialogViewModelListener = setDialogBaseActionButtonListener()
         return binding
     }
 
-    abstract fun additionalBinding()
+    abstract fun createContentBinding()
 
-    protected fun createBinding(layout: Int): ViewDataBinding {
+    private fun createBinding(layout: Int): ViewDataBinding {
         return DataBindingUtil.inflate(activity!!.layoutInflater, layout, null, false)
     }
 
-    abstract fun setViewModelListener(): BaseDialog1ViewModelListener
+    abstract fun setDialogBaseActionButtonListener(): DialogViewListener
 
     override fun dismissDialog() {
         dismiss()
+    }
+
+    interface ViewListener {
+        fun onCLickOK()
+        fun onClickCancel()
     }
 }
