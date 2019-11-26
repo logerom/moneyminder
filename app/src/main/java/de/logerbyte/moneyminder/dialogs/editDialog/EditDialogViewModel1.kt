@@ -1,6 +1,7 @@
 package de.logerbyte.moneyminder.dialogs.editDialog
 
 import android.content.Context
+import android.view.View
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
@@ -16,7 +17,7 @@ class EditDialogViewModel1(dialogCallback: DialogCallback, val context: Context?
 (dialogCallback) {
     private lateinit var viewInterface: ViewInterface
 
-    override fun onClickOk() {
+    override fun onClickOk(view: View) {
         val expenseToUpdate = Expense(cashViewModel.entryId,
                 cashViewModel.cashName.get(), cashViewModel.cashCategory,
                 cashViewModel.cashDate.get(),
@@ -26,7 +27,7 @@ class EditDialogViewModel1(dialogCallback: DialogCallback, val context: Context?
         appDatabaseManager.updateCashItem(expenseToUpdate).subscribeOn(
                 Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 { aBoolean -> viewInterface.onUpdateItem() })
-        super.onClickOk()
+        super.onClickOk(view)
     }
 
     fun setAdapter(adapterCallback: ViewInterface) {
