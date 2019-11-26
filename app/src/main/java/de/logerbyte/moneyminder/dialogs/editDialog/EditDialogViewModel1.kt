@@ -20,7 +20,7 @@ class EditDialogViewModel1(dialogCallback: DialogCallback, val context: Context?
         val expenseToUpdate = Expense(cashViewModel.entryId,
                 cashViewModel.cashName.get(), cashViewModel.cashCategory,
                 cashViewModel.cashDate.get(),
-                Double.valueOf(DigitUtil.commaToDot(cashViewModel.cashAmount.get()))!!)
+                Double.valueOf(DigitUtil.commaToDot(cashViewModel.cashAmount.get())))
 
         val appDatabaseManager = AppDatabaseManager(context)
         appDatabaseManager.updateCashItem(expenseToUpdate).subscribeOn(
