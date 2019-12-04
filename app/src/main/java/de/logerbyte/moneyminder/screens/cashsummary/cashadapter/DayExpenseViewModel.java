@@ -17,7 +17,7 @@ public class DayExpenseViewModel {
     private ObservableField<String> cashInEuro = new ObservableField<>();
     private AdapterListener cashAdapterItemAdapterListener;
     private ActivityListener mActivityListener;
-    private ViewInterface dialogVmListener;
+    private AdapterCallBack dialogVmListener;
 
     // FIXME: 17.09.18 only default constructor if we extend from AndroidViewModel. Use factory
     public DayExpenseViewModel(long entryId, String cashDate, String cashName, String cashCategory,
@@ -64,7 +64,7 @@ public class DayExpenseViewModel {
         mActivityListener = activityListener;
     }
 
-    public void setDialogListener(ViewInterface dialogVmListener) {
+    public void setDialogListener(AdapterCallBack dialogVmListener) {
         this.dialogVmListener = dialogVmListener;
     }
 
@@ -74,8 +74,7 @@ public class DayExpenseViewModel {
 
     public interface ActivityListener {
 
-        void showEditDialog(DayExpenseViewModel item,
-                ViewInterface dialogVmListener);
+        void showEditDialog(DayExpenseViewModel item, AdapterCallBack dialogVmListener);
     }
 
 

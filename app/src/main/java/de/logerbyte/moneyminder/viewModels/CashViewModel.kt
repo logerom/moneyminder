@@ -9,12 +9,13 @@ import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewMo
 
 class CashViewModel() : ViewModel() {
     // TODO: 2019-10-01 cash categories as string resources
-    val cashCategoryList = ArrayList(listOf("Essen", "Sonstiges", "Beauty"))
-    var entryId: Long = 0
     val cashDate = ObservableField<String>()
     val cashName = ObservableField<String>()
-    lateinit var cashCategory: String
     var cashAmount = ObservableField<String>()
+
+    var entryId: Long = 0
+    val cashCategoryList = ArrayList(listOf("Essen", "Sonstiges", "Beauty"))
+    lateinit var cashCategory: String
 
     constructor(dialogCallback: DialogCallback) : this()
 
@@ -61,6 +62,19 @@ class CashViewModel() : ViewModel() {
         }
 
         newText = s.toString()
+    }
+
+    fun isAllSet(): Boolean {
+        return !(isSomeElementNull(listOf(cashDate.get(), cashName.get(), cashCategory, cashAmount.get())))
+    }
+
+    private fun isSomeElementNull(listOf: List<String?>): Boolean {
+        for (element in listOf) {
+            if (element.isNullOrEmpty()) {
+                return true
+            }
+        }
+        return false
     }
 }
 

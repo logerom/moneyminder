@@ -30,7 +30,7 @@ import kotlin.collections.HashMap
 
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
-class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, ViewInterface {
+class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
     var dependencyView: View? = null
     var floatingDepedencyViewID = 0
     lateinit var recView: RecyclerView
@@ -221,6 +221,10 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     override fun onUpdateItem() {
+        loadExpenseList()
+    }
+
+    override fun onAddClicked() {
         loadExpenseList()
     }
 

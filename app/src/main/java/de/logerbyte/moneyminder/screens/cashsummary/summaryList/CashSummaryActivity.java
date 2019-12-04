@@ -7,15 +7,18 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
+import de.logerbyte.moneyminder.dialogs.AddCashDialog.AddCashDialog;
 import de.logerbyte.moneyminder.dialogs.editDialog.EditDialog;
 import de.logerbyte.moneyminder.screens.cashsummary.ViewListener;
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
-import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface;
 
 public class CashSummaryActivity extends FragmentActivity implements
         DayExpenseViewModel.ActivityListener, ViewListener {
 
+    private static final String ADD_CASH_DIALOG = "addCashDialog";
     private CashSummaryViewModel cashSummaryViewModel;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,25 +34,26 @@ public class CashSummaryActivity extends FragmentActivity implements
     }
 
     private void bindView() {
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(cashSummaryViewModel);
         binding.setViewListener(this);
-
     }
 
     @Override
-    public void showEditDialog(DayExpenseViewModel item,
-            ViewInterface dialogVmListener) {
-      //  new EditDialog().show(getSupportFragmentManager(), "Base_Dialog");
-                EditDialog baseDialog = new EditDialog();
-                baseDialog.show(getSupportFragmentManager(), "Edit_Dialog");
-                // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
-                baseDialog.setCash(item);
-                baseDialog.setAdapterCallback(dialogVmListener);
+    public void showEditDialog(DayExpenseViewModel item, AdapterCallBack dialogVmListener) {
+        //  new EditDialog().show(getSupportFragmentManager(), "Base_Dialog");
+        EditDialog baseDialog = new EditDialog();
+        baseDialog.show(getSupportFragmentManager(), "Edit_Dialog");
+        // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
+        baseDialog.setCash(item);
+        baseDialog.setAdapterCallback(dialogVmListener);
     }
 
     @Override
     public void onCLickFab() {
-        // TODO: 2019-11-07 open dialog
+        AdapterCallBack adapterCallBack = (AdapterCallBack) binding.rvCosts.getAdapter();
+        AddCashDialog cashDialog = new AddCashDialog();
+        cashDialog.setAdapterCallback(adapterCallBack);
+        cashDialog.show(getSupportFragmentManager(), ADD_CASH_DIALOG);
     }
 }

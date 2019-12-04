@@ -6,11 +6,11 @@ import android.widget.TextView
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.dialogs.BaseDialog
 import de.logerbyte.moneyminder.dialogs.DialogViewListener
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.BUNDLE_CASHITEM_ID
-import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.ViewInterface
 
 class DeleteDialog : BaseDialog() {
-    private lateinit var adapterCallback: ViewInterface
+    private lateinit var adapterCallback: AdapterCallBack
     var cashItemId: Long = 0L
     lateinit var deleteDialogViewModel: DeleteDialogViewModel
 
@@ -31,7 +31,7 @@ class DeleteDialog : BaseDialog() {
         return deleteDialogViewModel
     }
 
-    fun setAdapterCallback(adapterCallBack: ViewInterface) {
+    fun setAdapterCallback(adapterCallBack: AdapterCallBack) {
         this.adapterCallback = adapterCallBack
     }
 }
