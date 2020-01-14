@@ -99,7 +99,6 @@
                 android:layout_height="48dp"
                 android:digits="0123456789,"
                 android:hint="0,00"
-                android:inputType="numberDecimal"
                 android:text="@={viewModel.cashAmount}" />
         </LinearLayout>
     </LinearLayout>
