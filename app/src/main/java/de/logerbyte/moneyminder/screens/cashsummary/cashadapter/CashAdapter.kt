@@ -1,6 +1,5 @@
 package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -167,31 +166,13 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         Log.d("Scroll", "Init: ${dayExpenseViewModel.cashDate.get()} visible: ${holder.itemView
                 .visibility == View.VISIBLE}")
 
-        test(dayExpenseViewModel, holder)
+
 
         dayExpenseViewModel.setItemListener(this)
         dayExpenseViewModel.setDialogListener(this)
         dayExpenseViewModel.setActivityListener(cashSummaryActivity)
         (holder as ViewHolder).binding.vmCashItem = dayExpenseViewModel
-        checkFloating(dayExpenseViewModel, holder)
-    }
 
-    private fun test(dayExpenseViewModel: DayExpenseViewModel, holder1: RecyclerView.ViewHolder) {
-        val rec = Rect()
-        recView.getHitRect(rec)
-
-        if (holder1.itemView.getLocalVisibleRect(rec)) {
-            // view is in the visible rectangle
-        }
-    }
-
-    private fun checkFloating(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
-        if (dayExpenseViewModel.cashName.get() == "Raketen") {
-            floatingDepedencyViewID = View.generateViewId()
-            dependencyView = holder.itemView
-            dependencyView!!.id = floatingDepedencyViewID
-            floating = true
-        }
     }
 
     fun createViewTypeList(list: ArrayList<WeekSummaryViewModel>) {
