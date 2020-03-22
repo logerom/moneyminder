@@ -13,7 +13,7 @@ import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
-import de.logerbyte.moneyminder.dialogs.deleteDialog.DeleteDialog
+import de.logerbyte.moneyminder.dialogs.deleteDialog.DeleteDialogFragment
 import de.logerbyte.moneyminder.util.ConvertUtil
 import de.logerbyte.moneyminder.util.DigitUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -190,7 +190,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     }
 
     override fun onItemDeleteClicked(cashItemId: Long?) {
-        DeleteDialog().let {
+        DeleteDialogFragment().let {
             it.arguments = Bundle().apply { this.putLong(BUNDLE_CASHITEM_ID, cashItemId!!) }
             it.setAdapterCallback(this)
             it.show(attechedActivity.supportFragmentManager, "delete_tag")

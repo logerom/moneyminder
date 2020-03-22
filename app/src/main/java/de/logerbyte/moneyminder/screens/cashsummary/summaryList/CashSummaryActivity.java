@@ -5,10 +5,11 @@ import android.os.Bundle;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
+
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
-import de.logerbyte.moneyminder.dialogs.AddCashDialog.AddCashDialog;
-import de.logerbyte.moneyminder.dialogs.editDialog.EditDialog;
+import de.logerbyte.moneyminder.dialogs.addCashDialog.AddCashDialogFragment;
+import de.logerbyte.moneyminder.dialogs.editDialog.EditDialogFragment;
 import de.logerbyte.moneyminder.screens.cashsummary.ViewListener;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
@@ -41,8 +42,8 @@ public class CashSummaryActivity extends FragmentActivity implements
 
     @Override
     public void showEditDialog(DayExpenseViewModel item, AdapterCallBack dialogVmListener) {
-        //  new EditDialog().show(getSupportFragmentManager(), "Base_Dialog");
-        EditDialog baseDialog = new EditDialog();
+        //  new EditDialogFragment().show(getSupportFragmentManager(), "Base_Dialog");
+        EditDialogFragment baseDialog = new EditDialogFragment();
         baseDialog.show(getSupportFragmentManager(), "Edit_Dialog");
         // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
         baseDialog.setCash(item);
@@ -52,7 +53,7 @@ public class CashSummaryActivity extends FragmentActivity implements
     @Override
     public void onCLickFab() {
         AdapterCallBack adapterCallBack = (AdapterCallBack) binding.rvCosts.getAdapter();
-        AddCashDialog cashDialog = new AddCashDialog();
+        AddCashDialogFragment cashDialog = new AddCashDialogFragment();
         cashDialog.setAdapterCallback(adapterCallBack);
         cashDialog.show(getSupportFragmentManager(), ADD_CASH_DIALOG);
     }

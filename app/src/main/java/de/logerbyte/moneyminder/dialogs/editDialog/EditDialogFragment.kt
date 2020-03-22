@@ -4,15 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
+import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
-import de.logerbyte.moneyminder.dialogs.BaseDialog
+import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.DialogViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 
 
-open class EditDialog : BaseDialog() {
+open class EditDialogFragment : BaseDialogFragment() {
 
     lateinit var cashView: View
     lateinit var adapterCallback: AdapterCallBack
@@ -21,11 +22,11 @@ open class EditDialog : BaseDialog() {
     lateinit var editDialogViewModel1: EditDialogViewModel1
 
     // TODO: 2019-11-07 use same for add cash + set name of button generally
-    override fun createContentBinding() {
+    override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
         editDialogViewModel1 = EditDialogViewModel1(this, context, cashViewModel)
         cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }
-        binding.dialogContainer.addView(cashView)
+        viewBinding.dialogContainer.addView(cashView)
         cashViewModel.setCash(cash)
         editDialogViewModel1.setAdapter(adapterCallback)
     }

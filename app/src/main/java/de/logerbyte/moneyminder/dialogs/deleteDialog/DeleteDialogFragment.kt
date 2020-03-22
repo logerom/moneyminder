@@ -4,12 +4,13 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.TextView
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.dialogs.BaseDialog
+import de.logerbyte.moneyminder.databinding.BaseDialogBinding
+import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.DialogViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.BUNDLE_CASHITEM_ID
 
-class DeleteDialog : BaseDialog() {
+class DeleteDialogFragment : BaseDialogFragment() {
     private lateinit var adapterCallback: AdapterCallBack
     var cashItemId: Long = 0L
     lateinit var deleteDialogViewModel: DeleteDialogViewModel
@@ -19,12 +20,12 @@ class DeleteDialog : BaseDialog() {
         return super.onCreateDialog(savedInstanceState)
     }
 
-    override fun createContentBinding() {
+    override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
         deleteDialogViewModel = DeleteDialogViewModel(adapterCallback, cashItemId, this, context)
         val question = TextView(context).apply {
             setText(R.string.question_delete)
         }
-        binding.dialogContainer.addView(question)
+        viewBinding.dialogContainer.addView(question)
     }
 
     override fun setDialogBaseActionButtonListener(): DialogViewListener {
