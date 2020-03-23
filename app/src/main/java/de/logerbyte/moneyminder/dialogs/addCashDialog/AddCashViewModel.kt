@@ -1,7 +1,8 @@
-package de.logerbyte.moneyminder.dialogs.AddCashDialog
+package de.logerbyte.moneyminder.dialogs.addCashDialog
 
 import android.content.Context
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.ErrorHandling
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
@@ -16,6 +17,10 @@ import io.reactivex.schedulers.Schedulers
 
 class AddCashViewModel(dialogCallback: DialogCallback, val context: Context?, val cashViewModel:
 CashViewModel, val listCallback: AdapterCallBack) : BaseDialogViewModel1(dialogCallback) {
+
+    var changedQueryText: String? = ""
+
+    var submittedQueryText = MutableLiveData<String>()
 
     override fun onClickOk(view: View) {
         if (isInputCorrect()) {

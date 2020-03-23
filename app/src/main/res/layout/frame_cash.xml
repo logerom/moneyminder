@@ -56,7 +56,6 @@
                 android:layout_width="124dp"
                 android:layout_height="48dp"
                 android:singleLine="true"
-                android:nextFocusDown="@id/sp_cash_category"
                 android:hint="Ausgabe"
                 android:text="@={viewModel.cashName}" />
         </LinearLayout>
@@ -70,15 +69,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="@string/cashCategory" />
 
-            <Spinner
-                android:id="@+id/sp_cash_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:nextFocusDown="@id/et_cash_amount"
-                android:entries="@{viewModel.cashCategoryList}"
-                android:selectedItemPosition="@={viewModel.cashCategorySelectedItem}" />
+            <include
+                layout="@layout/category_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <LinearLayout
