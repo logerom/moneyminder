@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.dialogs.editDialog
+package de.logerbyte.moneyminder.editDialog
 
 
 interface BseDialogListenerViewModel {

@@ -1,9 +1,9 @@
-package de.logerbyte.moneyminder.dialogs.addCashDialog
+package de.logerbyte.moneyminder.addCashDialog
 
 import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import de.logerbyte.moneyminder.ErrorHandling
+import de.logerbyte.moneyminder.base.ErrorHandling
 import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1

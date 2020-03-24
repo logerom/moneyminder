@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import de.logerbyte.moneyminder.R;
+import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
-import de.logerbyte.moneyminder.dialogs.addCashDialog.AddCashDialogFragment;
-import de.logerbyte.moneyminder.dialogs.editDialog.EditDialogFragment;
+import de.logerbyte.moneyminder.editDialog.EditDialogFragment;
 import de.logerbyte.moneyminder.screens.cashsummary.ViewListener;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;

@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.dialogs.addCashDialog
+package de.logerbyte.moneyminder.addCashDialog
 
 import android.os.Bundle
 import android.view.LayoutInflater

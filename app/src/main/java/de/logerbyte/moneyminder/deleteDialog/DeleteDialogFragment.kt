@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.dialogs.deleteDialog
+package de.logerbyte.moneyminder.deleteDialog
 
 import android.app.Dialog
 import android.os.Bundle
