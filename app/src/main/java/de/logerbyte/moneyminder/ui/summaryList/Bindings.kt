@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.screens.cashsummary.summaryList
+package de.logerbyte.moneyminder.ui.summaryList
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager

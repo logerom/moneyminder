@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".screens.cashsummary.summaryList.CashSummaryActivity">
+            tools:context=".ui.summaryList.CashSummaryActivity">
 
             <Toolbar
                 android:id="@+id/my_toolbar"

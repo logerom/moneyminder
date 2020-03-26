@@ -1,14 +1,15 @@
-package de.logerbyte.moneyminder.screens.cashsummary.summaryList;
+package de.logerbyte.moneyminder.ui.summaryList;
 
 import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.AndroidViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.ObservableField;
-import androidx.lifecycle.AndroidViewModel;
 import de.logerbyte.moneyminder.db.AppDatabaseManager;
 import de.logerbyte.moneyminder.db.expense.Expense;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter;
