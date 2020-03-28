@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
+import de.logerbyte.moneyminder.base.adapter.SingleItemTypeAdapter
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
+import de.logerbyte.moneyminder.databinding.FormviewCategoryItemBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.DialogViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 import kotlinx.android.synthetic.main.category_list.*
+import java.util.*
 
 
 class AddCashDialogFragment : BaseDialogFragment() {
-
-
-    // todo-stewo: 2019-11-26 add cash layout + viewbinding
 
     lateinit var adapterCallback: AdapterCallBack
     private lateinit var addCashViewModel: AddCashViewModel
@@ -38,6 +38,20 @@ class AddCashDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        class CategoryAdapter : SingleItemTypeAdapter<String, FormviewCategoryItemBinding>(R.layout.formview_category_item) {
+            override fun binds(item: String, bindingClass: FormviewCategoryItemBinding) {
+                bindingClass.tvCategoryName.text = item
+            }
+        }
+
+        searchViewList.adapter = CategoryAdapter()
+                .apply { items = Arrays.asList("a", "b", "c") }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -48,8 +62,5 @@ class AddCashDialogFragment : BaseDialogFragment() {
             }
 
         })
-        return view
     }
-
-
 }
