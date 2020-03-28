@@ -52,6 +52,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
 
         searchViewList.adapter = CategoryAdapter()
                 .apply { items = Arrays.asList("a", "b", "c") }
+        // TODO: add categories from db
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
