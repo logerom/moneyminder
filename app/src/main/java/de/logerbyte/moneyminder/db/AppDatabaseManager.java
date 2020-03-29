@@ -6,6 +6,8 @@ import androidx.room.Room;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import de.logerbyte.moneyminder.db.expense.Expense;
 import io.reactivex.Observable;
 
@@ -16,23 +18,28 @@ import io.reactivex.Observable;
 
 public class AppDatabaseManager implements DbHelper{
 
-    private final AppDatabase mAppDatabase;
+    private final ExpenseDatabase mExpenseDatabase;
+
+    @Inject
+    public AppDatabaseManager(ExpenseDatabase expenseDatabase) {
+        this.mExpenseDatabase = expenseDatabase;
+    }
 
     public AppDatabaseManager(Context context) {
-        this.mAppDatabase = Room.databaseBuilder(context, AppDatabase.class, "moneyminder.db")
+        this.mExpenseDatabase = Room.databaseBuilder(context, ExpenseDatabase.class, "moneyminder.db")
                 .addMigrations(DbMigration.MIGRATION_1_2)
                 .build();
     }
 
     @Override
     public Observable<List<Expense>> getAllExpense() {
-        return Observable.fromCallable(() -> mAppDatabase.expenseDao().selectAll());
+        return Observable.fromCallable(() -> mExpenseDatabase.expenseDao().selectAll());
     }
 
     @Override
     public Observable<Boolean> insertCashItemIntoDB(Expense expense) {
         return Observable.fromCallable(()-> {
-            mAppDatabase.expenseDao().insert(expense);
+            mExpenseDatabase.expenseDao().insert(expense);
             return true;
         });
     }
@@ -40,7 +47,7 @@ public class AppDatabaseManager implements DbHelper{
     @Override
     public Observable<Boolean> deleteCashItem(long id) {
         return Observable.fromCallable(() -> {
-            mAppDatabase.expenseDao().delete(id);
+            mExpenseDatabase.expenseDao().delete(id);
             return true;
         });
     }
@@ -48,13 +55,13 @@ public class AppDatabaseManager implements DbHelper{
     @Override
     public Observable<Boolean> updateCashItem(Expense expense) {
         return Observable.fromCallable(() -> {
-            mAppDatabase.expenseDao().update(expense);
+            mExpenseDatabase.expenseDao().update(expense);
             return true;
         });
     }
 
     @Override
     public Observable<List<String>> getCategories() {
-        return Observable.fromCallable(() -> mAppDatabase.expenseDao().selectDistinctCategory());
+        return Observable.fromCallable(() -> mExpenseDatabase.expenseDao().selectDistinctCategory());
     }
 }

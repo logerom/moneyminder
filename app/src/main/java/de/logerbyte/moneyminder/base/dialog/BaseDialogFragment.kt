@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
+import dagger.android.support.DaggerDialogFragment
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 
 
-abstract class BaseDialogFragment : DialogFragment(), DialogCallback {
+abstract class BaseDialogFragment : DaggerDialogFragment(), DialogCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val viewBinding = DataBindingUtil.inflate(inflater, R.layout.base_dialog, container, false)

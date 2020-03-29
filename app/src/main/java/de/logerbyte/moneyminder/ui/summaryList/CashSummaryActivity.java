@@ -3,9 +3,9 @@ package de.logerbyte.moneyminder.ui.summaryList;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import dagger.android.support.DaggerAppCompatActivity;
 import de.logerbyte.moneyminder.R;
 import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment;
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding;
@@ -14,7 +14,7 @@ import de.logerbyte.moneyminder.screens.cashsummary.ViewListener;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
 
-public class CashSummaryActivity extends FragmentActivity implements
+public class CashSummaryActivity extends DaggerAppCompatActivity implements
         DayExpenseViewModel.ActivityListener, ViewListener {
 
     private static final String ADD_CASH_DIALOG = "addCashDialog";

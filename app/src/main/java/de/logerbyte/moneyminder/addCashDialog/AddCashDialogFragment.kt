@@ -17,9 +17,13 @@ import de.logerbyte.moneyminder.viewModels.CashViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.category_list.*
+import javax.inject.Inject
 
 
 class AddCashDialogFragment : BaseDialogFragment() {
+
+    @Inject
+    lateinit var appDatabaseManager: AppDatabaseManager
 
     lateinit var adapterCallback: AdapterCallBack
     private lateinit var addCashViewModel: AddCashViewModel
@@ -48,7 +52,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
         // fixme: RxJava2 for room + need to return boolean?
         // todo move to vm
         // todo dagger
-        AppDatabaseManager(context).categories
+        appDatabaseManager.categories
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { t -> showCategories(t) }

@@ -13,6 +13,7 @@ import de.logerbyte.moneyminder.util.DigitUtil
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
 class AddCashViewModel(
@@ -20,6 +21,9 @@ class AddCashViewModel(
         val context: Context?,
         val cashViewModel: CashViewModel,
         val listCallback: AdapterCallBack) : BaseDialogViewModel1(dialogCallback) {
+
+    @Inject
+    lateinit var appDatabaseManager: AppDatabaseManager
 
     var changedQueryText: String? = ""
 
@@ -39,7 +43,8 @@ class AddCashViewModel(
 
         val expense = Expense(null, cashViewModel.cashName.get(), cashViewModel.cashCategory,
                 cashViewModel.cashDate.get(), cashInEuro)
-        AppDatabaseManager(context)
+
+        appDatabaseManager
                 .insertCashItemIntoDB(expense)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
