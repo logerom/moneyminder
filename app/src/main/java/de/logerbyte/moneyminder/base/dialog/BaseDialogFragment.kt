@@ -20,39 +20,10 @@ abstract class BaseDialogFragment : DialogFragment(), DialogCallback {
         return viewBinding.root
     }
 
-
-//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//        return createDialog()
-//    }
-//
-//    private fun createDialog(): Dialog {
-//        return AlertDialog.Builder(activity).let {
-//            it.setView(initBinding()!!.root)
-//            it.create()
-//        }
-//    }
-
-//    private fun initBinding(): BaseDialogBinding? {
-//        binding = createBinding(R.layout.base_dialog) as BaseDialogBinding
-//        additionalContentViewBinding(viewBinding)
-//        binding!!.dialogViewModelListener = setDialogBaseActionButtonListener()
-//        return binding
-//    }
-
     abstract fun additionalContentViewBinding(viewBinding: BaseDialogBinding)
-
-//    private fun createBinding(layout: Int): ViewDataBinding {
-//        return DataBindingUtil.inflate(activity!!.layoutInflater, layout, null, false)
-//    }
-
     abstract fun setDialogBaseActionButtonListener(): DialogViewListener
 
     override fun dismissDialog() {
         dismiss()
-    }
-
-    interface ViewListener {
-        fun onCLickOK()
-        fun onClickCancel()
     }
 }
