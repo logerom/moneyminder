@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.base.adapter.SingleItemTypeAdapter
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
-import de.logerbyte.moneyminder.databinding.FormviewCategoryItemBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
+import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.DialogViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.viewModels.CashViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.category_list.*
-import java.util.*
 
 
 class AddCashDialogFragment : BaseDialogFragment() {
@@ -44,14 +44,16 @@ class AddCashDialogFragment : BaseDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        class CategoryAdapter : SingleItemTypeAdapter<String, FormviewCategoryItemBinding>(R.layout.formview_category_item) {
-            override fun binds(item: String, bindingClass: FormviewCategoryItemBinding) {
-                bindingClass.tvCategoryName.text = item
-            }
-        }
+        var categories = mutableListOf<String>()
+        // fixme: RxJava2 for room + need to return boolean?
+        // todo move to vm
+        // todo dagger
+        AppDatabaseManager(context).categories
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { t -> showCategories(t) }
 
-        searchViewList.adapter = CategoryAdapter()
-                .apply { items = Arrays.asList("a", "b", "c") }
+
         // TODO: add categories from db
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -63,5 +65,10 @@ class AddCashDialogFragment : BaseDialogFragment() {
             }
 
         })
+    }
+
+    private fun showCategories(categories: List<String>) {
+        searchViewList.adapter = CategoryAdapter()
+                .apply { items = categories as ArrayList }
     }
 }

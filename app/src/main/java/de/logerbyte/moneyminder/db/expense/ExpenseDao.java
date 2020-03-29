@@ -1,12 +1,12 @@
 package de.logerbyte.moneyminder.db.expense;
 
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import java.util.List;
 
 /**
  * Created by logerom on 08.08.18.
@@ -17,6 +17,9 @@ public interface ExpenseDao {
 
     @Query("SELECT * FROM Expense")
     List<Expense> selectAll();
+
+    @Query("SELECT DISTINCT category FROM Expense")
+    List<String> selectDistinctCategory();
 
     @Insert(onConflict = OnConflictStrategy.ROLLBACK)
     void insert(Expense expense);

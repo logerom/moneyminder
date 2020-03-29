@@ -15,8 +15,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class AddCashViewModel(dialogCallback: DialogCallback, val context: Context?, val cashViewModel:
-CashViewModel, val listCallback: AdapterCallBack) : BaseDialogViewModel1(dialogCallback) {
+class AddCashViewModel(
+        dialogCallback: DialogCallback,
+        val context: Context?,
+        val cashViewModel: CashViewModel,
+        val listCallback: AdapterCallBack) : BaseDialogViewModel1(dialogCallback) {
 
     var changedQueryText: String? = ""
 

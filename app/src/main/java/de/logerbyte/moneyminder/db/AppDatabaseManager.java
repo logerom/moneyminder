@@ -2,9 +2,10 @@ package de.logerbyte.moneyminder.db;
 
 import android.content.Context;
 
+import androidx.room.Room;
+
 import java.util.List;
 
-import androidx.room.Room;
 import de.logerbyte.moneyminder.db.expense.Expense;
 import io.reactivex.Observable;
 
@@ -50,5 +51,10 @@ public class AppDatabaseManager implements DbHelper{
             mAppDatabase.expenseDao().update(expense);
             return true;
         });
+    }
+
+    @Override
+    public Observable<List<String>> getCategories() {
+        return Observable.fromCallable(() -> mAppDatabase.expenseDao().selectDistinctCategory());
     }
 }
