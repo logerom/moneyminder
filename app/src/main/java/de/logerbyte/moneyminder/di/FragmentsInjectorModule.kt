@@ -1,10 +1,14 @@
-package de.logerbyte.moneyminder.addCashDialog
+package de.logerbyte.moneyminder.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment
 
 @Module
-abstract class AddCashDialogModule {
+abstract class FragmentsInjectorModule {
+
     @ContributesAndroidInjector
     abstract fun contributesAddCashDialogFragment(): AddCashDialogFragment
+
+
 }

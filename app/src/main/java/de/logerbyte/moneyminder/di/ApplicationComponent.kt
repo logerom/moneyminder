@@ -6,8 +6,6 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import de.logerbyte.moneyminder.App
-import de.logerbyte.moneyminder.addCashDialog.AddCashDialogModule
-import de.logerbyte.moneyminder.ui.summaryList.CashSummaryModule
 import javax.inject.Singleton
 
 @Singleton
@@ -15,8 +13,7 @@ import javax.inject.Singleton
         modules = [
             ApplicationModule::class,
             AndroidSupportInjectionModule::class,
-            AddCashDialogModule::class,
-            CashSummaryModule::class
+            FragmentsInjectorModule::class
         ])
 interface ApplicationComponent : AndroidInjector<App> {
 
