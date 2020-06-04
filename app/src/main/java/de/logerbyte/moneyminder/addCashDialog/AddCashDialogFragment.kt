@@ -36,7 +36,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
     }
 
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
-        addCashViewModel = AddCashViewModel(this, context, cashViewModel, adapterCallback)
+        addCashViewModel = AddCashViewModel(this, context, cashViewModel, adapterCallback, appDatabaseManager)
         val cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }
         viewBinding.dialogContainer.addView(cashView)
@@ -68,6 +68,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
                     newText?.apply {
                         val list = categoryAdapter.originalItems.filter { category -> category.startsWith(this, true) }
                         categoryAdapter.items = list as ArrayList
+                        cashViewModel.cashCategory = newText
                     }
                     return false
                 }
