@@ -1,11 +1,23 @@
 package de.logerbyte.moneyminder.addCashDialog
 
+import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.base.adapter.SingleItemTypeAdapter
 import de.logerbyte.moneyminder.databinding.FormviewCategoryItemBinding
 
-class CategoryAdapter : SingleItemTypeAdapter<String, FormviewCategoryItemBinding>(R.layout.formview_category_item) {
+class CategoryAdapter(private val clickListener: (String) -> Unit) : SingleItemTypeAdapter<String, FormviewCategoryItemBinding>(R.layout.formview_category_item) {
+    var originalItems = listOf("")
+        set(value) {
+            items = value.toMutableList()
+            field = value
+        }
+
     override fun binds(item: String, bindingClass: FormviewCategoryItemBinding) {
         bindingClass.tvCategoryName.text = item
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        super.onBindViewHolder(holder, position)
+        holder.itemView.setOnClickListener { clickListener(items[position]) }
     }
 }

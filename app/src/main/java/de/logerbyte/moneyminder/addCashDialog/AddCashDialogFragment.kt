@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
@@ -29,6 +28,9 @@ class AddCashDialogFragment : BaseDialogFragment() {
     private lateinit var addCashViewModel: AddCashViewModel
     private val cashViewModel = CashViewModel()
 
+    var categories = mutableListOf<String>()
+    lateinit var categoryAdapter: CategoryAdapter
+
     override fun setDialogBaseActionButtonListener(): DialogViewListener {
         return addCashViewModel
     }
@@ -48,31 +50,38 @@ class AddCashDialogFragment : BaseDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var categories = mutableListOf<String>()
         // fixme: RxJava2 for room + need to return boolean?
         // todo move to vm
         // todo dagger
         appDatabaseManager.categories
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { t -> showCategories(t) }
+                .subscribe { categoryList ->
+                    showCategories(categoryList)
+                    categories = categoryList
+                }
 
-
-        // TODO: add categories from db
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-        })
+        // TODO-SW: extract into own compound view
+        searchView.apply {
+            setOnQueryTextListener(object : SearchViewListener() {
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    newText?.apply {
+                        val list = categoryAdapter.originalItems.filter { category -> category.startsWith(this, true) }
+                        categoryAdapter.items = list as ArrayList
+                    }
+                    return false
+                }
+            })
+            isIconified = false
+            setOnCloseListener { true }
+        }
     }
 
     private fun showCategories(categories: List<String>) {
-        searchViewList.adapter = CategoryAdapter()
-                .apply { items = categories as ArrayList }
+        searchViewList.adapter = CategoryAdapter(clickListener = { s -> searchView.setQuery(s, false) })
+                .apply {
+                    originalItems = categories as ArrayList
+                    categoryAdapter = this
+                }
     }
 }
