@@ -72,8 +72,7 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/cashCategory" />
 
-            <include
-                layout="@layout/category_list"
+            <de.logerbyte.moneyminder.base.SearchList
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
