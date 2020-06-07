@@ -23,6 +23,7 @@ open class EditDialogFragment : BaseDialogFragment() {
 
     // TODO: 2019-11-07 use same for add cash + set name of button generally
     // TODO-SW: new categories exist for add cash. But not for edit cash.
+    // Add category list from db
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
         editDialogViewModel1 = EditDialogViewModel1(this, context, cashViewModel)
         cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)

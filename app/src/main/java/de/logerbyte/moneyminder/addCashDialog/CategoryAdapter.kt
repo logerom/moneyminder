@@ -6,7 +6,7 @@ import de.logerbyte.moneyminder.base.adapter.SingleItemTypeAdapter
 import de.logerbyte.moneyminder.databinding.FormviewCategoryItemBinding
 
 class CategoryAdapter(private val clickListener: (String) -> Unit) : SingleItemTypeAdapter<String, FormviewCategoryItemBinding>(R.layout.formview_category_item) {
-    var originalItems = listOf("")
+    var originalItems = ArrayList<String>()
         set(value) {
             items = value.toMutableList()
             field = value

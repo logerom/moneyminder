@@ -39,7 +39,7 @@ class AddCashViewModel(
     private fun saveCashAndReloadList() {
         val cashInEuro = (DigitUtil.commaToDot(cashViewModel.cashAmount.get())).toDouble()
 
-        val expense = Expense(null, cashViewModel.cashName.get(), cashViewModel.cashCategory,
+        val expense = Expense(null, cashViewModel.cashName.get(), cashViewModel.cashCategory.get(),
                 cashViewModel.cashDate.get(), cashInEuro)
 
         appDatabaseManager

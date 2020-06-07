@@ -29,7 +29,7 @@
                 android:id="@+id/et_date"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:afterTextChanged="@{viewModel::onTextChanged}"
+                android:afterTextChanged="@{viewModel::onDateTextChanged}"
                 android:digits="0123456789."
                 android:hint="dd.mm.yy"
                 android:inputType="number"
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="5"
-            android:orientation="horizontal">
+            android:orientation="horizontal">≤
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,9 +72,13 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/cashCategory" />
 
-            <de.logerbyte.moneyminder.base.SearchList
+            // todo-SW: two way binding with attributset
+
+            <de.logerbyte.moneyminder.base.SearchListView
+                android:id="@+id/custom_searchlist"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                searchText="@={viewModel.cashCategory}" />
 
         </LinearLayout>
 

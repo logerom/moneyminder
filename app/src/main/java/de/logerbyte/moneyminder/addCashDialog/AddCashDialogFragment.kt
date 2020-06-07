@@ -15,7 +15,7 @@ import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.category_list.*
+import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
 
 
@@ -27,9 +27,6 @@ class AddCashDialogFragment : BaseDialogFragment() {
     lateinit var adapterCallback: AdapterCallBack
     private lateinit var addCashViewModel: AddCashViewModel
     private val cashViewModel = CashViewModel()
-
-    var categories = mutableListOf<String>()
-    lateinit var categoryAdapter: CategoryAdapter
 
     override fun setDialogBaseActionButtonListener(): DialogViewListener {
         return addCashViewModel
@@ -57,32 +54,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { categoryList ->
-                    showCategories(categoryList)
-                    categories = categoryList
-                }
-
-        // TODO-SW: extract into own compound view
-        searchView.apply {
-            setOnQueryTextListener(object : SearchViewListener() {
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    newText?.apply {
-                        val list = categoryAdapter.originalItems.filter { category -> category.startsWith(this, true) }
-                        categoryAdapter.items = list as ArrayList
-                        cashViewModel.cashCategory = newText
-                    }
-                    return false
-                }
-            })
-            isIconified = false
-            setOnCloseListener { true }
-        }
-    }
-
-    private fun showCategories(categories: List<String>) {
-        searchViewList.adapter = CategoryAdapter(clickListener = { s -> searchView.setQuery(s, false) })
-                .apply {
-                    originalItems = categories as ArrayList
-                    categoryAdapter = this
+                    custom_searchlist.list = categoryList as ArrayList<String>
                 }
     }
 }

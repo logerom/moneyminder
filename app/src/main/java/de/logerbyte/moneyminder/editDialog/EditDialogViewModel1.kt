@@ -19,7 +19,7 @@ class EditDialogViewModel1(dialogCallback: DialogCallback, val context: Context?
 
     override fun onClickOk(view: View) {
         val expenseToUpdate = Expense(cashViewModel.entryId,
-                cashViewModel.cashName.get(), cashViewModel.cashCategory,
+                cashViewModel.cashName.get(), cashViewModel.cashCategory.get(),
                 cashViewModel.cashDate.get(),
                 Double.valueOf(DigitUtil.commaToDot(cashViewModel.cashAmount.get())))
 

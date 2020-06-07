@@ -2,9 +2,7 @@ package de.logerbyte.moneyminder.viewModels
 
 import android.text.Editable
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableInt
 import androidx.lifecycle.ViewModel
-import de.logerbyte.moneyminder.dialogs.DialogCallback
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 
 class CashViewModel() : ViewModel() {
@@ -12,60 +10,47 @@ class CashViewModel() : ViewModel() {
     val cashDate = ObservableField<String>()
     val cashName = ObservableField<String>()
     var cashAmount = ObservableField<String>()
+    var cashCategory = ObservableField<String>("")
 
     var entryId: Long = 0
-    val cashCategoryList = ArrayList(listOf("Essen", "Sonstiges", "Beauty"))
-    lateinit var cashCategory: String
-
-    constructor(dialogCallback: DialogCallback) : this()
+    var newDateText = ""
+    var dateDotDelete = false
 
     fun setCash(item: DayExpenseViewModel) {
         this.entryId = item.entryId
         this.cashDate.set(item.cashDate.get())
         this.cashName.set(item.cashName.get())
         this.cashAmount.set(item.cashInEuro.get())
-        val cashCategory = item.cashCategory.get().orEmpty()
-        this.cashCategory = cashCategory
-        cashCategorySelectedItem.set(cashCategoryList.indexOf(cashCategory))
+        this.cashCategory.set(item.cashCategory.get())
     }
 
-    var newText = ""
-    var dotDelete = false
-
-    var cashCategorySelectedItem = ObservableInt()
-        get() {
-            if (field.get() != -1) cashCategory = cashCategoryList[field.get()]
-            return field
-        }
-
-    fun onTextChanged(s: Editable) {
-        if (dotDelete) {
-            dotDelete = false
+    fun onDateTextChanged(s: Editable) {
+        if (dateDotDelete) {
+            dateDotDelete = false
             return
         }
         // fixme: 02.09.18 make util class with that dot delete logic
 
-        if (s.length < newText.length) {
-            val charAt = newText.toString().get(newText.toString().length - 1)
+        if (s.length < newDateText.length) {
+            val charAt = newDateText.toString().get(newDateText.toString().length - 1)
             if (charAt == '.') {
-                dotDelete = true
+                dateDotDelete = true
                 s.delete(s.toString().length - 1, s.toString().length)
             }
-            newText = s.toString()
+            newDateText = s.toString()
             return
         }
 
         if (s.toString().length == 2 || s.toString().length == 5) {
             s.append(".")
-            newText = s.toString()
+            newDateText = s.toString()
             return
         }
-
-        newText = s.toString()
+        newDateText = s.toString()
     }
 
     fun isAllSet(): Boolean {
-        return !(isSomeElementNull(listOf(cashDate.get(), cashName.get(), cashCategory, cashAmount.get())))
+        return !(isSomeElementNull(listOf(cashDate.get(), cashName.get(), cashCategory.get(), cashAmount.get())))
     }
 
     private fun isSomeElementNull(listOf: List<String?>): Boolean {
