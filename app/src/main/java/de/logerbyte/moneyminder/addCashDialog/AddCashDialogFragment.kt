@@ -53,8 +53,6 @@ class AddCashDialogFragment : BaseDialogFragment() {
         appDatabaseManager.categories
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { categoryList ->
-                    custom_searchlist.list = categoryList as ArrayList<String>
-                }
+                .subscribe { categoryList -> custom_searchlist.list = categoryList as ArrayList<String> }
     }
 }

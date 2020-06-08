@@ -13,9 +13,21 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.lang.Double
 
-class EditDialogViewModel1(dialogCallback: DialogCallback, val context: Context?, val cashViewModel: CashViewModel) : BaseDialogViewModel1
-(dialogCallback) {
+class EditDialogViewModel1(
+        val appDatabaseManager: AppDatabaseManager,
+        dialogCallback: DialogCallback,
+        val context: Context?,
+        val cashViewModel: CashViewModel,
+        val editDialogCallback: EditDialogCallback) : BaseDialogViewModel1(dialogCallback) {
+
     private lateinit var adapterCallBack: AdapterCallBack
+
+    init {
+        appDatabaseManager.categories
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { categoryList -> editDialogCallback.initCategories(categoryList as ArrayList<String>) }
+    }
 
     override fun onClickOk(view: View) {
         val expenseToUpdate = Expense(cashViewModel.entryId,
@@ -23,10 +35,10 @@ class EditDialogViewModel1(dialogCallback: DialogCallback, val context: Context?
                 cashViewModel.cashDate.get(),
                 Double.valueOf(DigitUtil.commaToDot(cashViewModel.cashAmount.get())))
 
-        val appDatabaseManager = AppDatabaseManager(context)
-        appDatabaseManager.updateCashItem(expenseToUpdate).subscribeOn(
-                Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                { aBoolean -> adapterCallBack.onUpdateItem() })
+        appDatabaseManager.updateCashItem(expenseToUpdate)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ aBoolean -> adapterCallBack.onUpdateItem() })
         super.onClickOk(view)
     }
 
