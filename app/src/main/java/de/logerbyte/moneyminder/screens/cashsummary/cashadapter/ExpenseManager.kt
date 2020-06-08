@@ -17,7 +17,9 @@ class ExpenseManager {
         val expenseLimit = 70
     }
 
-
+    // TODO-SW: sort expenses in week
+    // TODO-SW: per week: Ausgaben - Budget - Diff
+    // TODO-SW: at the end: sum of all Ausgaben - Budget - Diff
     fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
 
         var again = true
