@@ -8,12 +8,8 @@ import de.logerbyte.moneyminder.dialogs.DialogCallback
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-class DeleteDialogViewModel(val adapterCallback: AdapterCallBack, val itemIdToDelete: Long, dialogCallback: DialogCallback, val context: Context?) : BaseDialogViewModel1(dialogCallback) {
-    // TODO-sw: proof injection for all uses from appDatabaseManager. At the moment it only works for addCashDialog
-    @Inject
-    lateinit var appDatabaseManager: AppDatabaseManager
+class DeleteDialogViewModel(val appDatabaseManager: AppDatabaseManager, val adapterCallback: AdapterCallBack, val itemIdToDelete: Long, dialogCallback: DialogCallback, val context: Context?) : BaseDialogViewModel1(dialogCallback) {
 
     override fun onClickOk(view: View) {
         super.onClickOk(view)
