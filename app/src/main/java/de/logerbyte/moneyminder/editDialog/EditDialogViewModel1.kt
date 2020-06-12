@@ -23,6 +23,10 @@ class EditDialogViewModel1(
     private lateinit var adapterCallBack: AdapterCallBack
 
     init {
+        loadCategories()
+    }
+
+    private fun loadCategories() {
         appDatabaseManager.categories
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
