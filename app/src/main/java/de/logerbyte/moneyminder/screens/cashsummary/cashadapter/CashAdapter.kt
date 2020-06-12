@@ -1,7 +1,6 @@
 package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
 import de.logerbyte.moneyminder.deleteDialog.DeleteDialogFragment
 import de.logerbyte.moneyminder.util.ConvertUtil
-import de.logerbyte.moneyminder.util.DigitUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
@@ -99,17 +97,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         getItemAtPosition(holder, position)
     }
 
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-        super.onViewRecycled(holder)
-        //        floating = !((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() ==
-//                "diesdas")
-
-        if ((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() == "diesdas") {
-            floating = false
-        }
-
-    }
-
     override fun getItemViewType(position: Int): Int {
         return viewtypeList[position].ordinal
     }
@@ -154,25 +141,11 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         (holder as ViewHolderSummary).binding.vmSummary = week
     }
 
-    private fun aggregateExpenses(week: java.util.ArrayList<DayExpenseViewModel>): Double {
-        var cashSummary = 0.0
-        for (vm in week) {
-            cashSummary += java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
-        }
-        return cashSummary
-    }
-
     private fun initDayItem(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
-        Log.d("Scroll", "Init: ${dayExpenseViewModel.cashDate.get()} visible: ${holder.itemView
-                .visibility == View.VISIBLE}")
-
-
-
         dayExpenseViewModel.setItemListener(this)
         dayExpenseViewModel.setDialogListener(this)
         dayExpenseViewModel.setActivityListener(cashSummaryActivity)
         (holder as ViewHolder).binding.vmCashItem = dayExpenseViewModel
-
     }
 
     fun createViewTypeList(list: ArrayList<WeekSummaryViewModel>) {
