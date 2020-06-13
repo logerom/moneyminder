@@ -97,7 +97,6 @@ class ExpenseManager {
         return expenseDescend
     }
 
-    // TODO-SW: over all budgets
     fun getOverAllBudget(): Int {
         return allWeeks * budget
     }

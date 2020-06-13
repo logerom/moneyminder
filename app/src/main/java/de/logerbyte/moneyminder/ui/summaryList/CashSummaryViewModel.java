@@ -23,8 +23,9 @@ import de.logerbyte.moneyminder.util.DigitUtil;
 public class CashSummaryViewModel extends AndroidViewModel implements CashAdapter.Listener {
 
     CashAdapter cashAdapter;
-    private ObservableField<String> totalExpenses = new ObservableField<>();
+    private ObservableField<Double> totalExpenses = new ObservableField<>();
     private ObservableField<String> totalBudget = new ObservableField<>();
+    private ObservableField<Double> totalSaving = new ObservableField<>();
 
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
@@ -33,15 +34,14 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         super(application);
         cashAdapter = new CashAdapter(new AppDatabaseManager(application));
         cashAdapter.setLisener(this);
-        totalExpenses.set(String.format("%.2f", 0f));
+        totalExpenses.set(0d);
     }
 
     private void addCashToTotal(List<Expense> cashList) {
         totalExpenses.set(DigitUtil.INSTANCE.getCashTotal(cashList));
     }
 
-    public ObservableField<String> getTotalExpenses() {
-        totalExpenses.set(DigitUtil.INSTANCE.dotToComma(totalExpenses.get()));
+    public ObservableField<Double> getTotalExpenses() {
         return totalExpenses;
     }
 
@@ -50,11 +50,16 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
         return totalBudget;
     }
 
+    public ObservableField<Double> getTotalSaving() {
+        totalSaving.set(totalSaving.get());
+        return totalSaving;
+    }
+
     @Override
     public void onLoadedExpenses(@NotNull List<? extends Expense> expenses, int allBudget) {
-        // TODO-SW: add budgets to all summary
         addCashToTotal((List) expenses);
         totalBudget.set(DigitUtil.INSTANCE.doubleToString(allBudget));
+        totalSaving.set(Double.valueOf(allBudget) - totalExpenses.get());
 
     }
 

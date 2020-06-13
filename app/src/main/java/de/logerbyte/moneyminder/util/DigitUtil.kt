@@ -15,15 +15,16 @@ object DigitUtil {
         return commaString.replace(".", ",")
     }
 
-    fun getCashTotal(cashList: List<Expense>): String {
+    fun getCashTotal(cashList: List<Expense>): Double {
         var totalCash = 0.0
         for (expense in cashList) {
             totalCash = totalCash + expense.cashInEuro
         }
-        return doubleToString(totalCash)
+        return totalCash
     }
 
-    fun <T> doubleToString(value: T): String {
+    @JvmStatic
+    fun doubleToString(value: Double): String {
         return String.format(Locale.getDefault(), "%.2f", value)
     }
 }
