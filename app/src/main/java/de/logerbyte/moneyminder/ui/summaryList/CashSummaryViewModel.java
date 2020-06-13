@@ -45,7 +45,8 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     }
 
     @Override
-    public void onLoadedExpenses(@NotNull List<? extends Expense> expenses) {
+    public void onLoadedExpenses(@NotNull List<? extends Expense> expenses, int allBudget) {
+        // TODO-SW: add budgets to all summary
         addCashToTotal((List) expenses);
     }
 

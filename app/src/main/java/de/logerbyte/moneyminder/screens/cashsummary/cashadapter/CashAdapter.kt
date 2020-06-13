@@ -43,6 +43,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     var sdf = SimpleDateFormat("dd.MM.yy")
     private val weeksAndDaysWithExpenses = ArrayList<ArrayList<DayExpenseViewModel>>()
     private lateinit var weeksAndDaysExpense: ArrayList<WeekSummaryViewModel>
+    val expenseManager = ExpenseManager()
 
     private enum class ViewType {
         SUMMARY_LINE,
@@ -66,8 +67,10 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     fun initList(expenses: List<Expense>) {
         val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
         cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
-        mAdapterListener!!.onLoadedExpenses(expenses)
-        weeksAndDaysExpense = ExpenseManager().createWeeksAndDaysExpense(cashList)
+        weeksAndDaysExpense = expenseManager.createWeeksAndDaysExpense(cashList)
+
+        // TODO-SW: add Expnses - Budget - Diff (for all)
+        mAdapterListener!!.onLoadedExpenses(expenses, expenseManager.getOverAllBudget())
         createViewTypeList(weeksAndDaysExpense)
         notifyDataSetChanged()
     }
@@ -188,7 +191,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     interface Listener {
 
-        fun onLoadedExpenses(expenses: List<Expense>)
+        fun onLoadedExpenses(expenses: List<Expense>, allBudget: Int)
     }
 
     protected class ViewHolder(internal var binding: AdapterEntryBinding) : RecyclerView.ViewHolder(binding.root)
