@@ -1,6 +1,7 @@
 package de.logerbyte.moneyminder.util;
 
 import java.util.List;
+import java.util.Locale;
 
 import de.logerbyte.moneyminder.db.expense.Expense;
 
@@ -24,6 +25,11 @@ public class DigitUtil {
         for (Expense expense : cashList) {
             totalCash = totalCash + expense.cashInEuro;
         }
-        return String.format("%.2f", totalCash);
+        return doubleToString(totalCash);
     }
+
+    public static String doubleToString(Double value) {
+        return String.format(Locale.getDefault(), "%.2f", value);
+    }
+
 }

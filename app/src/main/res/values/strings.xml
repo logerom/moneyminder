@@ -9,4 +9,7 @@
     <string name="cash">Cash Amount</string>
     <string name="ok">Ok</string>
     <string name="question_delete">Wirklich löschen?</string>
+    <string name="expense">Ausgaben:</string>
+    <string name="budget">Budget:</string>
+    <string name="saved">Gesparrt:</string>
 </resources>

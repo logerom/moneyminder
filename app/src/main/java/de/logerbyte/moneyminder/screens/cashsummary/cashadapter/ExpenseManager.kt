@@ -10,17 +10,14 @@ import kotlin.collections.ArrayList
 class ExpenseManager {
 
     private var allWeeks = 0
+    val budget = 70
+
     var sdf = SimpleDateFormat("dd.MM.yy")
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
     private var addedExpenseLimitEoverhead = 0.00
 
-    companion object {
-        val expenseLimit = 70
-    }
 
     // TODO-SW: sort expenses in week
-    // TODO-SW: per week: Ausgaben - Budget - Diff
-    // TODO-SW: at the end: sum of all Ausgaben - Budget - Diff
     fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
 
         var again = true
@@ -76,10 +73,10 @@ class ExpenseManager {
     Double, expenseListNaturalOrder: ArrayList<WeekSummaryViewModel>) {
         allWeeks++
         val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
-        val weekSaldo = expenseLimit - expensesOfWeek
-        this.addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
-        // TODO-SW: budget for weksaldo, diff for adddedExpenseLimetOverhead
-        val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, this.addedExpenseLimitEoverhead,
+        val expenseDiff = budget - expensesOfWeek
+        // TODO-SW: for overall end line
+        this.addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + budget - expensesOfWeek
+        val summaryWeek = WeekSummaryViewModel(expensesOfWeek, budget.toDouble(), expenseDiff,
                 subExpenseDays)
         expenseListNaturalOrder.add(summaryWeek)
     }
@@ -107,7 +104,7 @@ class ExpenseManager {
 
     // TODO-SW: over all budgets
     fun getOverAllBudget(): Int {
-        return allWeeks * expenseLimit
+        return allWeeks * budget
     }
 
 }
