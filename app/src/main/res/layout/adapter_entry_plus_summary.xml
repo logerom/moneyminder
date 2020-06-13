@@ -5,6 +5,8 @@
         <variable
             name="vmSummary"
             type="de.logerbyte.moneyminder.screens.cashsummary.cashadapter.WeekSummaryViewModel" />
+
+        <import type="de.logerbyte.moneyminder.util.DigitUtil" />
     </data>
 
         <LinearLayout
@@ -16,33 +18,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Gesamt: "/>
+                android:text="@string/expenseEntryItem" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{vmSummary.cost}"/>
+                android:text="@{DigitUtil.doubleToString(vmSummary.cost)}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Saldo: "/>
+                android:text="@string/budgetEntryItem" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{vmSummary.saldo}"/>
+                android:text="@{DigitUtil.doubleToString(vmSummary.budget)}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Gesparrt: "/>
+                android:text="@string/savedEntryItem" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{vmSummary.saving}"/>
+                android:text="@{DigitUtil.doubleToString(vmSummary.saving)}"
+                android:textColor="@{vmSummary.saving &lt; 0 ? @android:color/holo_red_dark : @android:color/holo_green_dark}" />
         </LinearLayout>
 </layout>

@@ -1,7 +1,6 @@
 package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.db.expense.Expense
 import de.logerbyte.moneyminder.deleteDialog.DeleteDialogFragment
 import de.logerbyte.moneyminder.util.ConvertUtil
-import de.logerbyte.moneyminder.util.DigitUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
@@ -45,6 +43,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     var sdf = SimpleDateFormat("dd.MM.yy")
     private val weeksAndDaysWithExpenses = ArrayList<ArrayList<DayExpenseViewModel>>()
     private lateinit var weeksAndDaysExpense: ArrayList<WeekSummaryViewModel>
+    val expenseManager = ExpenseManager()
 
     private enum class ViewType {
         SUMMARY_LINE,
@@ -68,8 +67,9 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     fun initList(expenses: List<Expense>) {
         val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
         cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
-        mAdapterListener!!.onLoadedExpenses(expenses)
-        weeksAndDaysExpense = ExpenseManager().createWeeksAndDaysExpense(cashList)
+        weeksAndDaysExpense = expenseManager.createWeeksAndDaysExpense(cashList)
+
+        mAdapterListener!!.onLoadedExpenses(expenses, expenseManager.getOverAllBudget())
         createViewTypeList(weeksAndDaysExpense)
         notifyDataSetChanged()
     }
@@ -97,17 +97,6 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         getItemAtPosition(holder, position)
-    }
-
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-        super.onViewRecycled(holder)
-        //        floating = !((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() ==
-//                "diesdas")
-
-        if ((holder is ViewHolder) && holder.binding.vmCashItem!!.cashName.get() == "diesdas") {
-            floating = false
-        }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -154,25 +143,11 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         (holder as ViewHolderSummary).binding.vmSummary = week
     }
 
-    private fun aggregateExpenses(week: java.util.ArrayList<DayExpenseViewModel>): Double {
-        var cashSummary = 0.0
-        for (vm in week) {
-            cashSummary += java.lang.Double.parseDouble(DigitUtil.commaToDot(vm.cashInEuro.get()))
-        }
-        return cashSummary
-    }
-
     private fun initDayItem(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
-        Log.d("Scroll", "Init: ${dayExpenseViewModel.cashDate.get()} visible: ${holder.itemView
-                .visibility == View.VISIBLE}")
-
-
-
         dayExpenseViewModel.setItemListener(this)
         dayExpenseViewModel.setDialogListener(this)
         dayExpenseViewModel.setActivityListener(cashSummaryActivity)
         (holder as ViewHolder).binding.vmCashItem = dayExpenseViewModel
-
     }
 
     fun createViewTypeList(list: ArrayList<WeekSummaryViewModel>) {
@@ -215,7 +190,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     interface Listener {
 
-        fun onLoadedExpenses(expenses: List<Expense>)
+        fun onLoadedExpenses(expenses: List<Expense>, allBudget: Int)
     }
 
     protected class ViewHolder(internal var binding: AdapterEntryBinding) : RecyclerView.ViewHolder(binding.root)

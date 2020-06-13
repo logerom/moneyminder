@@ -9,26 +9,22 @@ import kotlin.collections.ArrayList
 
 class ExpenseManager {
 
-    var sdf = SimpleDateFormat("dd.MM.yy")
-    val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
-    private var addedExpenseLimitEoverhead = 0.00
+    private var allWeeks = 0
+    val budget = 70
 
-    companion object {
-        val expenseLimit = 70
-    }
+    var sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+    val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
+    var firstDate: Date? = null
+    var firstWeek: Int? = null
+    var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
+    val datesToDelete = ArrayList<DayExpenseViewModel>()
+    var subExpenseDays = ArrayList<DayExpenseViewModel>()
+
 
     // TODO-SW: sort expenses in week
-    // TODO-SW: per week: Ausgaben - Budget - Diff
-    // TODO-SW: at the end: sum of all Ausgaben - Budget - Diff
     fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
 
         var again = true
-        var firstDate: Date?
-        var firstWeek: Int? = null
-        var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
-        val datesToDelete = ArrayList<DayExpenseViewModel>()
-        var subExpenseDays = ArrayList<DayExpenseViewModel>()
-
         actualCalendar.clear()
 
         while (again) {
@@ -50,7 +46,7 @@ class ExpenseManager {
                     datesToDelete.add(expense)
                 } else {
                     // no more expense days in this week -> next week + summary line
-                    addExpenseToSummaryWeek(subExpenseDays, addedExpenseLimitEoverhead, expenseListNaturalOrder)
+                    addExpenseToSummaryWeek(subExpenseDays, expenseListNaturalOrder)
                     break
                 }
             }
@@ -60,7 +56,7 @@ class ExpenseManager {
             if (sortedExpenses.isEmpty()) {
                 // is list empty add last remaining expense to week
                 if (subExpenseDays.isNotEmpty()) {
-                    addExpenseToSummaryWeek(subExpenseDays, addedExpenseLimitEoverhead, expenseListNaturalOrder)
+                    addExpenseToSummaryWeek(subExpenseDays, expenseListNaturalOrder)
                 }
                 again = false
             }
@@ -71,12 +67,11 @@ class ExpenseManager {
         return descendWeekExpenses(expenseListNaturalOrder)
     }
 
-    private fun addExpenseToSummaryWeek(subExpenseDays: ArrayList<DayExpenseViewModel>, addedExpenseLimitEoverhead:
-    Double, expenseListNaturalOrder: ArrayList<WeekSummaryViewModel>) {
+    private fun addExpenseToSummaryWeek(subExpenseDays: ArrayList<DayExpenseViewModel>, expenseListNaturalOrder: ArrayList<WeekSummaryViewModel>) {
+        allWeeks++
         val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
-        val weekSaldo = expenseLimit - expensesOfWeek
-        this.addedExpenseLimitEoverhead = addedExpenseLimitEoverhead + expenseLimit - expensesOfWeek
-        val summaryWeek = WeekSummaryViewModel(expensesOfWeek, weekSaldo, this.addedExpenseLimitEoverhead,
+        val expenseDiff = budget - expensesOfWeek
+        val summaryWeek = WeekSummaryViewModel(expensesOfWeek, budget.toDouble(), expenseDiff,
                 subExpenseDays)
         expenseListNaturalOrder.add(summaryWeek)
     }
@@ -102,4 +97,7 @@ class ExpenseManager {
         return expenseDescend
     }
 
+    fun getOverAllBudget(): Int {
+        return allWeeks * budget
+    }
 }

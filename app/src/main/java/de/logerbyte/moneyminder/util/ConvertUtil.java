@@ -18,7 +18,7 @@ public class ConvertUtil {
 
         for (Expense expense :expenses) {
             DayExpenseViewModel item = new DayExpenseViewModel(expense.id, expense.cashDate,
-                    expense.cashName, expense.category, DigitUtil.dotToComma(String.valueOf(expense.cashInEuro)));
+                    expense.cashName, expense.category, DigitUtil.INSTANCE.dotToComma(String.valueOf(expense.cashInEuro)));
             dayExpenseViewModels.add(item);
         }
         return dayExpenseViewModels;

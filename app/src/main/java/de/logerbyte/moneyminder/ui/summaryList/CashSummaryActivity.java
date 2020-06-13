@@ -26,6 +26,11 @@ public class CashSummaryActivity extends DaggerAppCompatActivity implements
         super.onCreate(savedInstanceState);
         bindViewModel();
         bindView();
+        initActionBar();
+    }
+
+    private void initActionBar() {
+        // TODO-SW: add menu item with budget
         setActionBar(findViewById(R.id.my_toolbar));
     }
 
