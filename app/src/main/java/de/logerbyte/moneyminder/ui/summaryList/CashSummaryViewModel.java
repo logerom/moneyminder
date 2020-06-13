@@ -24,6 +24,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
 
     CashAdapter cashAdapter;
     private ObservableField<String> totalExpenses = new ObservableField<>();
+    private ObservableField<String> totalBudget = new ObservableField<>();
 
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
@@ -36,18 +37,25 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
     }
 
     private void addCashToTotal(List<Expense> cashList) {
-        totalExpenses.set(DigitUtil.getCashTotal(cashList));
+        totalExpenses.set(DigitUtil.INSTANCE.getCashTotal(cashList));
     }
 
     public ObservableField<String> getTotalExpenses() {
-        totalExpenses.set(DigitUtil.dotToComma(totalExpenses.get()));
+        totalExpenses.set(DigitUtil.INSTANCE.dotToComma(totalExpenses.get()));
         return totalExpenses;
+    }
+
+    public ObservableField<String> getTotalBudget() {
+        totalBudget.set(DigitUtil.INSTANCE.dotToComma(totalBudget.get()));
+        return totalBudget;
     }
 
     @Override
     public void onLoadedExpenses(@NotNull List<? extends Expense> expenses, int allBudget) {
         // TODO-SW: add budgets to all summary
         addCashToTotal((List) expenses);
+        totalBudget.set(DigitUtil.INSTANCE.doubleToString(allBudget));
+
     }
 
     void setCashSummaryActivity(DayExpenseViewModel.ActivityListener cashSummaryActivity) {

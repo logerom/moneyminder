@@ -69,7 +69,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
         cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
         weeksAndDaysExpense = expenseManager.createWeeksAndDaysExpense(cashList)
 
-        // TODO-SW: add Expnses - Budget - Diff (for all)
+        // TODO-SW: get over all budget - expenses
         mAdapterListener!!.onLoadedExpenses(expenses, expenseManager.getOverAllBudget())
         createViewTypeList(weeksAndDaysExpense)
         notifyDataSetChanged()
