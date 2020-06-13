@@ -12,7 +12,7 @@ class ExpenseManager {
     private var allWeeks = 0
     val budget = 70
 
-    var sdf = SimpleDateFormat("dd.MM.yy")
+    var sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
 
 
