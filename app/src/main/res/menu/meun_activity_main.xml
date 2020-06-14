@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/budget"
+        android:title="budget_item"
         android:icon="@android:drawable/ic_menu_info_details"
-        android:title="budget"
         app:showAsAction="always" />
 </menu>
