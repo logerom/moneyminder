@@ -24,7 +24,7 @@ public class CashSummaryViewModel extends AndroidViewModel implements CashAdapte
 
     CashAdapter cashAdapter;
     private ObservableField<Double> totalExpenses = new ObservableField<>();
-    private ObservableField<String> totalBudget = new ObservableField<>();
+    private ObservableField<String> totalBudget = new ObservableField<>("0,00");
     private ObservableField<Double> totalSaving = new ObservableField<>();
 
 

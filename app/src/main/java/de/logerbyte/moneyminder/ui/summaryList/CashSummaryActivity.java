@@ -1,7 +1,10 @@
 package de.logerbyte.moneyminder.ui.summaryList;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -29,9 +32,18 @@ public class CashSummaryActivity extends DaggerAppCompatActivity implements
         initActionBar();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.meun_activity_main, menu);
+        return true;
+    }
+
     private void initActionBar() {
         // TODO-SW: add menu item with budget
-        setActionBar(findViewById(R.id.my_toolbar));
+        Toolbar tb = findViewById(R.id.my_toolbar);
+        tb.inflateMenu(R.menu.meun_activity_main);
+        setSupportActionBar(tb);
     }
 
     private void bindViewModel() {
