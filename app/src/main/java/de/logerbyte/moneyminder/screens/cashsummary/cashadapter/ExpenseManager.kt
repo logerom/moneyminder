@@ -16,14 +16,13 @@ class ExpenseManager {
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
     var firstDate: Date? = null
     var firstWeek: Int? = null
-    var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
-    val datesToDelete = ArrayList<DayExpenseViewModel>()
-    var subExpenseDays = ArrayList<DayExpenseViewModel>()
 
 
     // TODO-SW: sort expenses in week
     fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
-
+        var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
+        val datesToDelete = ArrayList<DayExpenseViewModel>()
+        var subExpenseDays = ArrayList<DayExpenseViewModel>()
         var again = true
         actualCalendar.clear()
 

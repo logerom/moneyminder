@@ -35,14 +35,14 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
     lateinit var attechedActivity: FragmentActivity
     private val viewtypeList = ArrayList<ViewType>()
     private val calendar: Calendar
-    private var cashList = ArrayList<DayExpenseViewModel>()
+    private var viewModelCashItems = ArrayList<DayExpenseViewModel>()
     private var layoutInflater: LayoutInflater? = null
     private var mAdapterListener: Listener? = null
     private var cashSummaryActivity: DayExpenseViewModel.ActivityListener? = null
     private val dateMap = HashMap<Date, DayExpenseViewModel>()
     var sdf = SimpleDateFormat("dd.MM.yy")
     private val weeksAndDaysWithExpenses = ArrayList<ArrayList<DayExpenseViewModel>>()
-    private lateinit var weeksAndDaysExpense: ArrayList<WeekSummaryViewModel>
+    private lateinit var daysWithWeekSummaryViewModelList: ArrayList<WeekSummaryViewModel>
     val expenseManager = ExpenseManager()
 
     private enum class ViewType {
@@ -66,11 +66,11 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     fun initList(expenses: List<Expense>) {
         val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
-        cashList = ConvertUtil.expensesToCashItems(sortedExpenses)
-        weeksAndDaysExpense = expenseManager.createWeeksAndDaysExpense(cashList)
+        viewModelCashItems = ConvertUtil.expensesToViewModelCashItems(sortedExpenses)
+        daysWithWeekSummaryViewModelList = expenseManager.createWeeksAndDaysExpense(viewModelCashItems)
 
         mAdapterListener!!.onLoadedExpenses(expenses, expenseManager.getOverAllBudget())
-        createViewTypeList(weeksAndDaysExpense)
+        createViewTypeList(daysWithWeekSummaryViewModelList)
         notifyDataSetChanged()
     }
 
@@ -109,7 +109,7 @@ class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : Recycler
 
     private fun getItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
         var itemPosition = -1
-        for (weekSummary in weeksAndDaysExpense) {
+        for (weekSummary in daysWithWeekSummaryViewModelList) {
             val dayList = weekSummary.dayExpense
 
             // days

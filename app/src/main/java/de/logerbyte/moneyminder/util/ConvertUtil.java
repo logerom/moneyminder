@@ -13,7 +13,7 @@ import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewMo
 // fixme: 18.09.18 that are not an util
 public class ConvertUtil {
 
-    public static ArrayList<DayExpenseViewModel> expensesToCashItems(List<Expense> expenses) {
+    public static ArrayList<DayExpenseViewModel> expensesToViewModelCashItems(List<Expense> expenses) {
         ArrayList<DayExpenseViewModel> dayExpenseViewModels = new ArrayList<>();
 
         for (Expense expense :expenses) {
