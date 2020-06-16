@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import de.logerbyte.moneyminder.db.AppDatabaseManager;
-import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.data.db.AppDatabaseManager;
+import de.logerbyte.moneyminder.data.db.expense.Expense;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter;
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.util.DigitUtil;

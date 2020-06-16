@@ -2,8 +2,8 @@ package de.logerbyte.moneyminder.editDialog
 
 import android.content.Context
 import android.view.View
-import de.logerbyte.moneyminder.db.AppDatabaseManager
-import de.logerbyte.moneyminder.db.expense.Expense
+import de.logerbyte.moneyminder.data.db.AppDatabaseManager
+import de.logerbyte.moneyminder.data.db.expense.Expense
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
 import de.logerbyte.moneyminder.dialogs.DialogCallback
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack

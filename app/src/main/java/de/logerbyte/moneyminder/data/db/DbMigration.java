@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.db;
+package de.logerbyte.moneyminder.data.db;
 
 import androidx.annotation.NonNull;
 import androidx.room.migration.Migration;

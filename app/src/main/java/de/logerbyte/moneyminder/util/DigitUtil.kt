@@ -1,6 +1,6 @@
 package de.logerbyte.moneyminder.util
 
-import de.logerbyte.moneyminder.db.expense.Expense
+import de.logerbyte.moneyminder.data.db.expense.Expense
 import java.util.*
 
 /**

@@ -10,7 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
+import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment
+import de.logerbyte.moneyminder.data.SharedPrefManager
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuBudgetBinding
 import de.logerbyte.moneyminder.editDialog.EditDialogFragment
@@ -23,11 +25,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewListener {
+    private lateinit var popUpWindow: PopupWindow
     private var cashSummaryViewModel: CashSummaryViewModel? = null
     private var binding: ActivityMainBinding? = null
 
     @Inject
     lateinit var menu: MenuVm
+
+    @Inject
+    lateinit var sharedPrefManager: SharedPrefManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +41,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
         bindViewModel()
         bindView()
         initActionBar()
-        initMenu()
-    }
-
-    private fun initMenu() {
-        val menuBudgetBinding = MenuBudgetBinding.inflate(layoutInflater)
-        menuBudgetBinding.vm = menu
-        // TODO-SW: does i neet android provider
+        initPopUp()
     }
 
     private fun initActionBar() {
@@ -73,7 +73,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.budget -> {
-                showPopUp()
+                popUpWindow.showAsDropDown(my_toolbar, 0, 0, Gravity.END)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -81,12 +81,19 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
         }
     }
 
-    private fun showPopUp() {
+    private fun initPopUp() {
         val popUpView = layoutInflater.inflate(R.layout.menu_budget, null)
-        val popup = PopupWindow(popUpView, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
-        popup.showAsDropDown(my_toolbar, 0, 0, Gravity.END)
-        // TODO-SW: view binding for menu item
-        // TODO-SW: add budget to shared pref
+        MenuBudgetBinding.bind(popUpView).apply { vm = menu }
+
+        popUpWindow = PopupWindow(popUpView, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true).let {
+            it.setOnDismissListener { onMenuDismissed() }
+            it
+        }
+    }
+
+    private fun onMenuDismissed() {
+        // TODO-SW: move to business logic (VM?)
+        sharedPrefManager.writeString(SHARED_PREF_MENU_BUDGET, menu.text.get())
     }
 
     private fun bindViewModel() {

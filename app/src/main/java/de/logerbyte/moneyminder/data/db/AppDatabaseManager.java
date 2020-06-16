@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.db;
+package de.logerbyte.moneyminder.data.db;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.data.db.expense.Expense;
 import io.reactivex.Observable;
 
 /**

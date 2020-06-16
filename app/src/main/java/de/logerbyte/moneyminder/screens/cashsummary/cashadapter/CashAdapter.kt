@@ -8,10 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
+import de.logerbyte.moneyminder.data.db.AppDatabaseManager
+import de.logerbyte.moneyminder.data.db.expense.Expense
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
-import de.logerbyte.moneyminder.db.AppDatabaseManager
-import de.logerbyte.moneyminder.db.expense.Expense
 import de.logerbyte.moneyminder.deleteDialog.DeleteDialogFragment
 import de.logerbyte.moneyminder.util.ConvertUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
