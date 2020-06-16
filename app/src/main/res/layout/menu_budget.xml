@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="wrap_content"
-    android:background="@color/colorAccent">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="wrap_content"
+    <data>
+
+        <variable
+            name="vm"
+            type="de.logerbyte.moneyminder.menu.MenuVm" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="Budget:" />
+        android:background="@color/colorAccent">
 
-    <EditText
-        android:id="@+id/value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/label"
-        android:hint="value" />
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Budget:" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/label"
+            app:etTextChangeListener="@{vm}"
+            android:hint="value" />
+    </RelativeLayout>
+</layout>

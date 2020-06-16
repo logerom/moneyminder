@@ -12,26 +12,56 @@ import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
+import de.logerbyte.moneyminder.databinding.MenuBudgetBinding
 import de.logerbyte.moneyminder.editDialog.EditDialogFragment
+import de.logerbyte.moneyminder.menu.MenuVm
 import de.logerbyte.moneyminder.screens.cashsummary.ViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel.ActivityListener
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewListener {
     private var cashSummaryViewModel: CashSummaryViewModel? = null
     private var binding: ActivityMainBinding? = null
+
+    @Inject
+    lateinit var menu: MenuVm
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindViewModel()
         bindView()
         initActionBar()
+        initMenu()
+    }
+
+    private fun initMenu() {
+        val menuBudgetBinding = MenuBudgetBinding.inflate(layoutInflater)
+        menuBudgetBinding.vm = menu
+        // TODO-SW: does i neet android provider
     }
 
     private fun initActionBar() {
         my_toolbar.inflateMenu(R.menu.meun_activity_main)
         setSupportActionBar(my_toolbar)
+    }
+
+    override fun showEditDialog(item: DayExpenseViewModel, dialogVmListener: AdapterCallBack) { //  new EditDialogFragment().show(getSupportFragmentManager(), "Base_Dialog");
+        val baseDialog = EditDialogFragment()
+        baseDialog.show(supportFragmentManager, "Edit_Dialog")
+        // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
+        baseDialog.cash = item
+        baseDialog.adapterCallback = dialogVmListener
+    }
+
+    override fun onCLickFab() {
+        val adapterCallBack = binding!!.rvCosts.adapter as AdapterCallBack?
+        val cashDialog = AddCashDialogFragment()
+        cashDialog.adapterCallback = adapterCallBack!!
+        cashDialog.show(supportFragmentManager, ADD_CASH_DIALOG)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -60,30 +90,16 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     }
 
     private fun bindViewModel() {
+        // TODO-SW: provide vm with dagger
         cashSummaryViewModel = ViewModelProviders.of(this).get(CashSummaryViewModel::class.java)
         cashSummaryViewModel!!.setCashSummaryActivity(this)
     }
-
     private fun bindView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding?.viewModel = cashSummaryViewModel
         binding?.viewListener = this
     }
 
-    override fun showEditDialog(item: DayExpenseViewModel, dialogVmListener: AdapterCallBack) { //  new EditDialogFragment().show(getSupportFragmentManager(), "Base_Dialog");
-        val baseDialog = EditDialogFragment()
-        baseDialog.show(supportFragmentManager, "Edit_Dialog")
-        // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
-        baseDialog.cash = item
-        baseDialog.adapterCallback = dialogVmListener
-    }
-
-    override fun onCLickFab() {
-        val adapterCallBack = binding!!.rvCosts.adapter as AdapterCallBack?
-        val cashDialog = AddCashDialogFragment()
-        cashDialog.adapterCallback = adapterCallBack!!
-        cashDialog.show(supportFragmentManager, ADD_CASH_DIALOG)
-    }
 
     companion object {
         private const val ADD_CASH_DIALOG = "addCashDialog"
