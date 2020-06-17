@@ -1,6 +1,7 @@
 package de.logerbyte.moneyminder.util
 
-import de.logerbyte.moneyminder.db.expense.Expense
+import androidx.databinding.InverseMethod
+import de.logerbyte.moneyminder.data.db.expense.Expense
 import java.util.*
 
 /**
@@ -27,4 +28,13 @@ object DigitUtil {
     fun doubleToString(value: Double): String {
         return String.format(Locale.getDefault(), "%.2f", value)
     }
+
+    @JvmStatic
+    @InverseMethod("stringToInt")
+    fun IntToString(value: Int): String {
+        return value.toString()
+    }
+
+    @JvmStatic
+    fun stringToInt(value: String) = if (value == "") 0 else value.toInt()
 }

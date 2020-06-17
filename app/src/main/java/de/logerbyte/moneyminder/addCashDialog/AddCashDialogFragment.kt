@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
+import de.logerbyte.moneyminder.data.db.AppDatabaseManager
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
-import de.logerbyte.moneyminder.db.AppDatabaseManager
 import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.DialogViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack

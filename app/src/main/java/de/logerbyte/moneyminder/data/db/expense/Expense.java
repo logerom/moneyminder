@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.db.expense;
+package de.logerbyte.moneyminder.data.db.expense;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

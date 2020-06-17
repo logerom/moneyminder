@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.db;
+package de.logerbyte.moneyminder.data.db;
 
 import android.content.Context;
 
@@ -7,15 +7,16 @@ import androidx.room.Room;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
-import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.data.db.expense.Expense;
 import io.reactivex.Observable;
 
 /**
  * Created by logerom on 08.08.18.
  */
 
-
+@Singleton
 public class AppDatabaseManager implements DbHelper{
 
     private final ExpenseDatabase mExpenseDatabase;

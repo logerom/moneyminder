@@ -1,8 +1,8 @@
-package de.logerbyte.moneyminder.db;
+package de.logerbyte.moneyminder.data.db;
 
 import java.util.List;
 
-import de.logerbyte.moneyminder.db.expense.Expense;
+import de.logerbyte.moneyminder.data.db.expense.Expense;
 import io.reactivex.Observable;
 
 /**
