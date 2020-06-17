@@ -5,6 +5,8 @@
         <variable
             name="vm"
             type="de.logerbyte.moneyminder.menu.MenuVm" />
+
+        <import type="de.logerbyte.moneyminder.util.DigitUtil" />
     </data>
 
     <RelativeLayout
@@ -24,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/label"
-            android:text="@={vm.text}"
+            android:text="@={DigitUtil.IntToString(vm.budget)}"
             android:hint="value" />
     </RelativeLayout>
 </layout>

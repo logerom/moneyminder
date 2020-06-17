@@ -1,25 +1,34 @@
 package de.logerbyte.moneyminder.screens.cashsummary.cashadapter
 
+import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
+import de.logerbyte.moneyminder.data.SharedPrefManager
 import de.logerbyte.moneyminder.util.DigitUtil
 import java.lang.Double.parseDouble
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.collections.ArrayList
 
-
-class ExpenseManager {
+@Singleton
+class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManager) {
 
     private var allWeeks = 0
-    val budget = 70
+    var budget: Int = 0
 
     var sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
     var firstDate: Date? = null
     var firstWeek: Int? = null
-
-
     // TODO-SW: sort expenses in week
+
+    init {
+        loadBudgetFromSharedPref()
+    }
+
     fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
+        val sortedExpensesCopy = sortedExpenses.toMutableList()
         var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
         val datesToDelete = ArrayList<DayExpenseViewModel>()
         var subExpenseDays = ArrayList<DayExpenseViewModel>()
@@ -28,9 +37,9 @@ class ExpenseManager {
 
         while (again) {
 
-            for (expense: DayExpenseViewModel in sortedExpenses) {
+            for (expense: DayExpenseViewModel in sortedExpensesCopy) {
                 // starting week/expense which is use to compare with other expenses
-                if (sortedExpenses.indexOf(expense) == 0) {
+                if (sortedExpensesCopy.indexOf(expense) == 0) {
                     firstDate = getDateFromViewModel(expense)
                     actualCalendar.time = firstDate
                     firstWeek = actualCalendar.get(Calendar.WEEK_OF_YEAR)
@@ -50,9 +59,9 @@ class ExpenseManager {
                 }
             }
 
-            sortedExpenses.removeAll(datesToDelete)
+            sortedExpensesCopy.removeAll(datesToDelete)
 
-            if (sortedExpenses.isEmpty()) {
+            if (sortedExpensesCopy.isEmpty()) {
                 // is list empty add last remaining expense to week
                 if (subExpenseDays.isNotEmpty()) {
                     addExpenseToSummaryWeek(subExpenseDays, expenseListNaturalOrder)
@@ -64,6 +73,10 @@ class ExpenseManager {
 
         }
         return descendWeekExpenses(expenseListNaturalOrder)
+    }
+
+    fun loadBudgetFromSharedPref() {
+        budget = sharedPrefManager.getSharedPrefInt(SHARED_PREF_MENU_BUDGET)
     }
 
     private fun addExpenseToSummaryWeek(subExpenseDays: ArrayList<DayExpenseViewModel>, expenseListNaturalOrder: ArrayList<WeekSummaryViewModel>) {

@@ -7,12 +7,12 @@ import javax.inject.Singleton
 @Singleton
 class SharedPrefManager @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
-    fun writeString(key: String, value: String?) {
+    fun writeSharedPrefInt(key: String, value: Int) {
         sharedPreferences.edit().apply {
-            putString(key, value)
+            putInt(key, value)
             apply()
         }
     }
 
-    fun getSharedPrefString(key: String) = sharedPreferences.getString(key, "")
+    fun getSharedPrefInt(key: String) = sharedPreferences.getInt(key, 0)
 }

@@ -6,10 +6,14 @@ import de.logerbyte.moneyminder.data.SharedPrefManager
 import javax.inject.Inject
 
 
-class MenuVm @Inject constructor(private val sharedPrefManager: SharedPrefManager) {
-    var text = ObservableField<String>()
+class MenuVm @Inject constructor(sharedPrefManager: SharedPrefManager) {
+    var budget = ObservableField<Int>()
+
+    fun budget(value: String) {
+        budget.set(value.toInt())
+    }
 
     init {
-        text.set(sharedPrefManager.getSharedPrefString(SHARED_PREF_MENU_BUDGET))
+        budget.set(sharedPrefManager.getSharedPrefInt(SHARED_PREF_MENU_BUDGET))
     }
 }

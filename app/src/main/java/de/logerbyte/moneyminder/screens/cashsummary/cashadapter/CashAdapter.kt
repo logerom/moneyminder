@@ -28,7 +28,11 @@ import kotlin.collections.HashMap
 
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
-class CashAdapter @Inject constructor(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
+class CashAdapter @Inject constructor(
+        private val appDatabaseManager: AppDatabaseManager,
+        private val expenseManager: ExpenseManager
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
+
     var dependencyView: View? = null
     var floatingDepedencyViewID = 0
     lateinit var recView: RecyclerView
@@ -44,7 +48,6 @@ class CashAdapter @Inject constructor(private val appDatabaseManager: AppDatabas
     var sdf = SimpleDateFormat("dd.MM.yy")
     private val weeksAndDaysWithExpenses = ArrayList<ArrayList<DayExpenseViewModel>>()
     private lateinit var daysWithWeekSummaryViewModelList: ArrayList<WeekSummaryViewModel>
-    val expenseManager = ExpenseManager()
 
     private enum class ViewType {
         SUMMARY_LINE,
@@ -68,11 +71,15 @@ class CashAdapter @Inject constructor(private val appDatabaseManager: AppDatabas
     fun initList(expenses: List<Expense>) {
         val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
         viewModelCashItems = ConvertUtil.expensesToViewModelCashItems(sortedExpenses)
-        daysWithWeekSummaryViewModelList = expenseManager.createWeeksAndDaysExpense(viewModelCashItems)
+        recreateList()
 
         mAdapterListener!!.onLoadedExpenses(expenses, expenseManager.getOverAllBudget())
         createViewTypeList(daysWithWeekSummaryViewModelList)
         notifyDataSetChanged()
+    }
+
+    private fun recreateList() {
+        daysWithWeekSummaryViewModelList = expenseManager.createWeeksAndDaysExpense(viewModelCashItems)
     }
 
 
@@ -126,7 +133,6 @@ class CashAdapter @Inject constructor(private val appDatabaseManager: AppDatabas
                 initCashSummaryItem(weekSummary, viewHolder)
             }
         }
-
     }
 
     private fun layoutSummaryLine(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -187,6 +193,13 @@ class CashAdapter @Inject constructor(private val appDatabaseManager: AppDatabas
 
     fun setActivityListener(cashSummaryActivity: DayExpenseViewModel.ActivityListener) {
         this.cashSummaryActivity = cashSummaryActivity
+    }
+
+    fun onBudgetUpdated() {
+        expenseManager.loadBudgetFromSharedPref()
+        recreateList()
+        this.notifyDataSetChanged()
+        // TODO-SW: update list after new budget set
     }
 
     interface Listener {
