@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
@@ -26,8 +25,10 @@ import javax.inject.Inject
 
 class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewListener {
     private lateinit var popUpWindow: PopupWindow
-    private var cashSummaryViewModel: CashSummaryViewModel? = null
     private var binding: ActivityMainBinding? = null
+
+    @Inject
+    lateinit var cashSummaryViewModel: CashSummaryViewModel
 
     @Inject
     lateinit var menu: MenuVm
@@ -97,8 +98,6 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     }
 
     private fun bindViewModel() {
-        // TODO-SW: provide vm with dagger
-        cashSummaryViewModel = ViewModelProviders.of(this).get(CashSummaryViewModel::class.java)
         cashSummaryViewModel!!.setCashSummaryActivity(this)
     }
     private fun bindView() {

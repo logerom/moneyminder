@@ -18,6 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -27,7 +28,7 @@ import kotlin.collections.HashMap
 
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
-class CashAdapter(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
+class CashAdapter @Inject constructor(private val appDatabaseManager: AppDatabaseManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
     var dependencyView: View? = null
     var floatingDepedencyViewID = 0
     lateinit var recView: RecyclerView
