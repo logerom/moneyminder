@@ -94,6 +94,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
 
     private fun onMenuDismissed() {
         // TODO-SW: move to business logic (VM?)
+        // TODO-SW: update total savings 
         menu.budget.get()?.apply {
             sharedPrefManager.writeSharedPrefInt(SHARED_PREF_MENU_BUDGET, this)
         }

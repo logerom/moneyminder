@@ -14,20 +14,26 @@ import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewMo
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
+import javax.inject.Named
 
 
-open class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
-
-    lateinit var cashView: View
-    lateinit var adapterCallback: AdapterCallBack
-    lateinit var cash: DayExpenseViewModel
-    val cashViewModel = CashViewModel()
-    lateinit var editDialogViewModel1: EditDialogViewModel1
+class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
 
     @Inject
     lateinit var appDatabaseManager: AppDatabaseManager
 
+    @Inject
+    @Named("Date")
+    lateinit var date: String
+
+    lateinit var cashView: View
+    lateinit var adapterCallback: AdapterCallBack
+    lateinit var cash: DayExpenseViewModel
+    lateinit var cashViewModel: CashViewModel
+    lateinit var editDialogViewModel1: EditDialogViewModel1
+
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
+        cashViewModel = CashViewModel(date)
         editDialogViewModel1 = EditDialogViewModel1(appDatabaseManager, this, context, cashViewModel, this)
         cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }
