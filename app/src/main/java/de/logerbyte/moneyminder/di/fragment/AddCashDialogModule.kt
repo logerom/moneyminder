@@ -1,28 +1,25 @@
 package de.logerbyte.moneyminder.di.fragment
 
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import dagger.Module
+import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment
+import de.logerbyte.moneyminder.viewModels.CashViewModel
 
-@Module(includes = [AddCashDialogModule.AddCashDialogBinds::class])
-class AddCashDialogModule {
-//    @Provides
-//    fun provideAddCashDialogViewModel(
-//            factory: ViewModelProvider.Factory,
-//            injector: AddCashDialogFragment
-//    ) = ViewModelProviders.of(injector, factory).get(CashViewModel::class.java)
-//
-//    @Provides
-//    @IntoMap
-//    @ViewModelKey(CashViewModel::class)
-//    fun provideCashSummaryViewModel(@Named("Date") date: String): ViewModel = CashViewModel(date)
-//
-    // TODO-SW: sw factory for cashviewmodel
+@Module
+abstract class AddCashDialogModule {
+
+    @ContributesAndroidInjector(modules = [InjectViewModel::class])
+    abstract fun addCashDialogFragmet(): AddCashDialogFragment
 
     @Module
-    abstract class AddCashDialogBinds {
-        //    // TODO-SW: Scoping dagger android subcomponents
-        @ContributesAndroidInjector()
-        abstract fun addCashDialogFragmet(): AddCashDialogFragment
+    class InjectViewModel {
+        @Provides
+        fun provideAddCashDialogViewModel(
+                factory: ViewModelProvider.Factory,
+                injector: AddCashDialogFragment
+        ) = ViewModelProviders.of(injector, factory).get(CashViewModel::class.java)
     }
 }

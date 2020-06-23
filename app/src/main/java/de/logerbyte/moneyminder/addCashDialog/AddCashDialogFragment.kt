@@ -17,7 +17,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
-import javax.inject.Named
 
 
 class AddCashDialogFragment : BaseDialogFragment() {
@@ -26,11 +25,10 @@ class AddCashDialogFragment : BaseDialogFragment() {
     lateinit var appDatabaseManager: AppDatabaseManager
 
     @Inject
-    @Named("Date")
-    lateinit var date: String
     lateinit var cashViewModel: CashViewModel
 
     lateinit var adapterCallback: AdapterCallBack
+
     private lateinit var addCashViewModel: AddCashViewModel
 
     override fun setDialogBaseActionButtonListener(): DialogViewListener {
@@ -38,7 +36,6 @@ class AddCashDialogFragment : BaseDialogFragment() {
     }
 
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
-        cashViewModel = CashViewModel(date)
         addCashViewModel = AddCashViewModel(this, context, cashViewModel, adapterCallback, appDatabaseManager)
         val cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }

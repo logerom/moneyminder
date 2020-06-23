@@ -53,7 +53,7 @@ object ApplicationModule {
     @Singleton
     @JvmStatic
     @Provides
-    @JvmName("Date")
+    // TODO-SW: @JVMNamed doesnt work
     fun provideDate(sdf: SimpleDateFormat) = sdf.format(Calendar.getInstance(Locale.getDefault()).time)
 
 }

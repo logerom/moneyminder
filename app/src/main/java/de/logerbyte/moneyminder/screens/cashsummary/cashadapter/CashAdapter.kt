@@ -199,7 +199,6 @@ class CashAdapter @Inject constructor(
         expenseManager.loadBudgetFromSharedPref()
         recreateList()
         this.notifyDataSetChanged()
-        // TODO-SW: update list after new budget set
     }
 
     interface Listener {
