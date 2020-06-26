@@ -6,17 +6,20 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment
+import de.logerbyte.moneyminder.di.FragmentScope
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 
 @Module
 abstract class AddCashDialogModule {
 
+    @FragmentScope
     @ContributesAndroidInjector(modules = [InjectViewModel::class])
     abstract fun addCashDialogFragmet(): AddCashDialogFragment
 
     @Module
     class InjectViewModel {
         @Provides
+        @FragmentScope
         fun provideAddCashDialogViewModel(
                 factory: ViewModelProvider.Factory,
                 injector: AddCashDialogFragment

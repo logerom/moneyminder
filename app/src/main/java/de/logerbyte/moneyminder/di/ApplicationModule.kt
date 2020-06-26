@@ -8,10 +8,12 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import de.logerbyte.moneyminder.DB_NAME
+import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.SHARED_PREF
 import de.logerbyte.moneyminder.data.db.ExpenseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Named
 import javax.inject.Provider
 import javax.inject.Singleton
 
@@ -50,10 +52,9 @@ object ApplicationModule {
     @Provides
     fun provideSdf() = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
 
-    @Singleton
     @JvmStatic
     @Provides
-    // TODO-SW: @JVMNamed doesnt work
+    @Named(NAMED_DATE)
     fun provideDate(sdf: SimpleDateFormat) = sdf.format(Calendar.getInstance(Locale.getDefault()).time)
 
 }

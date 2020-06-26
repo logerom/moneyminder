@@ -11,7 +11,7 @@ import de.logerbyte.moneyminder.ui.summaryList.CashSummaryViewModel
 @Module
 abstract class CashSummaryModule {
 
-    // TODO-SW: Scoping dagger android subcomponents
+    @ActivityScope
     @ContributesAndroidInjector(modules = [InjectViewModel::class])
     abstract fun contributesCashSummaryActivity(): CashSummaryActivity
 

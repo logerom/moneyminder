@@ -3,9 +3,13 @@ package de.logerbyte.moneyminder.viewModels
 import android.text.Editable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
+import javax.inject.Inject
+import javax.inject.Named
 
-class CashViewModel(date: String) : ViewModel() {
+class CashViewModel @Inject constructor(@Named(NAMED_DATE) date: String) : ViewModel() {
+
     // TODO: 2019-10-01 cash categories as string resources
     val cashDate = ObservableField<String>(date)
     val cashName = ObservableField<String>()

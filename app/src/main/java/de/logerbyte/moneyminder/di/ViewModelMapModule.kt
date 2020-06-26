@@ -1,22 +1,22 @@
 package de.logerbyte.moneyminder.di
 
 import androidx.lifecycle.ViewModel
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
-import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.ui.summaryList.CashSummaryViewModel
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 
 @Module
-class ViewModelMapModule {
-    @Provides
+abstract class ViewModelMapModule {
+
+    @Binds
     @IntoMap
     @ViewModelKey(CashSummaryViewModel::class)
-    fun intoMapCashSummaryViewModel(cashAdapter: CashAdapter): ViewModel = CashSummaryViewModel(cashAdapter)
+    abstract fun intoMapCashSummaryViewModel(cashSummaryViewModel: CashSummaryViewModel): ViewModel
 
-    @Provides
+    @Binds
     @IntoMap
     @ViewModelKey(CashViewModel::class)
-    fun provideCashSummaryViewModel(date: String): ViewModel = CashViewModel(date)
+    abstract fun intoMapCashViewModel(cashViewModel: CashViewModel): ViewModel
 }
