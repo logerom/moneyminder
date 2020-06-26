@@ -13,7 +13,7 @@ import kotlin.collections.ArrayList
 @Singleton
 class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManager) {
 
-    private var allWeeks = 0
+    private var weeksAndDays = ArrayList<WeekSummaryViewModel>()
     var budget: Int = 0
 
     var sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
@@ -28,8 +28,8 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
     }
 
     fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
+        weeksAndDays.clear()
         val sortedExpensesCopy = sortedExpenses.toMutableList()
-        var expenseListNaturalOrder = ArrayList<WeekSummaryViewModel>()
         val datesToDelete = ArrayList<DayExpenseViewModel>()
         var subExpenseDays = ArrayList<DayExpenseViewModel>()
         var again = true
@@ -54,7 +54,7 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
                     datesToDelete.add(expense)
                 } else {
                     // no more expense days in this week -> next week + summary line
-                    addExpenseToSummaryWeek(subExpenseDays, expenseListNaturalOrder)
+                    addExpenseToSummaryWeek(subExpenseDays, weeksAndDays)
                     break
                 }
             }
@@ -64,7 +64,7 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
             if (sortedExpensesCopy.isEmpty()) {
                 // is list empty add last remaining expense to week
                 if (subExpenseDays.isNotEmpty()) {
-                    addExpenseToSummaryWeek(subExpenseDays, expenseListNaturalOrder)
+                    addExpenseToSummaryWeek(subExpenseDays, weeksAndDays)
                 }
                 again = false
             }
@@ -72,7 +72,7 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
             subExpenseDays = ArrayList()
 
         }
-        return descendWeekExpenses(expenseListNaturalOrder)
+        return descendWeekExpenses(weeksAndDays)
     }
 
     fun loadBudgetFromSharedPref() {
@@ -80,7 +80,6 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
     }
 
     private fun addExpenseToSummaryWeek(subExpenseDays: ArrayList<DayExpenseViewModel>, expenseListNaturalOrder: ArrayList<WeekSummaryViewModel>) {
-        allWeeks++
         val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
         val expenseDiff = budget - expensesOfWeek
         val summaryWeek = WeekSummaryViewModel(expensesOfWeek, budget.toDouble(), expenseDiff,
@@ -88,6 +87,7 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
         expenseListNaturalOrder.add(summaryWeek)
     }
 
+    // TODO-SW: up to DateTimeUtil
     private fun getDateFromViewModel(itemViewModel: DayExpenseViewModel): Date? {
         val dateString = itemViewModel.cashDate.get()
         return sdf.parse(dateString)
@@ -110,6 +110,6 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
     }
 
     fun getOverAllBudget(): Int {
-        return allWeeks * budget
+        return weeksAndDays.size * budget
     }
 }

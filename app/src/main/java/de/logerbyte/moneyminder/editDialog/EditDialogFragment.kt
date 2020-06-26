@@ -16,16 +16,18 @@ import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
 
 
-open class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
+class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
+
+    @Inject
+    lateinit var appDatabaseManager: AppDatabaseManager
+
+    @Inject
+    lateinit var cashViewModel: CashViewModel
 
     lateinit var cashView: View
     lateinit var adapterCallback: AdapterCallBack
     lateinit var cash: DayExpenseViewModel
-    val cashViewModel = CashViewModel()
     lateinit var editDialogViewModel1: EditDialogViewModel1
-
-    @Inject
-    lateinit var appDatabaseManager: AppDatabaseManager
 
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
         editDialogViewModel1 = EditDialogViewModel1(appDatabaseManager, this, context, cashViewModel, this)

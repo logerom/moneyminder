@@ -8,11 +8,9 @@ import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewMo
 import de.logerbyte.moneyminder.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.util.DigitUtil.doubleToString
 import de.logerbyte.moneyminder.util.DigitUtil.getCashTotal
+import javax.inject.Inject
 
-/**
- * Created by logerom on 28.07.18.
- */
-class CashSummaryViewModel(val cashAdapter: CashAdapter) : ViewModel(), CashAdapter.Listener {
+class CashSummaryViewModel @Inject constructor(val cashAdapter: CashAdapter) : ViewModel(), CashAdapter.Listener {
     val totalExpenses = ObservableField<Double>()
     private val totalBudget = ObservableField("0,00")
     private val totalSaving = ObservableField<Double?>()

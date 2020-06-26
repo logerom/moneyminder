@@ -24,9 +24,12 @@ class AddCashDialogFragment : BaseDialogFragment() {
     @Inject
     lateinit var appDatabaseManager: AppDatabaseManager
 
+    @Inject
+    lateinit var cashViewModel: CashViewModel
+
     lateinit var adapterCallback: AdapterCallBack
+
     private lateinit var addCashViewModel: AddCashViewModel
-    private val cashViewModel = CashViewModel()
 
     override fun setDialogBaseActionButtonListener(): DialogViewListener {
         return addCashViewModel
