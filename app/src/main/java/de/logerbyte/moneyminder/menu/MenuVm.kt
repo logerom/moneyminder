@@ -1,5 +1,6 @@
 package de.logerbyte.moneyminder.menu
 
+import android.view.View
 import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.data.SharedPrefManager
@@ -15,5 +16,9 @@ class MenuVm @Inject constructor(sharedPrefManager: SharedPrefManager) {
 
     init {
         budget.set(sharedPrefManager.getSharedPrefInt(SHARED_PREF_MENU_BUDGET))
+    }
+
+    fun onCLickFilter(view: View){
+        // TODO: 27.06.20 open filter dialog
     }
 }
