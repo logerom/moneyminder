@@ -19,6 +19,6 @@ class MenuVm @Inject constructor(sharedPrefManager: SharedPrefManager) {
     }
 
     fun onCLickFilter(view: View){
-        // TODO: 27.06.20 open filter dialog
+        // TODO-SW: 27.06.20 open filter dialog
     }
 }
