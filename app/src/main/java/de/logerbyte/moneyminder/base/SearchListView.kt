@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.addCashDialog.CategoryAdapter
+import de.logerbyte.moneyminder.adapter.CategoryAdapter
 import kotlinx.android.synthetic.main.category_list.view.*
 
 class SearchListView(context: Context?, attributeSet: AttributeSet) : LinearLayout(context, attributeSet) {

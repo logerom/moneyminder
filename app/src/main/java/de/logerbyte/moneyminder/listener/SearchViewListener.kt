@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.addCashDialog
+package de.logerbyte.moneyminder.listener
 
 import android.widget.SearchView
 

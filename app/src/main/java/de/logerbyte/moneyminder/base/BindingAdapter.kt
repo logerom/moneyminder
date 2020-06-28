@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.base
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
-import de.logerbyte.moneyminder.addCashDialog.SearchViewListener
+import de.logerbyte.moneyminder.listener.SearchViewListener
 import kotlinx.android.synthetic.main.category_list.view.*
 
 object BindingAdapter {

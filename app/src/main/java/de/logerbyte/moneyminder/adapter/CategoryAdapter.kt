@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.addCashDialog
+package de.logerbyte.moneyminder.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
