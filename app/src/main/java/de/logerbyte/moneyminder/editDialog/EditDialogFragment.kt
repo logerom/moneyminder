@@ -8,7 +8,7 @@ import de.logerbyte.moneyminder.data.db.AppDatabaseManager
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
-import de.logerbyte.moneyminder.dialogs.DialogViewListener
+import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.viewModels.CashViewModel
@@ -39,7 +39,7 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
     }
 
 
-    override fun setDialogBaseActionButtonListener(): DialogViewListener {
+    override fun setDialogBaseActionButtonListener(): BaseDialogActionListener {
         return editDialogViewModel1
         // TODO: 2019-11-19 create baseDialogViewAction (for cancel and ok)
     }

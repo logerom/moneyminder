@@ -10,7 +10,7 @@ import de.logerbyte.moneyminder.data.db.AppDatabaseManager
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
-import de.logerbyte.moneyminder.dialogs.DialogViewListener
+import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,7 +31,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
 
     private lateinit var addCashViewModel: AddCashViewModel
 
-    override fun setDialogBaseActionButtonListener(): DialogViewListener {
+    override fun setDialogBaseActionButtonListener(): BaseDialogActionListener {
         return addCashViewModel
     }
 

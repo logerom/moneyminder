@@ -21,7 +21,7 @@ abstract class BaseDialogFragment : DaggerDialogFragment(), DialogCallback {
     }
 
     abstract fun additionalContentViewBinding(viewBinding: BaseDialogBinding)
-    abstract fun setDialogBaseActionButtonListener(): DialogViewListener
+    abstract fun setDialogBaseActionButtonListener(): BaseDialogActionListener
 
     override fun dismissDialog() {
         dismiss()

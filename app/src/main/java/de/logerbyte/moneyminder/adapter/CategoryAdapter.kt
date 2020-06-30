@@ -12,7 +12,7 @@ class CategoryAdapter(private val clickListener: (String) -> Unit) : SingleItemT
             field = value
         }
 
-    override fun binds(item: String, bindingClass: FormviewCategoryItemBinding) {
+    override fun bindItemToView(item: String, bindingClass: FormviewCategoryItemBinding) {
         bindingClass.tvCategoryName.text = item
     }
 
