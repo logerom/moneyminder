@@ -6,9 +6,10 @@ import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
+import javax.inject.Inject
 
 // TODO-SW: open filter form menu
-class FilterDialog : BaseDialogFragment(), BaseDialogActionListener {
+class FilterDialog @Inject constructor() : BaseDialogFragment(), BaseDialogActionListener {
     // TODO-SW: inject VM  and bind to View
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_filter, null)

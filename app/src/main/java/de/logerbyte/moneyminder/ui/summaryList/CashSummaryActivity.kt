@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import dagger.android.support.DaggerAppCompatActivity
@@ -13,9 +12,10 @@ import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.addCashDialog.AddCashDialogFragment
 import de.logerbyte.moneyminder.data.SharedPrefManager
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
-import de.logerbyte.moneyminder.databinding.MenuBudgetBinding
+import de.logerbyte.moneyminder.databinding.MenuSettingsBindingImpl
 import de.logerbyte.moneyminder.editDialog.EditDialogFragment
 import de.logerbyte.moneyminder.menu.MenuVm
+import de.logerbyte.moneyminder.menu.SettingsPopupWindow
 import de.logerbyte.moneyminder.screens.cashsummary.ViewListener
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewListener {
-    private lateinit var popUpWindow: PopupWindow
+    private lateinit var settingsWindowDelegator: SettingsPopupWindow
     private var binding: ActivityMainBinding? = null
 
     @Inject
@@ -36,6 +36,9 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     @Inject
     lateinit var sharedPrefManager: SharedPrefManager
 
+    // TODO-SW: inject Settingspopup  
+    //@Inject
+    lateinit var settingsPopupWindow: SettingsPopupWindow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +76,8 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.budget -> {
-                popUpWindow.showAsDropDown(my_toolbar, 0, 0, Gravity.END)
+            R.id.settings -> {
+                settingsWindowDelegator.popupWindow.showAsDropDown(my_toolbar, 0, 0, Gravity.END)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -83,17 +86,20 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     }
 
     private fun initPopUp() {
-        val popUpView = layoutInflater.inflate(R.layout.menu_budget, null)
-        MenuBudgetBinding.bind(popUpView).apply { vm = menu }
-
-        popUpWindow = PopupWindow(popUpView, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true).let {
-            it.setOnDismissListener { onMenuDismissed() }
-            it
+        val popUpView = layoutInflater.inflate(R.layout.menu_settings, null)
+        // TODO-SW: inject setttingspopUP
+        settingsWindowDelegator = settingsPopupWindow.createPopupWindow(popUpView, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true).apply {
+            this.setDismissListener(this)
+        }
+        MenuSettingsBindingImpl.bind(popUpView).apply {
+            vm = menu
+            listener = settingsWindowDelegator
         }
     }
 
+    // TODO-SW: move to settingsPopupWindow
     private fun onMenuDismissed() {
-        // TODO-SW: move to business logic (VM?)
+        // TODO: move to business logic (VM?)
         // Error-SW: crashed when enter
         menu.budget.get()?.apply {
             sharedPrefManager.writeSharedPrefInt(SHARED_PREF_MENU_BUDGET, this)

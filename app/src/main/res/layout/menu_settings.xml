@@ -5,6 +5,9 @@
         <variable
             name="vm"
             type="de.logerbyte.moneyminder.menu.MenuVm" />
+        <variable
+            name="listener"
+            type="de.logerbyte.moneyminder.menu.MenuItemsClicked" />
 
         <import type="de.logerbyte.moneyminder.util.DigitUtil" />
     </data>
@@ -42,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:onClick="@{vm::onCLickFilter}"
+                android:onClick="@{listener::onFilterClicked}"
                 android:text="Filter" />
         </LinearLayout>
 

@@ -21,7 +21,7 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
     var firstDate: Date? = null
     var firstWeek: Int? = null
-    // TODO-SW: sort expenses in week
+    // TODO: sort expenses in week
 
     init {
         loadBudgetFromSharedPref()
@@ -87,7 +87,7 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
         expenseListNaturalOrder.add(summaryWeek)
     }
 
-    // TODO-SW: up to DateTimeUtil
+    // TODO: up to DateTimeUtil
     private fun getDateFromViewModel(itemViewModel: DayExpenseViewModel): Date? {
         val dateString = itemViewModel.cashDate.get()
         return sdf.parse(dateString)
