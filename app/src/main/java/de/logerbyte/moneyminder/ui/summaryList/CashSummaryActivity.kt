@@ -36,9 +36,9 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     @Inject
     lateinit var sharedPrefManager: SharedPrefManager
 
-    // TODO-SW: inject Settingspopup  
-    //@Inject
-    lateinit var settingsPopupWindow: SettingsPopupWindow
+//     TODO-SW: inject Settingspopup
+@Inject
+lateinit var settingsPopupWindow: SettingsPopupWindow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

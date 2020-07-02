@@ -1,19 +1,14 @@
 package de.logerbyte.moneyminder.menu
 
-import android.content.Context
 import android.view.View
-import android.widget.PopupMenu
 import android.widget.PopupWindow
 import androidx.fragment.app.FragmentManager
 import de.logerbyte.moneyminder.menu.filter.FilterDialog
 import javax.inject.Inject
 
 // TODO-SW: view reference from fragmentManger?
-class SettingsPopupWindow (): MenuItemsClicked, PopupWindow.OnDismissListener{
+class SettingsPopupWindow @Inject constructor(val fragmentManager: FragmentManager) : MenuItemsClicked, PopupWindow.OnDismissListener {
     lateinit var popupWindow: PopupWindow
-
-    // TODO-SW: inject fragmentmanager
-    lateinit var fragmentManager: FragmentManager
 
     fun createPopupWindow(contentView: View, with: Int, height: Int, focusable: Boolean): SettingsPopupWindow {
         popupWindow = PopupWindow(contentView, with, height, focusable)
@@ -21,7 +16,7 @@ class SettingsPopupWindow (): MenuItemsClicked, PopupWindow.OnDismissListener{
     }
 
     override fun onFilterClicked(view: View) {
-        FilterDialog().show(fragmentManager,SettingsPopupWindow::class.simpleName)
+        FilterDialog().show(fragmentManager, SettingsPopupWindow::class.simpleName)
     }
 
     override fun setDismissListener(listener: PopupWindow.OnDismissListener) {

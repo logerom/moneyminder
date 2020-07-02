@@ -25,9 +25,7 @@ abstract class CashSummaryModule {
         ) = ViewModelProviders.of(cashSummaryActivity, factory).get(CashSummaryViewModel::class.java)
 
         // TODO-SW: provide fragmentmanager
-//        @Provides
-//        fun providesFragmentManager(cashSummaryActivity: CashSummaryActivity){
-//            cashSummaryActivity.supportFragmentManager
-//        }
+        @Provides
+        fun providesFragmentManager(cashSummaryActivity: CashSummaryActivity) = cashSummaryActivity.supportFragmentManager
     }
 }
