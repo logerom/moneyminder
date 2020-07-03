@@ -11,7 +11,10 @@ class SettingsPopupWindow @Inject constructor(val fragmentManager: FragmentManag
     lateinit var popupWindow: PopupWindow
 
     fun createPopupWindow(contentView: View, with: Int, height: Int, focusable: Boolean): SettingsPopupWindow {
-        popupWindow = PopupWindow(contentView, with, height, focusable)
+        popupWindow = PopupWindow(contentView, with, height, focusable).let {
+            it.setOnDismissListener(this)
+            it
+        }
         return this
     }
 

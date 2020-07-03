@@ -36,9 +36,8 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     @Inject
     lateinit var sharedPrefManager: SharedPrefManager
 
-//     TODO-SW: inject Settingspopup
-@Inject
-lateinit var settingsPopupWindow: SettingsPopupWindow
+    @Inject
+    lateinit var settingsPopupWindow: SettingsPopupWindow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,9 +87,7 @@ lateinit var settingsPopupWindow: SettingsPopupWindow
     private fun initPopUp() {
         val popUpView = layoutInflater.inflate(R.layout.menu_settings, null)
         // TODO-SW: inject setttingspopUP
-        settingsWindowDelegator = settingsPopupWindow.createPopupWindow(popUpView, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true).apply {
-            this.setDismissListener(this)
-        }
+        settingsWindowDelegator = settingsPopupWindow.createPopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
         MenuSettingsBindingImpl.bind(popUpView).apply {
             vm = menu
             listener = settingsWindowDelegator
