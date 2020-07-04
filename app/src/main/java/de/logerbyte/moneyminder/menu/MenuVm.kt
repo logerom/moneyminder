@@ -4,9 +4,10 @@ import android.view.View
 import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.data.SharedPrefManager
+import de.logerbyte.moneyminder.di.ActivityScope
 import javax.inject.Inject
 
-
+@ActivityScope
 class MenuVm @Inject constructor(sharedPrefManager: SharedPrefManager) {
     var budget = ObservableField<Int>()
 

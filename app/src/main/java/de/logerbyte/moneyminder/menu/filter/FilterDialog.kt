@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
-import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
+import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import javax.inject.Inject
 
 // TODO-SW: open filter form menu
@@ -19,6 +19,7 @@ class FilterDialog @Inject constructor() : BaseDialogFragment(), BaseDialogActio
     override fun setDialogBaseActionButtonListener(): BaseDialogActionListener = this
 
     override fun onClickOk(view: View) {
+        // TODO-SW: on CLick okFilter
         TODO("Not yet implemented")
     }
 

@@ -3,6 +3,7 @@ package de.logerbyte.moneyminder.ui.summaryList
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.data.db.expense.Expense
+import de.logerbyte.moneyminder.di.ActivityScope
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel.ActivityListener
 import de.logerbyte.moneyminder.util.DigitUtil.dotToComma
@@ -10,6 +11,7 @@ import de.logerbyte.moneyminder.util.DigitUtil.doubleToString
 import de.logerbyte.moneyminder.util.DigitUtil.getCashTotal
 import javax.inject.Inject
 
+@ActivityScope
 class CashSummaryViewModel @Inject constructor(val cashAdapter: CashAdapter) : ViewModel(), CashAdapter.Listener {
     val totalExpenses = ObservableField<Double>()
     private val totalBudget = ObservableField("0,00")

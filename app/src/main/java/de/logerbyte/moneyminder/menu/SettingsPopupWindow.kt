@@ -3,11 +3,19 @@ package de.logerbyte.moneyminder.menu
 import android.view.View
 import android.widget.PopupWindow
 import androidx.fragment.app.FragmentManager
+import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
+import de.logerbyte.moneyminder.data.SharedPrefManager
 import de.logerbyte.moneyminder.menu.filter.FilterDialog
+import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter
 import javax.inject.Inject
 
 // TODO-SW: view reference from fragmentManger?
-class SettingsPopupWindow @Inject constructor(val fragmentManager: FragmentManager) : MenuItemsClicked, PopupWindow.OnDismissListener {
+class SettingsPopupWindow @Inject constructor(
+        val fragmentManager: FragmentManager,
+        val menuVm: MenuVm,
+        val sharedPrefManager: SharedPrefManager,
+        val cashAdapter: CashAdapter)
+    : MenuItemsClicked, PopupWindow.OnDismissListener {
     lateinit var popupWindow: PopupWindow
 
     fun createPopupWindow(contentView: View, with: Int, height: Int, focusable: Boolean): SettingsPopupWindow {
@@ -27,7 +35,10 @@ class SettingsPopupWindow @Inject constructor(val fragmentManager: FragmentManag
     }
 
     override fun onDismiss() {
-        // TODO-SW: get old onDissmiss from activity
+        menuVm.budget.get()?.apply {
+            sharedPrefManager.writeSharedPrefInt(SHARED_PREF_MENU_BUDGET, this)
+        }
+        cashAdapter.onBudgetUpdated()
     }
 }
 

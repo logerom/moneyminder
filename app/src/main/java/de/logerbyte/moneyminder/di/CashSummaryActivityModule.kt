@@ -9,7 +9,7 @@ import de.logerbyte.moneyminder.ui.summaryList.CashSummaryActivity
 import de.logerbyte.moneyminder.ui.summaryList.CashSummaryViewModel
 
 @Module
-abstract class CashSummaryModule {
+abstract class CashSummaryActivityModule {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [InjectViewModel::class])
@@ -24,7 +24,6 @@ abstract class CashSummaryModule {
                 cashSummaryActivity: CashSummaryActivity
         ) = ViewModelProviders.of(cashSummaryActivity, factory).get(CashSummaryViewModel::class.java)
 
-        // TODO-SW: provide fragmentmanager
         @Provides
         fun providesFragmentManager(cashSummaryActivity: CashSummaryActivity) = cashSummaryActivity.supportFragmentManager
     }

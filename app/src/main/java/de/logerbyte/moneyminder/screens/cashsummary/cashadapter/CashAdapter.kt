@@ -13,6 +13,7 @@ import de.logerbyte.moneyminder.data.db.expense.Expense
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
 import de.logerbyte.moneyminder.deleteDialog.DeleteDialogFragment
+import de.logerbyte.moneyminder.di.ActivityScope
 import de.logerbyte.moneyminder.util.ConvertUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -28,6 +29,7 @@ import kotlin.collections.HashMap
 
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
+@ActivityScope
 class CashAdapter @Inject constructor(
         private val appDatabaseManager: AppDatabaseManager,
         private val expenseManager: ExpenseManager
