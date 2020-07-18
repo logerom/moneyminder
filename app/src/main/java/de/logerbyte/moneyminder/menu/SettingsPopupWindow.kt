@@ -16,6 +16,7 @@ class SettingsPopupWindow @Inject constructor(
         val sharedPrefManager: SharedPrefManager,
         val cashAdapter: CashAdapter)
     : MenuItemsClicked, PopupWindow.OnDismissListener {
+
     lateinit var popupWindow: PopupWindow
 
     fun createPopupWindow(contentView: View, with: Int, height: Int, focusable: Boolean): SettingsPopupWindow {
