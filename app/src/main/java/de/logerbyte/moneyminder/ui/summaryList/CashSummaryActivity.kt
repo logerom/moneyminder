@@ -81,7 +81,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
 
     private fun initPopUp() {
         val popUpView = layoutInflater.inflate(R.layout.menu_settings, null)
-        // TODO-SW: init with dagger?
+        // fixme-sw: init with dagger?
         settingsWindowDelegator = settingsPopupWindow.createPopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
         MenuSettingsBindingImpl.bind(popUpView).apply {
             vm = menuVm
