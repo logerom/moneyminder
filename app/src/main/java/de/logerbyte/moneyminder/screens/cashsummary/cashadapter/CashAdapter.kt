@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.data.db.AppDatabaseManager
 import de.logerbyte.moneyminder.data.db.expense.Expense
+import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
 import de.logerbyte.moneyminder.deleteDialog.DeleteDialogFragment
@@ -29,7 +29,7 @@ import kotlin.collections.HashMap
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
 class CashAdapter @Inject constructor(
-        private val appDatabaseManager: AppDatabaseManager,
+        private val expenseRepo: ExpenseRepo,
         private val expenseManager: ExpenseManager
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
 
@@ -62,7 +62,7 @@ class CashAdapter @Inject constructor(
 
     // FIXME: 23.09.18 2 same loadExpense functions. base it.
     fun loadExpenseList() {
-        appDatabaseManager.allExpense
+        expenseRepo.allExpense
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { expenses -> initList(expenses) }

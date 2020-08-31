@@ -1,15 +1,14 @@
-package de.logerbyte.moneyminder.data.db;
+package de.logerbyte.moneyminder.data.db.expense;
 
 import java.util.List;
 
-import de.logerbyte.moneyminder.data.db.expense.Expense;
 import io.reactivex.Observable;
 
 /**
  * Created by logerom on 09.08.18.
  */
 
-public interface DbHelper {
+public interface ExpenseAPI {
     Observable<List<Expense>> getAllExpense();
 
     Observable<Boolean> insertCashItemIntoDB(Expense expense);

@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.base.ErrorHandling
-import de.logerbyte.moneyminder.data.db.AppDatabaseManager
 import de.logerbyte.moneyminder.data.db.expense.Expense
+import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
 import de.logerbyte.moneyminder.dialogs.DialogCallback
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
@@ -20,7 +20,7 @@ class AddCashViewModel(
         val context: Context?,
         val cashViewModel: CashViewModel,
         val listCallback: AdapterCallBack,
-        val appDatabaseManager: AppDatabaseManager
+        val expenseRepo: ExpenseRepo
 ) : BaseDialogViewModel1(dialogCallback) {
 
     var changedQueryText: String? = ""
@@ -42,7 +42,7 @@ class AddCashViewModel(
         val expense = Expense(null, cashViewModel.cashName.get(), cashViewModel.cashCategory.get(),
                 cashViewModel.cashDate.get(), cashInEuro)
 
-        appDatabaseManager
+        expenseRepo
                 .insertCashItemIntoDB(expense)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

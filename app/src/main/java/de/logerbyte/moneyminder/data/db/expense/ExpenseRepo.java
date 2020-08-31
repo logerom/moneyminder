@@ -1,15 +1,11 @@
-package de.logerbyte.moneyminder.data.db;
-
-import android.content.Context;
-
-import androidx.room.Room;
+package de.logerbyte.moneyminder.data.db.expense;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import de.logerbyte.moneyminder.data.db.expense.Expense;
+import de.logerbyte.moneyminder.data.db.ExpenseDatabase;
 import io.reactivex.Observable;
 
 /**
@@ -17,19 +13,13 @@ import io.reactivex.Observable;
  */
 
 @Singleton
-public class AppDatabaseManager implements DbHelper{
+public class ExpenseRepo implements ExpenseAPI {
 
     private final ExpenseDatabase mExpenseDatabase;
 
     @Inject
-    public AppDatabaseManager(ExpenseDatabase expenseDatabase) {
+    public ExpenseRepo(ExpenseDatabase expenseDatabase) {
         this.mExpenseDatabase = expenseDatabase;
-    }
-
-    public AppDatabaseManager(Context context) {
-        this.mExpenseDatabase = Room.databaseBuilder(context, ExpenseDatabase.class, "moneyminder.db")
-                .addMigrations(DbMigration.MIGRATION_1_2)
-                .build();
     }
 
     @Override
@@ -39,7 +29,7 @@ public class AppDatabaseManager implements DbHelper{
 
     @Override
     public Observable<Boolean> insertCashItemIntoDB(Expense expense) {
-        return Observable.fromCallable(()-> {
+        return Observable.fromCallable(() -> {
             mExpenseDatabase.expenseDao().insert(expense);
             return true;
         });

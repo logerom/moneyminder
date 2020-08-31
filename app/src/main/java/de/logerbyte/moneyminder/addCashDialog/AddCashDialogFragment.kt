@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.data.db.AppDatabaseManager
+import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
-import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
+import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.viewModels.CashViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class AddCashDialogFragment : BaseDialogFragment() {
 
     @Inject
-    lateinit var appDatabaseManager: AppDatabaseManager
+    lateinit var expenseRepo: ExpenseRepo
 
     @Inject
     lateinit var cashViewModel: CashViewModel
@@ -36,7 +36,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
     }
 
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
-        addCashViewModel = AddCashViewModel(this, context, cashViewModel, adapterCallback, appDatabaseManager)
+        addCashViewModel = AddCashViewModel(this, context, cashViewModel, adapterCallback, expenseRepo)
         val cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }
         viewBinding.dialogContainer.addView(cashView)
@@ -53,7 +53,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
         // fixme: RxJava2 for room + need to return boolean?
         // todo move to vm
         // todo dagger
-        appDatabaseManager.categories
+        expenseRepo.categories
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { categoryList -> custom_searchlist.list = categoryList as ArrayList<String> }
