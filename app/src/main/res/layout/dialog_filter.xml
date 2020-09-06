@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -17,7 +18,10 @@
             android:id="@+id/rvFilterCategories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:adapter="@{vm.adapter}" />
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/filter_item" />
 
     </FrameLayout>
 </layout>
