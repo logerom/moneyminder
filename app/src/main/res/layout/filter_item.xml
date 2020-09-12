@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="de.logerbyte.moneyminder.menu.filter.FilterItemVM" />
+            type="de.logerbyte.moneyminder.menu.filter.FilterDialogItem" />
     </data>
 
 
@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="@{vm.isChecked()}" />
+            android:checked="@{vm.value}" />
 
         <TextView
             android:layout_width="wrap_content"

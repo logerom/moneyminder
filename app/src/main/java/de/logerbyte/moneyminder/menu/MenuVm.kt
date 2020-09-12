@@ -17,8 +17,4 @@ class MenuVm @Inject constructor(sharedPrefManager: SharedPrefManager) {
     init {
         budget.set(sharedPrefManager.getSharedPrefInt(SHARED_PREF_MENU_BUDGET))
     }
-
-    fun onCLickFilter(view: View){
-        // TODO-SW: 27.06.20 open filter dialog
-    }
 }
