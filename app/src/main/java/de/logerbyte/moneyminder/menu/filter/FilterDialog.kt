@@ -11,9 +11,7 @@ import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
 import kotlinx.android.synthetic.main.dialog_filter.*
 import javax.inject.Inject
 
-// TODO-SW: open filter form menu
 class FilterDialog : BaseDialogFragment(), BaseDialogActionListener {
-    // TODO-SW: inject VM  and bind to View
     @Inject
     lateinit var filterAdapter: FilterAdapter
 

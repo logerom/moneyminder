@@ -9,7 +9,7 @@ import de.logerbyte.moneyminder.menu.filter.FilterDialog
 import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.CashAdapter
 import javax.inject.Inject
 
-// TODO-SW: view reference from fragmentManger?
+// fixme-SW: view reference from fragmentManger?
 class SettingsPopupWindow @Inject constructor(
         val fragmentManager: FragmentManager,
         val menuVm: MenuVm,
