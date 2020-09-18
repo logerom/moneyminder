@@ -30,7 +30,7 @@ class FilterDialog : BaseDialogFragment(), BaseDialogActionListener {
     }
 
     private fun initObservable() {
-        filterDialogVM.categoriess.observe(this, Observer { t -> filterAdapter.items = t as MutableList<FilterDialogItem> })
+        filterDialogVM.rawCategoriess.observe(this, Observer { t -> filterAdapter.items = t as MutableList<FilterDialogItem> })
     }
 
     override fun setDialogBaseActionButtonListener(): BaseDialogActionListener = this

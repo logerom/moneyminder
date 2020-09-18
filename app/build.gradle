@@ -66,6 +66,7 @@ dependencies {
     // reactive
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxKotlin"
 
     // viewModel
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'

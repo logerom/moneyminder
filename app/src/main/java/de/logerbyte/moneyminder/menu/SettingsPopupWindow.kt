@@ -36,10 +36,14 @@ class SettingsPopupWindow @Inject constructor(
     }
 
     override fun onDismiss() {
+        writeBudgetInSharedPref()
+        cashAdapter.onBudgetUpdated()
+    }
+
+    private fun writeBudgetInSharedPref() {
         menuVm.budget.get()?.apply {
             sharedPrefManager.writeSharedPrefInt(SHARED_PREF_MENU_BUDGET, this)
         }
-        cashAdapter.onBudgetUpdated()
     }
 }
 

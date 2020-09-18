@@ -1,27 +1,38 @@
 package de.logerbyte.moneyminder.menu.filter
 
-import androidx.annotation.MainThread
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import de.logerbyte.moneyminder.base.viewmodel.BaseViewModel
+import de.logerbyte.moneyminder.data.SharedPrefManager
 import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class FilterDialogVM @Inject constructor(val expenseRepo: ExpenseRepo) : ViewModel() {
+class FilterDialogVM @Inject constructor(val expenseRepo: ExpenseRepo, val sharedPrefManager:
+SharedPrefManager) : BaseViewModel() {
 
-    val categoriess = MutableLiveData<List<FilterDialogItem>>()
+    val rawCategoriess = MutableLiveData<List<FilterDialogItem>>()
+    val selectedCategories = MutableLiveData<List<FilterDialogItem>>()
 
     init {
+        initFilterCategories()
+    }
+
+    private fun initFilterCategories() {
+        // TODO-SW: read data-source sharedPref, when null, check db
+        loadRawCategories()
+    }
+
+    private fun loadRawCategories() {
         expenseRepo.categories
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ categories -> initCategories(categories) })
+                .subscribe { categories -> initRawCategories(categories) }
+                .addTo(compositeDisposable)
     }
 
-    private fun initCategories(categories: List<String>) {
-        categoriess.value = categories.map { s: String -> FilterDialogItem(s, false) }
+    private fun initRawCategories(categories: List<String>) {
+        rawCategoriess.value = categories.map { s: String -> FilterDialogItem(s, false) }
     }
 }
