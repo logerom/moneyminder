@@ -1,5 +1,6 @@
 package de.logerbyte.moneyminder.menu.filter
 
+import android.widget.CheckBox
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.base.viewmodel.BaseViewModel
 import de.logerbyte.moneyminder.data.SharedPrefManager
@@ -10,17 +11,21 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class FilterDialogVM @Inject constructor(val expenseRepo: ExpenseRepo, val sharedPrefManager:
-SharedPrefManager) : BaseViewModel() {
+SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
 
     val rawCategoriess = MutableLiveData<List<FilterDialogItem>>()
-    val selectedCategories = MutableLiveData<List<FilterDialogItem>>()
+    val checkedSet = hashSetOf<String>()
 
     init {
         initFilterCategories()
     }
 
+    override fun onClickCheckBox(checkBox: CheckBox, checkBoxName: String) {
+        if (checkBox.isChecked) checkedSet.add(checkBoxName) else checkedSet.remove(checkBoxName)
+    }
+
     private fun initFilterCategories() {
-        // TODO-SW: read data-source sharedPref, when null, check db
+        // TODO-SW: read checked state. data-source sharedPref, when null, check db
         loadRawCategories()
     }
 

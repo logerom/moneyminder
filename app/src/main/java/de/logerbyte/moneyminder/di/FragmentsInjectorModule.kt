@@ -6,6 +6,7 @@ import de.logerbyte.moneyminder.deleteDialog.DeleteDialogFragment
 import de.logerbyte.moneyminder.di.fragment.AddCashDialogModule
 import de.logerbyte.moneyminder.editDialog.EditDialogFragment
 import de.logerbyte.moneyminder.menu.filter.FilterDialog
+import de.logerbyte.moneyminder.menu.filter.FilterDialogModule
 
 @Module(includes = [AddCashDialogModule::class])
 abstract class FragmentsInjectorModule {
@@ -16,7 +17,6 @@ abstract class FragmentsInjectorModule {
     @ContributesAndroidInjector
     abstract fun contributesEditDialogFragment(): EditDialogFragment
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [FilterDialogModule::class])
     abstract fun contributeFilterDialog(): FilterDialog
-
 }
