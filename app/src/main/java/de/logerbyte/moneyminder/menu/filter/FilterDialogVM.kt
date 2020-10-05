@@ -1,5 +1,6 @@
 package de.logerbyte.moneyminder.menu.filter
 
+import android.view.View
 import android.widget.CheckBox
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.base.viewmodel.BaseViewModel
@@ -20,8 +21,10 @@ SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
         initFilterCategories()
     }
 
-    override fun onClickCheckBox(checkBox: CheckBox, checkBoxName: String) {
-        if (checkBox.isChecked) checkedSet.add(checkBoxName) else checkedSet.remove(checkBoxName)
+    override fun onClickCheckBox(view: View, checkBoxName: String) {
+        (view as CheckBox).apply {
+            if (this.isChecked) checkedSet.add(checkBoxName) else checkedSet.remove(checkBoxName)
+        }
     }
 
     private fun initFilterCategories() {
@@ -39,5 +42,9 @@ SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
 
     private fun initRawCategories(categories: List<String>) {
         rawCategoriess.value = categories.map { s: String -> FilterDialogItem(s, false) }
+    }
+
+    fun applyFilter() {
+        // TODO-SW: when something alter in repo all observer should be noticed. So the recycler view updated automatic
     }
 }

@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.menu.filter
 
-import android.widget.CheckBox
+import android.view.View
 
 interface FilterDialogVMListener {
-    fun onClickCheckBox(checkBox: CheckBox, checkBoxName: String)
+    fun onClickCheckBox(view: View, checkBoxName: String)
 }

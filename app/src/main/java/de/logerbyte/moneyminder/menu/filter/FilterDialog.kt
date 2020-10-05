@@ -36,6 +36,7 @@ class FilterDialog : BaseDialogFragment(), BaseDialogActionListener {
     override fun setDialogBaseActionButtonListener(): BaseDialogActionListener = this
 
     override fun onClickOk(view: View) {
+        filterDialogVM.applyFilter()
         // TODO-SW: on CLick okFilter
         // TODO-SW: 13.09.2020 save filter in shared preferences? + reload list
     }

@@ -18,6 +18,11 @@ public interface ExpenseDao {
     @Query("SELECT * FROM Expense")
     List<Expense> selectAll();
 
+
+    // TODO-SW: select all where cashDate is in range
+    @Query("SELECT * FROM Expense where cashDate")
+    List<Expense> selectAllBetween();
+
     @Query("SELECT DISTINCT category FROM Expense")
     List<String> selectDistinctCategory();
 
