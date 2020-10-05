@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import de.logerbyte.moneyminder.ui.summaryList.CashSummaryActivity
-import de.logerbyte.moneyminder.ui.summaryList.CashSummaryViewModel
+import de.logerbyte.moneyminder.cashOverview.CashSummaryActivity
+import de.logerbyte.moneyminder.cashOverview.CashSummaryViewModel
 
 @Module
 abstract class CashSummaryActivityModule {

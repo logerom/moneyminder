@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="de.logerbyte.moneyminder.menu.filter.FilterDialogItem" />
+            type="de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialogItem" />
     </data>
 
 

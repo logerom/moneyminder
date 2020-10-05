@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import de.logerbyte.moneyminder.menu.filter.FilterDialogVM
-import de.logerbyte.moneyminder.ui.summaryList.CashSummaryViewModel
-import de.logerbyte.moneyminder.viewModels.CashViewModel
+import de.logerbyte.moneyminder.cashOverview.CashSummaryViewModel
+import de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialogVM
+import de.logerbyte.moneyminder.cashOverview.viewModels.CashViewModel
 
 @Module
 abstract class ViewModelMapModule {

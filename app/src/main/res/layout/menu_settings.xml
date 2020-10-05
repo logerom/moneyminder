@@ -4,10 +4,11 @@
     <data>
         <variable
             name="vm"
-            type="de.logerbyte.moneyminder.menu.MenuVm" />
+            type="de.logerbyte.moneyminder.cashOverview.menu.MenuVm" />
+
         <variable
             name="listener"
-            type="de.logerbyte.moneyminder.menu.MenuItemsClicked" />
+            type="de.logerbyte.moneyminder.cashOverview.menu.MenuItemsClicked" />
 
         <import type="de.logerbyte.moneyminder.util.DigitUtil" />
     </data>

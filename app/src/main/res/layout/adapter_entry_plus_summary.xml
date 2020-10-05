@@ -4,7 +4,7 @@
 
         <variable
             name="vmSummary"
-            type="de.logerbyte.moneyminder.screens.cashsummary.cashadapter.WeekSummaryViewModel" />
+            type="de.logerbyte.moneyminder.cashOverview.cashadapter.WeekSummaryViewModel" />
 
         <import type="de.logerbyte.moneyminder.util.DigitUtil" />
     </data>

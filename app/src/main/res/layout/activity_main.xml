@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="de.logerbyte.moneyminder.ui.summaryList.CashSummaryViewModel" />
+            type="de.logerbyte.moneyminder.cashOverview.CashSummaryViewModel" />
 
         <variable
             name="viewListener"
-            type="de.logerbyte.moneyminder.screens.cashsummary.ViewListener" />
+            type="de.logerbyte.moneyminder.cashOverview.ViewListener" />
 
         <import type="de.logerbyte.moneyminder.util.DigitUtil" />
     </data>
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".ui.summaryList.CashSummaryActivity">
+            tools:context=".cashOverview.CashSummaryActivity">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/my_toolbar"
@@ -131,8 +131,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_plus_circle_outline"
             binding:layout_anchor="@id/rv_costs"
-            binding:layout_anchorGravity="bottom|end"
-            binding:layout_behavior=".view.FloatingActionButtonBehavior" />
+            binding:layout_anchorGravity="bottom|end" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
