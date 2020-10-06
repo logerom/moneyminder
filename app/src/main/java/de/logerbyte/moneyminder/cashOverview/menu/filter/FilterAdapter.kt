@@ -9,6 +9,5 @@ class FilterAdapter @Inject constructor() : SingleItemTypeAdapter<FilterDialogIt
 
     override fun bindItemToView(item: FilterDialogItem, bindingClass: DialogFilterItemBinding) {
         bindingClass.filterDialogItem = item
-        // TODO-SW: set click listener for cheked/unchecked
     }
 }

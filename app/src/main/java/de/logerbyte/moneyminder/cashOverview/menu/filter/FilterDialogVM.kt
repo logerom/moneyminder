@@ -14,8 +14,8 @@ import javax.inject.Inject
 class FilterDialogVM @Inject constructor(val expenseRepo: ExpenseRepo, val sharedPrefManager:
 SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
 
-    val rawCategoriess = MutableLiveData<List<FilterDialogItem>>()
-    val checkedSet = hashSetOf<String>()
+    val rawCategories = MutableLiveData<List<FilterDialogItem>>()
+    val checkedCategories = hashSetOf<String>()
 
     init {
         initFilterCategories()
@@ -23,7 +23,7 @@ SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
 
     override fun onClickCheckBox(view: View, checkBoxName: String) {
         (view as CheckBox).apply {
-            if (this.isChecked) checkedSet.add(checkBoxName) else checkedSet.remove(checkBoxName)
+            if (this.isChecked) checkedCategories.add(checkBoxName) else checkedCategories.remove(checkBoxName)
         }
     }
 
@@ -41,10 +41,15 @@ SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
     }
 
     private fun initRawCategories(categories: List<String>) {
-        rawCategoriess.value = categories.map { s: String -> FilterDialogItem(s, false) }
+        rawCategories.value = categories.map { s: String -> FilterDialogItem(s, false) }
     }
 
     fun applyFilter() {
-        // TODO-SW: when something alter in repo all observer should be noticed. So the recycler view updated automatic
+
+        // TODO-SW: 1. get expenses with checked categories.
+        expenseRepo.expensesWithCategories(checkedCategories)
+
+        // TODO-SW: ? when something alter in repo all observer should be noticed. So the recycler view updated
+        // automatic
     }
 }

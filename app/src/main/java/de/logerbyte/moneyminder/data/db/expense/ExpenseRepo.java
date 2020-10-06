@@ -1,5 +1,8 @@
 package de.logerbyte.moneyminder.data.db.expense;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -54,5 +57,10 @@ public class ExpenseRepo implements ExpenseAPI {
     @Override
     public Observable<List<String>> getCategories() {
         return Observable.fromCallable(() -> mExpenseDatabase.expenseDao().selectDistinctCategory());
+    }
+
+    @Override
+    public Observable<List<Expense>> expensesWithCategories(@NotNull HashSet<String> checkedCategories) {
+        return Observable.fromCallable(() -> mExpenseDatabase.expenseDao().expensesWithCategories(checkedCategories));
     }
 }
