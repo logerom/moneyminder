@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -37,5 +36,5 @@ public interface ExpenseDao {
     void update(Expense expense);
 
     @Query("SELECT * FROM Expense WHERE category IN (:checkedCategories)")
-    List<Expense> expensesWithCategories(HashSet<String> checkedCategories);
+    List<Expense> expensesWithCategories(String[] checkedCategories);
 }

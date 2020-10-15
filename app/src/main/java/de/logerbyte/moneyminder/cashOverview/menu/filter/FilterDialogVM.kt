@@ -15,7 +15,7 @@ class FilterDialogVM @Inject constructor(val expenseRepo: ExpenseRepo, val share
 SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
 
     val rawCategories = MutableLiveData<List<FilterDialogItem>>()
-    val checkedCategories = hashSetOf<String>()
+    val checkedCategories = setOf<String>()
 
     init {
         initFilterCategories()
@@ -23,7 +23,7 @@ SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
 
     override fun onClickCheckBox(view: View, checkBoxName: String) {
         (view as CheckBox).apply {
-            if (this.isChecked) checkedCategories.add(checkBoxName) else checkedCategories.remove(checkBoxName)
+            if (this.isChecked) checkedCategories.plus(checkBoxName) else checkedCategories.minus(checkBoxName)
         }
     }
 

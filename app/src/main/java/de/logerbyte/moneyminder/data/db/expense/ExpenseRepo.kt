@@ -1,66 +1,45 @@
-package de.logerbyte.moneyminder.data.db.expense;
+package de.logerbyte.moneyminder.data.db.expense
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashSet;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import de.logerbyte.moneyminder.data.db.ExpenseDatabase;
-import io.reactivex.Observable;
+import de.logerbyte.moneyminder.data.db.ExpenseDatabase
+import io.reactivex.Observable
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by logerom on 08.08.18.
  */
-
 @Singleton
-public class ExpenseRepo implements ExpenseAPI {
-
-    private final ExpenseDatabase mExpenseDatabase;
-
-    @Inject
-    public ExpenseRepo(ExpenseDatabase expenseDatabase) {
-        this.mExpenseDatabase = expenseDatabase;
+class ExpenseRepo @Inject constructor(private val mExpenseDatabase: ExpenseDatabase) : ExpenseAPI {
+    override fun getAllExpense(): Observable<List<Expense>> {
+        return Observable.fromCallable { mExpenseDatabase.expenseDao().selectAll() }
     }
 
-    @Override
-    public Observable<List<Expense>> getAllExpense() {
-        return Observable.fromCallable(() -> mExpenseDatabase.expenseDao().selectAll());
+    override fun insertCashItemIntoDB(expense: Expense): Observable<Boolean> {
+        return Observable.fromCallable {
+            mExpenseDatabase.expenseDao().insert(expense)
+            true
+        }
     }
 
-    @Override
-    public Observable<Boolean> insertCashItemIntoDB(Expense expense) {
-        return Observable.fromCallable(() -> {
-            mExpenseDatabase.expenseDao().insert(expense);
-            return true;
-        });
+    override fun deleteCashItem(id: Long): Observable<Boolean> {
+        return Observable.fromCallable {
+            mExpenseDatabase.expenseDao().delete(id)
+            true
+        }
     }
 
-    @Override
-    public Observable<Boolean> deleteCashItem(long id) {
-        return Observable.fromCallable(() -> {
-            mExpenseDatabase.expenseDao().delete(id);
-            return true;
-        });
+    override fun updateCashItem(expense: Expense): Observable<Boolean> {
+        return Observable.fromCallable {
+            mExpenseDatabase.expenseDao().update(expense)
+            true
+        }
     }
 
-    @Override
-    public Observable<Boolean> updateCashItem(Expense expense) {
-        return Observable.fromCallable(() -> {
-            mExpenseDatabase.expenseDao().update(expense);
-            return true;
-        });
+    override fun getCategories(): Observable<List<String>> {
+        return Observable.fromCallable { mExpenseDatabase.expenseDao().selectDistinctCategory() }
     }
 
-    @Override
-    public Observable<List<String>> getCategories() {
-        return Observable.fromCallable(() -> mExpenseDatabase.expenseDao().selectDistinctCategory());
-    }
-
-    @Override
-    public Observable<List<Expense>> expensesWithCategories(@NotNull HashSet<String> checkedCategories) {
-        return Observable.fromCallable(() -> mExpenseDatabase.expenseDao().expensesWithCategories(checkedCategories));
+    override fun expensesWithCategories(checkedCategories: Set<String>): Observable<MutableList<Expense>>? {
+        return Observable.fromCallable { mExpenseDatabase.expenseDao().expensesWithCategories(checkedCategories.toTypedArray()) }
     }
 }

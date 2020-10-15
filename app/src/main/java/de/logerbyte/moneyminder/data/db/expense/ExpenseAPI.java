@@ -2,8 +2,8 @@ package de.logerbyte.moneyminder.data.db.expense;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.Observable;
 
@@ -22,5 +22,5 @@ public interface ExpenseAPI {
 
     Observable<List<String>> getCategories();
 
-    Observable<List<Expense>> expensesWithCategories(@NotNull HashSet<String> checkedCategories);
+    Observable<List<Expense>> expensesWithCategories(@NotNull Set<String> checkedCategories);
 }
