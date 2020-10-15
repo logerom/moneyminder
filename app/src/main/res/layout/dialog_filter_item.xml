@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="filterDialogItem"
+            type="de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialogItem" />
+
+        <variable
+            name="filterDialogVM"
+            type="de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialogVMListener" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{filterDialogItem.name}"
+            tools:text="Category_1" />
+
+        <!-- // TODO-SW: checkbox listener into DialogVM for saving checked status -->
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{filterDialogItem.value}"
+            android:onClick="@{(checkBox)->filterDialogVM.onClickCheckBox(checkBox, filterDialogItem.name)}" />
+    </LinearLayout>
+</layout>

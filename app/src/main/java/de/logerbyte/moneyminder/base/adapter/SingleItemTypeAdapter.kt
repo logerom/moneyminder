@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class SingleItemTypeAdapter<ITEM_TYPE, BINDING_CLASS : ViewDataBinding>(
         val layout: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    abstract fun binds(item: ITEM_TYPE, bindingClass: BINDING_CLASS)
+    abstract fun bindItemToView(item: ITEM_TYPE, bindingClass: BINDING_CLASS)
 
     lateinit var layoutInflater: LayoutInflater
     var items = mutableListOf<ITEM_TYPE>()
@@ -24,13 +24,13 @@ abstract class SingleItemTypeAdapter<ITEM_TYPE, BINDING_CLASS : ViewDataBinding>
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as SingleItemTypeAdapter<ITEM_TYPE, BINDING_CLASS>.MyViewHolder).bind(items[position])
+        (holder as SingleItemTypeAdapter<ITEM_TYPE, BINDING_CLASS>.MyViewHolder).bindItemToView(items[position])
     }
     override fun getItemCount(): Int = items.size
 
     inner class MyViewHolder(val binding: BINDING_CLASS) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ITEM_TYPE) {
-            binds(item, binding)
+        fun bindItemToView(item: ITEM_TYPE) {
+            bindItemToView(item, binding)
         }
     }
 }

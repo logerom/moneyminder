@@ -3,8 +3,8 @@ package de.logerbyte.moneyminder.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel;
 import de.logerbyte.moneyminder.data.db.expense.Expense;
-import de.logerbyte.moneyminder.screens.cashsummary.cashadapter.DayExpenseViewModel;
 
 /**
  * Created by logerom on 09.08.18.

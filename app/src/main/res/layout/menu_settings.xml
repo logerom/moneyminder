@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="de.logerbyte.moneyminder.cashOverview.menu.MenuVm" />
+
+        <variable
+            name="listener"
+            type="de.logerbyte.moneyminder.cashOverview.menu.MenuItemsClicked" />
+
+        <import type="de.logerbyte.moneyminder.util.DigitUtil" />
+    </data>
+<LinearLayout
+    android:layout_width="@dimen/menu_width"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorAccent">
+    <!-- Budget -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budget: " />
+        <EditText
+            android:id="@+id/value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={DigitUtil.IntToString(vm.budget)}"
+            android:hint="value" />
+    </LinearLayout>
+
+    <!-- Category Filter -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorAccent">
+            <TextView
+                android:id="@+id/labelFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:onClick="@{listener::onFilterClicked}"
+                android:text="Filter" />
+        </LinearLayout>
+
+</LinearLayout>
+</layout>
