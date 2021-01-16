@@ -47,13 +47,13 @@ android {
     productFlavors {
         development {
             dimension "version"
-            applicationIdSuffix ".development"
-            versionNameSuffix "-development"
+            applicationIdSuffix ".free"
+            versionNameSuffix "-free"
         }
         production {
             dimension "version"
-            applicationIdSuffix ".production"
-            versionNameSuffix "-production"
+            applicationIdSuffix ".paid"
+            versionNameSuffix "-paid"
         }
     }
 
