@@ -54,8 +54,9 @@
             android:text="@={vmCashItem.cashInEuro}"
             tools:text="0,00"/>
 
+        <!-- todo: display your money portion -->
         <TextView
-            android:id="@+id/tv_share"
+            android:id="@+id/tv_money_portion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100%"/>

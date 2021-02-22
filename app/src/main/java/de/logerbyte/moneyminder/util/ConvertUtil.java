@@ -17,6 +17,7 @@ public class ConvertUtil {
         ArrayList<DayExpenseViewModel> dayExpenseViewModels = new ArrayList<>();
 
         for (Expense expense :expenses) {
+            // TODO: 22.02.21 convert to kotlin and use data classes
             DayExpenseViewModel item = new DayExpenseViewModel(expense.id, expense.cashDate,
                     expense.cashName, expense.category, DigitUtil.INSTANCE.dotToComma(String.valueOf(expense.cashInEuro)));
             dayExpenseViewModels.add(item);
