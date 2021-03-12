@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply from: 'jacoco.gradle'
 apply plugin: 'com.adarshr.test-logger'
 apply plugin: 'kotlin-android-extensions'
+apply from: "../artifacts.gradle"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -40,20 +41,6 @@ android {
         debug {
             applicationIdSuffix ".debug"
             debuggable true
-        }
-    }
-
-    flavorDimensions "version"
-    productFlavors {
-        development {
-            dimension "version"
-            applicationIdSuffix ".development"
-            versionNameSuffix "-development"
-        }
-        production {
-            dimension "version"
-            applicationIdSuffix ".production"
-            versionNameSuffix "-production"
         }
     }
 
