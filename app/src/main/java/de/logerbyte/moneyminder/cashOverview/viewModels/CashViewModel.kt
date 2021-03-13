@@ -55,7 +55,7 @@ class CashViewModel @Inject constructor(@Named(NAMED_DATE) date: String) : ViewM
     }
 
     fun isAllSet(): Boolean {
-        return !(isSomeElementNull(listOf(cashDate.get(), cashName.get(), cashCategory.get(), cashAmount.get())))
+        return !(isSomeElementNull(listOf(cashDate.get(), cashName.get(), cashCategory.get(), cashAmount.get(), cashPerson.get())))
     }
 
     private fun isSomeElementNull(listOf: List<String?>): Boolean {
