@@ -10,6 +10,7 @@ import dagger.Provides
 import de.logerbyte.moneyminder.DB_NAME
 import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.SHARED_PREF
+import de.logerbyte.moneyminder.data.db.DbMigration
 import de.logerbyte.moneyminder.data.db.ExpenseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,8 +37,9 @@ object ApplicationModule {
     fun provideDataBase(context: Context): ExpenseDatabase {
         return Room.databaseBuilder(
                 context.applicationContext,
-                ExpenseDatabase::class.java, DB_NAME
-        ).build()
+                ExpenseDatabase::class.java, DB_NAME)
+            .addMigrations(DbMigration.MIGRATION_2_3)
+            .build()
     }
 
     @JvmStatic

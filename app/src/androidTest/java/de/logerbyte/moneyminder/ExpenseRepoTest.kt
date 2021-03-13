@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import de.logerbyte.moneyminder.data.db.DbMigration
 import de.logerbyte.moneyminder.data.db.ExpenseDatabase
 import de.logerbyte.moneyminder.data.db.expense.Expense
 import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
@@ -26,10 +27,10 @@ class ExpenseRepoTest {
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        database = Room.databaseBuilder(
-                context,
-                ExpenseDatabase::class.java, DB_NAME
-        ).build()
+        database = Room.databaseBuilder(context,
+                                        ExpenseDatabase::class.java, DB_NAME)
+            .addMigrations(DbMigration.MIGRATION_2_3)
+            .build()
 
         expenseRepo = ExpenseRepo(database)
         initDB()
