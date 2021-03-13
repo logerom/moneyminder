@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.cashOverview.deleteDialog.DeleteDialogFragment
 import de.logerbyte.moneyminder.data.db.expense.Expense
-import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
+import de.logerbyte.moneyminder.mapper.ExpenseToItemMapper
 import de.logerbyte.moneyminder.util.ConvertUtil
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -29,8 +27,8 @@ import kotlin.collections.HashMap
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
 class CashAdapter @Inject constructor(
-        private val expenseRepo: ExpenseRepo,
-        private val expenseManager: ExpenseManager
+    private val expenseDataManager: ExpenseDataManager,
+    private val mapper: ExpenseToItemMapper
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
 
     var dependencyView: View? = null
@@ -60,26 +58,18 @@ class CashAdapter @Inject constructor(
         loadExpenseList()
     }
 
-    // FIXME: 23.09.18 2 same loadExpense functions. base it.
-    fun loadExpenseList() {
-        expenseRepo.allExpense
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { expenses -> initList(expenses) }
-    }
-
     fun initList(expenses: List<Expense>) {
         val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
         viewModelCashItems = ConvertUtil.expensesToViewModelCashItems(sortedExpenses)
         recreateList()
 
-        mAdapterListener?.onLoadedExpenses(expenses, expenseManager.getOverAllBudget())
+        mAdapterListener?.onLoadedExpenses(expenses, expenseDataManager.getOverAllBudget())
         createViewTypeList(daysWithWeekSummaryViewModelList)
         notifyDataSetChanged()
     }
 
     private fun recreateList() {
-        daysWithWeekSummaryViewModelList = expenseManager.createWeeksAndDaysExpense(viewModelCashItems)
+        daysWithWeekSummaryViewModelList = expenseDataManager.createWeeksAndDaysExpense(viewModelCashItems)
     }
 
 
@@ -180,14 +170,17 @@ class CashAdapter @Inject constructor(
     }
 
     override fun onItemDeleted() {
+        // TODO: 13.03.21 reload list
         loadExpenseList()
     }
 
     override fun onUpdateItem() {
+        // TODO: 13.03.21 reload list
         loadExpenseList()
     }
 
     override fun onAddClicked() {
+        // TODO: 13.03.21 reload list
         loadExpenseList()
     }
 
@@ -196,7 +189,7 @@ class CashAdapter @Inject constructor(
     }
 
     fun onBudgetUpdated() {
-        expenseManager.loadBudgetFromSharedPref()
+        expenseDataManager.loadBudgetFromSharedPref()
         recreateList()
         this.notifyDataSetChanged()
     }

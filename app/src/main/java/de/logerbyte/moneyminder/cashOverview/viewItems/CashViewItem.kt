@@ -8,8 +8,8 @@ import javax.inject.Inject
 import javax.inject.Named
 
 
-class CashViewItem @Inject constructor(@Named(NAMED_DATE) date: String){
-    val cashDate = ObservableField<String>(date)
+class CashViewItem {
+    val cashDate = ObservableField<String>()
     val cashName = ObservableField<String>()
     var cashAmount = ObservableField<String>()
     var cashCategory = ObservableField<String>("")
@@ -25,6 +25,7 @@ class CashViewItem @Inject constructor(@Named(NAMED_DATE) date: String){
         this.cashName.set(item.cashName.get())
         this.cashAmount.set(item.cashInEuro.get())
         this.cashCategory.set(item.cashCategory.get())
+        this.cashPerson.set(item.cash)
     }
 
     fun onDateTextChanged(s: Editable) {

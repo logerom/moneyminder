@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.cashOverview.addCashDialog.AddCashDialogFragment
@@ -15,6 +16,7 @@ import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel.Act
 import de.logerbyte.moneyminder.cashOverview.editDialog.EditDialogFragment
 import de.logerbyte.moneyminder.cashOverview.menu.MenuVm
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
+import de.logerbyte.moneyminder.cashOverview.viewItems.CashViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBindingImpl
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,6 +43,15 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
         bindView()
         initActionBar()
         initPopUp()
+        initBinding()
+    }
+
+    private fun initBinding() {
+        cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it)})
+    }
+
+    private fun setListAdapter(it: List<CashViewItem>?) {
+        TODO("Not yet implemented")
     }
 
     private fun initActionBar() {

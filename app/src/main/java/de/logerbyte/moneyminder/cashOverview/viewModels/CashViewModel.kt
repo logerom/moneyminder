@@ -9,9 +9,9 @@ import de.logerbyte.moneyminder.cashOverview.viewItems.CashViewItem
 import javax.inject.Inject
 import javax.inject.Named
 
-class CashViewModel @Inject constructor(val cashViewItem: CashViewItem) : ViewModel() {
+class CashViewModel @Inject constructor(@Named(NAMED_DATE) date: String) : ViewModel() {
 
-    // TODO: 2019-10-01 cash categories as string resources
+    var cashViewItem: CashViewItem = CashViewItem().apply { cashDate.set(date)}
 
 }
 

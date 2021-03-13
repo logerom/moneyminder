@@ -2,7 +2,11 @@ package de.logerbyte.moneyminder.cashOverview.cashadapter
 
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.data.SharedPrefManager
+import de.logerbyte.moneyminder.data.db.expense.Expense
+import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
 import de.logerbyte.moneyminder.util.DigitUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.lang.Double.parseDouble
 import java.text.SimpleDateFormat
 import java.util.*
@@ -11,7 +15,8 @@ import javax.inject.Singleton
 import kotlin.collections.ArrayList
 
 @Singleton
-class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManager) {
+class ExpenseDataManager @Inject constructor(val sharedPrefManager: SharedPrefManager,
+                                            val expenseRepo: ExpenseRepo) {
 
     private var weeksAndDays = ArrayList<WeekSummaryViewModel>()
     var budget: Int = 0
@@ -26,6 +31,12 @@ class ExpenseManager @Inject constructor(val sharedPrefManager: SharedPrefManage
     init {
         loadBudgetFromSharedPref()
     }
+
+    // FIXME: 23.09.18 2 same loadExpense functions. base it.
+    fun loadExpenseList() = expenseRepo.allExpense.subscribeOn(Schedulers.io())
+
+
+
 
     fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<DayExpenseViewModel>): ArrayList<WeekSummaryViewModel> {
         weeksAndDays.clear()
