@@ -15,6 +15,7 @@ class CashViewModel @Inject constructor(@Named(NAMED_DATE) date: String) : ViewM
     val cashName = ObservableField<String>()
     var cashAmount = ObservableField<String>()
     var cashCategory = ObservableField<String>("")
+    var cashPerson = ObservableField<String>()
 
     var entryId: Long = 0
     var newDateText = ""
