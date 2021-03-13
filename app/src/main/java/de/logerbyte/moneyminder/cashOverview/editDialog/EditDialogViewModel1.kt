@@ -34,10 +34,12 @@ class EditDialogViewModel1(
     }
 
     override fun onClickOk(view: View) {
-        val expenseToUpdate = Expense(cashViewModel.entryId,
-                cashViewModel.cashName.get(), cashViewModel.cashCategory.get(),
-                cashViewModel.cashDate.get(),
-                Double.valueOf(DigitUtil.commaToDot(cashViewModel.cashAmount.get())))
+        val expenseToUpdate = Expense(cashViewModel.cashViewItem.entryId,
+                cashViewModel.cashViewItem.cashName.get(), cashViewModel.cashViewItem.cashCategory.get(),
+                cashViewModel.cashViewItem.cashDate.get(),
+                Double.valueOf(DigitUtil.commaToDot(cashViewModel.cashViewItem.cashAmount.get())),
+                cashViewModel.cashViewItem.cashPerson.get()
+            )
 
         expenseRepo.updateCashItem(expenseToUpdate)
                 .subscribeOn(Schedulers.computation())

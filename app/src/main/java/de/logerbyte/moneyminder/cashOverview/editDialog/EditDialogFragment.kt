@@ -34,7 +34,7 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
         cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }
         viewBinding.dialogContainer.addView(cashView)
-        cashViewModel.setCash(cash)
+        cashViewModel.cashViewItem.setCash(cash)
         editDialogViewModel1.setAdapter(adapterCallback)
     }
 

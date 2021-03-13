@@ -21,7 +21,7 @@ class ExpenseRepoTest {
     private lateinit var expenseRepo: ExpenseRepo
     private val testObserver = TestObserver<MutableList<Expense>>()
 
-    private val expenseFake = Expense(null, "burger", "essen", "11.11.11", 2.4)
+    private val expenseFake = Expense(null, "burger", "essen", "11.11.11", 2.4, "0")
 
     @Before
     fun setUp() {

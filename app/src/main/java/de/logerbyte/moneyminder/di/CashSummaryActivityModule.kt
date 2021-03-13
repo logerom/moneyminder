@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import de.logerbyte.moneyminder.cashOverview.CashSummaryActivity
 import de.logerbyte.moneyminder.cashOverview.CashSummaryViewModel
+import javax.inject.Named
 
 @Module
 abstract class CashSummaryActivityModule {
@@ -19,6 +20,7 @@ abstract class CashSummaryActivityModule {
     class InjectViewModel {
 
         @Provides
+        @Named("ANDROID_VIEWMODEL")
         fun provideCashSummaryViewModel(
                 factory: ViewModelProvider.Factory,
                 cashSummaryActivity: CashSummaryActivity

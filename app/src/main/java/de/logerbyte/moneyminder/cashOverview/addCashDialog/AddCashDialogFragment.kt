@@ -17,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class AddCashDialogFragment : BaseDialogFragment() {
@@ -25,6 +26,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
     lateinit var expenseRepo: ExpenseRepo
 
     @Inject
+    @Named("ANDROID_VIEWMODEL")
     lateinit var cashViewModel: CashViewModel
 
     lateinit var adapterCallback: AdapterCallBack
@@ -36,6 +38,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
     }
 
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
+        // TODO: 13.03.21 inject addcashviewmodel
         addCashViewModel = AddCashViewModel(this, context, cashViewModel, adapterCallback, expenseRepo)
         val cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }

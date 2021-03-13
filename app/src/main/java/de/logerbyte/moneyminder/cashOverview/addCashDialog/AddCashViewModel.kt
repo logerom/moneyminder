@@ -37,10 +37,10 @@ class AddCashViewModel(
     }
 
     private fun saveCashAndReloadList() {
-        val cashInEuro = (DigitUtil.commaToDot(cashViewModel.cashAmount.get())).toDouble()
+        val cashInEuro = (DigitUtil.commaToDot(cashViewModel.cashViewItem.cashAmount.get())).toDouble()
 
-        val expense = Expense(null, cashViewModel.cashName.get(), cashViewModel.cashCategory.get(),
-                cashViewModel.cashDate.get(), cashInEuro)
+        val expense = Expense(null, cashViewModel.cashViewItem.cashName.get(), cashViewModel.cashViewItem.cashCategory.get(),
+                cashViewModel.cashViewItem.cashDate.get(), cashInEuro, cashViewModel.cashViewItem.cashPerson.get())
 
         expenseRepo
                 .insertCashItemIntoDB(expense)
@@ -52,6 +52,6 @@ class AddCashViewModel(
     }
 
     private fun isInputCorrect(): Boolean {
-        return cashViewModel.isAllSet()
+        return cashViewModel.cashViewItem.isAllSet()
     }
 }

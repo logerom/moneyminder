@@ -19,12 +19,14 @@ import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBindingImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+import javax.inject.Named
 
 class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewListener {
     private lateinit var settingsWindowDelegator: SettingsPopupWindow
     private var binding: ActivityMainBinding? = null
 
     @Inject
+    @Named("ANDROID_VIEWMODEL")
     lateinit var cashSummaryViewModel: CashSummaryViewModel
 
     @Inject
