@@ -16,7 +16,7 @@ import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel.Act
 import de.logerbyte.moneyminder.cashOverview.editDialog.EditDialogFragment
 import de.logerbyte.moneyminder.cashOverview.menu.MenuVm
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
-import de.logerbyte.moneyminder.cashOverview.viewItems.CashViewItem
+import de.logerbyte.moneyminder.data.viewItem.CashViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBindingImpl
 import kotlinx.android.synthetic.main.activity_main.*

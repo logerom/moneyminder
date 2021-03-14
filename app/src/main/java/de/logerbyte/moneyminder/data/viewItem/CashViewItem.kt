@@ -1,11 +1,8 @@
-package de.logerbyte.moneyminder.cashOverview.viewItems
+package de.logerbyte.moneyminder.data.viewItem
 
 import android.text.Editable
 import androidx.databinding.ObservableField
-import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel
-import javax.inject.Inject
-import javax.inject.Named
 
 
 class CashViewItem {
