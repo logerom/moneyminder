@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel;
-import de.logerbyte.moneyminder.data.dbItem.expense.Expense;
+import de.logerbyte.moneyminder.domain.database.expense.Expense;
 
 /**
  * Created by logerom on 09.08.18.

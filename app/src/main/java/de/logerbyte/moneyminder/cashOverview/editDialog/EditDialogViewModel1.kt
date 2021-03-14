@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.View
 import de.logerbyte.moneyminder.cashOverview.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.cashOverview.viewModels.CashViewModel
-import de.logerbyte.moneyminder.data.dbItem.expense.Expense
-import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
+import de.logerbyte.moneyminder.domain.database.expense.Expense
+import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
 import de.logerbyte.moneyminder.dialogs.DialogCallback
 import de.logerbyte.moneyminder.util.DigitUtil

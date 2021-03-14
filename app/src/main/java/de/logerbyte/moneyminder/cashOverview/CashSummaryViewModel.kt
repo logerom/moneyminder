@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.cashOverview.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.cashOverview.cashadapter.ExpenseDataManager
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
-import de.logerbyte.moneyminder.data.dbItem.expense.Expense
+import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.mapper.ExpenseToItemMapper
 import de.logerbyte.moneyminder.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.util.DigitUtil.doubleToString

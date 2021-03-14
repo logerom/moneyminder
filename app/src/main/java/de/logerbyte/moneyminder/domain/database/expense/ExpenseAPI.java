@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.data.dbItem.expense;
+package de.logerbyte.moneyminder.domain.database.expense;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -2,7 +2,7 @@ package de.logerbyte.moneyminder.cashOverview.cashadapter
 
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.data.SharedPrefManager
-import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
+import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.util.DigitUtil
 import io.reactivex.schedulers.Schedulers
 import java.lang.Double.parseDouble

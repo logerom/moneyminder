@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.mapper
 
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
-import de.logerbyte.moneyminder.data.dbItem.expense.Expense
+import de.logerbyte.moneyminder.domain.database.expense.Expense
 import java.util.ArrayList
 import javax.inject.Inject
 

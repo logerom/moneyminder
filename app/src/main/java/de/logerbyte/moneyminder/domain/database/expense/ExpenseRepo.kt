@@ -1,6 +1,6 @@
-package de.logerbyte.moneyminder.data.dbItem.expense
+package de.logerbyte.moneyminder.domain.database.expense
 
-import de.logerbyte.moneyminder.data.dbItem.ExpenseDatabase
+import de.logerbyte.moneyminder.domain.database.ExpenseDatabase
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
