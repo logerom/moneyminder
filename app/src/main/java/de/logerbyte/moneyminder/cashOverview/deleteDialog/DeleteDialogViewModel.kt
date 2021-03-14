@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.cashOverview.deleteDialog
 import android.content.Context
 import android.view.View
 import de.logerbyte.moneyminder.cashOverview.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
+import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
 import de.logerbyte.moneyminder.dialogs.DialogCallback
 import io.reactivex.android.schedulers.AndroidSchedulers

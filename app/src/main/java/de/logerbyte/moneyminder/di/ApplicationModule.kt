@@ -10,8 +10,8 @@ import dagger.Provides
 import de.logerbyte.moneyminder.DB_NAME
 import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.SHARED_PREF
-import de.logerbyte.moneyminder.data.db.DbMigration
-import de.logerbyte.moneyminder.data.db.ExpenseDatabase
+import de.logerbyte.moneyminder.data.dbItem.DbMigration
+import de.logerbyte.moneyminder.data.dbItem.ExpenseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Named

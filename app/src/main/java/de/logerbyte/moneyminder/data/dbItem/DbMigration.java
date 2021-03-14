@@ -1,11 +1,8 @@
-package de.logerbyte.moneyminder.data.db;
+package de.logerbyte.moneyminder.data.dbItem;
 
 import androidx.annotation.NonNull;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 public class DbMigration {
 

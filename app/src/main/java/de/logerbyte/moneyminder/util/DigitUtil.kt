@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.util
 
 import androidx.databinding.InverseMethod
-import de.logerbyte.moneyminder.data.db.expense.Expense
+import de.logerbyte.moneyminder.data.dbItem.expense.Expense
 import java.util.*
 
 /**

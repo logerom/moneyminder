@@ -2,10 +2,8 @@ package de.logerbyte.moneyminder.cashOverview.cashadapter
 
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.data.SharedPrefManager
-import de.logerbyte.moneyminder.data.db.expense.Expense
-import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
+import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
 import de.logerbyte.moneyminder.util.DigitUtil
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.lang.Double.parseDouble
 import java.text.SimpleDateFormat

@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import de.logerbyte.moneyminder.data.db.DbMigration
-import de.logerbyte.moneyminder.data.db.ExpenseDatabase
-import de.logerbyte.moneyminder.data.db.expense.Expense
-import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
+import de.logerbyte.moneyminder.data.dbItem.DbMigration
+import de.logerbyte.moneyminder.data.dbItem.ExpenseDatabase
+import de.logerbyte.moneyminder.data.dbItem.expense.Expense
+import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
 import io.reactivex.observers.TestObserver
 import org.junit.After
 import org.junit.Before

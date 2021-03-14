@@ -6,7 +6,7 @@ import android.widget.TextView
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.cashOverview.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.cashOverview.cashadapter.BUNDLE_CASHITEM_ID
-import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
+import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
 import de.logerbyte.moneyminder.dialogs.BaseDialogFragment

@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.cashOverview.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.cashOverview.viewModels.CashViewModel
-import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
+import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener

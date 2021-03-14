@@ -5,7 +5,7 @@ import android.widget.CheckBox
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.base.viewmodel.BaseViewModel
 import de.logerbyte.moneyminder.data.SharedPrefManager
-import de.logerbyte.moneyminder.data.db.expense.ExpenseRepo
+import de.logerbyte.moneyminder.data.dbItem.expense.ExpenseRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers

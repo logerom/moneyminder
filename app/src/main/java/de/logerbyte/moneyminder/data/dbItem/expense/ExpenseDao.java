@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.data.db.expense;
+package de.logerbyte.moneyminder.data.dbItem.expense;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
