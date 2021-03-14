@@ -74,7 +74,7 @@
 
             // todo-SW: two way binding with attributset
 
-            <de.logerbyte.moneyminder.compoundView.searchcategoryList.SearchListView
+            <de.logerbyte.moneyminder.presentation.custom.searchCategoryView.SearchListView
                 android:id="@+id/custom_searchlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

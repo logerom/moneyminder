@@ -2,7 +2,7 @@ package de.logerbyte.moneyminder.data.viewItem
 
 import android.text.Editable
 import androidx.databinding.ObservableField
-import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel
+import de.logerbyte.moneyminder.presentation.cashadapter.DayExpenseViewModel
 
 
 class CashViewItem {

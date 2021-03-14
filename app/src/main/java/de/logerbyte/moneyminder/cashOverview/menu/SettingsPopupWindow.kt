@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.PopupWindow
 import androidx.fragment.app.FragmentManager
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
-import de.logerbyte.moneyminder.cashOverview.cashadapter.CashAdapter
+import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialog
 import de.logerbyte.moneyminder.data.SharedPrefManager
 import javax.inject.Inject
