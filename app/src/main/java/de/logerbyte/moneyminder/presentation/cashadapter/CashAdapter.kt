@@ -34,6 +34,22 @@ class CashAdapter @Inject constructor(
     private val mapper: ExpenseToItemMapper
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewItem.AdapterListener, AdapterCallBack {
 
+    var items = mutableListOf<DayExpenseViewItem>()
+        set(value) {
+            field = value
+            this.notifyDataSetChanged()
+        }
+
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+    // TODO: 14.03.21 Differ with viewType property in ViewItem not with extra viewTypeList
+
+
+    //////////////////////////////////////////////////////////////////////////
+
+
     var dependencyView: View? = null
     var floatingDepedencyViewID = 0
     lateinit var recView: RecyclerView
@@ -104,10 +120,6 @@ class CashAdapter @Inject constructor(
         return viewtypeList[position].ordinal
     }
 
-    override fun getItemCount(): Int {
-        return viewtypeList.size
-    }
-
     private fun getItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
         var itemPosition = -1
         for (weekSummary in daysWithWeekSummaryViewItemList) {
@@ -143,7 +155,7 @@ class CashAdapter @Inject constructor(
         (holder as ViewHolderSummary).binding.vmSummary = week
     }
 
-    private fun initDayItem(dayExpenseViewModel: DayExpenseViewModel, holder: RecyclerView.ViewHolder) {
+    private fun initDayItem(dayExpenseViewModel: DayExpenseViewItem, holder: RecyclerView.ViewHolder) {
         dayExpenseViewModel.setItemListener(this)
         dayExpenseViewModel.setDialogListener(this)
         dayExpenseViewModel.setActivityListener(cashSummaryActivity)
@@ -153,7 +165,7 @@ class CashAdapter @Inject constructor(
     fun createViewTypeList(list: ArrayList<WeekSummaryViewItem>) {
         viewtypeList.clear()
         for (weekSummary in list) {
-            for (expense in weekSummary.dayExpense) {
+            for (expense in weekSummary.dayiteExpense) {
                 viewtypeList.add(ViewType.SAME_WEEK)
             }
             viewtypeList.add(ViewType.SUMMARY_LINE)
