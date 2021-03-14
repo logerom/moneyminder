@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.mapper
+package de.logerbyte.moneyminder.domain.mapper
 
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense

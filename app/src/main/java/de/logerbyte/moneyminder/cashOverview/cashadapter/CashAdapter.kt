@@ -8,11 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.cashOverview.deleteDialog.DeleteDialogFragment
+import de.logerbyte.moneyminder.presentation.dialogDelete.DeleteDialogFragment
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
-import de.logerbyte.moneyminder.mapper.ExpenseToItemMapper
+import de.logerbyte.moneyminder.domain.mapper.ExpenseToItemMapper
 import de.logerbyte.moneyminder.util.ConvertUtil
 import java.text.SimpleDateFormat
 import java.util.*

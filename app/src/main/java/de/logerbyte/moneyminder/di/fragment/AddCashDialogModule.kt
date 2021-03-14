@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import de.logerbyte.moneyminder.cashOverview.addCashDialog.AddCashDialogFragment
+import de.logerbyte.moneyminder.presentation.dialogAddCash.AddCashDialogFragment
 import de.logerbyte.moneyminder.cashOverview.viewModels.CashViewModel
 import de.logerbyte.moneyminder.di.FragmentScope
 import javax.inject.Named

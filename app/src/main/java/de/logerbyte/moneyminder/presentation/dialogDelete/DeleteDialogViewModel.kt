@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashOverview.deleteDialog
+package de.logerbyte.moneyminder.presentation.dialogDelete
 
 import android.content.Context
 import android.view.View

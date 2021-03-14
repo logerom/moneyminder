@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashOverview
+package de.logerbyte.moneyminder.presentation.activityCashSummary
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -8,7 +8,7 @@ import de.logerbyte.moneyminder.cashOverview.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.cashOverview.cashadapter.ExpenseDataManager
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense
-import de.logerbyte.moneyminder.mapper.ExpenseToItemMapper
+import de.logerbyte.moneyminder.domain.mapper.ExpenseToItemMapper
 import de.logerbyte.moneyminder.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.util.DigitUtil.doubleToString
 import de.logerbyte.moneyminder.util.DigitUtil.getCashTotal

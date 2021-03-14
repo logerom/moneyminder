@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashOverview
+package de.logerbyte.moneyminder.presentation.activityCashSummary
 
 import android.os.Bundle
 import android.view.Gravity
@@ -9,11 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.cashOverview.addCashDialog.AddCashDialogFragment
+import de.logerbyte.moneyminder.cashOverview.ViewListener
+import de.logerbyte.moneyminder.presentation.dialogAddCash.AddCashDialogFragment
 import de.logerbyte.moneyminder.cashOverview.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel.ActivityListener
-import de.logerbyte.moneyminder.cashOverview.editDialog.EditDialogFragment
+import de.logerbyte.moneyminder.presentation.dialogEdit.EditDialogFragment
 import de.logerbyte.moneyminder.cashOverview.menu.MenuVm
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
