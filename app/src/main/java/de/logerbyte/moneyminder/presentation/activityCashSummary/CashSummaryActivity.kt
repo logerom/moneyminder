@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.presentation.activity.activityCashSummary
+package de.logerbyte.moneyminder.presentation.activityCashSummary
 
 import android.os.Bundle
 import android.view.Gravity
@@ -9,13 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.cashOverview.ViewListener
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashDialogFragment
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.presentation.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.presentation.cashadapter.DayExpenseViewModel.ActivityListener
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragment
-import de.logerbyte.moneyminder.cashOverview.menu.MenuVm
+import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
@@ -24,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Named
 
-class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewListener {
+class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, CashSummaryViewListener {
     private lateinit var settingsWindowDelegator: SettingsPopupWindow
     private var binding: ActivityMainBinding? = null
 
@@ -33,7 +32,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
     lateinit var cashSummaryViewModel: CashSummaryViewModel
 
     @Inject
-    lateinit var menuVm: MenuVm
+    lateinit var settingsPopupViewModel: SettingsPopupViewModel
 
     @Inject
     lateinit var settingsPopupWindow: SettingsPopupWindow
@@ -97,7 +96,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, ViewLis
         // fixme-sw: init with dagger?
         settingsWindowDelegator = settingsPopupWindow.createPopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
         MenuSettingsBindingImpl.bind(popUpView).apply {
-            vm = menuVm
+            vm = settingsPopupViewModel
             listener = settingsWindowDelegator
         }
     }

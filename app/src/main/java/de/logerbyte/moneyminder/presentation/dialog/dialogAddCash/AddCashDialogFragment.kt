@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.cashOverview.viewModels.CashViewModel
+import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogViewModel
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
@@ -27,7 +27,7 @@ class AddCashDialogFragment : BaseDialogFragment() {
 
     @Inject
     @Named("ANDROID_VIEWMODEL")
-    lateinit var cashViewModel: CashViewModel
+    lateinit var editDialogViewModel: EditDialogViewModel
 
     lateinit var adapterCallback: AdapterCallBack
 
@@ -39,9 +39,9 @@ class AddCashDialogFragment : BaseDialogFragment() {
 
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
         // TODO: 13.03.21 inject addcashviewmodel
-        addCashViewModel = AddCashViewModel(this, context, cashViewModel, adapterCallback, expenseRepo)
+        addCashViewModel = AddCashViewModel(this, context, editDialogViewModel, adapterCallback, expenseRepo)
         val cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
-        DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = cashViewModel }
+        DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = editDialogViewModel }
         viewBinding.dialogContainer.addView(cashView)
     }
 

@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialogVM" />
+            type="de.logerbyte.moneyminder.cashOverview.menu.dialogFilter.FilterDialogViewModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

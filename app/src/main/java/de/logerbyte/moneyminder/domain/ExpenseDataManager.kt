@@ -1,7 +1,6 @@
 package de.logerbyte.moneyminder.domain
 
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
-import de.logerbyte.moneyminder.data.SharedPrefManager
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.domain.util.DigitUtil
 import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
@@ -15,7 +14,7 @@ import kotlin.collections.ArrayList
 
 @Singleton
 class ExpenseDataManager @Inject constructor(val sharedPrefManager: SharedPrefManager,
-                                            val expenseRepo: ExpenseRepo) {
+                                             val expenseRepo: ExpenseRepo) {
 
     private var weeksAndDays = ArrayList<WeekSummaryViewItem>()
     var budget: Int = 0

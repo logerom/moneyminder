@@ -4,11 +4,11 @@
 
         <variable
             name="filterDialogItem"
-            type="de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialogItem" />
+            type="de.logerbyte.moneyminder.data.viewItem.FilterDialogViewItem" />
 
         <variable
             name="filterDialogVM"
-            type="de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialogVMListener" />
+            type="de.logerbyte.moneyminder.cashOverview.menu.dialogFilter.FilterDialogVMListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

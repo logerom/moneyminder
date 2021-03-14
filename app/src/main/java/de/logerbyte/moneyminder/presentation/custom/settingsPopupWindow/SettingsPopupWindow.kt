@@ -5,18 +5,20 @@ import android.widget.PopupWindow
 import androidx.fragment.app.FragmentManager
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
-import de.logerbyte.moneyminder.cashOverview.menu.filter.FilterDialog
-import de.logerbyte.moneyminder.data.SharedPrefManager
+import de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialog
+import de.logerbyte.moneyminder.domain.SharedPrefManager
+import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import javax.inject.Inject
 
 // fixme-SW: view reference from fragmentManger?
 class SettingsPopupWindow @Inject constructor(
-        val fragmentManager: FragmentManager,
-        val menuVm: MenuVm,
-        val sharedPrefManager: SharedPrefManager,
-        val cashAdapter: CashAdapter)
+    val fragmentManager: FragmentManager,
+    val settingsPopupViewModel: SettingsPopupViewModel,
+    val sharedPrefManager: SharedPrefManager,
+    val cashAdapter: CashAdapter)
     : MenuItemsClicked, PopupWindow.OnDismissListener {
 
+    // TODO: 14.03.21 enherit from widget dont wrapp
     lateinit var popupWindow: PopupWindow
 
     fun createPopupWindow(contentView: View, with: Int, height: Int, focusable: Boolean): SettingsPopupWindow {
@@ -41,7 +43,7 @@ class SettingsPopupWindow @Inject constructor(
     }
 
     private fun writeBudgetInSharedPref() {
-        menuVm.budget.get()?.apply {
+        settingsPopupViewModel.budget.get()?.apply {
             sharedPrefManager.writeSharedPrefInt(SHARED_PREF_MENU_BUDGET, this)
         }
     }

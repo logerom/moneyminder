@@ -11,7 +11,7 @@
 
         <variable
             name="viewListener"
-            type="de.logerbyte.moneyminder.cashOverview.ViewListener" />
+            type="de.logerbyte.moneyminder.presentation.activity.activityCashSummary.CashSummaryViewListener" />
 
         <import type="de.logerbyte.moneyminder.util.DigitUtil" />
     </data>
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".presentation.activity.activityCashSummary.CashSummaryActivity">
+            tools:context=".presentation.activityCashSummary.CashSummaryActivity">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/my_toolbar"

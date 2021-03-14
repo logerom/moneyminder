@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.base.ErrorHandling
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.cashOverview.viewModels.CashViewModel
+import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogViewModel
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
@@ -16,11 +16,11 @@ import io.reactivex.schedulers.Schedulers
 
 
 class AddCashViewModel(
-        dialogCallback: DialogCallback,
-        val context: Context?,
-        val cashViewModel: CashViewModel,
-        val listCallback: AdapterCallBack,
-        val expenseRepo: ExpenseRepo
+    dialogCallback: DialogCallback,
+    val context: Context?,
+    val editDialogViewModel: EditDialogViewModel,
+    val listCallback: AdapterCallBack,
+    val expenseRepo: ExpenseRepo
 ) : BaseDialogViewModel1(dialogCallback) {
 
     var changedQueryText: String? = ""
@@ -37,10 +37,10 @@ class AddCashViewModel(
     }
 
     private fun saveCashAndReloadList() {
-        val cashInEuro = (DigitUtil.commaToDot(cashViewModel.cashViewItem.cashAmount.get())).toDouble()
+        val cashInEuro = (DigitUtil.commaToDot(editDialogViewModel.cashViewItem.cashAmount.get())).toDouble()
 
-        val expense = Expense(null, cashViewModel.cashViewItem.cashName.get(), cashViewModel.cashViewItem.cashCategory.get(),
-                cashViewModel.cashViewItem.cashDate.get(), cashInEuro, cashViewModel.cashViewItem.cashPerson.get())
+        val expense = Expense(null, editDialogViewModel.cashViewItem.cashName.get(), editDialogViewModel.cashViewItem.cashCategory.get(),
+                editDialogViewModel.cashViewItem.cashDate.get(), cashInEuro, editDialogViewModel.cashViewItem.cashPerson.get())
 
         expenseRepo
                 .insertCashItemIntoDB(expense)
@@ -52,6 +52,6 @@ class AddCashViewModel(
     }
 
     private fun isInputCorrect(): Boolean {
-        return cashViewModel.cashViewItem.isAllSet()
+        return editDialogViewModel.cashViewItem.isAllSet()
     }
 }

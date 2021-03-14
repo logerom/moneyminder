@@ -1,20 +1,22 @@
-package de.logerbyte.moneyminder.cashOverview.menu.filter
+package de.logerbyte.moneyminder.presentation.dialog.dialogFilter
 
 import android.view.View
 import android.widget.CheckBox
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.base.viewmodel.BaseViewModel
-import de.logerbyte.moneyminder.data.SharedPrefManager
+import de.logerbyte.moneyminder.data.viewItem.FilterDialogViewItem
+import de.logerbyte.moneyminder.domain.SharedPrefManager
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class FilterDialogVM @Inject constructor(val expenseRepo: ExpenseRepo, val sharedPrefManager:
-SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
+class FilterDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo, val sharedPrefManager:
+SharedPrefManager
+) : BaseViewModel(), FilterDialogVMListener {
 
-    val rawCategories = MutableLiveData<List<FilterDialogItem>>()
+    val rawCategories = MutableLiveData<List<FilterDialogViewItem>>()
     val checkedCategories = setOf<String>()
 
     init {
@@ -41,7 +43,7 @@ SharedPrefManager) : BaseViewModel(), FilterDialogVMListener {
     }
 
     private fun initRawCategories(categories: List<String>) {
-        rawCategories.value = categories.map { s: String -> FilterDialogItem(s, false) }
+        rawCategories.value = categories.map { s: String -> FilterDialogViewItem(s, false) }
     }
 
     fun applyFilter() {

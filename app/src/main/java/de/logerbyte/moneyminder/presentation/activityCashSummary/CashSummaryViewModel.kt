@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.presentation.activity.activityCashSummary
+package de.logerbyte.moneyminder.presentation.activityCashSummary
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData

@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import de.logerbyte.moneyminder.domain.di.ActivityScope
-import de.logerbyte.moneyminder.presentation.activity.activityCashSummary.CashSummaryActivity
-import de.logerbyte.moneyminder.presentation.activity.activityCashSummary.CashSummaryViewModel
+import de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryActivity
+import de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewModel
 import javax.inject.Named
 
 @Module

@@ -1,12 +1,12 @@
-package de.logerbyte.moneyminder.cashOverview.menu
+package de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow
 
 import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
-import de.logerbyte.moneyminder.data.SharedPrefManager
+import de.logerbyte.moneyminder.domain.SharedPrefManager
 import javax.inject.Inject
 
 
-class MenuVm @Inject constructor(sharedPrefManager: SharedPrefManager) {
+class SettingsPopupViewModel @Inject constructor(sharedPrefManager: SharedPrefManager) {
     var budget = ObservableField<Int>()
 
     fun budget(value: String) {

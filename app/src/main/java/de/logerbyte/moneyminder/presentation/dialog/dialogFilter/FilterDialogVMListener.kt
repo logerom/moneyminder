@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.cashOverview.menu.filter
+package de.logerbyte.moneyminder.presentation.dialog.dialogFilter
 
 import android.view.View
 
