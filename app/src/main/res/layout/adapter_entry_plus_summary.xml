@@ -4,9 +4,9 @@
 
         <variable
             name="vmSummary"
-            type="de.logerbyte.moneyminder.cashOverview.cashadapter.WeekSummaryViewModel" />
+            type="de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem" />
 
-        <import type="de.logerbyte.moneyminder.util.DigitUtil" />
+        <import type="de.logerbyte.moneyminder.domain.util.DigitUtil" />
     </data>
 
         <LinearLayout
