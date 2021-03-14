@@ -15,8 +15,6 @@ import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
 import de.logerbyte.moneyminder.domain.ExpenseDataManager
-import de.logerbyte.moneyminder.domain.mapper.ExpenseToItemMapper
-import de.logerbyte.moneyminder.domain.util.ConvertUtil
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -30,11 +28,10 @@ import kotlin.collections.HashMap
 const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
 class CashAdapter @Inject constructor(
-    private val expenseDataManager: ExpenseDataManager,
-    private val mapper: ExpenseToItemMapper
+    private val expenseDataManager: ExpenseDataManager
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewItem.AdapterListener, AdapterCallBack {
 
-    var items = mutableListOf<DayExpenseViewItem>()
+    var items = mutableListOf<WeekSummaryViewItem>()
         set(value) {
             field = value
             this.notifyDataSetChanged()
@@ -44,7 +41,8 @@ class CashAdapter @Inject constructor(
         return items.size
     }
 
-    // TODO: 14.03.21 Differ with viewType property in ViewItem not with extra viewTypeList
+    // todo X: Item Mapper has to map in NO_CASCADED List items
+    // todo X: Differ with viewType property in ViewItem not with extra viewTypeList
 
 
     //////////////////////////////////////////////////////////////////////////
@@ -56,7 +54,6 @@ class CashAdapter @Inject constructor(
     var floating = false
     lateinit var attechedActivity: FragmentActivity
     private val viewtypeList = ArrayList<ViewType>()
-    private val calendar: Calendar
     private var viewModelCashItems = ArrayList<DayExpenseViewModel>()
     private var layoutInflater: LayoutInflater? = null
     private var mAdapterListener: Listener? = null
@@ -71,17 +68,7 @@ class CashAdapter @Inject constructor(
         SAME_WEEK
     }
 
-    init {
-        calendar = Calendar.getInstance()
-        calendar.firstDayOfWeek = Calendar.MONDAY
-        loadExpenseList()
-    }
-
     fun initList(expenses: List<Expense>) {
-        val sortedExpenses = expenses.sortedBy { sdf.parse(it.cashDate) }
-        viewModelCashItems = ConvertUtil.expensesToViewModelCashItems(sortedExpenses)
-        recreateList()
-
         mAdapterListener?.onLoadedExpenses(expenses, expenseDataManager.getOverAllBudget())
         createViewTypeList(daysWithWeekSummaryViewItemList)
         notifyDataSetChanged()

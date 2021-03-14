@@ -6,10 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.domain.ExpenseDataManager
-import de.logerbyte.moneyminder.data.viewItem.CashViewItem
 import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense
-import de.logerbyte.moneyminder.domain.mapper.ExpenseToItemMapper
 import de.logerbyte.moneyminder.domain.mapper.WeekSummaryItemMapper
 import de.logerbyte.moneyminder.domain.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.domain.util.DigitUtil.doubleToString
