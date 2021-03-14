@@ -11,9 +11,9 @@
 
         <variable
             name="viewListener"
-            type="de.logerbyte.moneyminder.presentation.activity.activityCashSummary.CashSummaryViewListener" />
+            type="de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewListener" />
 
-        <import type="de.logerbyte.moneyminder.util.DigitUtil" />
+        <import type="de.logerbyte.moneyminder.domain.util.DigitUtil" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -42,7 +42,6 @@
                     android:id="@+id/rv_costs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    binding:recyclerAdapter="@{viewModel.cashAdapter}"
                     tools:listitem="@layout/adapter_entry" />
 
             </LinearLayout>

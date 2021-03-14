@@ -4,6 +4,8 @@ import android.view.View;
 
 import androidx.databinding.ObservableField;
 
+import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack;
+
 /**
  * Created by logerom on 29.07.18.
  */
@@ -74,7 +76,7 @@ public class DayExpenseViewItem {
 
     public interface ActivityListener {
 
-        void showEditDialog(DayExpenseViewModel item, AdapterCallBack dialogVmListener);
+        void showEditDialog(DayExpenseViewItem item, AdapterCallBack dialogVmListener);
     }
 
 

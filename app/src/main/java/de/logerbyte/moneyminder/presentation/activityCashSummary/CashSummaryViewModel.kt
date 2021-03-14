@@ -7,20 +7,24 @@ import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.domain.ExpenseDataManager
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
+import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.domain.mapper.ExpenseToItemMapper
+import de.logerbyte.moneyminder.domain.mapper.WeekSummaryItemMapper
 import de.logerbyte.moneyminder.domain.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.domain.util.DigitUtil.doubleToString
 import de.logerbyte.moneyminder.domain.util.DigitUtil.getCashTotal
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDataManager,
-                                               val mapper: ExpenseToItemMapper) : ViewModel(), CashAdapter.Listener {
+                                               val mapper: WeekSummaryItemMapper,
+                                               val sdf: SimpleDateFormat) : ViewModel(), CashAdapter.Listener {
     val totalExpenses = ObservableField<Double>()
     private val totalBudget = ObservableField("0,00")
     private val totalSaving = ObservableField<Double?>()
-    private val _cashItems = MutableLiveData<List<CashViewItem>>()
-    val cashItems: LiveData<List<CashViewItem>> = _cashItems
+    private val _cashItems = MutableLiveData<List<WeekSummaryViewItem>>()
+    val cashItems: LiveData<List<WeekSummaryViewItem>> = _cashItems
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
     init {
@@ -30,6 +34,7 @@ class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDa
 
     private fun initCashViewItem() {
         expenseDataManager.loadExpenseList()
+            .map { it.sortedBy { sdf.parse(it.cashDate) } }
             .map { mapper.map(it) }
             .subscribe {_cashItems.value = it}
     }

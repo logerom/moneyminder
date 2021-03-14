@@ -10,7 +10,7 @@
             name="listener"
             type="de.logerbyte.moneyminder.cashOverview.menu.MenuItemsClicked" />
 
-        <import type="de.logerbyte.moneyminder.util.DigitUtil" />
+        <import type="de.logerbyte.moneyminder.domain.util.DigitUtil" />
     </data>
 <LinearLayout
     android:layout_width="@dimen/menu_width"

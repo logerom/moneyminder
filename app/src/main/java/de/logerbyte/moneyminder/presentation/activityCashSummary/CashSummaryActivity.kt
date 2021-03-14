@@ -11,19 +11,19 @@ import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashDialogFragment
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.presentation.cashadapter.DayExpenseViewModel
-import de.logerbyte.moneyminder.presentation.cashadapter.DayExpenseViewModel.ActivityListener
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragment
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
-import de.logerbyte.moneyminder.data.viewItem.CashViewItem
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
+import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
-import de.logerbyte.moneyminder.databinding.MenuSettingsBindingImpl
+import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
+import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Named
 
-class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, CashSummaryViewListener {
+class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewItem.ActivityListener, CashSummaryViewListener {
     private lateinit var settingsWindowDelegator: SettingsPopupWindow
     private var binding: ActivityMainBinding? = null
 
@@ -37,20 +37,28 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, CashSum
     @Inject
     lateinit var settingsPopupWindow: SettingsPopupWindow
 
+    @Inject
+    lateinit var cashAdapter: CashAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindViewModel()
-        bindView()
+
+        bindContentView()
         initActionBar()
         initPopUp()
         initBinding()
+        setUpRecyclerView()
+    }
+
+    private fun setUpRecyclerView() {
+        binding?.rvCosts?.adapter = cashAdapter
     }
 
     private fun initBinding() {
         cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it)})
     }
 
-    private fun setListAdapter(it: List<CashViewItem>?) {
+    private fun setListAdapter(it: List<WeekSummaryViewItem>) {
         TODO("Not yet implemented")
     }
 
@@ -59,7 +67,9 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, CashSum
         setSupportActionBar(my_toolbar)
     }
 
-    override fun showEditDialog(item: DayExpenseViewModel, dialogVmListener: AdapterCallBack) { //  new EditDialogFragment().show(getSupportFragmentManager(), "Base_Dialog");
+    override fun showEditDialog(item: DayExpenseViewItem, dialogVmListener: AdapterCallBack) {
+        //  new EditDialogFragment().show
+        // (getSupportFragmentManager(), "Base_Dialog");
         val baseDialog = EditDialogFragment()
         baseDialog.show(supportFragmentManager, "Edit_Dialog")
         // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
@@ -87,7 +97,6 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, CashSum
                 true
             }
             else -> super.onOptionsItemSelected(item)
-
         }
     }
 
@@ -95,21 +104,17 @@ class CashSummaryActivity : DaggerAppCompatActivity(), ActivityListener, CashSum
         val popUpView = layoutInflater.inflate(R.layout.menu_settings, null)
         // fixme-sw: init with dagger?
         settingsWindowDelegator = settingsPopupWindow.createPopupWindow(popUpView, RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT, true)
-        MenuSettingsBindingImpl.bind(popUpView).apply {
+        MenuSettingsBinding.bind(popUpView).apply {
             vm = settingsPopupViewModel
             listener = settingsWindowDelegator
         }
     }
 
-    private fun bindViewModel() {
-        cashSummaryViewModel!!.setCashSummaryActivity(this)
-    }
-    private fun bindView() {
+    private fun bindContentView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding?.viewModel = cashSummaryViewModel
         binding?.viewListener = this
     }
-
 
     companion object {
         private const val ADD_CASH_DIALOG = "addCashDialog"

@@ -6,6 +6,7 @@ import de.logerbyte.moneyminder.presentation.cashadapter.DayExpenseViewModel
 
 
 class CashViewItem {
+    // todo X: observable field copy in mapper
     val cashDate = ObservableField<String>()
     val cashName = ObservableField<String>()
     var cashAmount = ObservableField<String>()

@@ -10,6 +10,7 @@ import dagger.Provides
 import de.logerbyte.moneyminder.DB_NAME
 import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.SHARED_PREF
+import de.logerbyte.moneyminder.domain.database.DbMigration
 import de.logerbyte.moneyminder.domain.database.ExpenseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,6 +20,10 @@ import javax.inject.Singleton
 
 @Module
 object ApplicationModule {
+
+    @Provides
+    @Singleton
+    fun provideDateFormat() = SimpleDateFormat("dd.MM.yy")
 
     @JvmStatic
     @Singleton

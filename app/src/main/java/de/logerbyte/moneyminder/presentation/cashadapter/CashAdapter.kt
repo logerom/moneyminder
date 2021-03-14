@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
 import de.logerbyte.moneyminder.presentation.dialog.dialogDelete.DeleteDialogFragment
 import de.logerbyte.moneyminder.domain.database.expense.Expense
@@ -31,7 +32,7 @@ const val BUNDLE_CASHITEM_ID = "cash_item_id"
 class CashAdapter @Inject constructor(
     private val expenseDataManager: ExpenseDataManager,
     private val mapper: ExpenseToItemMapper
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewModel.AdapterListener, AdapterCallBack {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewItem.AdapterListener, AdapterCallBack {
 
     var dependencyView: View? = null
     var floatingDepedencyViewID = 0
