@@ -5,12 +5,13 @@ import android.view.View;
 import androidx.databinding.ObservableField;
 
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack;
+import kotlin.Deprecated;
 
 /**
  * Created by logerom on 29.07.18.
  */
-
-public class DayExpenseViewItem {
+@Deprecated(message = "Use CashViewItem")
+public class DayExpenseViewViewItem implements ExpenseListViewItem {
 
     private long entryId;
     private ObservableField<String> cashName = new ObservableField<>();
@@ -22,8 +23,8 @@ public class DayExpenseViewItem {
     private AdapterCallBack dialogVmListener;
 
     // FIXME: 17.09.18 only default constructor if we extend from AndroidViewModel. Use factory
-    public DayExpenseViewItem(long entryId, String cashDate, String cashName, String cashCategory,
-                              String cashInEuro) {
+    public DayExpenseViewViewItem(long entryId, String cashDate, String cashName, String cashCategory,
+                                  String cashInEuro) {
         this.entryId = entryId;
         this.cashDate.set(cashDate);
         this.cashName.set(cashName);
@@ -76,7 +77,7 @@ public class DayExpenseViewItem {
 
     public interface ActivityListener {
 
-        void showEditDialog(DayExpenseViewItem item, AdapterCallBack dialogVmListener);
+        void showEditDialog(DayExpenseViewViewItem item, AdapterCallBack dialogVmListener);
     }
 
 

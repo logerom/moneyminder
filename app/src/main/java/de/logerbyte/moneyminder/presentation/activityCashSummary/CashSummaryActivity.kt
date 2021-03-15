@@ -14,8 +14,8 @@ import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragment
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Named
 
-class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewItem.ActivityListener, CashSummaryViewListener {
+class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.ActivityListener, CashSummaryViewListener {
     private lateinit var settingsWindowDelegator: SettingsPopupWindow
     private var binding: ActivityMainBinding? = null
 
@@ -58,7 +58,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewItem.Activi
         cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it)})
     }
 
-    private fun setListAdapter(it: List<SummaryMonthViewItem>) {
+    private fun setListAdapter(it: List<SummaryMonthViewViewItem>) {
         TODO("Not yet implemented")
     }
 
@@ -67,7 +67,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewItem.Activi
         setSupportActionBar(my_toolbar)
     }
 
-    override fun showEditDialog(item: DayExpenseViewItem, dialogVmListener: AdapterCallBack) {
+    override fun showEditDialog(item: DayExpenseViewViewItem, dialogVmListener: AdapterCallBack) {
         //  new EditDialogFragment().show
         // (getSupportFragmentManager(), "Base_Dialog");
         val baseDialog = EditDialogFragment()

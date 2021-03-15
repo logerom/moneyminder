@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.domain.ExpenseDataManager
-import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.domain.mapper.MonthSummaryItemViewMapper
 import de.logerbyte.moneyminder.domain.util.DigitUtil.dotToComma
@@ -21,8 +21,8 @@ class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDa
     val totalExpenses = ObservableField<Double>()
     private val totalBudget = ObservableField("0,00")
     private val totalSaving = ObservableField<Double?>()
-    private val _cashItems = MutableLiveData<List<SummaryMonthViewItem>>()
-    val cashItems: LiveData<List<SummaryMonthViewItem>> = _cashItems
+    private val _cashItems = MutableLiveData<List<SummaryMonthViewViewItem>>()
+    val cashItems: LiveData<List<SummaryMonthViewViewItem>> = _cashItems
 
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
     init {

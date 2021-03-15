@@ -4,7 +4,7 @@
 
         <variable
             name="vmSummary"
-            type="de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem" />
+            type="de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem" />
 
         <import type="de.logerbyte.moneyminder.domain.util.DigitUtil" />
     </data>

@@ -1,36 +1,56 @@
 package de.logerbyte.moneyminder.domain.mapper
 
-import de.logerbyte.moneyminder.data.viewItem.CashViewItem
-import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
+import de.logerbyte.moneyminder.data.viewItem.CashViewViewItem
+import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
 
 class MonthSummaryItemViewMapper @Inject constructor(
     val sdf: SimpleDateFormat
-): BaseMapper<List<Expense>, List<SummaryMonthViewItem>> {
+): BaseMapper<List<Expense>, List<SummaryMonthViewViewItem>> {
 
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
     var firstDate: Date? = null
     var firstWeek: Int? = null
-    private var weeksAndDays = ArrayList<SummaryMonthViewItem>()
+    private var weeksAndDays = ArrayList<SummaryMonthViewViewItem>()
     var budget: Int = 0
 
     /**
      * Epense list needs to be sorted in days
      */
-    override fun map(from: List<Expense>): List<SummaryMonthViewItem> {
+    override fun map(from: List<Expense>): List<SummaryMonthViewViewItem> {
+        val viewItemList = ArrayList<ExpenseListViewItem>()
+
+        for (expenseIndex in from.indices) {
+
+            val expense = from[expenseIndex]
+            viewItemList.add(CashViewViewItem(expense.cashDate, expense.cashName, expense.cashInEuro.toString(), expense.category, expense.person))
+            val expense1 = if(expenseIndex + 1 < from.size) from[expenseIndex + 1] else break
+
+            val localDate = LocalDate.parse(expense.cashDate)
+            val nextLocalDate = LocalDate.parse(expense1.cashDate)
+
+            if(localDate.month == nextLocalDate.month){
+                viewItemList.add(CashViewViewItem(expense1.cashDate, expense1.cashName, expense1.cashInEuro.toString(), expense1.category, expense1.person))
+            }else{
+                // TODO: 15.03.21 MonthSummaryLine with all expenses in month AND Savings = limit - expenses
+            }
+        }
+        java.time.Clock.
 //        return createWeeksAndDaysExpense(ArrayList(from))
         return summerMonthExpense(from)
     }
 
-    private fun summerMonthExpense(from: List<Expense>): List<SummaryMonthViewItem> {
+    private fun summerMonthExpense(from: List<Expense>): List<SummaryMonthViewViewItem> {
         TODO("Not yet implemented")
     }
 
-    fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<Expense>): List<SummaryMonthViewItem> {
+    fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<Expense>): List<SummaryMonthViewViewItem> {
         weeksAndDays.clear()
         val datesToDelete = ArrayList<Expense>()
         var subExpenseDays = ArrayList<Expense>()
@@ -78,19 +98,19 @@ class MonthSummaryItemViewMapper @Inject constructor(
     }
 
     private fun addExpenseToSummaryWeek(subExpenseDays: ArrayList<Expense>, expenseListNaturalOrder:
-    ArrayList<SummaryMonthViewItem>) {
+    ArrayList<SummaryMonthViewViewItem>) {
         val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
         val expenseDiff = budget - expensesOfWeek
-        val summaryWeek = SummaryMonthViewItem(expensesOfWeek, budget.toDouble(), expenseDiff,
+        val summaryWeek = SummaryMonthViewViewItem(expensesOfWeek, budget.toDouble(), expenseDiff,
             createCashViewItem(subExpenseDays))
         expenseListNaturalOrder.add(summaryWeek)
     }
 
-    private fun createCashViewItem(expenses: java.util.ArrayList<Expense>): java.util.ArrayList<CashViewItem> {
-        val cashViewItems = java.util.ArrayList<CashViewItem>()
+    private fun createCashViewItem(expenses: java.util.ArrayList<Expense>): java.util.ArrayList<CashViewViewItem> {
+        val cashViewItems = java.util.ArrayList<CashViewViewItem>()
         for (expense in expenses) {
             // todo X: copy operator? Are properties linked?
-            val item = CashViewItem().apply {
+            val item = CashViewViewItem().apply {
                 cashDate.set(expense.cashDate)
                 cashName.set(expense.cashName)
                 cashAmount.set(expense.cashName)
@@ -116,8 +136,8 @@ class MonthSummaryItemViewMapper @Inject constructor(
         return cashSummary
     }
 
-    private fun descendWeekExpenses(expenseListNaturalOrder: ArrayList<SummaryMonthViewItem>): ArrayList<SummaryMonthViewItem> {
-        val expenseDescend = ArrayList<SummaryMonthViewItem>()
+    private fun descendWeekExpenses(expenseListNaturalOrder: ArrayList<SummaryMonthViewViewItem>): ArrayList<SummaryMonthViewViewItem> {
+        val expenseDescend = ArrayList<SummaryMonthViewViewItem>()
         for (i in expenseListNaturalOrder.indices.reversed()) {
             expenseDescend.add(expenseListNaturalOrder[i])
         }

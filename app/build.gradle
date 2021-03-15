@@ -10,7 +10,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "de.logerbyte.moneyminder"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 300
         versionName "3.0.0"

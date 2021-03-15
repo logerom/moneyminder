@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem
 import de.logerbyte.moneyminder.presentation.dialog.dialogDelete.DeleteDialogFragment
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
@@ -29,9 +29,9 @@ const val BUNDLE_CASHITEM_ID = "cash_item_id"
 
 class CashAdapter @Inject constructor(
     private val expenseDataManager: ExpenseDataManager
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewItem.AdapterListener, AdapterCallBack {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewViewItem.AdapterListener, AdapterCallBack {
 
-    var items = mutableListOf<SummaryMonthViewItem>()
+    var items = mutableListOf<SummaryMonthViewViewItem>()
         set(value) {
             field = value
             this.notifyDataSetChanged()
@@ -61,7 +61,7 @@ class CashAdapter @Inject constructor(
     private val dateMap = HashMap<Date, DayExpenseViewModel>()
     var sdf = SimpleDateFormat("dd.MM.yy")
     private val weeksAndDaysWithExpenses = ArrayList<ArrayList<DayExpenseViewModel>>()
-    private lateinit var daysWithSummaryMonthViewItemList: ArrayList<SummaryMonthViewItem>
+    private lateinit var daysWithSummaryMonthViewItemList: ArrayList<SummaryMonthViewViewItem>
 
     private enum class ViewType {
         SUMMARY_LINE,
@@ -138,18 +138,18 @@ class CashAdapter @Inject constructor(
         return ViewHolder(binding)
     }
 
-    private fun initCashSummaryItem(month: SummaryMonthViewItem, holder: RecyclerView.ViewHolder) {
+    private fun initCashSummaryItem(month: SummaryMonthViewViewItem, holder: RecyclerView.ViewHolder) {
         (holder as ViewHolderSummary).binding.vmSummary = month
     }
 
-    private fun initDayItem(dayExpenseViewModel: DayExpenseViewItem, holder: RecyclerView.ViewHolder) {
+    private fun initDayItem(dayExpenseViewModel: DayExpenseViewViewItem, holder: RecyclerView.ViewHolder) {
         dayExpenseViewModel.setItemListener(this)
         dayExpenseViewModel.setDialogListener(this)
         dayExpenseViewModel.setActivityListener(cashSummaryActivity)
         (holder as ViewHolder).binding.vmCashItem = dayExpenseViewModel
     }
 
-    fun createViewTypeList(list: ArrayList<SummaryMonthViewItem>) {
+    fun createViewTypeList(list: ArrayList<SummaryMonthViewViewItem>) {
         viewtypeList.clear()
         for (weekSummary in list) {
             for (expense in weekSummary.dayiteExpense) {

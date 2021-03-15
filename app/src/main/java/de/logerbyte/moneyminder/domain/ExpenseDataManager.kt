@@ -2,7 +2,7 @@ package de.logerbyte.moneyminder.domain
 
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
-import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +14,7 @@ import kotlin.collections.ArrayList
 class ExpenseDataManager @Inject constructor(val sharedPrefManager: SharedPrefManager,
                                              val expenseRepo: ExpenseRepo) {
 
-    private var weeksAndDays = ArrayList<SummaryMonthViewItem>()
+    private var weeksAndDays = ArrayList<SummaryMonthViewViewItem>()
     var budget: Int = 0
 
     var sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
