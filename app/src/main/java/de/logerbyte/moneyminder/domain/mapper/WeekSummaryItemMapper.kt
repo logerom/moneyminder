@@ -1,10 +1,8 @@
 package de.logerbyte.moneyminder.domain.mapper
 
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense
-import de.logerbyte.moneyminder.domain.util.DigitUtil
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -20,14 +18,15 @@ class WeekSummaryItemMapper @Inject constructor(
     private var weeksAndDays = ArrayList<WeekSummaryViewItem>()
     var budget: Int = 0
 
-
+    /**
+     * Epense list needs to be sorted in days
+     */
     override fun map(from: List<Expense>): List<WeekSummaryViewItem> {
-        return createWeeksAndDaysExpense(from)
+        return createWeeksAndDaysExpense(ArrayList(from))
     }
 
-    fun createWeeksAndDaysExpense(sortedExpenses: List<Expense>): List<WeekSummaryViewItem> {
+    fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<Expense>): List<WeekSummaryViewItem> {
         weeksAndDays.clear()
-        val sortedExpensesCopy = sortedExpenses.toMutableList()
         val datesToDelete = ArrayList<Expense>()
         var subExpenseDays = ArrayList<Expense>()
         var again = true
@@ -35,9 +34,9 @@ class WeekSummaryItemMapper @Inject constructor(
 
         while (again) {
 
-            for (expense: Expense in sortedExpensesCopy) {
+            for (expense: Expense in sortedExpenses) {
                 // starting week/expense which is use to compare with other expenses
-                if (sortedExpensesCopy.indexOf(expense) == 0) {
+                if (sortedExpenses.indexOf(expense) == 0) {
                     firstDate = getDateFromViewModel(expense)
                     actualCalendar.time = firstDate
                     firstWeek = actualCalendar.get(Calendar.WEEK_OF_YEAR)
@@ -57,9 +56,9 @@ class WeekSummaryItemMapper @Inject constructor(
                 }
             }
 
-            sortedExpensesCopy.removeAll(datesToDelete)
+            sortedExpenses.removeAll(datesToDelete)
 
-            if (sortedExpensesCopy.isEmpty()) {
+            if (sortedExpenses.isEmpty()) {
                 // is list empty add last remaining expense to week
                 if (subExpenseDays.isNotEmpty()) {
                     addExpenseToSummaryWeek(subExpenseDays, weeksAndDays)
