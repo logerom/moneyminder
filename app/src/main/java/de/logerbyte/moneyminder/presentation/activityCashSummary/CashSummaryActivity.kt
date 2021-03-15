@@ -15,7 +15,7 @@ import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragmen
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
@@ -58,7 +58,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewItem.Activi
         cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it)})
     }
 
-    private fun setListAdapter(it: List<WeekSummaryViewItem>) {
+    private fun setListAdapter(it: List<SummaryMonthViewItem>) {
         TODO("Not yet implemented")
     }
 

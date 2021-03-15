@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
 import de.logerbyte.moneyminder.presentation.dialog.dialogDelete.DeleteDialogFragment
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
@@ -31,7 +31,7 @@ class CashAdapter @Inject constructor(
     private val expenseDataManager: ExpenseDataManager
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DayExpenseViewItem.AdapterListener, AdapterCallBack {
 
-    var items = mutableListOf<WeekSummaryViewItem>()
+    var items = mutableListOf<SummaryMonthViewItem>()
         set(value) {
             field = value
             this.notifyDataSetChanged()
@@ -61,7 +61,7 @@ class CashAdapter @Inject constructor(
     private val dateMap = HashMap<Date, DayExpenseViewModel>()
     var sdf = SimpleDateFormat("dd.MM.yy")
     private val weeksAndDaysWithExpenses = ArrayList<ArrayList<DayExpenseViewModel>>()
-    private lateinit var daysWithWeekSummaryViewItemList: ArrayList<WeekSummaryViewItem>
+    private lateinit var daysWithSummaryMonthViewItemList: ArrayList<SummaryMonthViewItem>
 
     private enum class ViewType {
         SUMMARY_LINE,
@@ -70,12 +70,12 @@ class CashAdapter @Inject constructor(
 
     fun initList(expenses: List<Expense>) {
         mAdapterListener?.onLoadedExpenses(expenses, expenseDataManager.getOverAllBudget())
-        createViewTypeList(daysWithWeekSummaryViewItemList)
+        createViewTypeList(daysWithSummaryMonthViewItemList)
         notifyDataSetChanged()
     }
 
     private fun recreateList() {
-        daysWithWeekSummaryViewItemList = expenseDataManager.createWeeksAndDaysExpense(viewModelCashItems)
+        daysWithSummaryMonthViewItemList = expenseDataManager.createWeeksAndDaysExpense(viewModelCashItems)
     }
 
 
@@ -109,7 +109,7 @@ class CashAdapter @Inject constructor(
 
     private fun getItemAtPosition(viewHolder: RecyclerView.ViewHolder, position: Int) {
         var itemPosition = -1
-        for (weekSummary in daysWithWeekSummaryViewItemList) {
+        for (weekSummary in daysWithSummaryMonthViewItemList) {
             val dayList = weekSummary.dayExpense
 
             // days
@@ -138,8 +138,8 @@ class CashAdapter @Inject constructor(
         return ViewHolder(binding)
     }
 
-    private fun initCashSummaryItem(week: WeekSummaryViewItem, holder: RecyclerView.ViewHolder) {
-        (holder as ViewHolderSummary).binding.vmSummary = week
+    private fun initCashSummaryItem(month: SummaryMonthViewItem, holder: RecyclerView.ViewHolder) {
+        (holder as ViewHolderSummary).binding.vmSummary = month
     }
 
     private fun initDayItem(dayExpenseViewModel: DayExpenseViewItem, holder: RecyclerView.ViewHolder) {
@@ -149,7 +149,7 @@ class CashAdapter @Inject constructor(
         (holder as ViewHolder).binding.vmCashItem = dayExpenseViewModel
     }
 
-    fun createViewTypeList(list: ArrayList<WeekSummaryViewItem>) {
+    fun createViewTypeList(list: ArrayList<SummaryMonthViewItem>) {
         viewtypeList.clear()
         for (weekSummary in list) {
             for (expense in weekSummary.dayiteExpense) {

@@ -1,31 +1,36 @@
 package de.logerbyte.moneyminder.domain.mapper
 
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
-import de.logerbyte.moneyminder.data.viewItem.WeekSummaryViewItem
+import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
 
-class WeekSummaryItemMapper @Inject constructor(
+class MonthSummaryItemViewMapper @Inject constructor(
     val sdf: SimpleDateFormat
-): BaseMapper<List<Expense>, List<WeekSummaryViewItem>> {
+): BaseMapper<List<Expense>, List<SummaryMonthViewItem>> {
 
     val actualCalendar: Calendar = Calendar.getInstance().apply { firstDayOfWeek = Calendar.MONDAY }
     var firstDate: Date? = null
     var firstWeek: Int? = null
-    private var weeksAndDays = ArrayList<WeekSummaryViewItem>()
+    private var weeksAndDays = ArrayList<SummaryMonthViewItem>()
     var budget: Int = 0
 
     /**
      * Epense list needs to be sorted in days
      */
-    override fun map(from: List<Expense>): List<WeekSummaryViewItem> {
-        return createWeeksAndDaysExpense(ArrayList(from))
+    override fun map(from: List<Expense>): List<SummaryMonthViewItem> {
+//        return createWeeksAndDaysExpense(ArrayList(from))
+        return summerMonthExpense(from)
     }
 
-    fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<Expense>): List<WeekSummaryViewItem> {
+    private fun summerMonthExpense(from: List<Expense>): List<SummaryMonthViewItem> {
+        TODO("Not yet implemented")
+    }
+
+    fun createWeeksAndDaysExpense(sortedExpenses: ArrayList<Expense>): List<SummaryMonthViewItem> {
         weeksAndDays.clear()
         val datesToDelete = ArrayList<Expense>()
         var subExpenseDays = ArrayList<Expense>()
@@ -73,10 +78,10 @@ class WeekSummaryItemMapper @Inject constructor(
     }
 
     private fun addExpenseToSummaryWeek(subExpenseDays: ArrayList<Expense>, expenseListNaturalOrder:
-    ArrayList<WeekSummaryViewItem>) {
+    ArrayList<SummaryMonthViewItem>) {
         val expensesOfWeek = sumExpensesOfWeek(subExpenseDays)
         val expenseDiff = budget - expensesOfWeek
-        val summaryWeek = WeekSummaryViewItem(expensesOfWeek, budget.toDouble(), expenseDiff,
+        val summaryWeek = SummaryMonthViewItem(expensesOfWeek, budget.toDouble(), expenseDiff,
             createCashViewItem(subExpenseDays))
         expenseListNaturalOrder.add(summaryWeek)
     }
@@ -111,8 +116,8 @@ class WeekSummaryItemMapper @Inject constructor(
         return cashSummary
     }
 
-    private fun descendWeekExpenses(expenseListNaturalOrder: ArrayList<WeekSummaryViewItem>): ArrayList<WeekSummaryViewItem> {
-        val expenseDescend = ArrayList<WeekSummaryViewItem>()
+    private fun descendWeekExpenses(expenseListNaturalOrder: ArrayList<SummaryMonthViewItem>): ArrayList<SummaryMonthViewItem> {
+        val expenseDescend = ArrayList<SummaryMonthViewItem>()
         for (i in expenseListNaturalOrder.indices.reversed()) {
             expenseDescend.add(expenseListNaturalOrder[i])
         }
