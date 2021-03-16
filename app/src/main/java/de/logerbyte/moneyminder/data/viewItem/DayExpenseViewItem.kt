@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.data.viewItem
 import android.text.Editable
 import androidx.databinding.ObservableField
 
-class CashViewViewItem(cashDate: String, cashName: String, cashAmount: String, cashCategory: String, cashPerson: String): ExpenseListViewItem {
+class DayExpenseViewItem(cashDate: String, cashName: String, cashAmount: String, cashCategory: String, cashPerson: String): ExpenseListViewItem {
 
     // todo X: observable field copy in mapper
     val cashDate = ObservableField<String>()

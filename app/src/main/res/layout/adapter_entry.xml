@@ -6,14 +6,13 @@
 
         <variable
             name="vmCashItem"
-            type="de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel" />
+            type="de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem" />
     </data>
 
     <LinearLayout
         android:id="@+id/ll_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{vmCashItem::onCashItemClicked}"
         android:orientation="horizontal"
         android:padding="2dp"
         android:layout_margin="2dp">
@@ -51,21 +50,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashInEuro}"
+            android:text="@={vmCashItem.cashAmount}"
             tools:text="0,00"/>
 
         <!-- todo: display your money portion -->
         <TextView
-            android:id="@+id/tv_money_portion"
+            android:id="@+id/tv_money_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100%"/>
+            android:text="@{vmCashItem.cashPerson}"/>
 
         <ImageButton
+            android:id="@+id/bu_delete"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:scaleType="center"
-            android:background="@android:drawable/ic_menu_delete"
-            android:onClick="@{() -> vmCashItem.onCashItemDeleteClicked(vmCashItem.entryId)}"/>
+            android:background="@android:drawable/ic_menu_delete"/>
     </LinearLayout>
 </layout>

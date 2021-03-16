@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -15,7 +16,7 @@ import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragmen
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewViewItem
-import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem
+import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
@@ -37,7 +38,6 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
     @Inject
     lateinit var settingsPopupWindow: SettingsPopupWindow
 
-    @Inject
     lateinit var cashAdapter: CashAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,15 +51,21 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
     }
 
     private fun setUpRecyclerView() {
-        binding?.rvCosts?.adapter = cashAdapter
+        binding?.rvCosts?.adapter = CashAdapter(
+            onDeleteClicked = openDeleteDialog())
+    }
+
+    private fun openDeleteDialog(): () -> View {
+//        todo X: open delete dialog
+        TODO("Not yet implemented")
     }
 
     private fun initBinding() {
         cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it)})
     }
 
-    private fun setListAdapter(it: List<SummaryMonthViewViewItem>) {
-        TODO("Not yet implemented")
+    private fun setListAdapter(it: List<ExpenseListViewItem>) {
+        cashAdapter.items = it
     }
 
     private fun initActionBar() {
@@ -100,6 +106,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
         }
     }
 
+//    todo X: Savings doesnt work
     private fun initPopUp() {
         val popUpView = layoutInflater.inflate(R.layout.menu_settings, null)
         // fixme-sw: init with dagger?

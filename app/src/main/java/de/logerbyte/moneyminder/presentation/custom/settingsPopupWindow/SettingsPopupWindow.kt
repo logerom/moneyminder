@@ -14,8 +14,7 @@ import javax.inject.Inject
 class SettingsPopupWindow @Inject constructor(
     val fragmentManager: FragmentManager,
     val settingsPopupViewModel: SettingsPopupViewModel,
-    val sharedPrefManager: SharedPrefManager,
-    val cashAdapter: CashAdapter)
+    val sharedPrefManager: SharedPrefManager)
     : MenuItemsClicked, PopupWindow.OnDismissListener {
 
     // TODO: 14.03.21 enherit from widget dont wrapp
@@ -38,8 +37,9 @@ class SettingsPopupWindow @Inject constructor(
     }
 
     override fun onDismiss() {
+//        todo X: Update after setting
         writeBudgetInSharedPref()
-        cashAdapter.onBudgetUpdated()
+//        cashAdapter.onBudgetUpdated()
     }
 
     private fun writeBudgetInSharedPref() {

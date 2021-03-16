@@ -3,8 +3,8 @@
     <data>
 
         <variable
-            name="vmSummary"
-            type="de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewViewItem" />
+            name="viewItem"
+            type="de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem" />
 
         <import type="de.logerbyte.moneyminder.domain.util.DigitUtil" />
     </data>
@@ -23,29 +23,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{DigitUtil.doubleToString(vmSummary.cost)}" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/budgetEntryItem" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@{DigitUtil.doubleToString(vmSummary.budget)}" />
+                android:text="@{DigitUtil.doubleToString(viewItem.cost)}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/savedEntryItem" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{DigitUtil.doubleToString(vmSummary.saving)}"
-                android:textColor="@{vmSummary.saving &lt; 0 ? @android:color/holo_red_dark : @android:color/holo_green_dark}" />
+                android:text="@{DigitUtil.doubleToString(viewItem.saving)}"
+                android:textColor="@{viewItem.saving &lt; 0 ? @android:color/holo_red_dark : @android:color/holo_green_dark}" />
         </LinearLayout>
 </layout>
