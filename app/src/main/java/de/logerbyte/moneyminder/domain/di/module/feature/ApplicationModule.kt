@@ -21,10 +21,6 @@ import javax.inject.Singleton
 @Module
 object ApplicationModule {
 
-    @Provides
-    @Singleton
-    fun provideDateFormat() = SimpleDateFormat("dd.MM.yy")
-
     @JvmStatic
     @Singleton
     @Provides

@@ -8,7 +8,7 @@
 
         <variable
             name="filterDialogVM"
-            type="de.logerbyte.moneyminder.cashOverview.menu.dialogFilter.FilterDialogVMListener" />
+            type="de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialogVMListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

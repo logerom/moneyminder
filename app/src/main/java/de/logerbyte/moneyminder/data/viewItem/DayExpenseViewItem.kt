@@ -3,27 +3,12 @@ package de.logerbyte.moneyminder.data.viewItem
 import android.text.Editable
 import androidx.databinding.ObservableField
 
-class DayExpenseViewItem(cashDate: String, cashName: String, cashAmount: String, cashCategory: String, cashPerson: String): ExpenseListViewItem {
-
-    // todo X: observable field copy in mapper
-    val cashDate = ObservableField<String>()
-
-    val cashName = ObservableField<String>()
-    var cashAmount = ObservableField<String>()
-    var cashCategory = ObservableField<String>("")
-    var cashPerson = ObservableField<String>()
-    var entryId: Long = 0
+data class DayExpenseViewItem(val cashDate: String, val cashName: String, val cashAmount: String, val cashCategory: String,
+                              val cashPerson: String):
+ExpenseListViewItem {
 
     var newDateText = ""
     var dateDotDelete = false
-
-    init {
-        this.cashDate.set(cashDate)
-        this.cashName.set(cashName)
-        this.cashAmount.set(cashAmount)
-        this.cashCategory.set(cashCategory)
-        this.cashPerson.set(cashPerson)
-    }
 
     fun onDateTextChanged(s: Editable) {
         if (dateDotDelete) {
@@ -51,7 +36,7 @@ class DayExpenseViewItem(cashDate: String, cashName: String, cashAmount: String,
     }
 
     fun isAllSet(): Boolean {
-        return !(isSomeElementNull(listOf(cashDate.get(), cashName.get(), cashCategory.get(), cashAmount.get(), cashPerson.get())))
+        return !(isSomeElementNull(listOf(cashDate, cashName, cashCategory, cashAmount, cashPerson)))
     }
 
     private fun isSomeElementNull(listOf: List<String?>): Boolean {

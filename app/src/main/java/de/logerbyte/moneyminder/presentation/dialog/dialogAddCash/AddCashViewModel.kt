@@ -37,10 +37,10 @@ class AddCashViewModel(
     }
 
     private fun saveCashAndReloadList() {
-        val cashInEuro = (DigitUtil.commaToDot(editDialogViewModel.cashViewItem.cashAmount.get())).toDouble()
+        val cashInEuro = (DigitUtil.commaToDot(editDialogViewModel.cashViewItem.cashAmount)).toDouble()
 
-        val expense = Expense(null, editDialogViewModel.cashViewItem.cashName.get(), editDialogViewModel.cashViewItem.cashCategory.get(),
-                editDialogViewModel.cashViewItem.cashDate.get(), cashInEuro, editDialogViewModel.cashViewItem.cashPerson.get())
+        val expense = Expense(null, editDialogViewModel.cashViewItem.cashName, editDialogViewModel.cashViewItem.cashCategory,
+                editDialogViewModel.cashViewItem.cashDate, cashInEuro, editDialogViewModel.cashViewItem.cashPerson)
 
         expenseRepo
                 .insertCashItemIntoDB(expense)

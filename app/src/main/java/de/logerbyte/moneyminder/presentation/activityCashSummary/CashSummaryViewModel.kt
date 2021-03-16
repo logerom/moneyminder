@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDataManager,
                                                val viewMapper: MonthSummaryItemViewMapper,
-                                               val sdf: SimpleDateFormat) : ViewModel(), CashAdapter.Listener {
+                                               val sdf: SimpleDateFormat) : ViewModel() {
     val totalExpenses = ObservableField<Double>()
     private val totalBudget = ObservableField("0,00")
     private val totalSaving = ObservableField<Double?>()
@@ -52,9 +52,9 @@ class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDa
         return totalSaving
     }
 
-    override fun onLoadedExpenses(expenses: List<Expense>, allBudget: Int) {
-        addCashToTotal(expenses)
-        totalBudget.set(doubleToString(allBudget.toDouble()))
-        totalSaving.set(java.lang.Double.valueOf(allBudget.toDouble()) - totalExpenses.get()!!)
-    }
+//    override fun onLoadedExpenses(expenses: List<Expense>, allBudget: Int) {
+//        addCashToTotal(expenses)
+//        totalBudget.set(doubleToString(allBudget.toDouble()))
+//        totalSaving.set(java.lang.Double.valueOf(allBudget.toDouble()) - totalExpenses.get()!!)
+//    }
 }

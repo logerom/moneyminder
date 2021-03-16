@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "Expense")
 data class Expense(// TODO: 13.03.21 Person as Int
-    @field:PrimaryKey var id: Long,
+    @field:PrimaryKey var id: Long?,
     var cashName: String,
     var category: String,
     var cashDate: String,
