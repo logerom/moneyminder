@@ -54,9 +54,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
     private fun setUpRecyclerView() {
         binding?.rvCosts?.adapter = CashAdapter(
             onDeleteClicked = openDeleteDialog())
-            .apply {
-                cashAdapter = this
-            }
+            .apply { cashAdapter = this }
     }
 
     private fun openDeleteDialog(): () -> Unit {
@@ -88,9 +86,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
     }
 
     override fun onCLickFab() {
-        val adapterCallBack = binding!!.rvCosts.adapter as AdapterCallBack?
         val cashDialog = AddCashDialogFragment()
-        cashDialog.adapterCallback = adapterCallBack!!
         cashDialog.show(supportFragmentManager, ADD_CASH_DIALOG)
     }
 
