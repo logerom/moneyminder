@@ -36,7 +36,7 @@
                 android:singleLine="true"
                 android:nextFocusDown="@id/et_cash_name"
                 android:maxLength="8"
-                android:text="@={viewModel.cashViewItem.cashDate}" />
+                android:text="@{viewModel.cashViewItem.cashDate}" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,7 +57,7 @@
                 android:layout_height="48dp"
                 android:singleLine="true"
                 android:hint="Ausgabe"
-                android:text="@={viewModel.cashViewItem.cashName}" />
+                android:text="@{viewModel.cashViewItem.cashName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,7 +78,7 @@
                 android:id="@+id/custom_searchlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                searchText="@={viewModel.cashViewItem.cashCategory}" />
+                searchText="@{viewModel.cashViewItem.cashCategory}" />
 
         </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:layout_height="48dp"
                 android:digits="0123456789,"
                 android:hint="0,00"
-                android:text="@={viewModel.cashViewItem.cashAmount}" />
+                android:text="@{viewModel.cashViewItem.cashAmount}" />
         </LinearLayout>
 
         <TableLayout
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
                 <EditText
-                    android:text="@={viewModel.cashViewItem.cashPerson}"
+                    android:text="@{viewModel.cashViewItem.cashPerson}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>

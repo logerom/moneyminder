@@ -56,7 +56,7 @@ public class DayExpenseViewViewItem implements ExpenseListViewItem {
     }
 
     public void onCashItemClicked(View view) {
-        mActivityListener.showEditDialog(this, dialogVmListener);
+//        mActivityListener.showEditDialog(this, dialogVmListener);
     }
 
     public void setItemListener(AdapterListener cashAdapter) {
@@ -77,7 +77,7 @@ public class DayExpenseViewViewItem implements ExpenseListViewItem {
 
     public interface ActivityListener {
 
-        void showEditDialog(DayExpenseViewViewItem item, AdapterCallBack dialogVmListener);
+        void showEditDialog(DayExpenseViewItem item, AdapterCallBack dialogVmListener);
     }
 
 

@@ -15,6 +15,7 @@ import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragment
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewViewItem
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
@@ -46,18 +47,21 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
         bindContentView()
         initActionBar()
         initPopUp()
-        initBinding()
         setUpRecyclerView()
+        initBinding()
     }
 
     private fun setUpRecyclerView() {
         binding?.rvCosts?.adapter = CashAdapter(
             onDeleteClicked = openDeleteDialog())
+            .apply {
+                cashAdapter = this
+            }
     }
 
-    private fun openDeleteDialog(): () -> View {
+    private fun openDeleteDialog(): () -> Unit {
 //        todo X: open delete dialog
-        TODO("Not yet implemented")
+        return {}
     }
 
     private fun initBinding() {
@@ -73,7 +77,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
         setSupportActionBar(my_toolbar)
     }
 
-    override fun showEditDialog(item: DayExpenseViewViewItem, dialogVmListener: AdapterCallBack) {
+    override fun showEditDialog(item: DayExpenseViewItem, dialogVmListener: AdapterCallBack) {
         //  new EditDialogFragment().show
         // (getSupportFragmentManager(), "Base_Dialog");
         val baseDialog = EditDialogFragment()

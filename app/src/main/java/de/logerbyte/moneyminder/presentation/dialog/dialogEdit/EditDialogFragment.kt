@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.presentation.cashadapter.DayExpenseViewModel
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
@@ -25,7 +25,7 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
 
     lateinit var cashView: View
     lateinit var adapterCallback: AdapterCallBack
-    lateinit var cash: DayExpenseViewModel
+    lateinit var cash: DayExpenseViewItem
     lateinit var editDialogViewModel1: EditDialogViewModel1
 
     override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
@@ -33,7 +33,7 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
         cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
         DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = editDialogViewModel }
         viewBinding.dialogContainer.addView(cashView)
-        editDialogViewModel.cashViewItem.setCash(cash)
+        editDialogViewModel.cashViewItem = DayExpenseViewItem("cash",""",""","","","")
         editDialogViewModel1.setAdapter(adapterCallback)
     }
 

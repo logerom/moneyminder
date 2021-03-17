@@ -33,17 +33,17 @@ class EditDialogViewModel1(
     }
 
     override fun onClickOk(view: View) {
-        val expenseToUpdate = Expense(editDialogViewModel.cashViewItem.entryId,
-                editDialogViewModel.cashViewItem.cashName.get(), editDialogViewModel.cashViewItem.cashCategory.get(),
-                editDialogViewModel.cashViewItem.cashDate.get(),
-                Double.valueOf(DigitUtil.commaToDot(editDialogViewModel.cashViewItem.cashAmount.get())),
-                editDialogViewModel.cashViewItem.cashPerson.get()
-            )
+//        val expenseToUpdate = Expense(editDialogViewModel.cashViewItem.entryId,
+//                editDialogViewModel.cashViewItem.cashName.get(), editDialogViewModel.cashViewItem.cashCategory.get(),
+//                editDialogViewModel.cashViewItem.cashDate.get(),
+//                Double.valueOf(DigitUtil.commaToDot(editDialogViewModel.cashViewItem.cashAmount.get())),
+//                editDialogViewModel.cashViewItem.cashPerson.get()
+//            )
 
-        expenseRepo.updateCashItem(expenseToUpdate)
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ aBoolean -> adapterCallBack.onUpdateItem() })
+//        expenseRepo.updateCashItem(expenseToUpdate)
+//                .subscribeOn(Schedulers.computation())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ aBoolean -> adapterCallBack.onUpdateItem() })
         super.onClickOk(view)
     }
 

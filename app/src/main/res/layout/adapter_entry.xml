@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashDate}"
+            android:text="@{vmCashItem.cashDate}"
             tools:text="01.01.18"/>
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashName}"
+            android:text="@{vmCashItem.cashName}"
             tools:text="Arbeitsausflug"/>
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashCategory}"
+            android:text="@{vmCashItem.cashCategory}"
             tools:text="Kategory"/>
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashAmount}"
+            android:text="@{vmCashItem.cashAmount}"
             tools:text="0,00"/>
 
         <!-- todo: display your money portion -->

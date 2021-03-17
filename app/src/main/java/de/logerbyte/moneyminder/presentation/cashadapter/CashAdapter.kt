@@ -18,7 +18,7 @@ import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
  */
 
 class CashAdapter(
-    val onDeleteClicked: () -> View) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val onDeleteClicked: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var layoutInflater: LayoutInflater
     var items = listOf<ExpenseListViewItem>()

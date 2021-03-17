@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.TextView
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.presentation.cashadapter.BUNDLE_CASHITEM_ID
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
@@ -21,7 +20,7 @@ class DeleteDialogFragment : BaseDialogFragment() {
     lateinit var expenseRepo: ExpenseRepo
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        cashItemId = arguments!!.getLong(BUNDLE_CASHITEM_ID)
+        cashItemId = arguments!!.getLong("")
         return super.onCreateDialog(savedInstanceState)
     }
 

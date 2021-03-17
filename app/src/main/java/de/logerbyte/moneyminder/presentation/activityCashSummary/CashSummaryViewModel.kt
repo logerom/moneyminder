@@ -1,5 +1,6 @@
 package de.logerbyte.moneyminder.presentation.activityCashSummary
 
+import androidx.annotation.MainThread
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import de.logerbyte.moneyminder.domain.mapper.MonthSummaryItemViewMapper
 import de.logerbyte.moneyminder.domain.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.domain.util.DigitUtil.doubleToString
 import de.logerbyte.moneyminder.domain.util.DigitUtil.getCashTotal
+import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
@@ -34,6 +36,7 @@ class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDa
         expenseDataManager.loadExpenseList()
             .map { it.sortedBy { sdf.parse(it.cashDate) } }
             .map { viewMapper.map(it) }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe {_cashItems.value = it}
     }
 

@@ -8,7 +8,7 @@ import javax.inject.Named
 
 class EditDialogViewModel @Inject constructor(@Named(NAMED_DATE) date: String) : ViewModel() {
 
-    var cashViewItem: DayExpenseViewItem = DayExpenseViewItem().apply { cashDate.set(date)}
+    var cashViewItem: DayExpenseViewItem = DayExpenseViewItem(date,"","","","")
 
 }
 
