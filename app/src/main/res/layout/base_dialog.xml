@@ -2,14 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="dialogViewModelListener"
-            type="de.logerbyte.moneyminder.dialogs.BaseDialogActionListener" />
-
-    </data>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,9 +19,9 @@
             tools:context=".presentation.activityCashSummary.CashSummaryActivity">
 
             <Button
+                android:id="@+id/bu_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{(view)->dialogViewModelListener.onClickCancel(view)}"
                 android:text="@string/cancel"
                 android:layout_toLeftOf="@id/bu_ok" />
 
@@ -37,7 +29,6 @@
                 android:id="@+id/bu_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{(view)->dialogViewModelListener.onClickOk(view)}"
                 android:text="@string/ok"
                 android:layout_alignParentEnd="true" />
 

@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogViewModel" />
+            type="de.logerbyte.moneyminder.presentation.dialog.CashViewModel" />
     </data>
 
     <LinearLayout
@@ -29,7 +29,7 @@
                 android:id="@+id/et_date"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:afterTextChanged="@{viewModel.cashViewItem.onDateTextChanged}"
+                android:afterTextChanged="@{viewModel.onDateTextChanged}"
                 android:digits="0123456789."
                 android:hint="dd.mm.yy"
                 android:inputType="number"

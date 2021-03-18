@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.dialogs
 import android.view.View
 
 
-interface BaseDialogActionListener {
+interface BaseDialogViewListener {
     fun onClickOk(view: View)
     fun onClickCancel(view: View)
 }

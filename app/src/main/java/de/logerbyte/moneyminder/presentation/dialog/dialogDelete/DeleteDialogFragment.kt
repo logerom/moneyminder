@@ -7,8 +7,8 @@ import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
-import de.logerbyte.moneyminder.dialogs.BaseDialogActionListener
-import de.logerbyte.moneyminder.dialogs.BaseDialogFragment
+import de.logerbyte.moneyminder.dialogs.BaseDialogViewListener
+import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
 import javax.inject.Inject
 
 class DeleteDialogFragment : BaseDialogFragment() {
@@ -32,7 +32,7 @@ class DeleteDialogFragment : BaseDialogFragment() {
         viewBinding.dialogContainer.addView(question)
     }
 
-    override fun setDialogBaseActionButtonListener(): BaseDialogActionListener {
+    override fun setDialogBaseActionButtonListener(): BaseDialogViewListener {
         return deleteDialogViewModel
     }
 
