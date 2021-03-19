@@ -6,11 +6,11 @@ import de.logerbyte.moneyminder.base.adapter.SingleItemTypeAdapter
 import de.logerbyte.moneyminder.databinding.FormviewCategoryItemBinding
 
 class CategoryAdapter(private val clickListener: (String) -> Unit) : SingleItemTypeAdapter<String, FormviewCategoryItemBinding>(R.layout.formview_category_item) {
-    var originalItems = ArrayList<String>()
-        set(value) {
-            items = value.toMutableList()
-            field = value
-        }
+//    var originalItems = mutableListOf<String>()
+//        set(value) {
+//            items = value.toMutableList()
+//            field = value
+//        }
 
     override fun bindItemToView(item: String, bindingClass: FormviewCategoryItemBinding) {
         bindingClass.tvCategoryName.text = item

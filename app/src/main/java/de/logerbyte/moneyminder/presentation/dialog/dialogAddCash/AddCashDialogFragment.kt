@@ -12,6 +12,8 @@ import javax.inject.Named
 
 class AddCashDialogFragment : BaseCashDialogFragment() {
 
+    private lateinit var binding: FrameCashBinding
+
     @Inject
     @Named("ANDROID_VIEWMODEL")
     lateinit var addCashViewModel: AddCashViewModel
@@ -21,7 +23,10 @@ class AddCashDialogFragment : BaseCashDialogFragment() {
 
     override fun viewContent(): View {
         return FrameCashBinding.inflate(layoutInflater)
-            .apply { viewModel = addCashViewModel }.root
+            .apply {
+                viewModel = addCashViewModel
+                binding = this}
+            .root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +40,10 @@ class AddCashDialogFragment : BaseCashDialogFragment() {
     }
 
     private fun initLiveData() {
-        addCashViewModel.categoryList.observe(viewLifecycleOwner, Observer {  })
+        addCashViewModel.categoryList.observe(viewLifecycleOwner, Observer { setListCategories(it) })
+    }
+
+    private fun setListCategories(it: List<String>) {
+        binding.customSearchlist.list = it
     }
 }

@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.main.category_list.view.*
 
 class SearchListView(context: Context?, attributeSet: AttributeSet) : LinearLayout(context, attributeSet) {
 
-    var list = ArrayList<String>()
+    var list = listOf<String>()
         set(value) {
-            categoryAdapter.originalItems = value
+            categoryAdapter.items = value
             field = value
         }
 

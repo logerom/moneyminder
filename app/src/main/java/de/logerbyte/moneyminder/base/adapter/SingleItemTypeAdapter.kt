@@ -12,7 +12,7 @@ abstract class SingleItemTypeAdapter<ITEM_TYPE, BINDING_CLASS : ViewDataBinding>
     abstract fun bindItemToView(item: ITEM_TYPE, bindingClass: BINDING_CLASS)
 
     lateinit var layoutInflater: LayoutInflater
-    var items = mutableListOf<ITEM_TYPE>()
+    var items = listOf<ITEM_TYPE>()
         set(value) {
             field = value
             this.notifyDataSetChanged()
