@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.domain.di.module.feature
+package de.logerbyte.moneyminder.domain.di.module
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -24,8 +24,7 @@ object ApplicationModule {
     @JvmStatic
     @Singleton
     @Provides
-    fun provideViewModelFactory(viewModelMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
-    ) = object : ViewModelProvider.Factory {
+    fun provideViewModelFactory(viewModelMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) = object : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return requireNotNull(viewModelMap[modelClass as Class<out ViewModel>]).get() as T
         }

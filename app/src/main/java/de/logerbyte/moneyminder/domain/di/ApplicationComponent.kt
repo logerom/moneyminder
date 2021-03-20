@@ -7,15 +7,15 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import de.logerbyte.moneyminder.App
 import de.logerbyte.moneyminder.domain.di.module.FragmentsInjectorModule
-import de.logerbyte.moneyminder.domain.di.module.feature.ApplicationModule
+import de.logerbyte.moneyminder.domain.di.module.ApplicationModule
 import de.logerbyte.moneyminder.domain.di.module.feature.CashSummaryActivityModule
-import de.logerbyte.moneyminder.domain.di.module.ViewModelMapModule
+import de.logerbyte.moneyminder.domain.di.module.ViewModelModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
         modules = [
-            ViewModelMapModule::class,
+            ViewModelModule::class,
             CashSummaryActivityModule::class,
             ApplicationModule::class,
             AndroidSupportInjectionModule::class,

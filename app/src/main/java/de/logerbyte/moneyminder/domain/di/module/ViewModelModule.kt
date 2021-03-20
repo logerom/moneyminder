@@ -11,7 +11,7 @@ import de.logerbyte.moneyminder.domain.di.ViewModelKey
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashViewModel
 
 @Module
-abstract class ViewModelMapModule {
+abstract class ViewModelModule {
 
     @Binds
     @IntoMap
