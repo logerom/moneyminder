@@ -41,7 +41,7 @@ class AddCashDialogFragment : BaseCashDialogFragment() {
                     // Todo X: set CashViewitem over Databinding
                     CashViewItem(
                             it.etDate.text.toString(), it.etCashName.text.toString(), it.etCashAmount.text.toString(),
-                            it.customSearchlist.getSearchQuery(), it.tvPerson.text.toString()) })
+                            it.customSearchlist.getSearchQuery(), it.etPerson.text.toString()) })
     }
 
     private fun initLiveData() {

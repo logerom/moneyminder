@@ -27,7 +27,10 @@ open class CashViewModel(
                 .subscribe { _categoryList.value = it}
     }
     fun saveCash(cashViewItem: CashViewItem) {
-        expenseRepo.insertCashItemIntoDB(expenseMapper.map(cashViewItem))
+        expenseRepo
+                .insertCashItemIntoDB(expenseMapper.map(cashViewItem))
+                .subscribeOn(Schedulers.io())
+                .subscribe()
     }
 
     var cashViewItem = CashViewItem()
