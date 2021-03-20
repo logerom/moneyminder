@@ -9,7 +9,7 @@ import de.logerbyte.moneyminder.domain.di.module.feature.AddCashDialogModule
 import de.logerbyte.moneyminder.domain.di.module.feature.FilterDialogModule
 
 @Module(includes = [AddCashDialogModule::class])
-abstract class FragmentsInjectorModule {
+abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributesDeleteDialogFragment(): DeleteDialogFragment

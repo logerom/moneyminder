@@ -13,14 +13,13 @@ abstract class BaseDialogFragment : DaggerDialogFragment() {
 
     abstract val onOKClicked: ()->Unit
     abstract val onCancelClicked: ()->Unit
+    abstract fun viewContent(): View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val viewBinding = BaseDialogBinding.inflate(inflater).apply {
+        return BaseDialogBinding.inflate(inflater).apply {
             dialogContainer.addView(viewContent())
-            buCancel.setOnClickListener { onOKClicked } }
-            bu_ok.setOnClickListener { onCancelClicked }
-        return viewBinding.root
+            buCancel.setOnClickListener { onOKClicked }
+            buOK.setOnClickListener { onCancelClicked }
+        }.root
     }
-
-    abstract fun viewContent(): View
 }

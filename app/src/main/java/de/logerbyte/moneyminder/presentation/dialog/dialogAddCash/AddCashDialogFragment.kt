@@ -25,6 +25,7 @@ class AddCashDialogFragment : BaseCashDialogFragment() {
         return FrameCashBinding.inflate(layoutInflater)
             .apply {
                 viewModel = addCashViewModel
+
                 binding = this}
             .root
     }
@@ -33,10 +34,6 @@ class AddCashDialogFragment : BaseCashDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initLiveData()
-        // fixme: RxJava2 for room + need to return boolean?
-        // todo move to vm
-        // todo dagger
-
     }
 
     private fun initLiveData() {

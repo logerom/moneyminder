@@ -28,22 +28,25 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
     lateinit var cash: DayExpenseViewItem
     lateinit var editDialogViewModel1: EditDialogViewModel1
 
-    override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
-        editDialogViewModel1 = EditDialogViewModel1(expenseRepo, this, context, editDialogViewModel, this)
-        cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
-        DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = editDialogViewModel }
-        viewBinding.dialogContainer.addView(cashView)
-        editDialogViewModel.cashViewItem = DayExpenseViewItem("cash",""",""","","","")
-        editDialogViewModel1.setAdapter(adapterCallback)
-    }
-
-
-    override fun setDialogBaseActionButtonListener(): BaseDialogViewListener {
-        return editDialogViewModel1
-        // TODO: 2019-11-19 create baseDialogViewAction (for cancel and ok)
-    }
+//    override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
+//        editDialogViewModel1 = EditDialogViewModel1(expenseRepo, this, context, editDialogViewModel, this)
+//        cashView = LayoutInflater.from(context).inflate(R.layout.frame_cash, null, false)
+//        DataBindingUtil.bind<FrameCashBinding>(cashView!!).let { it!!.viewModel = editDialogViewModel }
+//        viewBinding.dialogContainer.addView(cashView)
+//        editDialogViewModel.cashViewItem = DayExpenseViewItem("cash",""",""","","","")
+//        editDialogViewModel1.setAdapter(adapterCallback)
+//    }
 
     override fun initCategories(categories: ArrayList<String>) {
         custom_searchlist.list = categories
+    }
+
+    override val onOKClicked: () -> Unit
+        get() = TODO("Not yet implemented")
+    override val onCancelClicked: () -> Unit
+        get() = TODO("Not yet implemented")
+
+    override fun viewContent(): View {
+        TODO("Not yet implemented")
     }
 }

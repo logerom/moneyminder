@@ -19,10 +19,13 @@ class FilterDialog : BaseDialogFragment(), BaseDialogViewListener {
     @Inject
     lateinit var filterDialogViewModel: FilterDialogViewModel
 
-    override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
-        val view = LayoutInflater.from(context).inflate(R.layout.dialog_filter, null)
-        viewBinding.dialogContainer.addView(view)
-    }
+
+    override val onOKClicked: () -> Unit
+        get() = TODO("Not yet implemented")
+    override val onCancelClicked: () -> Unit
+        get() = TODO("Not yet implemented")
+
+    override fun viewContent() = LayoutInflater.from(context).inflate(R.layout.dialog_filter, null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,8 +36,6 @@ class FilterDialog : BaseDialogFragment(), BaseDialogViewListener {
     private fun initObservable() {
         filterDialogViewModel.rawCategories.observe(this, Observer { t -> filterAdapter.items = t as MutableList<FilterDialogViewItem> })
     }
-
-    override fun setDialogBaseActionButtonListener(): BaseDialogViewListener = this
 
     override fun onClickOk(view: View) {
         filterDialogViewModel.applyFilter()

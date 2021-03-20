@@ -5,10 +5,6 @@ import androidx.databinding.ObservableField
 
 data class DayExpenseViewItem(val cashDate: String, val cashName: String, val cashAmount: String, val cashCategory: String,
                               val cashPerson: String): ExpenseListViewItem {
-    var newDateText = ""
-    var dateDotDelete = false
-
-
 
     fun isAllSet(): Boolean {
         return !(isSomeElementNull(listOf(cashDate, cashName, cashCategory, cashAmount, cashPerson)))

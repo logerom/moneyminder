@@ -19,14 +19,14 @@
             tools:context=".presentation.activityCashSummary.CashSummaryActivity">
 
             <Button
-                android:id="@+id/bu_cancel"
+                android:id="@+id/buCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
-                android:layout_toLeftOf="@id/bu_ok" />
+                android:layout_toLeftOf="@id/buOK" />
 
             <Button
-                android:id="@+id/bu_ok"
+                android:id="@+id/buOK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ok"

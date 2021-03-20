@@ -1,12 +1,14 @@
 package de.logerbyte.moneyminder.presentation.dialog
 
 import android.text.Editable
-import android.view.View
 
-abstract class BaseCashDialogFragment: BaseDialogFragment(){
+abstract class BaseCashDialogFragment: BaseDialogFragment(), CashViewAction{
+
+    var newDateText = ""
+    var dateDotDelete = false
 
     // todo X: base method for changing text in ViewModel?
-    fun onDateTextChanged(s: Editable) {
+    override fun onDateTextChanged(s: Editable) {
         if (dateDotDelete) {
             dateDotDelete = false
             return
@@ -32,3 +34,4 @@ abstract class BaseCashDialogFragment: BaseDialogFragment(){
     }
 
 }
+
