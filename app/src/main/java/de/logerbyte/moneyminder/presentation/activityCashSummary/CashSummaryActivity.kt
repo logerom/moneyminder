@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashDialogFragment
@@ -52,9 +53,11 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
     }
 
     private fun setUpRecyclerView() {
-        binding?.rvCosts?.adapter = CashAdapter(
-            onDeleteClicked = openDeleteDialog())
-            .apply { cashAdapter = this }
+        binding?.rvCosts?.apply {
+            this.adapter = CashAdapter(onDeleteClicked = openDeleteDialog())
+                            .apply { cashAdapter = this }
+            this.layoutManager = LinearLayoutManager(this.context)
+        }
     }
 
     private fun openDeleteDialog(): () -> Unit {
@@ -63,7 +66,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
     }
 
     private fun initBinding() {
-        cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it)})
+        cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it) })
     }
 
     private fun setListAdapter(it: List<ExpenseListViewItem>) {
@@ -106,7 +109,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
         }
     }
 
-//    todo X: Savings doesnt work
+    //    todo X: Savings doesnt work
     private fun initPopUp() {
         val popUpView = layoutInflater.inflate(R.layout.menu_settings, null)
         // fixme-sw: init with dagger?
