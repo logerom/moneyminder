@@ -19,12 +19,6 @@ class FilterDialog : BaseDialogFragment(), BaseDialogViewListener {
     @Inject
     lateinit var filterDialogViewModel: FilterDialogViewModel
 
-
-    override val onOKClicked: () -> Unit
-        get() = TODO("Not yet implemented")
-    override val onCancelClicked: () -> Unit
-        get() = TODO("Not yet implemented")
-
     override fun viewContent() = LayoutInflater.from(context).inflate(R.layout.dialog_filter, null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

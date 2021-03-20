@@ -41,11 +41,6 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
         custom_searchlist.list = categories
     }
 
-    override val onOKClicked: () -> Unit
-        get() = TODO("Not yet implemented")
-    override val onCancelClicked: () -> Unit
-        get() = TODO("Not yet implemented")
-
     override fun viewContent(): View {
         TODO("Not yet implemented")
     }

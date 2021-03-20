@@ -20,11 +20,6 @@ class DeleteDialogFragment : BaseDialogFragment() {
     @Inject
     lateinit var expenseRepo: ExpenseRepo
 
-    override val onOKClicked: () -> Unit
-        get() = TODO("Not yet implemented")
-    override val onCancelClicked: () -> Unit
-        get() = TODO("Not yet implemented")
-
     override fun viewContent(): View {
         TODO("Not yet implemented")
     }
