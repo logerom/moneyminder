@@ -1,24 +1,21 @@
 package de.logerbyte.moneyminder.presentation.activityCashSummary
 
-import androidx.annotation.MainThread
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
-import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.domain.ExpenseDataManager
 import de.logerbyte.moneyminder.domain.database.expense.Expense
-import de.logerbyte.moneyminder.domain.mapper.MonthSummaryItemViewMapper
+import de.logerbyte.moneyminder.domain.mapper.ExpenseViewItemMapper
 import de.logerbyte.moneyminder.domain.util.DigitUtil.dotToComma
-import de.logerbyte.moneyminder.domain.util.DigitUtil.doubleToString
 import de.logerbyte.moneyminder.domain.util.DigitUtil.getCashTotal
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDataManager,
-                                               val viewMapper: MonthSummaryItemViewMapper,
+                                               val viewItemMapper: ExpenseViewItemMapper,
                                                val sdf: SimpleDateFormat) : ViewModel() {
     val totalExpenses = ObservableField<Double>()
     private val totalBudget = ObservableField("0,00")
@@ -35,7 +32,7 @@ class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDa
     private fun initCashViewItem() {
         expenseDataManager.loadExpenseList()
             .map { it.sortedBy { sdf.parse(it.cashDate) } }
-            .map { viewMapper.map(it) }
+            .map { viewItemMapper.map(it) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {_cashItems.value = it}
     }

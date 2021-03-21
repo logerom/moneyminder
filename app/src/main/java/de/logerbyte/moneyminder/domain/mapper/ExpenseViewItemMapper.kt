@@ -11,7 +11,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-class MonthSummaryItemViewMapper @Inject constructor(
+class ExpenseViewItemMapper @Inject constructor(
     val sdf: SimpleDateFormat
 ): BaseMapper<List<Expense>, List<ExpenseListViewItem>> {
 
