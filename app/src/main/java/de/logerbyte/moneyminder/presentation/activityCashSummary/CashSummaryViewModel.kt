@@ -4,13 +4,13 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
 import de.logerbyte.moneyminder.domain.ExpenseDataManager
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.domain.mapper.ExpenseViewItemMapper
 import de.logerbyte.moneyminder.domain.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.domain.util.DigitUtil.getCashTotal
-import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
@@ -26,18 +26,14 @@ class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDa
     // fixme: 14.08.18 add live data in view and viewModel which updates the "view observable"
     init {
         totalExpenses.set(0.0)
-        initCashViewItem()
     }
 
-    private fun initCashViewItem() {
-        expenseDataManager.loadExpenseList()
-            .map { it.sortedBy { sdf.parse(it.cashDate) } }
-            .map { viewItemMapper.map(it) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {_cashItems.value = it}
-    }
+    fun observeExpenses() =
+            expenseDataManager.loadExpenseList()
+                    .map { it.sortedBy { sdf.parse(it.cashDate) } }
+                    .map { viewItemMapper.map(it) }
 
-//    todo X: Need this functions?
+    //    todo X: Need this functions?
     private fun addCashToTotal(cashList: List<Expense>) {
         totalExpenses.set(getCashTotal(cashList))
     }

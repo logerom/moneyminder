@@ -1,5 +1,7 @@
 package de.logerbyte.moneyminder.domain.database.expense;
 
+import androidx.lifecycle.LiveData;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import io.reactivex.Observable;
  */
 
 public interface ExpenseAPI {
-    Observable<List<Expense>> getAllExpense();
+    LiveData<List<Expense>> getAllExpense();
 
     Observable<Boolean> insertCashItemIntoDB(Expense expense);
 

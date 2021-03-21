@@ -1,5 +1,6 @@
 package de.logerbyte.moneyminder.domain.database.expense;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -16,7 +17,7 @@ import java.util.List;
 public interface ExpenseDao {
 
     @Query("SELECT * FROM Expense")
-    List<Expense> selectAll();
+    LiveData<List<Expense>> selectAll();
 
 
     // TODO-SW: select all where cashDate is in range

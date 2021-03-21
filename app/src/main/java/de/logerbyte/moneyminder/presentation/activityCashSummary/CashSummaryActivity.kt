@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -49,7 +48,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
         initActionBar()
         initPopUp()
         setUpRecyclerView()
-        initBinding()
+        initLiveData()
     }
 
     private fun setUpRecyclerView() {
@@ -65,8 +64,8 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
         return {}
     }
 
-    private fun initBinding() {
-        cashSummaryViewModel.cashItems.observe(this, Observer { setListAdapter(it) })
+    private fun initLiveData() {
+        cashSummaryViewModel.observeExpenses().observe(this, Observer { setListAdapter(it) })
     }
 
     private fun setListAdapter(it: List<ExpenseListViewItem>) {

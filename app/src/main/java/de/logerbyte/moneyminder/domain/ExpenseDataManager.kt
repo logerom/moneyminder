@@ -23,7 +23,7 @@ class ExpenseDataManager @Inject constructor(val sharedPrefManager: SharedPrefMa
     // TODO: sort expenses in week
 
 
-    fun loadExpenseList() = expenseRepo.allExpense.subscribeOn(Schedulers.io())
+    fun loadExpenseList() = expenseRepo.allExpense
 
     fun loadBudgetFromSharedPref() {
         budget = sharedPrefManager.getSharedPrefInt(SHARED_PREF_MENU_BUDGET)
