@@ -26,6 +26,7 @@ open class CashViewModel(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { _categoryList.value = it}
     }
+
     fun saveCash(cashViewItem: CashViewItem) {
         expenseRepo
                 .insertCashItemIntoDB(expenseMapper.map(cashViewItem))

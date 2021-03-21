@@ -5,13 +5,13 @@ import de.logerbyte.moneyminder.BuildConfig
 
 data class CashViewItem(
         var cashDate: String = "", var cashName: String = "", var cashAmount: String = "", var cashCategory: String = "",
-        var cashPerson: String = ""
-){
+        var cashPerson: String = ""){
+
     init {
-        cashDate = if(BuildConfig.DEBUG) "11.11.11" else ""
-        cashName = if(BuildConfig.DEBUG) "Burger" else ""
-        cashAmount = if(BuildConfig.DEBUG) "1,11" else ""
-        cashCategory = if(BuildConfig.DEBUG) "essen" else ""
-        cashPerson = if(BuildConfig.DEBUG) "1" else ""
+        cashDate = if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate
+        cashName = if(BuildConfig.DEBUG && cashName.isBlank()) "Burger" else cashName
+        cashAmount = if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount
+        cashCategory = if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory
+        cashPerson = if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson
     }
 }

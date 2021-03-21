@@ -10,6 +10,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class ExpenseRepo @Inject constructor(private val mExpenseDatabase: ExpenseDatabase) : ExpenseAPI {
+    // tood X: livedata
     override fun getAllExpense(): Observable<List<Expense>> {
         return Observable.fromCallable { mExpenseDatabase.expenseDao().selectAll() }
     }
