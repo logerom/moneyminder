@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewType
@@ -45,8 +47,8 @@ class CashAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if(viewType == ExpenseListViewType.DAY_ITEM.ordinal)
-            DayExpenseViewHolder(AdapterEntryBinding.inflate(layoutInflater))
-        else MonthExpenseViewHolder(AdapterEntryPlusSummaryBinding.inflate(layoutInflater))
+            DayExpenseViewHolder(DataBindingUtil.inflate(layoutInflater, R.layout.adapter_entry,parent,false))
+        else MonthExpenseViewHolder(DataBindingUtil.inflate(layoutInflater, R.layout.adapter_entry_plus_summary,parent,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
