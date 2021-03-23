@@ -24,7 +24,6 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
     lateinit var editDialogViewModel: EditDialogViewModel
 
     lateinit var cashView: View
-    lateinit var adapterCallback: AdapterCallBack
     lateinit var cash: DayExpenseViewItem
     lateinit var editDialogViewModel1: EditDialogViewModel1
 

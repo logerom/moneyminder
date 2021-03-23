@@ -11,21 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerAppCompatActivity
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashDialogFragment
-import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragment
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewViewItem
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
+import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallbackV1
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Named
 
-class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.ActivityListener, CashSummaryViewListener {
+class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSummaryViewListener {
     private lateinit var settingsWindowDelegator: SettingsPopupWindow
     private var binding: ActivityMainBinding? = null
 
@@ -53,15 +52,23 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
 
     private fun setUpRecyclerView() {
         binding?.rvCosts?.apply {
-            this.adapter = CashAdapter(onDeleteClicked = openDeleteDialog())
+            this.adapter = CashAdapter(this@CashSummaryActivity)
                             .apply { cashAdapter = this }
             this.layoutManager = LinearLayoutManager(this.context)
         }
     }
 
-    private fun openDeleteDialog(): () -> Unit {
-//        todo X: open delete dialog
-        return {}
+    override fun onDeleteItemClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onItemClicked(viewItem: DayExpenseViewItem) {
+        //  new EditDialogFragment().show
+        // (getSupportFragmentManager(), "Base_Dialog");
+        val baseDialog = EditDialogFragment()
+        baseDialog.show(supportFragmentManager, "Edit_Dialog")
+        // todo X: parcelable for ViewItem transaction between androidScreens.
+        // todo X: Base VM and binding for AndroidFragments/Activities + Base for Notifications (Toast/Snackbar)
     }
 
     private fun initLiveData() {
@@ -75,16 +82,6 @@ class CashSummaryActivity : DaggerAppCompatActivity(), DayExpenseViewViewItem.Ac
     private fun initActionBar() {
         my_toolbar.inflateMenu(R.menu.meun_activity_main)
         setSupportActionBar(my_toolbar)
-    }
-
-    override fun showEditDialog(item: DayExpenseViewItem, dialogVmListener: AdapterCallBack) {
-        //  new EditDialogFragment().show
-        // (getSupportFragmentManager(), "Base_Dialog");
-        val baseDialog = EditDialogFragment()
-        baseDialog.show(supportFragmentManager, "Edit_Dialog")
-        // TODO: 2019-09-27 implement parcelable in bundle for item transaction between fragment
-        baseDialog.cash = item
-        baseDialog.adapterCallback = dialogVmListener
     }
 
     override fun onCLickFab() {

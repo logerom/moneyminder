@@ -1,8 +1,6 @@
 package de.logerbyte.moneyminder.presentation.cashadapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +17,7 @@ import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
  * Created by logerom on 28.07.18.
  */
 
-class CashAdapter(
-    val onDeleteClicked: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CashAdapter(val adapterCallbackV1: AdapterCallbackV1) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var layoutInflater: LayoutInflater
     var items = listOf<ExpenseListViewItem>()
@@ -61,7 +58,8 @@ class CashAdapter(
     inner class DayExpenseViewHolder(val binding: AdapterEntryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(viewItem: DayExpenseViewItem){
             binding.vmCashItem = viewItem
-            binding.buDelete.setOnClickListener { onDeleteClicked }
+            binding.buDelete.setOnClickListener {adapterCallbackV1.onDeleteItemClicked() }
+            binding.llItem.setOnClickListener { adapterCallbackV1.onItemClicked(viewItem) }
         }
     }
 
