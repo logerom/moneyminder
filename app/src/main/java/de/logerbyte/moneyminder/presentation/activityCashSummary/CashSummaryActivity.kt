@@ -65,8 +65,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
     override fun onItemClicked(viewItem: DayExpenseViewItem) {
         //  new EditDialogFragment().show
         // (getSupportFragmentManager(), "Base_Dialog");
-        val baseDialog = EditDialogFragment()
-        baseDialog.show(supportFragmentManager, "Edit_Dialog")
+       EditDialogFragment.newInstance(viewItem).show(supportFragmentManager, "Edit_Dialog")
         // todo X: parcelable for ViewItem transaction between androidScreens.
         // todo X: Base VM and binding for AndroidFragments/Activities + Base for Notifications (Toast/Snackbar)
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.domain.mapper.ExpenseMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -34,5 +35,5 @@ open class CashViewModel(
                 .subscribe()
     }
 
-    var cashViewItem = CashViewItem()
+    var cashViewItem = DayExpenseViewItem()
 }

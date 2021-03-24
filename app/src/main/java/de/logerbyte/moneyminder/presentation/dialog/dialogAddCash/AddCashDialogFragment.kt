@@ -22,7 +22,7 @@ class AddCashDialogFragment : BaseCashDialogFragment() {
     override fun viewContent(): View {
         return FrameCashBinding.inflate(layoutInflater)
                 .apply {
-                    viewModel = addCashViewModel
+                    viewItem = addCashViewModel.cashViewItem
                     binding = this
                 }
                 .root
