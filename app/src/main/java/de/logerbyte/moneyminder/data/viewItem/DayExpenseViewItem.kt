@@ -15,12 +15,6 @@ data class DayExpenseViewItem(var cashDate: String = "", var cashName: String = 
         cashCategory = if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory
         cashPerson = if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson
     }
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString())
 
     fun isAllSet(): Boolean {
         return !(isSomeElementNull(listOf(cashDate, cashName, cashCategory, cashAmount, cashPerson)))
@@ -34,6 +28,13 @@ data class DayExpenseViewItem(var cashDate: String = "", var cashName: String = 
         }
         return false
     }
+
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString())
 
     override fun describeContents(): Int {
         return 0

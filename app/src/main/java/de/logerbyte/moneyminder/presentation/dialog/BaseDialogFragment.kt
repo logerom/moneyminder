@@ -8,8 +8,9 @@ import dagger.android.support.DaggerDialogFragment
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 
-
 abstract class BaseDialogFragment : DaggerDialogFragment() {
+    lateinit var parcelKey: String
+
 
     open fun onCancelClicked(view: View) {
         this.dismiss()
