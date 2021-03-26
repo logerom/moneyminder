@@ -1,8 +1,9 @@
 package de.logerbyte.moneyminder.presentation.dialog
 
+import android.os.Parcelable
 import android.text.Editable
 
-abstract class BaseCashDialogFragment: BaseDialogFragment(), CashViewAction{
+abstract class BaseCashDialogFragment<PARCEL_TYPE: Parcelable>: BaseDialogFragment<PARCEL_TYPE>(), CashViewAction{
 
     var newDateText = ""
     var dateDotDelete = false

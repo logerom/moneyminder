@@ -1,10 +1,8 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogEdit
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
@@ -14,7 +12,7 @@ import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
 
 
-class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
+class EditDialogFragment : BaseDialogFragment<DayExpenseViewItem>(), EditDialogCallback {
 
     @Inject
     lateinit var expenseRepo: ExpenseRepo
@@ -35,20 +33,13 @@ class EditDialogFragment : BaseDialogFragment(), EditDialogCallback {
 //        editDialogViewModel1.setAdapter(adapterCallback)
 //    }
 
-    companion object {
-        fun newInstance(viewItem: DayExpenseViewItem, parcelKey: String, fragment: BaseDialogFragment) = fragment.apply {
-            this.arguments = Bundle().also { it.putParcelable(parcelKey, viewItem) }
-            this.parcelKey = parcelKey
-        }
-    }
-
     override fun initCategories(categories: ArrayList<String>) {
         custom_searchlist.list = categories
     }
 
-    override fun viewContent(): View {
+    override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<FrameCashBinding>(layoutInflater, R.layout.frame_cash, null, false)
-        arguments?.getParcelable<DayExpenseViewItem>(parcelKey).apply { binding.viewItem = this }
+        binding.viewItem = parcel
         return binding.root
     }
 }

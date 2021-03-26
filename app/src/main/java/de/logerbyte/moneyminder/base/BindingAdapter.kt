@@ -10,8 +10,8 @@ import kotlinx.android.synthetic.main.category_list.view.*
 object BindingAdapter {
     @JvmStatic
     @BindingAdapter("searchText")
-    fun setSearchText(searchViewView: SearchListView, value: String) {
-        searchViewView.setSearchQuery(value)
+    fun setSearchText(searchViewView: SearchListView, value: String?) {
+        value?.apply {searchViewView.setSearchQuery(value)}
     }
 
     @JvmStatic

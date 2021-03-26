@@ -2,17 +2,14 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogDelete
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
-import android.widget.TextView
-import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
-import de.logerbyte.moneyminder.databinding.BaseDialogBinding
-import de.logerbyte.moneyminder.dialogs.BaseDialogViewListener
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
 import javax.inject.Inject
 
-class DeleteDialogFragment : BaseDialogFragment() {
+class DeleteDialogFragment : BaseDialogFragment<Parcelable>() {
     private lateinit var adapterCallback: AdapterCallBack
     var cashItemId: Long = 0L
     lateinit var deleteDialogViewModel: DeleteDialogViewModel
@@ -20,7 +17,7 @@ class DeleteDialogFragment : BaseDialogFragment() {
     @Inject
     lateinit var expenseRepo: ExpenseRepo
 
-    override fun viewContent(): View {
+    override fun viewContent(bundle: Bundle?): View {
         TODO("Not yet implemented")
     }
 
