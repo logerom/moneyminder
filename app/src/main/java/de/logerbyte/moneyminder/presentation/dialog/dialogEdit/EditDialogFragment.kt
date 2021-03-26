@@ -7,12 +7,14 @@ import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
+import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
+import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
 import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
 
 
-class EditDialogFragment : BaseDialogFragment<DayExpenseViewItem>(), EditDialogCallback {
+class EditDialogFragment: BaseDialogFragmentv1(), EditDialogCallback, BaseFragment {
 
     @Inject
     lateinit var expenseRepo: ExpenseRepo
@@ -39,7 +41,7 @@ class EditDialogFragment : BaseDialogFragment<DayExpenseViewItem>(), EditDialogC
 
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<FrameCashBinding>(layoutInflater, R.layout.frame_cash, null, false)
-        binding.viewItem = parcel
+        binding.viewItem = getParcel<DayExpenseViewItem>()
         return binding.root
     }
 }

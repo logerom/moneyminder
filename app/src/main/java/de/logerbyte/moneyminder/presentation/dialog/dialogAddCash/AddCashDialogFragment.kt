@@ -6,12 +6,14 @@ import androidx.lifecycle.Observer
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
+import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseCashDialogFragment
+import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
 import javax.inject.Inject
 import javax.inject.Named
 
 
-class AddCashDialogFragment : BaseCashDialogFragment<DayExpenseViewItem>() {
+class AddCashDialogFragment: BaseDialogFragmentv1(), BaseFragment{
 
     private lateinit var binding: FrameCashBinding
 

@@ -12,10 +12,7 @@ import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.presentation.PARCEL_KEY
 
 
-abstract class BaseDialogFragment<PARCEL_TYPE: Parcelable> : DaggerDialogFragment() {
-    var parcelKey: String? = null
-    var parcel: PARCEL_TYPE? = null
-        get() = arguments?.getParcelable(PARCEL_KEY)
+abstract class BaseDialogFragmentv1: DaggerDialogFragment() {
 
     open fun onCancelClicked(view: View) {
         this.dismiss()
@@ -25,12 +22,6 @@ abstract class BaseDialogFragment<PARCEL_TYPE: Parcelable> : DaggerDialogFragmen
     }
 
     abstract fun viewContent(bundle: Bundle?): View
-
-    companion object MyFragmet: Fragment(){
-        fun <TYPE: Parcelable>newBaseInstancee(viewItem: DayExpenseViewItem, fragment: BaseDialogFragment<TYPE>) = fragment.apply {
-            this.arguments = Bundle().also { it.putParcelable(PARCEL_KEY, viewItem) }
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return BaseDialogBinding.inflate(inflater).apply {

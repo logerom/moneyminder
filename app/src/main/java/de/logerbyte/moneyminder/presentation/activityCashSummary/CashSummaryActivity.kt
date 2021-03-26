@@ -18,9 +18,9 @@ import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
+import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallbackV1
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
-import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment.Companion.newInstancee
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -67,10 +67,8 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
         //  new EditDialogFragment().show
         // (getSupportFragmentManager(), "Base_Dialog");
 
-        newInstancee(viewItem, EditDialogFragment())
+        BaseFragment.newInstancee(viewItem, EditDialogFragment())
                 .show(supportFragmentManager, "Edit_Dialog")
-        // todo X: parcelable for ViewItem transaction between androidScreens.
-        // todo X: Base VM and binding for AndroidFragments/Activities + Base for Notifications (Toast/Snackbar)
     }
 
     private fun initLiveData() {
