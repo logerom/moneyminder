@@ -8,12 +8,19 @@ import de.logerbyte.moneyminder.BuildConfig
 
 data class DayExpenseViewItem(var cashDate: String = "", var cashName: String = "", var cashAmount: String = "", var cashCategory: String = "",
                               var cashPerson: String = ""): ExpenseListViewItem, Parcelable {
+
+    val cashPersonField=ObservableField<String>()
+    val cashCategoryField=ObservableField<String>()
+    val cashAmountField=ObservableField<String>()
+    val cashNameField=ObservableField<String>()
+    val cashDateField = ObservableField<String>()
+
     init {
-        cashDate = if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate
-        cashName = if(BuildConfig.DEBUG && cashName.isBlank()) "Burger" else cashName
-        cashAmount = if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount
-        cashCategory = if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory
-        cashPerson = if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson
+        cashDateField.set(if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate)
+        cashNameField.set(if(BuildConfig.DEBUG && cashName.isBlank()) "Burger" else cashName)
+        cashAmountField.set(if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount)
+        cashCategoryField.set(if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory)
+        cashPersonField.set(if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson)
     }
 
     fun isAllSet(): Boolean {

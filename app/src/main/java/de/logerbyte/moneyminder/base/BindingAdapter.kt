@@ -3,6 +3,7 @@ package de.logerbyte.moneyminder.base
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
+import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.base.listener.SearchViewListener
 import de.logerbyte.moneyminder.presentation.custom.searchCategoryView.SearchListView
 import kotlinx.android.synthetic.main.category_list.view.*
@@ -10,8 +11,8 @@ import kotlinx.android.synthetic.main.category_list.view.*
 object BindingAdapter {
     @JvmStatic
     @BindingAdapter("searchText")
-    fun setSearchText(searchViewView: SearchListView, value: String?) {
-        value?.apply {searchViewView.setSearchQuery(value)}
+    fun setSearchText(searchViewView: SearchListView, value: ObservableField<String>) {
+        value.get()?.apply {searchViewView.setSearchQuery(this)}
     }
 
     @JvmStatic
