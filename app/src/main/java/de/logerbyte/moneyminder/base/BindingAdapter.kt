@@ -21,18 +21,18 @@ object BindingAdapter {
         return view.getSearchQuery()
     }
 
-//    @JvmStatic
-//    @BindingAdapter("searchTextAttrChanged")
-//    fun setListener(searchViewView: SearchListView, listener: InverseBindingListener?) {
-//        searchViewView.searchView.setOnQueryTextListener(object : SearchViewListener() {
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                newText?.apply {
-//                    val list = searchViewView.categoryAdapter.originalItems.filter { category -> category.startsWith(this, true) }
-//                    searchViewView.categoryAdapter.items = list as ArrayList
-//                    listener?.onChange()
-//                }
-//                return true
-//            }
-//        })
-//    }
+    @JvmStatic
+    @BindingAdapter("searchTextAttrChanged")
+    fun setListener(searchViewView: SearchListView, listener: InverseBindingListener?) {
+        searchViewView.searchView.setOnQueryTextListener(object : SearchViewListener() {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.apply {
+                    val list = searchViewView.list.filter { category -> category.startsWith(this, true) }
+                    searchViewView.categoryAdapter.items = list as ArrayList
+                    listener?.onChange()
+                }
+                return true
+            }
+        })
+    }
 }
