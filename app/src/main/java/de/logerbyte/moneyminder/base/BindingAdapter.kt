@@ -9,6 +9,7 @@ import de.logerbyte.moneyminder.presentation.custom.searchCategoryView.SearchLis
 import kotlinx.android.synthetic.main.category_list.view.*
 
 object BindingAdapter {
+
     @JvmStatic
     @BindingAdapter("searchText")
     fun setSearchText(searchViewView: SearchListView, value: ObservableField<String>) {

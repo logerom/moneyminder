@@ -8,6 +8,9 @@ import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.base.listener.SearchViewListener
 import kotlinx.android.synthetic.main.category_list.view.*
 
+/**
+ * Set list with search suggestions.
+ */
 class SearchListView(context: Context, attributeSet: AttributeSet) : LinearLayout(context, attributeSet) {
 
     var foo = ""
