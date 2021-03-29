@@ -8,6 +8,9 @@ import de.logerbyte.moneyminder.base.listener.SearchViewListener
 import de.logerbyte.moneyminder.presentation.custom.searchCategoryView.SearchListView
 import kotlinx.android.synthetic.main.category_list.view.*
 
+/**
+ * InverseBindingAdapter with InverseBindingListener for 2 way binding properties.
+ */
 object BindingAdapter {
 
     @JvmStatic
