@@ -3,11 +3,9 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogAddCash
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import de.logerbyte.moneyminder.data.viewItem.CashViewItem
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.presentation.BaseFragment
-import de.logerbyte.moneyminder.presentation.dialog.BaseCashDialogFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
 import javax.inject.Inject
 import javax.inject.Named

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.android.support.DaggerDialogFragment
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.presentation.PARCEL_KEY
 

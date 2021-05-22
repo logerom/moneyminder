@@ -5,7 +5,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1

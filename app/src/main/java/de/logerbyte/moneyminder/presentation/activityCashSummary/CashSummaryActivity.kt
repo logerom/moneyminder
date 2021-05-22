@@ -14,8 +14,8 @@ import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashDialogF
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragment
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
 import de.logerbyte.moneyminder.presentation.BaseFragment

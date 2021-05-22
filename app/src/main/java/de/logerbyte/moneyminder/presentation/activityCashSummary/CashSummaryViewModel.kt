@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
-import de.logerbyte.moneyminder.domain.ExpenseDataManager
+import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
+import de.logerbyte.moneyminder.entities.data.ExpenseDataManager
 import de.logerbyte.moneyminder.framework.database.Expense
-import de.logerbyte.moneyminder.domain.mapper.ExpenseViewItemMapper
-import de.logerbyte.moneyminder.domain.util.DigitUtil.dotToComma
-import de.logerbyte.moneyminder.domain.util.DigitUtil.getCashTotal
+import de.logerbyte.moneyminder.entities.mapper.ExpenseViewItemMapper
+import de.logerbyte.moneyminder.entities.util.DigitUtil.dotToComma
+import de.logerbyte.moneyminder.entities.util.DigitUtil.getCashTotal
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 

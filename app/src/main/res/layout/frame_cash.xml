@@ -5,7 +5,7 @@
 
         <variable
             name="viewItem"
-            type="de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem" />
+            type="de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem" />
         <variable
             name="viewActionListener"
             type="de.logerbyte.moneyminder.presentation.dialog.CashViewAction" />

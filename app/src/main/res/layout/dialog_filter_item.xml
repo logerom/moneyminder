@@ -4,7 +4,7 @@
 
         <variable
             name="filterDialogItem"
-            type="de.logerbyte.moneyminder.data.viewItem.FilterDialogViewItem" />
+            type="de.logerbyte.moneyminder.entities.data.viewData.FilterDialogViewItem" />
 
         <variable
             name="filterDialogVM"

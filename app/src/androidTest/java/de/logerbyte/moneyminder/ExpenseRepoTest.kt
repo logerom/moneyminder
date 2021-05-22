@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import de.logerbyte.moneyminder.framework.database.DbMigration.MIGRATION_2_3
 import de.logerbyte.moneyminder.framework.database.ExpenseDatabase
 import de.logerbyte.moneyminder.framework.database.Expense
-import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
+import de.logerbyte.moneyminder.framework.database.ExpenseRepo
 import io.reactivex.observers.TestObserver
 import org.junit.After
 import org.junit.Before

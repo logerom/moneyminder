@@ -3,8 +3,6 @@ package de.logerbyte.moneyminder.presentation
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.fragment.app.Fragment
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
 
 const val PARCEL_KEY = "parcel_key"
 

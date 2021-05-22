@@ -4,9 +4,9 @@ import android.view.View
 import android.widget.CheckBox
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.base.viewmodel.BaseViewModel
-import de.logerbyte.moneyminder.data.viewItem.FilterDialogViewItem
-import de.logerbyte.moneyminder.domain.SharedPrefManager
-import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
+import de.logerbyte.moneyminder.entities.data.viewData.FilterDialogViewItem
+import de.logerbyte.moneyminder.framework.SharedPrefManager
+import de.logerbyte.moneyminder.framework.database.ExpenseRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
+import de.logerbyte.moneyminder.framework.database.ExpenseRepo
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
 import javax.inject.Inject
 

@@ -1,15 +1,11 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogEdit
 
-import android.content.Context
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
-import de.logerbyte.moneyminder.dialogs.BaseDialogViewModel1
-import de.logerbyte.moneyminder.dialogs.DialogCallback
+import de.logerbyte.moneyminder.framework.database.ExpenseRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

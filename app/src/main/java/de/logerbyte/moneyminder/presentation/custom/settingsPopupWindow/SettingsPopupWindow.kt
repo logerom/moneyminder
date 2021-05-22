@@ -4,9 +4,8 @@ import android.view.View
 import android.widget.PopupWindow
 import androidx.fragment.app.FragmentManager
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
-import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
 import de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialog
-import de.logerbyte.moneyminder.domain.SharedPrefManager
+import de.logerbyte.moneyminder.framework.SharedPrefManager
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import javax.inject.Inject
 
@@ -14,7 +13,8 @@ import javax.inject.Inject
 class SettingsPopupWindow @Inject constructor(
     val fragmentManager: FragmentManager,
     val settingsPopupViewModel: SettingsPopupViewModel,
-    val sharedPrefManager: SharedPrefManager)
+    val sharedPrefManager: SharedPrefManager
+)
     : MenuItemsClicked, PopupWindow.OnDismissListener {
 
     // TODO: 14.03.21 enherit from widget dont wrapp

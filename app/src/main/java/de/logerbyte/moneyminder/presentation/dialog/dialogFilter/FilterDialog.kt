@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.data.viewItem.FilterDialogViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.FilterDialogViewItem
 import de.logerbyte.moneyminder.dialogs.BaseDialogViewListener
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
 import kotlinx.android.synthetic.main.dialog_filter.*

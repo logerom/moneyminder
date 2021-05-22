@@ -6,7 +6,7 @@
 
         <variable
             name="vmCashItem"
-            type="de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem" />
+            type="de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem" />
     </data>
 
     <LinearLayout

@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
-import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewType
-import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewType
+import de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
 

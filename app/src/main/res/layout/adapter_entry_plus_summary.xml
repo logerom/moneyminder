@@ -4,9 +4,9 @@
 
         <variable
             name="viewItem"
-            type="de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem" />
+            type="de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem" />
 
-        <import type="de.logerbyte.moneyminder.domain.util.DigitUtil" />
+        <import type="de.logerbyte.moneyminder.entities.util.DigitUtil" />
     </data>
 
         <LinearLayout

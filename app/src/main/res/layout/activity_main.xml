@@ -13,7 +13,7 @@
             name="viewListener"
             type="de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewListener" />
 
-        <import type="de.logerbyte.moneyminder.domain.util.DigitUtil" />
+        <import type="de.logerbyte.moneyminder.entities.util.DigitUtil" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
