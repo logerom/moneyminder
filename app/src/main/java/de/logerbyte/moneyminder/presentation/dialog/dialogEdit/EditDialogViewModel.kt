@@ -2,6 +2,8 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogEdit
 
 import android.content.Context
 import android.view.View
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
+import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewViewItem
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.domain.database.expense.Expense
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
@@ -12,16 +14,21 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.lang.Double
 
-class EditDialogViewModel1(
+class EditDialogViewModel(
     val expenseRepo: ExpenseRepo,
     dialogCallback: DialogCallback,
     val context: Context?,
     val editDialogCallback: EditDialogCallback) : BaseDialogViewModel1(dialogCallback) {
 
     private lateinit var adapterCallBack: AdapterCallBack
+    private lateinit var data: DayExpenseViewItem
 
     init {
         loadCategories()
+    }
+
+    fun setData(dayExpenseViewViewItem: DayExpenseViewItem) {
+        this.data = dayExpenseViewViewItem
     }
 
     private fun loadCategories() {
@@ -38,12 +45,12 @@ class EditDialogViewModel1(
 //                Double.valueOf(DigitUtil.commaToDot(editDialogViewModel.cashViewItem.cashAmount.get())),
 //                editDialogViewModel.cashViewItem.cashPerson.get()
 //            )
-
+//
 //        expenseRepo.updateCashItem(expenseToUpdate)
 //                .subscribeOn(Schedulers.computation())
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribe({ aBoolean -> adapterCallBack.onUpdateItem() })
-        super.onClickOk(view)
+//        super.onClickOk(view)
     }
 
     fun setAdapter(adapterCallback: AdapterCallBack) {

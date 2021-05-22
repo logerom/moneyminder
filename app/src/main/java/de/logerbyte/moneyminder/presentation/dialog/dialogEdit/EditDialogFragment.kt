@@ -5,10 +5,8 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
-import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.presentation.BaseFragment
-import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
 import kotlinx.android.synthetic.main.frame_cash.*
 import javax.inject.Inject
@@ -17,11 +15,7 @@ import javax.inject.Inject
 class EditDialogFragment: BaseDialogFragmentv1(), EditDialogCallback, BaseFragment {
 
     @Inject
-    lateinit var expenseRepo: ExpenseRepo
-
-    lateinit var cashView: View
-    lateinit var cash: DayExpenseViewItem
-    lateinit var editDialogViewModel1: EditDialogViewModel1
+    lateinit var editDialogViewModel: EditDialogViewModel
 
 //    override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
 //        editDialogViewModel1 = EditDialogViewModel1(expenseRepo, this, context, editDialogViewModel, this)
@@ -38,7 +32,9 @@ class EditDialogFragment: BaseDialogFragmentv1(), EditDialogCallback, BaseFragme
 
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<FrameCashBinding>(layoutInflater, R.layout.frame_cash, null, false)
-        binding.viewItem = getParcel<DayExpenseViewItem>()
+        val data = getParcel<DayExpenseViewItem>()
+        binding.viewItem = data
+        editDialogViewModel.setData(data?: DayExpenseViewItem())
         return binding.root
     }
 }
