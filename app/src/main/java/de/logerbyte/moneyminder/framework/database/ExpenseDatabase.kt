@@ -1,9 +1,7 @@
-package de.logerbyte.moneyminder.domain.database
+package de.logerbyte.moneyminder.framework.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import de.logerbyte.moneyminder.domain.database.expense.Expense
-import de.logerbyte.moneyminder.domain.database.expense.ExpenseDao
 
 /**
  * Created by logerom on 08.08.18.

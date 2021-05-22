@@ -25,10 +25,7 @@ abstract class BaseDialogFragmentv1: DaggerDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return BaseDialogBinding.inflate(inflater).apply {
-            dialogContainer.addView(viewContent(savedInstanceState))
-            buCancel.setOnClickListener { onCancelClicked(it) }
-            buOK.setOnClickListener { onOKClicked(it) }
-        }.root
+            dialogContainer.addView(viewContent(savedInstanceState))}.root
     }
 
 

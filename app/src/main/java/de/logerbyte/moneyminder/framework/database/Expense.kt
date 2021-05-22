@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.domain.database.expense
+package de.logerbyte.moneyminder.framework.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

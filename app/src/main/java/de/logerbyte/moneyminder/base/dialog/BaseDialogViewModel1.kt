@@ -12,5 +12,4 @@ abstract class BaseDialogViewModel1(private val dialogCallback: DialogCallback) 
     override fun onClickCancel(view: View) {
         dialogCallback.dismissDialog()
     }
-
 }

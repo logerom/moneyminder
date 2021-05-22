@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.domain.mapper
 
 import de.logerbyte.moneyminder.data.viewItem.CashViewItem
-import de.logerbyte.moneyminder.domain.database.expense.Expense
+import de.logerbyte.moneyminder.framework.database.Expense
 import de.logerbyte.moneyminder.domain.util.DigitUtil
 import javax.inject.Inject
 import javax.inject.Singleton

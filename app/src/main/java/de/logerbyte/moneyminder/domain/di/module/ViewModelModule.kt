@@ -8,6 +8,7 @@ import de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryView
 import de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialogViewModel
 import de.logerbyte.moneyminder.domain.di.ViewModelKey
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashViewModel
+import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogViewModel
 
 @Module
 abstract class ViewModelModule {
@@ -26,4 +27,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddCashViewModel::class)
     abstract fun intoMapAddCashViewModel(addCashViewModel: AddCashViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditDialogViewModel::class)
+    abstract fun intoEditDialogViewModel(editDialogViewModel: EditDialogViewModel): ViewModel
 }

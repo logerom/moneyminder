@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.domain.database;
+package de.logerbyte.moneyminder.framework.database;
 
 import androidx.annotation.NonNull;
 import androidx.room.migration.Migration;

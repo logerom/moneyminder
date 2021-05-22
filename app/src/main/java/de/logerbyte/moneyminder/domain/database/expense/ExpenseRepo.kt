@@ -1,7 +1,8 @@
 package de.logerbyte.moneyminder.domain.database.expense
 
 import androidx.lifecycle.LiveData
-import de.logerbyte.moneyminder.domain.database.ExpenseDatabase
+import de.logerbyte.moneyminder.framework.database.Expense
+import de.logerbyte.moneyminder.framework.database.ExpenseDatabase
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Set;
 
+import de.logerbyte.moneyminder.framework.database.Expense;
 import io.reactivex.Observable;
 
 /**

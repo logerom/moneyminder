@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.domain.database.expense;
+package de.logerbyte.moneyminder.framework.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,6 +8,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import de.logerbyte.moneyminder.framework.database.Expense;
 
 /**
  * Created by logerom on 08.08.18.

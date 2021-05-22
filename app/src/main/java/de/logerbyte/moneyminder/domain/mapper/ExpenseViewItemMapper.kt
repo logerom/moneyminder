@@ -5,7 +5,7 @@ import de.logerbyte.moneyminder.DATE_PATTERN
 import de.logerbyte.moneyminder.data.viewItem.DayExpenseViewItem
 import de.logerbyte.moneyminder.data.viewItem.ExpenseListViewItem
 import de.logerbyte.moneyminder.data.viewItem.SummaryMonthViewItem
-import de.logerbyte.moneyminder.domain.database.expense.Expense
+import de.logerbyte.moneyminder.framework.database.Expense
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

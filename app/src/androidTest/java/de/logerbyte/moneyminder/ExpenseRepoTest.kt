@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import de.logerbyte.moneyminder.domain.database.DbMigration.MIGRATION_2_3
-import de.logerbyte.moneyminder.domain.database.ExpenseDatabase
-import de.logerbyte.moneyminder.domain.database.expense.Expense
+import de.logerbyte.moneyminder.framework.database.DbMigration.MIGRATION_2_3
+import de.logerbyte.moneyminder.framework.database.ExpenseDatabase
+import de.logerbyte.moneyminder.framework.database.Expense
 import de.logerbyte.moneyminder.domain.database.expense.ExpenseRepo
 import io.reactivex.observers.TestObserver
 import org.junit.After
@@ -56,7 +56,7 @@ class ExpenseRepoTest {
     fun testgetAllEpenses() {
         val testObserver = TestObserver<List<Expense>>()
 
-        expenseRepo.allExpense.subscribe(testObserver)
+        expenseRepo.allExpense.observe(testObserver)
         testObserver.assertValueCount(1)
         testObserver.assertValue { t -> if (t[0].cashName == expenseFake.cashName) return@assertValue true else false }
     }
