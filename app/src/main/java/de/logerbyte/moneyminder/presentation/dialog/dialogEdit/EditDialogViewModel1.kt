@@ -16,7 +16,6 @@ class EditDialogViewModel1(
     val expenseRepo: ExpenseRepo,
     dialogCallback: DialogCallback,
     val context: Context?,
-    val editDialogViewModel: EditDialogViewModel,
     val editDialogCallback: EditDialogCallback) : BaseDialogViewModel1(dialogCallback) {
 
     private lateinit var adapterCallBack: AdapterCallBack

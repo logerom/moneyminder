@@ -19,9 +19,6 @@ class EditDialogFragment: BaseDialogFragmentv1(), EditDialogCallback, BaseFragme
     @Inject
     lateinit var expenseRepo: ExpenseRepo
 
-    @Inject
-    lateinit var editDialogViewModel: EditDialogViewModel
-
     lateinit var cashView: View
     lateinit var cash: DayExpenseViewItem
     lateinit var editDialogViewModel1: EditDialogViewModel1

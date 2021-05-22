@@ -6,7 +6,6 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewModel
 import de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialogViewModel
-import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogViewModel
 import de.logerbyte.moneyminder.domain.di.ViewModelKey
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashViewModel
 
@@ -17,11 +16,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CashSummaryViewModel::class)
     abstract fun intoMapCashSummaryViewModel(cashSummaryViewModel: CashSummaryViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(EditDialogViewModel::class)
-    abstract fun intoMapCashViewModel(editDialogViewModel: EditDialogViewModel): ViewModel
 
     @Binds
     @IntoMap
