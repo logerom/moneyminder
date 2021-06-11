@@ -67,7 +67,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
         //  new EditDialogFragment().show
         // (getSupportFragmentManager(), "Base_Dialog");
 
-        BaseFragment.newInstancee(viewItem, EditDialogFragment())
+        BaseFragment.newInstanceWithArguments(viewItem, EditDialogFragment())
                 .show(supportFragmentManager, "Edit_Dialog")
     }
 

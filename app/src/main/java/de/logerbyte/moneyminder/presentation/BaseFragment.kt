@@ -13,7 +13,7 @@ interface BaseFragment {
     fun <PARCEL_TYPE : Parcelable> Fragment.getParcel() = arguments?.getParcelable<PARCEL_TYPE>(PARCEL_KEY)
 
     companion object{
-        fun <TYPE : Parcelable, FRAGMENT: Fragment>newInstancee(viewItem: TYPE, fragment: FRAGMENT) = fragment.apply {
+        fun <TYPE : Parcelable, FRAGMENT: Fragment>newInstanceWithArguments(viewItem: TYPE, fragment: FRAGMENT) = fragment.apply {
             this.arguments = Bundle().also { it.putParcelable(PARCEL_KEY, viewItem) }
         }
     }
