@@ -58,7 +58,7 @@ class CashAdapter(val adapterCallbackV1: AdapterCallbackV1) : RecyclerView.Adapt
     inner class DayExpenseViewHolder(val binding: AdapterEntryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(viewItem: DayExpenseViewItem){
             binding.vmCashItem = viewItem
-            binding.buDelete.setOnClickListener {adapterCallbackV1.onDeleteItemClicked() }
+            binding.buDelete.setOnClickListener {adapterCallbackV1.onDeleteItemClicked(viewItem) }
             binding.llItem.setOnClickListener { adapterCallbackV1.onItemClicked(viewItem) }
         }
     }

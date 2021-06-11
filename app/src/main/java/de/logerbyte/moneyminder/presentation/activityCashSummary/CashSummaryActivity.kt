@@ -21,6 +21,7 @@ import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallbackV1
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
+import de.logerbyte.moneyminder.presentation.dialog.dialogDelete.DeleteDialogFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -59,8 +60,8 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
         }
     }
 
-    override fun onDeleteItemClicked() {
-        TODO("Not yet implemented")
+    override fun onDeleteItemClicked(item: DayExpenseViewItem) {
+        BaseFragment.newInstanceWithArguments(item, DeleteDialogFragment()).show(supportFragmentManager, DeleteDialogFragment::class.java.simpleName)
     }
 
     override fun onItemClicked(viewItem: DayExpenseViewItem) {

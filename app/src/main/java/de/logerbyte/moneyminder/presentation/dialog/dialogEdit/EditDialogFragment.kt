@@ -43,7 +43,7 @@ class EditDialogFragment: BaseDialogFragmentv1(), BaseFragment {
     }
 
     private fun initLiveData() {
-        editDialogViewModel.categories.observe(this, Observer { onCategories(it) })
+        editDialogViewModel.categories.observe(viewLifecycleOwner, Observer { onCategories(it) })
     }
 
     fun onCategories(list: ArrayList<String>){
