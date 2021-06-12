@@ -34,15 +34,15 @@ class AddCashDialogFragment: BaseDialogFragmentv1(), BaseFragment{
         initLiveData()
     }
 
-    override fun onOKClicked(view: View) {
-        super.onOKClicked(view)
-        addCashViewModel.saveCash(
-                binding.let {
-                    // Todo X: set CashViewitem over Databinding
-                    CashViewItem(
-                            it.etDate.text.toString(), it.etCashName.text.toString(), it.etCashAmount.text.toString(),
-                            it.customSearchlist.getSearchQuery(), it.etPerson.text.toString()) })
-    }
+//    override fun onOKClicked(view: View) {
+//        super.onOKClicked(view)
+//        addCashViewModel.saveCash(
+//                binding.let {
+//                    // Todo sw: set CashViewitem over Databinding
+//                    CashViewItem(
+//                            it.etDate.text.toString(), it.etCashName.text.toString(), it.etCashAmount.text.toString(),
+//                            it.customSearchlist.getSearchQuery(), it.etPerson.text.toString()) })
+//    }
 
     private fun initLiveData() {
         addCashViewModel.categoryList.observe(viewLifecycleOwner, Observer { setListCategories(it) })

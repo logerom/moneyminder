@@ -10,7 +10,7 @@
             name="viewActionListener"
             type="de.logerbyte.moneyminder.presentation.dialog.CashViewAction" />
     </data>
-    <!-- todo x: two way binding-->
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

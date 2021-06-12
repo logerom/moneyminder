@@ -8,7 +8,7 @@ abstract class BaseCashDialogFragment<PARCEL_TYPE: Parcelable>: BaseDialogFragme
     var newDateText = ""
     var dateDotDelete = false
 
-    // todo X: base method for changing text in ViewModel?
+    // todo sw: base method for changing text in ViewModel?
     override fun onDateTextChanged(s: Editable) {
         if (dateDotDelete) {
             dateDotDelete = false

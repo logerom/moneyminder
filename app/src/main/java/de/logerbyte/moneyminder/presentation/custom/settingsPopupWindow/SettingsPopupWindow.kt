@@ -37,7 +37,7 @@ class SettingsPopupWindow @Inject constructor(
     }
 
     override fun onDismiss() {
-//        todo X: Update after setting
+//        todo sw: Update after setting
         writeBudgetInSharedPref()
 //        cashAdapter.onBudgetUpdated()
     }

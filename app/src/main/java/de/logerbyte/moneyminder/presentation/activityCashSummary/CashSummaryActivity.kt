@@ -106,7 +106,6 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
         }
     }
 
-    //    todo X: Savings doesnt work
     private fun initPopUp() {
         val popUpView = layoutInflater.inflate(R.layout.menu_settings, null)
         // fixme-sw: init with dagger?
