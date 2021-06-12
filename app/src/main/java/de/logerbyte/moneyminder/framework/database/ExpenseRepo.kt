@@ -10,8 +10,7 @@ import javax.inject.Singleton
  * Created by logerom on 08.08.18.
  */
 @Singleton
-class ExpenseRepo @Inject constructor(private val mDatabase: Database) :
-    ExpenseAPI {
+class ExpenseRepo @Inject constructor(private val mDatabase: Database) : ExpenseAPI {
 
     override fun getAllExpense(): LiveData<List<ExpenseEntity>> {
         return mDatabase.expenseDao().selectAll()
@@ -29,6 +28,10 @@ class ExpenseRepo @Inject constructor(private val mDatabase: Database) :
             mDatabase.expenseDao().delete(id)
             true
         }
+    }
+
+    override fun deleteCashItem(expenseEntity: ExpenseEntity?): Observable<Boolean> {
+        return Observable.fromCallable { mDatabase.expenseDao().delete(expenseEntity); true}
     }
 
     override fun updateCashItem(expenseEntity: ExpenseEntity): Observable<Boolean> {

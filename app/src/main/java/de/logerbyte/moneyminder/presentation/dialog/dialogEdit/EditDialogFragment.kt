@@ -32,6 +32,7 @@ class EditDialogFragment: BaseDialogFragmentv1(), BaseFragment {
         val binding = DataBindingUtil.inflate<FrameCashBinding>(layoutInflater, R.layout.frame_cash, null, false)
         val data = getParcel<DayExpenseViewItem>()
         binding.viewItem = data
+        baseDialogBinding.viewListener = editDialogViewModel
         editDialogViewModel.setData(data?: DayExpenseViewItem())
         return binding.root
     }
@@ -44,10 +45,14 @@ class EditDialogFragment: BaseDialogFragmentv1(), BaseFragment {
 
     private fun initLiveData() {
         editDialogViewModel.categories.observe(viewLifecycleOwner, Observer { onCategories(it) })
+        editDialogViewModel.shallDialogClose.observe(viewLifecycleOwner, Observer { closeDialog(it) })
+    }
+
+    private fun closeDialog(close: Boolean) {
+        if(close)this.dismiss()
     }
 
     fun onCategories(list: ArrayList<String>){
         custom_searchlist.list = list
-
     }
 }

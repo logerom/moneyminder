@@ -1,11 +1,13 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogEdit
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.framework.database.ExpenseRepo
+import de.logerbyte.moneyminder.presentation.dialog.BaseDialogViewListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -16,10 +18,13 @@ import javax.inject.Inject
 //    val context: Context?,
 //    val editDialogCallback: EditDialogCallback) : BaseDialogViewModel1(dialogCallback) {
 
-class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): ViewModel() {
+class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): ViewModel(), BaseDialogViewListener {
 
     private lateinit var adapterCallBack: AdapterCallBack
     private lateinit var data: DayExpenseViewItem
+    val shallDialogClose = MutableLiveData<Boolean>()
+    private val _shallDialogClose = shallDialogClose
+
 
     private var _categories = MutableLiveData<ArrayList<String>>()
     val categories: LiveData<ArrayList<String>> = _categories
@@ -57,4 +62,11 @@ class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): Vie
     fun setAdapter(adapterCallback: AdapterCallBack) {
         adapterCallBack = adapterCallback
     }
+
+    override fun onClickOk(view: View) {
+        _shallDialogClose.value = true
+    }
+
+    override fun onClickCancel(view: View) {
+        _shallDialogClose.value = true    }
 }

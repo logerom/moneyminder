@@ -19,6 +19,8 @@ public interface ExpenseAPI {
 
     Observable<Boolean> deleteCashItem(long id);
 
+    Observable<Boolean> deleteCashItem(ExpenseEntity expenseEntity);
+
     Observable<Boolean> updateCashItem(ExpenseEntity expenseEntity);
 
     Observable<List<String>> getCategories();

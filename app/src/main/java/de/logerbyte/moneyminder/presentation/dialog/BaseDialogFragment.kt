@@ -11,7 +11,7 @@ import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.presentation.PARCEL_KEY
 
-
+@Deprecated("Use BaseDialogFragmentv1")
 abstract class BaseDialogFragment<PARCEL_TYPE: Parcelable> : DaggerDialogFragment() {
     var parcelKey: String? = null
     var parcel: PARCEL_TYPE? = null

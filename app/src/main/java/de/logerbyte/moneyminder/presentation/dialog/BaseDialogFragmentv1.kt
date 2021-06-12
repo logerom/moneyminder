@@ -10,17 +10,13 @@ import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 
 abstract class BaseDialogFragmentv1: DaggerDialogFragment() {
 
-    open fun onCancelClicked(view: View) {
-        this.dismiss()
-    }
-    open fun onOKClicked(view: View) {
-        this.dismiss()
-    }
+    lateinit var baseDialogBinding: BaseDialogBinding
 
     abstract fun viewContent(bundle: Bundle?): View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return BaseDialogBinding.inflate(inflater).apply {
+            baseDialogBinding = this
             dialogContainer.addView(viewContent(savedInstanceState))}.root
     }
 

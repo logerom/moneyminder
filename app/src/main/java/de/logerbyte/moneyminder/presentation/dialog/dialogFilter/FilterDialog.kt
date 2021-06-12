@@ -7,7 +7,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.entities.data.viewData.FilterDialogViewItem
-import de.logerbyte.moneyminder.dialogs.BaseDialogViewListener
+import de.logerbyte.moneyminder.presentation.dialog.BaseDialogViewListener
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragment
 import kotlinx.android.synthetic.main.dialog_filter.*
 import javax.inject.Inject
@@ -28,7 +28,7 @@ class FilterDialog : BaseDialogFragment<Parcelable>(), BaseDialogViewListener {
     }
 
     private fun initObservable() {
-        filterDialogViewModel.rawCategories.observe(this, Observer { t -> filterAdapter.items = t as MutableList<FilterDialogViewItem> })
+        filterDialogViewModel.rawCategories.observe(viewLifecycleOwner, Observer { t -> filterAdapter.items = t as MutableList<FilterDialogViewItem> })
     }
 
     override fun onClickOk(view: View) {

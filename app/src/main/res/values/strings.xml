@@ -8,7 +8,6 @@
     <string name="cashCategory">Cash Category</string>
     <string name="cash">Cash Amount</string>
     <string name="ok">Ok</string>
-    <string name="question_delete">Wirklich löschen?</string>
     <string name="expense">Ausgaben</string>
     <string name="budget">Budget</string>
     <string name="saved">Gesparrt</string>
@@ -16,4 +15,5 @@
     <string name="budgetEntryItem">Budget:</string>
     <string name="savedEntryItem">Gespart:</string>
     <string name="person">Person</string>
+    <string name="wont_delete_title">Wirklich löschen?</string>
 </resources>
