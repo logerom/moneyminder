@@ -5,7 +5,7 @@ import de.logerbyte.moneyminder.DATE_PATTERN
 import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
 import de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem
-import de.logerbyte.moneyminder.framework.database.Expense
+import de.logerbyte.moneyminder.framework.database.ExpenseEntity
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -13,12 +13,12 @@ import javax.inject.Inject
 
 class ExpenseViewItemMapper @Inject constructor(
         val sdf: SimpleDateFormat
-) : BaseMapper<List<Expense>, List<ExpenseListViewItem>> {
+) : BaseMapper<List<ExpenseEntity>, List<ExpenseListViewItem>> {
 
     /**
      * Epense list needs to be sorted in days
      */
-    override fun map(from: List<Expense>): List<ExpenseListViewItem> {
+    override fun map(from: List<ExpenseEntity>): List<ExpenseListViewItem> {
         val viewItemList = ArrayList<ExpenseListViewItem>()
         var cashInMonth = 0.0
 

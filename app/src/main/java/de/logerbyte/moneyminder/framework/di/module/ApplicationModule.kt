@@ -10,8 +10,8 @@ import dagger.Provides
 import de.logerbyte.moneyminder.DB_NAME
 import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.SHARED_PREF
-import de.logerbyte.moneyminder.framework.database.DbMigration
-import de.logerbyte.moneyminder.framework.database.ExpenseDatabase
+import de.logerbyte.moneyminder.framework.database.DatabaseMigration
+import de.logerbyte.moneyminder.framework.database.Database
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Named
@@ -33,11 +33,11 @@ object ApplicationModule {
     @JvmStatic
     @Singleton
     @Provides
-    fun provideDataBase(context: Context): ExpenseDatabase {
+    fun provideDataBase(context: Context): Database {
         return Room.databaseBuilder(
                 context.applicationContext,
-                ExpenseDatabase::class.java, DB_NAME)
-            .addMigrations(DbMigration.MIGRATION_2_3)
+                Database::class.java, DB_NAME)
+            .addMigrations(DatabaseMigration.MIGRATION_2_3)
             .build()
     }
 

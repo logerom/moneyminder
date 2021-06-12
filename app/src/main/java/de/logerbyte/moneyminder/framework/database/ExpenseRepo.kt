@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.framework.database
 
 import androidx.lifecycle.LiveData
-import de.logerbyte.moneyminder.entities.data.ExpenseAPI
+import de.logerbyte.moneyminder.entities.data.database.ExpenseAPI
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -10,39 +10,39 @@ import javax.inject.Singleton
  * Created by logerom on 08.08.18.
  */
 @Singleton
-class ExpenseRepo @Inject constructor(private val mExpenseDatabase: ExpenseDatabase) :
+class ExpenseRepo @Inject constructor(private val mDatabase: Database) :
     ExpenseAPI {
 
-    override fun getAllExpense(): LiveData<List<Expense>> {
-        return mExpenseDatabase.expenseDao().selectAll()
+    override fun getAllExpense(): LiveData<List<ExpenseEntity>> {
+        return mDatabase.expenseDao().selectAll()
     }
 
-    override fun insertCashItemIntoDB(expense: Expense): Observable<Boolean> {
+    override fun insertCashItemIntoDB(expenseEntity: ExpenseEntity): Observable<Boolean> {
         return Observable.fromCallable {
-            mExpenseDatabase.expenseDao().insert(expense)
+            mDatabase.expenseDao().insert(expenseEntity)
             true
         }
     }
 
     override fun deleteCashItem(id: Long): Observable<Boolean> {
         return Observable.fromCallable {
-            mExpenseDatabase.expenseDao().delete(id)
+            mDatabase.expenseDao().delete(id)
             true
         }
     }
 
-    override fun updateCashItem(expense: Expense): Observable<Boolean> {
+    override fun updateCashItem(expenseEntity: ExpenseEntity): Observable<Boolean> {
         return Observable.fromCallable {
-            mExpenseDatabase.expenseDao().update(expense)
+            mDatabase.expenseDao().update(expenseEntity)
             true
         }
     }
 
     override fun getCategories(): Observable<List<String>> {
-        return Observable.fromCallable { mExpenseDatabase.expenseDao().selectDistinctCategory() }
+        return Observable.fromCallable { mDatabase.expenseDao().selectDistinctCategory() }
     }
 
-    override fun expensesWithCategories(checkedCategories: Set<String>): Observable<MutableList<Expense>>? {
-        return Observable.fromCallable { mExpenseDatabase.expenseDao().expensesWithCategories(checkedCategories.toTypedArray()) }
+    override fun expensesWithCategories(checkedCategories: Set<String>): Observable<MutableList<ExpenseEntity>>? {
+        return Observable.fromCallable { mDatabase.expenseDao().expensesWithCategories(checkedCategories.toTypedArray()) }
     }
 }

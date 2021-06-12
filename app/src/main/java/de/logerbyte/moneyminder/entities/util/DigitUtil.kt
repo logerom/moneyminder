@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.entities.util
 
 import androidx.databinding.InverseMethod
-import de.logerbyte.moneyminder.framework.database.Expense
+import de.logerbyte.moneyminder.framework.database.ExpenseEntity
 import java.util.*
 
 /**
@@ -16,7 +16,7 @@ object DigitUtil {
         return commaString.replace(".", ",")
     }
 
-    fun getCashTotal(cashList: List<Expense>): Double {
+    fun getCashTotal(cashList: List<ExpenseEntity>): Double {
         var totalCash = 0.0
         for (expense in cashList) {
             totalCash = totalCash + expense.cashInEuro

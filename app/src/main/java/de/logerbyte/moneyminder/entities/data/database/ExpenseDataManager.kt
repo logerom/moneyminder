@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.entities.data
+package de.logerbyte.moneyminder.entities.data.database
 
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.framework.database.ExpenseRepo

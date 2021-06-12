@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-public class DbMigration {
+public class DatabaseMigration {
 
     public static Migration MIGRATION_1_2 = new Migration(1,2) {
         @Override
