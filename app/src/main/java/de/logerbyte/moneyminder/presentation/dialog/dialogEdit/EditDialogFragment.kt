@@ -39,7 +39,6 @@ class EditDialogFragment: BaseDialogFragmentv1(), BaseFragment {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initLiveData()
     }
 

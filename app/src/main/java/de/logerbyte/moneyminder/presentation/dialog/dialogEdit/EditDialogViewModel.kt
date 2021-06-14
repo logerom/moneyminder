@@ -1,6 +1,5 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogEdit
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -65,10 +64,10 @@ class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): Vie
         adapterCallBack = adapterCallback
     }
 
-    override fun onClickOk(view: View) {
+    override fun onClickOk() {
         _shallDialogClose.value = true
     }
 
-    override fun onClickCancel(view: View) {
+    override fun onClickCancel() {
         _shallDialogClose.value = true    }
 }

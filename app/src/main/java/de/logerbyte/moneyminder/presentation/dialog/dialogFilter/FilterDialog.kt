@@ -31,13 +31,13 @@ class FilterDialog : BaseDialogFragment<Parcelable>(), BaseDialogViewListener {
         filterDialogViewModel.rawCategories.observe(viewLifecycleOwner, Observer { t -> filterAdapter.items = t as MutableList<FilterDialogViewItem> })
     }
 
-    override fun onClickOk(view: View) {
+    override fun onClickOk() {
         filterDialogViewModel.applyFilter()
         // TODO-SW: on CLick okFilter
         // TODO-SW: 13.09.2020 save filter in shared preferences? + reload list
     }
 
-    override fun onClickCancel(view: View) {
+    override fun onClickCancel() {
         // TODO-SW: onClickCancel
     }
 

@@ -19,6 +19,4 @@ abstract class BaseDialogFragmentv1: DaggerDialogFragment() {
             baseDialogBinding = this
             dialogContainer.addView(viewContent(savedInstanceState))}.root
     }
-
-
 }
