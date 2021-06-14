@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.entities.data.viewData
 import de.logerbyte.moneyminder.BuildConfig
 
 @Deprecated(message = "Use DayExpenseViewItem")
-data class DayExpenseViewItem(
+data class CashViewItem(
         var cashDate: String = "", var cashName: String = "", var cashAmount: String = "", var cashCategory: String = "",
         var cashPerson: String = ""){
 

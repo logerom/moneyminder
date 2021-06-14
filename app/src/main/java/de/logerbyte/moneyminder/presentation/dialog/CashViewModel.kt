@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.framework.database.ExpenseRepo
 import de.logerbyte.moneyminder.entities.mapper.ExpenseMapper
 import io.reactivex.android.schedulers.AndroidSchedulers

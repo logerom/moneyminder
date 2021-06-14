@@ -20,6 +20,7 @@ class AddCashDialogFragment: BaseDialogFragmentv1(), BaseFragment{
     lateinit var addCashViewModel: AddCashViewModel
 
     override fun viewContent(bundle: Bundle?): View {
+        baseDialogBinding.viewListener = addCashViewModel
         return FrameCashBinding.inflate(layoutInflater)
                 .apply {
                     viewItem = addCashViewModel.cashViewItem
