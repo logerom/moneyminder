@@ -5,7 +5,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
@@ -30,10 +30,10 @@ class EditDialogFragment: BaseDialogFragmentv1(), BaseFragment {
 
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<FrameCashBinding>(layoutInflater, R.layout.frame_cash, null, false)
-        val data = getParcel<DayExpenseViewItem>()
+        val data = getParcel<CashViewItem>()
         binding.viewItem = data
         baseDialogBinding.viewListener = editDialogViewModel
-        editDialogViewModel.setData(data?: DayExpenseViewItem())
+        editDialogViewModel.setData(data?: CashViewItem())
         return binding.root
     }
 

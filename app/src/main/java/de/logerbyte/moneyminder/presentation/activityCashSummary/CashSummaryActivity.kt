@@ -14,7 +14,7 @@ import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashDialogF
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogFragment
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import de.logerbyte.moneyminder.cashOverview.menu.SettingsPopupWindow
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
@@ -60,11 +60,11 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
         }
     }
 
-    override fun onDeleteItemClicked(item: DayExpenseViewItem) {
+    override fun onDeleteItemClicked(item: CashViewItem) {
         BaseFragment.newInstanceWithArguments(item, DeleteDialogFragment()).show(supportFragmentManager, DeleteDialogFragment::class.java.simpleName)
     }
 
-    override fun onItemClicked(viewItem: DayExpenseViewItem) {
+    override fun onItemClicked(viewItem: CashViewItem) {
         //  new EditDialogFragment().show
         // (getSupportFragmentManager(), "Base_Dialog");
 

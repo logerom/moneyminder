@@ -6,7 +6,7 @@
 
         <variable
             name="vmCashItem"
-            type="de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem" />
+            type="de.logerbyte.moneyminder.entities.data.viewData.CashViewItem" />
     </data>
 
     <LinearLayout
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@{vmCashItem.cashDate}"
+            android:text="@{vmCashItem.cashDateField}"
             tools:text="01.01.18"/>
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@{vmCashItem.cashName}"
+            android:text="@{vmCashItem.cashNameField}"
             tools:text="Arbeitsausflug"/>
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@{vmCashItem.cashCategory}"
+            android:text="@{vmCashItem.cashCategoryField}"
             tools:text="Kategory"/>
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@{vmCashItem.cashAmount}"
+            android:text="@{vmCashItem.cashAmountField}"
             tools:text="0,00"/>
 
         <!-- todo: display your money portion -->
@@ -58,7 +58,7 @@
             android:id="@+id/tv_money_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vmCashItem.cashPerson}"/>
+            android:text="@{vmCashItem.cashPersonField}"/>
 
         <ImageButton
             android:id="@+id/bu_delete"

@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogEdit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.framework.database.ExpenseRepo
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogViewListener
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): ViewModel(), BaseDialogViewListener {
 
     private lateinit var adapterCallBack: AdapterCallBack
-    private lateinit var data: DayExpenseViewItem
+    private lateinit var data: CashViewItem
     val shallDialogClose = MutableLiveData<Boolean>()
     private val _shallDialogClose = shallDialogClose
 
@@ -34,8 +34,8 @@ class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): Vie
 
     // todo x: Set Base view Listener in Fragment and set VM for xml -> cant find method
 
-    fun setData(dayExpenseViewViewItem: DayExpenseViewItem) {
-        this.data = dayExpenseViewViewItem
+    fun setData(cashViewViewItem: CashViewItem) {
+        this.data = cashViewViewItem
     }
 
     private fun loadCategories() {

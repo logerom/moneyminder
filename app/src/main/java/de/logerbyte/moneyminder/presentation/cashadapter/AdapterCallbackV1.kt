@@ -1,8 +1,8 @@
 package de.logerbyte.moneyminder.presentation.cashadapter
 
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 
 interface AdapterCallbackV1 {
-    fun onDeleteItemClicked(item: DayExpenseViewItem)
-    fun onItemClicked(viewItem: DayExpenseViewItem)
+    fun onDeleteItemClicked(item: CashViewItem)
+    fun onItemClicked(viewItem: CashViewItem)
 }

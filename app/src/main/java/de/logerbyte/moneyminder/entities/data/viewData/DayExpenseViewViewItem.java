@@ -77,7 +77,7 @@ public class DayExpenseViewViewItem implements ExpenseListViewItem {
 
     public interface ActivityListener {
 
-        void showEditDialog(DayExpenseViewItem item, AdapterCallBack dialogVmListener);
+        void showEditDialog(CashViewItem item, AdapterCallBack dialogVmListener);
     }
 
 

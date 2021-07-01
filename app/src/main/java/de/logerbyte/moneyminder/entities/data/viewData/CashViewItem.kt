@@ -1,17 +1,68 @@
 package de.logerbyte.moneyminder.entities.data.viewData
 
+import android.os.Parcel
+import android.os.Parcelable
+import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.BuildConfig
 
-@Deprecated(message = "Use DayExpenseViewItem")
-data class CashViewItem(
-        var cashDate: String = "", var cashName: String = "", var cashAmount: String = "", var cashCategory: String = "",
-        var cashPerson: String = ""){
+data class CashViewItem(private val cashDate: String = "", private val cashName: String = "", private val cashAmount: String = "", private val cashCategory: String = "",
+                        private val cashPerson: String = ""): ExpenseListViewItem, Parcelable {
+
+    val cashPersonField=ObservableField<String>()
+    val cashCategoryField=ObservableField<String>()
+    val cashAmountField=ObservableField<String>()
+    val cashNameField=ObservableField<String>()
+    val cashDateField = ObservableField<String>()
 
     init {
-        cashDate = if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate
-        cashName = if(BuildConfig.DEBUG && cashName.isBlank()) "Burger" else cashName
-        cashAmount = if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount
-        cashCategory = if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory
-        cashPerson = if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson
+        cashDateField.set(if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate)
+        cashNameField.set(if(BuildConfig.DEBUG && cashName.isBlank()) "Burger" else cashName)
+        cashAmountField.set(if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount)
+        cashCategoryField.set(if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory)
+        cashPersonField.set(if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson)
+    }
+
+    fun isAllSet(): Boolean {
+        return !(isSomeElementNull(listOf(cashDate, cashName, cashCategory, cashAmount, cashPerson)))
+    }
+
+    private fun isSomeElementNull(listOf: List<String?>): Boolean {
+        for (element in listOf) {
+            if (element.isNullOrEmpty()) {
+                return true
+            }
+        }
+        return false
+    }
+
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString())
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.apply {
+            writeString(cashDate)
+            writeString(cashName)
+            writeString(cashAmount)
+            writeString(cashCategory)
+            writeString(cashPerson)
+        }
+    }
+
+    companion object CREATOR : Parcelable.Creator<CashViewItem> {
+        override fun createFromParcel(parcel: Parcel): CashViewItem {
+            return CashViewItem(parcel)
+        }
+
+        override fun newArray(size: Int): Array<CashViewItem?> {
+            return arrayOfNulls(size)
+        }
     }
 }

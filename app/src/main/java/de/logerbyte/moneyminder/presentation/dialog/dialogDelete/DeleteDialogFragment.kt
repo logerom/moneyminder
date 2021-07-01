@@ -3,11 +3,10 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogDelete
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.DialogDeleteBinding
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
 import de.logerbyte.moneyminder.framework.database.ExpenseRepo
 import de.logerbyte.moneyminder.presentation.BaseFragment
@@ -24,7 +23,7 @@ class DeleteDialogFragment: BaseDialogFragmentv1(), BaseFragment {
 
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<DialogDeleteBinding>(layoutInflater, R.layout.dialog_delete, null, false)
-        val data = getParcel<DayExpenseViewItem>()
+        val data = getParcel<CashViewItem>()
 
         return binding.root
     }

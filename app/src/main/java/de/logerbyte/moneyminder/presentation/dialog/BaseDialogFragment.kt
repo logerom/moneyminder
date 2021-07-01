@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.android.support.DaggerDialogFragment
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
+import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.databinding.BaseDialogBinding
 import de.logerbyte.moneyminder.presentation.PARCEL_KEY
 
@@ -27,7 +27,7 @@ abstract class BaseDialogFragment<PARCEL_TYPE: Parcelable> : DaggerDialogFragmen
     abstract fun viewContent(bundle: Bundle?): View
 
     companion object MyFragmet: Fragment(){
-        fun <TYPE: Parcelable>newBaseInstancee(viewItem: DayExpenseViewItem, fragment: BaseDialogFragment<TYPE>) = fragment.apply {
+        fun <TYPE: Parcelable>newBaseInstancee(viewItem: CashViewItem, fragment: BaseDialogFragment<TYPE>) = fragment.apply {
             this.arguments = Bundle().also { it.putParcelable(PARCEL_KEY, viewItem) }
         }
     }

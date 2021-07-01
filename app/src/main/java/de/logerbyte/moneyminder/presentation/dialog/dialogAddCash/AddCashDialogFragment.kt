@@ -3,7 +3,6 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogAddCash
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewItem
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
@@ -36,6 +35,7 @@ class AddCashDialogFragment: BaseDialogFragmentv1(), BaseFragment{
 
     private fun initLiveData() {
         addCashViewModel.categoryList.observe(viewLifecycleOwner, Observer { setListCategories(it) })
+        addCashViewModel.isSaved.observe(viewLifecycleOwner, Observer { this.dismiss() })
     }
 
     private fun setListCategories(it: List<String>) {
