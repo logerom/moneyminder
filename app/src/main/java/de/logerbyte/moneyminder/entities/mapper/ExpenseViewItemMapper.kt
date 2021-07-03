@@ -16,25 +16,22 @@ class ExpenseViewItemMapper @Inject constructor(
 ) : BaseMapper<List<ExpenseEntity>, List<ExpenseListViewItem>> {
 
     /**
-     * Epense list needs to be sorted in days
+     * Adds a summary line after all expenses in month
      */
     override fun map(from: List<ExpenseEntity>): List<ExpenseListViewItem> {
         val viewItemList = ArrayList<ExpenseListViewItem>()
         var cashInMonth = 0.0
 
         for (expenseIndex in from.indices) {
-            val hasNextItem = expenseIndex + 1 < from.size
             val expense = from[expenseIndex]
-            val localDate = LocalDate.parse(expense.cashDate, DateTimeFormatter.ofPattern(DATE_PATTERN))
+            val localDate = parseLocalDate(expense)
 
-            viewItemList.add(CashViewItem(expense.cashDate?:"", expense.cashName?:"", expense.cashInEuro.toString(), expense.category?:"", expense.person?:""))
-            cashInMonth += expense.cashInEuro
-
-            if (hasNextItem) {
+            if (hasNext(expenseIndex, from)) {
                 val expense1 = from[expenseIndex + 1]
-                val nextLocalDate = LocalDate.parse(expense1.cashDate, DateTimeFormatter.ofPattern(DATE_PATTERN))
+                val nextLocalDate = parseLocalDate(expense1)
 
                 if (localDate.month == nextLocalDate.month) {
+                    // todo x: no null check value should not be null in database. Handle liveData null check and put nonNull values in database
                     viewItemList.add(CashViewItem(expense1.cashDate?:"", expense1.cashName?:"", expense1.cashInEuro.toString(), expense1.category?:"", expense1.person?:""))
                     cashInMonth += expense1.cashInEuro
                 } else {
@@ -48,4 +45,9 @@ class ExpenseViewItemMapper @Inject constructor(
         }
         return viewItemList
     }
+
+    private fun parseLocalDate(expense: ExpenseEntity) =
+        LocalDate.parse(expense.cashDate, DateTimeFormatter.ofPattern(DATE_PATTERN))
+
+    private fun hasNext(expenseIndex: Int, from: List<ExpenseEntity>) = expenseIndex + 1 < from.size
 }

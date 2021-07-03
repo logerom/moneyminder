@@ -19,7 +19,6 @@ class ExpenseDataManager @Inject constructor(val sharedPrefManager: SharedPrefMa
 
     var sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
 
-    // TODO: sort expenses in wee
     fun loadExpenseList() = expenseRepo.allExpense
 
     fun loadBudgetFromSharedPref() {

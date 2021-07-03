@@ -29,9 +29,9 @@ class CashSummaryViewModel @Inject constructor(val expenseDataManager: ExpenseDa
     }
 
     fun observeExpenses() =
-            expenseDataManager.loadExpenseList()
-                    .map { it.sortedBy { sdf.parse(it.cashDate) } }
-                    .map { viewItemMapper.map(it) }
+        expenseDataManager.loadExpenseList()
+            .map { it -> it.sortedBy { sdf.parse(it.cashDate) } }
+            .map { viewItemMapper.map(it) }
 
     //    todo sw: Need this functions?
     private fun addCashToTotal(cashList: List<ExpenseEntity>) {

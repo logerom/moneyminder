@@ -32,8 +32,6 @@ class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): Vie
         loadCategories()
     }
 
-    // todo x: Set Base view Listener in Fragment and set VM for xml -> cant find method
-
     fun setData(cashViewViewItem: CashViewItem) {
         this.data = cashViewViewItem
     }
