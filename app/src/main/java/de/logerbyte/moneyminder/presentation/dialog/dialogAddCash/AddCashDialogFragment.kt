@@ -1,9 +1,12 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogAddCash
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import de.logerbyte.moneyminder.databinding.FrameCashBinding
+import de.logerbyte.moneyminder.domain.showToastAlert
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
 import javax.inject.Inject
@@ -35,7 +38,13 @@ class AddCashDialogFragment: BaseDialogFragmentv1(), BaseFragment{
 
     private fun initLiveData() {
         addCashViewModel.categoryList.observe(viewLifecycleOwner, Observer { setListCategories(it) })
+        addCashViewModel.isInputCorrect.observe(viewLifecycleOwner, Observer { handleInput(it) })
         addCashViewModel.isSaved.observe(viewLifecycleOwner, Observer { this.dismiss() })
+    }
+
+    private fun handleInput(it: Boolean?) {
+        it?.also {
+            if(it) dismiss() else context.showToastAlert("Input not correct") }
     }
 
     private fun setListCategories(it: List<String>) {

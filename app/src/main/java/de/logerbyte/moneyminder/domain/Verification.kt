@@ -23,3 +23,5 @@ class Verification @Inject constructor(){
         return true
     }
 }
+
+fun String?.itOrEmpty(): String = this ?:""
