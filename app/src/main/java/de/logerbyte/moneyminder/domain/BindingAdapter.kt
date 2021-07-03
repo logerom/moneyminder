@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.base
+package de.logerbyte.moneyminder.domain
 
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter

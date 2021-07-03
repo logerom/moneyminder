@@ -2,7 +2,10 @@ package de.logerbyte.moneyminder.entities.data.viewData
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
 import de.logerbyte.moneyminder.BuildConfig
 
 data class CashViewItem(private val cashDate: String = "", private val cashName: String = "", private val cashAmount: String = "", private val cashCategory: String = "",
@@ -21,6 +24,7 @@ data class CashViewItem(private val cashDate: String = "", private val cashName:
         cashCategoryField.set(if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory)
         cashPersonField.set(if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson)
     }
+
 
     fun isAllSet(): Boolean {
         return !(isSomeElementNull(listOf(cashDate, cashName, cashCategory, cashAmount, cashPerson)))
