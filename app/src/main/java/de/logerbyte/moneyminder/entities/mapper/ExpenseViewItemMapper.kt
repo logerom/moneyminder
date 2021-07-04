@@ -26,16 +26,20 @@ class ExpenseViewItemMapper @Inject constructor(
             val expense = from[expenseIndex]
             val localDate = parseLocalDate(expense)
 
+            if(expenseIndex == 0)
+                viewItemList.add(setCashItem(expense))
+
             if (hasNext(expenseIndex, from)) {
                 val expense1 = from[expenseIndex + 1]
                 val nextLocalDate = parseLocalDate(expense1)
 
-                if (localDate.month == nextLocalDate.month) {
+                if (isExpenseInSameMonth(localDate, nextLocalDate)) {
                     // todo x: no null check value should not be null in database. Handle liveData null check and put nonNull values in database
-                    viewItemList.add(CashViewItem(expense1.cashDate?:"", expense1.cashName?:"", expense1.cashInEuro.toString(), expense1.category?:"", expense1.person?:""))
+                    viewItemList.add(setCashItem(expense1))
                     cashInMonth += expense1.cashInEuro
                 } else {
                     viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth))
+                    viewItemList.add(setCashItem(expense1))
                     cashInMonth = 0.0
                 }
             } else {
@@ -45,6 +49,20 @@ class ExpenseViewItemMapper @Inject constructor(
         }
         return viewItemList
     }
+
+    private fun setCashItem(expense1: ExpenseEntity) =
+        CashViewItem(
+            expense1.cashDate ?: "",
+            expense1.cashName ?: "",
+            expense1.cashInEuro.toString(),
+            expense1.category ?: "",
+            expense1.person ?: ""
+        )
+
+    private fun isExpenseInSameMonth(
+        localDate: LocalDate,
+        nextLocalDate: LocalDate
+    ) = localDate.month == nextLocalDate.month
 
     private fun parseLocalDate(expense: ExpenseEntity) =
         LocalDate.parse(expense.cashDate, DateTimeFormatter.ofPattern(DATE_PATTERN))
