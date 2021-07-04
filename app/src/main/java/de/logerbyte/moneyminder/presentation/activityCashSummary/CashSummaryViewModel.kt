@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
 import de.logerbyte.moneyminder.entities.data.database.ExpenseDataManager
-import de.logerbyte.moneyminder.framework.database.ExpenseEntity
+import de.logerbyte.moneyminder.domain.database.ExpenseEntity
 import de.logerbyte.moneyminder.entities.mapper.ExpenseViewItemMapper
 import de.logerbyte.moneyminder.entities.util.DigitUtil.dotToComma
 import de.logerbyte.moneyminder.entities.util.DigitUtil.getCashTotal

@@ -2,7 +2,7 @@ package de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow
 
 import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
-import de.logerbyte.moneyminder.framework.SharedPrefManager
+import de.logerbyte.moneyminder.domain.SharedPrefManager
 import javax.inject.Inject
 
 

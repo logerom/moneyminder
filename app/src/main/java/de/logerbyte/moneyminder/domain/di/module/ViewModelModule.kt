@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.framework.di.module
+package de.logerbyte.moneyminder.domain.di.module
 
 import androidx.lifecycle.ViewModel
 import dagger.Binds
@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewModel
 import de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialogViewModel
-import de.logerbyte.moneyminder.framework.di.ViewModelKey
+import de.logerbyte.moneyminder.domain.di.ViewModelKey
 import de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashViewModel
 import de.logerbyte.moneyminder.presentation.dialog.dialogEdit.EditDialogViewModel
 

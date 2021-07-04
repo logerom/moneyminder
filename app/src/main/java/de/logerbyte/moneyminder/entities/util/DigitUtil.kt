@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.entities.util
 
 import androidx.databinding.InverseMethod
-import de.logerbyte.moneyminder.framework.database.ExpenseEntity
+import de.logerbyte.moneyminder.domain.database.ExpenseEntity
 import java.util.*
 
 /**

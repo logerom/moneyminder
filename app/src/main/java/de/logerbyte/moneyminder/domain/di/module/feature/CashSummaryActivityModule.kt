@@ -1,11 +1,11 @@
-package de.logerbyte.moneyminder.framework.di.module.feature
+package de.logerbyte.moneyminder.domain.di.module.feature
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
-import de.logerbyte.moneyminder.framework.di.ActivityScope
+import de.logerbyte.moneyminder.domain.di.ActivityScope
 import de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryActivity
 import de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewModel
 import javax.inject.Named

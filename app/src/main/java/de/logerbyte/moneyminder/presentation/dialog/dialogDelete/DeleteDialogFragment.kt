@@ -8,7 +8,7 @@ import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.DialogDeleteBinding
 import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallBack
-import de.logerbyte.moneyminder.framework.database.ExpenseRepo
+import de.logerbyte.moneyminder.domain.database.ExpenseRepo
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
 import javax.inject.Inject

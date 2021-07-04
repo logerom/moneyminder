@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.framework.database
+package de.logerbyte.moneyminder.domain.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

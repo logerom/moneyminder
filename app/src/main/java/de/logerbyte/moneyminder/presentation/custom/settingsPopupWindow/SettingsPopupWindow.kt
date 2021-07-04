@@ -5,7 +5,7 @@ import android.widget.PopupWindow
 import androidx.fragment.app.FragmentManager
 import de.logerbyte.moneyminder.SHARED_PREF_MENU_BUDGET
 import de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialog
-import de.logerbyte.moneyminder.framework.SharedPrefManager
+import de.logerbyte.moneyminder.domain.SharedPrefManager
 import de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel
 import javax.inject.Inject
 

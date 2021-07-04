@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.framework.di.module.feature
+package de.logerbyte.moneyminder.domain.di.module.feature
 
 import dagger.Module
 import de.logerbyte.moneyminder.presentation.dialog.dialogFilter.FilterDialogViewModel

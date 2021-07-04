@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.framework.di
+package de.logerbyte.moneyminder.domain.di
 
 import android.content.Context
 import dagger.BindsInstance
@@ -6,10 +6,10 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import de.logerbyte.moneyminder.presentation.App
-import de.logerbyte.moneyminder.framework.di.module.FragmentModule
-import de.logerbyte.moneyminder.framework.di.module.ApplicationModule
-import de.logerbyte.moneyminder.framework.di.module.feature.CashSummaryActivityModule
-import de.logerbyte.moneyminder.framework.di.module.ViewModelModule
+import de.logerbyte.moneyminder.domain.di.module.FragmentModule
+import de.logerbyte.moneyminder.domain.di.module.ApplicationModule
+import de.logerbyte.moneyminder.domain.di.module.feature.CashSummaryActivityModule
+import de.logerbyte.moneyminder.domain.di.module.ViewModelModule
 import javax.inject.Singleton
 
 @Singleton

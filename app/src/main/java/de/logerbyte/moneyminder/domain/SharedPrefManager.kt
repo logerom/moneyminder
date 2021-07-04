@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.framework
+package de.logerbyte.moneyminder.domain
 
 import android.content.SharedPreferences
 import javax.inject.Inject

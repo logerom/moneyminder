@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Set;
-import de.logerbyte.moneyminder.framework.database.ExpenseEntity;
+import de.logerbyte.moneyminder.domain.database.ExpenseEntity;
 import io.reactivex.Observable;
 
 /**

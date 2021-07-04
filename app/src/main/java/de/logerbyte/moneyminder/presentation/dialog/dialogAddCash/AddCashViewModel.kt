@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.domain.Verification
 import de.logerbyte.moneyminder.domain.itOrEmpty
 import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
-import de.logerbyte.moneyminder.framework.database.ExpenseRepo
+import de.logerbyte.moneyminder.domain.database.ExpenseRepo
 import de.logerbyte.moneyminder.entities.mapper.ExpenseMapper
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogViewListener
 import de.logerbyte.moneyminder.presentation.dialog.CashViewModel

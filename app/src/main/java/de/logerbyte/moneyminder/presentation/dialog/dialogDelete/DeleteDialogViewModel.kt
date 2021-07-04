@@ -1,6 +1,6 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogDelete
 
-import de.logerbyte.moneyminder.framework.database.ExpenseRepo
+import de.logerbyte.moneyminder.domain.database.ExpenseRepo
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogViewListener
 
 class DeleteDialogViewModel(val expenseRepo: ExpenseRepo) : BaseDialogViewListener {

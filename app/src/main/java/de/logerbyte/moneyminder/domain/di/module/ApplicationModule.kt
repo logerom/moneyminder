@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.framework.di.module
+package de.logerbyte.moneyminder.domain.di.module
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,8 +10,8 @@ import dagger.Provides
 import de.logerbyte.moneyminder.DB_NAME
 import de.logerbyte.moneyminder.NAMED_DATE
 import de.logerbyte.moneyminder.SHARED_PREF
-import de.logerbyte.moneyminder.framework.database.DatabaseMigration
-import de.logerbyte.moneyminder.framework.database.Database
+import de.logerbyte.moneyminder.domain.database.DatabaseMigration
+import de.logerbyte.moneyminder.domain.database.Database
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Named

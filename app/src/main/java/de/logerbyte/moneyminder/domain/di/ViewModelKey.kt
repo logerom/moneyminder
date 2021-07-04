@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.framework.di
+package de.logerbyte.moneyminder.domain.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
