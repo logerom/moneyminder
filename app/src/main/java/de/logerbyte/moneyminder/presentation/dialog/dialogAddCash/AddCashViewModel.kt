@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogAddCash
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import de.logerbyte.moneyminder.domain.Verification
-import de.logerbyte.moneyminder.domain.itOrEmpty
+import de.logerbyte.moneyminder.domain.textOrBlank
 import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.domain.database.ExpenseRepo
 import de.logerbyte.moneyminder.entities.mapper.ExpenseMapper
@@ -29,7 +29,7 @@ class AddCashViewModel @Inject constructor(
     }
 
     private fun isInputCorrect(cashViewItem: CashViewItem) =
-        verification.isDateTextCorrect(cashViewItem.cashDateField.get().itOrEmpty())
+        verification.isDateTextCorrect(cashViewItem.cashDateField.get().textOrBlank())
 
     override fun onClickCancel() {
         TODO("Not yet implemented")

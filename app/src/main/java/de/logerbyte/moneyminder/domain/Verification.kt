@@ -24,4 +24,4 @@ class Verification @Inject constructor(){
     }
 }
 
-fun String?.itOrEmpty(): String = this ?:""
+fun String?.textOrBlank(): String = this ?:""
