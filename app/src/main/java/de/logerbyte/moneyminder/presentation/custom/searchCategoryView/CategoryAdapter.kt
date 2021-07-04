@@ -2,7 +2,7 @@ package de.logerbyte.moneyminder.presentation.custom.searchCategoryView
 
 import androidx.recyclerview.widget.RecyclerView
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.base.adapter.SingleItemTypeAdapter
+import de.logerbyte.moneyminder.domain.base.adapter.SingleItemTypeAdapter
 import de.logerbyte.moneyminder.databinding.FormviewCategoryItemBinding
 
 class CategoryAdapter(private val clickListener: (String) -> Unit) : SingleItemTypeAdapter<String, FormviewCategoryItemBinding>(R.layout.formview_category_item) {

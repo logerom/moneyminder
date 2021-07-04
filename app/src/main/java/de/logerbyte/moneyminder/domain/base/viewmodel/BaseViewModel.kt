@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.base.viewmodel
+package de.logerbyte.moneyminder.domain.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable

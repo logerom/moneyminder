@@ -3,7 +3,7 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogFilter
 import android.view.View
 import android.widget.CheckBox
 import androidx.lifecycle.MutableLiveData
-import de.logerbyte.moneyminder.base.viewmodel.BaseViewModel
+import de.logerbyte.moneyminder.domain.base.viewmodel.BaseViewModel
 import de.logerbyte.moneyminder.entities.data.viewData.FilterDialogViewItem
 import de.logerbyte.moneyminder.domain.SharedPrefManager
 import de.logerbyte.moneyminder.domain.database.ExpenseRepo

@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.base.adapter
+package de.logerbyte.moneyminder.domain.base.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

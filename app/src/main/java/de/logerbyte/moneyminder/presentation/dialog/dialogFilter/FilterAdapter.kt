@@ -1,7 +1,7 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogFilter
 
 import de.logerbyte.moneyminder.R
-import de.logerbyte.moneyminder.base.adapter.SingleItemTypeAdapter
+import de.logerbyte.moneyminder.domain.base.adapter.SingleItemTypeAdapter
 import de.logerbyte.moneyminder.entities.data.viewData.FilterDialogViewItem
 import de.logerbyte.moneyminder.databinding.DialogFilterItemBinding
 import javax.inject.Inject

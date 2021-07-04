@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.databinding.ObservableField
-import de.logerbyte.moneyminder.base.listener.SearchViewListener
+import de.logerbyte.moneyminder.domain.base.listener.SearchViewListener
 import de.logerbyte.moneyminder.presentation.custom.searchCategoryView.SearchListView
 import kotlinx.android.synthetic.main.category_list.view.*
 

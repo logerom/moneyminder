@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.base.listener
+package de.logerbyte.moneyminder.domain.base.listener
 
 import android.widget.SearchView
 
