@@ -34,7 +34,6 @@ class ExpenseViewItemMapper @Inject constructor(
                 val nextLocalDate = parseLocalDate(expense1)
 
                 if (isExpenseInSameMonth(localDate, nextLocalDate)) {
-                    // todo x: no null check value should not be null in database. Handle liveData null check and put nonNull values in database
                     viewItemList.add(setCashItem(expense1))
                     cashInMonth += expense1.cashInEuro
                 } else {

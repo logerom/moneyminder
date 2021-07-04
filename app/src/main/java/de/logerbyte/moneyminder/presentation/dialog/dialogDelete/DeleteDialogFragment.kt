@@ -21,6 +21,8 @@ class DeleteDialogFragment: BaseDialogFragmentv1(), BaseFragment {
     @Inject
     lateinit var expenseRepo: ExpenseRepo
 
+    // todo x: Add delete action.
+
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<DialogDeleteBinding>(layoutInflater, R.layout.dialog_delete, null, false)
         val data = getParcel<CashViewItem>()

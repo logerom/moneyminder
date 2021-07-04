@@ -52,8 +52,6 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
         initLiveData()
     }
 
-    //todo x: DB Entries are duplicated shown in list, but are single in DB
-
     private fun setUpRecyclerView() {
         binding?.rvCosts?.apply {
             this.adapter = CashAdapter(this@CashSummaryActivity)
