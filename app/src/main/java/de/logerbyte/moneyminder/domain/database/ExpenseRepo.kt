@@ -30,7 +30,7 @@ class ExpenseRepo @Inject constructor(private val mDatabase: Database) : Expense
         }
     }
 
-    override fun deleteCashItem(expenseEntity: ExpenseEntity?): Observable<Boolean> {
+    override fun deleteCashItem(expenseEntity: ExpenseEntity): Observable<Boolean> {
         return Observable.fromCallable { mDatabase.expenseDao().delete(expenseEntity); true}
     }
 

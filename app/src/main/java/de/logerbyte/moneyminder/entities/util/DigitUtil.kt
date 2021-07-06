@@ -29,6 +29,10 @@ object DigitUtil {
         return String.format(Locale.getDefault(), "%.2f", value)
     }
 
+    fun stringToDouble(value: Double): String {
+        return String.format(Locale.getDefault(), "%.2f", value)
+    }
+
     @JvmStatic
     @InverseMethod("stringToInt")
     fun IntToString(value: Int): String {

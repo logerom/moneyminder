@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import de.logerbyte.moneyminder.R
 import de.logerbyte.moneyminder.databinding.DialogDeleteBinding
 import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
@@ -21,30 +22,19 @@ class DeleteDialogFragment: BaseDialogFragmentv1(), BaseFragment {
     @Inject
     lateinit var expenseRepo: ExpenseRepo
 
-    // todo x: Add delete action.
+    // todo x: lateinit property deleteDialogViewModel has not been initialized
 
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<DialogDeleteBinding>(layoutInflater, R.layout.dialog_delete, null, false)
-        val data = getParcel<CashViewItem>()
-
+        deleteDialogViewModel.vmData = getParcel<CashViewItem>()?:CashViewItem()
+        initLiveData()
         return binding.root
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        cashItemId = arguments!!.getLong("")
-        return super.onCreateDialog(savedInstanceState)
-    }
-
-//    override fun additionalContentViewBinding(viewBinding: BaseDialogBinding) {
-//        deleteDialogViewModel = DeleteDialogViewModel(expenseRepo, adapterCallback, cashItemId, this, context)
-//        val question = TextView(context).apply {
-//            setText(R.string.question_delete)
-//        }
-//        viewBinding.dialogContainer.addView(question)
-//    }
-
-    fun setAdapterCallback(adapterCallBack: AdapterCallBack) {
-        this.adapterCallback = adapterCallBack
+    private fun initLiveData() {
+        deleteDialogViewModel.isDeleted.observe(viewLifecycleOwner, Observer {
+            if(it) dismiss()
+        })
     }
 }
 
