@@ -1,6 +1,5 @@
 package de.logerbyte.moneyminder.presentation.dialog.dialogDelete
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -15,18 +14,22 @@ import de.logerbyte.moneyminder.presentation.dialog.BaseDialogFragmentv1
 import javax.inject.Inject
 
 class DeleteDialogFragment: BaseDialogFragmentv1(), BaseFragment {
-    private lateinit var adapterCallback: AdapterCallBack
-    var cashItemId: Long = 0L
+
+    @Inject
     lateinit var deleteDialogViewModel: DeleteDialogViewModel
 
     @Inject
     lateinit var expenseRepo: ExpenseRepo
+
+    private lateinit var adapterCallback: AdapterCallBack
+    var cashItemId: Long = 0L
 
     // todo x: lateinit property deleteDialogViewModel has not been initialized
 
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<DialogDeleteBinding>(layoutInflater, R.layout.dialog_delete, null, false)
         deleteDialogViewModel.vmData = getParcel<CashViewItem>()?:CashViewItem()
+        baseDialogBinding.viewListener = deleteDialogViewModel
         initLiveData()
         return binding.root
     }

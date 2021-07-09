@@ -2,14 +2,17 @@ package de.logerbyte.moneyminder.entities.data.viewData
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.annotation.NonNull
-import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
 import de.logerbyte.moneyminder.BuildConfig
 
-data class CashViewItem(private val cashDate: String = "", private val cashName: String = "", private val cashAmount: String = "", private val cashCategory: String = "",
-                        private val cashPerson: String = ""): ExpenseListViewItem, Parcelable {
+data class CashViewItem(
+    val cashId: Long = 0,
+    private val cashDate: String = "",
+    private val cashName: String = "",
+    private val cashAmount: String = "",
+    private val cashCategory: String = "",
+    private val cashPerson: String = ""
+): ExpenseListViewItem, Parcelable {
 
     val cashPersonField=ObservableField<String>()
     val cashCategoryField=ObservableField<String>()
@@ -40,11 +43,13 @@ data class CashViewItem(private val cashDate: String = "", private val cashName:
     }
 
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString())
+        parcel.readLong(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    )
 
     override fun describeContents(): Int {
         return 0
@@ -52,11 +57,12 @@ data class CashViewItem(private val cashDate: String = "", private val cashName:
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.apply {
-            writeString(cashDate)
-            writeString(cashName)
-            writeString(cashAmount)
-            writeString(cashCategory)
-            writeString(cashPerson)
+            writeLong(cashId)
+            writeString(cashDateField.get())
+            writeString(cashNameField.get())
+            writeString(cashAmountField.get())
+            writeString(cashCategoryField.get())
+            writeString(cashPersonField.get())
         }
     }
 

@@ -51,6 +51,7 @@ class ExpenseViewItemMapper @Inject constructor(
 
     private fun setCashItem(expense1: ExpenseEntity) =
         CashViewItem(
+            expense1.id ?: 0,
             expense1.cashDate ?: "",
             expense1.cashName ?: "",
             expense1.cashInEuro.toString(),

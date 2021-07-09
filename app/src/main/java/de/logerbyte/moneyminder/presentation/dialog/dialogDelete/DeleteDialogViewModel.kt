@@ -8,8 +8,9 @@ import de.logerbyte.moneyminder.entities.mapper.map
 import de.logerbyte.moneyminder.presentation.dialog.BaseDialogViewListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class DeleteDialogViewModel(val expenseRepo: ExpenseRepo) : BaseDialogViewListener {
+class DeleteDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo) : BaseDialogViewListener {
     lateinit var vmData: CashViewItem
     private val _isDeleted = MutableLiveData<Boolean>()
     val isDeleted: LiveData<Boolean> = _isDeleted

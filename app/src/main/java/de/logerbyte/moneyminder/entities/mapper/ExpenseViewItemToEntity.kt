@@ -8,6 +8,6 @@ import de.logerbyte.moneyminder.entities.data.viewData.DayExpenseViewViewItem
 import de.logerbyte.moneyminder.entities.util.DigitUtil
 
 fun CashViewItem.map()
-    = ExpenseEntity(null, cashNameField.get().textOrBlank(), cashCategoryField.get().textOrBlank(),
+    = ExpenseEntity(cashId, cashNameField.get().textOrBlank(), cashCategoryField.get().textOrBlank(),
                     cashDateField.get().textOrBlank(), cashAmountField.get().textOrBlank().toDouble(),
                     cashPersonField.get().textOrBlank())
