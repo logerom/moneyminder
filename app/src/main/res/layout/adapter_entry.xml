@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@{vmCashItem.cashAmountField}"
+            android:text="@{vmCashItem.expensePortionText}"
             tools:text="0,00"/>
 
         <!-- todo: display your money portion -->

@@ -13,5 +13,5 @@ data class ExpenseEntity(// TODO: 13.03.21 Person as Int
     var category: String,
     var cashDate: String,
     var cashInEuro: Double,
-    var person: String
+    var person: Int
 )

@@ -14,11 +14,12 @@ data class CashViewItem(
     private val cashPerson: String = ""
 ): ExpenseListViewItem, Parcelable {
 
-    val cashPersonField=ObservableField<String>()
+    var cashPersonField=ObservableField<String>()
     val cashCategoryField=ObservableField<String>()
     val cashAmountField=ObservableField<String>()
     val cashNameField=ObservableField<String>()
     val cashDateField = ObservableField<String>()
+    val expensePortionText: String
 
     init {
         cashDateField.set(if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate)
@@ -26,6 +27,17 @@ data class CashViewItem(
         cashAmountField.set(if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount)
         cashCategoryField.set(if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory)
         cashPersonField.set(if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson)
+        expensePortionText = calculatePortion()
+    }
+
+    private fun calculatePortion(): String {
+        val amount: Double = cashAmountField.get()?.toDouble() ?: 0.0
+        val portion: Double = try {
+            amount.div(cashPersonField.get()?.toInt() ?: 1)
+        } catch (e: ArithmeticException) {
+            return "0.00"
+        }
+        return "$portion ($amount)"
     }
 
 
