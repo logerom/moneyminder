@@ -1,4 +1,4 @@
 package de.logerbyte.moneyminder.entities.data.viewData
 
-class SummaryMonthViewItem(val cost: Double,
-                           val saving: Double): ExpenseListViewItem
+data class SummaryMonthViewItem(val allCosts: Double,
+                                val savings: Double, val budget: Int): ExpenseListViewItem

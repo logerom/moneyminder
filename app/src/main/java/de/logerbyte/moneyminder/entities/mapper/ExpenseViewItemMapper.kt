@@ -37,12 +37,12 @@ class ExpenseViewItemMapper @Inject constructor(
                     viewItemList.add(setCashItem(expense1))
                     cashInMonth += expense1.cashInEuro
                 } else {
-                    viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth))
+                    viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth, BUDGET))
                     viewItemList.add(setCashItem(expense1))
                     cashInMonth = 0.0
                 }
             } else {
-                viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth))
+                viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth, BUDGET))
                 cashInMonth = 0.0
             }
         }
@@ -52,11 +52,11 @@ class ExpenseViewItemMapper @Inject constructor(
     private fun setCashItem(expense1: ExpenseEntity) =
         CashViewItem(
             expense1.id ?: 0,
-            expense1.cashDate ?: "",
-            expense1.cashName ?: "",
+            expense1.cashDate,
+            expense1.cashName,
             expense1.cashInEuro.toString(),
-            expense1.category ?: "",
-            expense1.person ?: ""
+            expense1.category,
+            expense1.person
         )
 
     private fun isExpenseInSameMonth(
