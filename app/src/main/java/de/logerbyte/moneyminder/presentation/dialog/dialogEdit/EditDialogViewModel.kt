@@ -62,6 +62,8 @@ class EditDialogViewModel @Inject constructor(val expenseRepo: ExpenseRepo): Vie
         adapterCallBack = adapterCallback
     }
 
+
+    // todo x: Values wont be saved after closing App. But after closing dialog.
     override fun onClickOk() {
         _shallDialogClose.value = true
     }

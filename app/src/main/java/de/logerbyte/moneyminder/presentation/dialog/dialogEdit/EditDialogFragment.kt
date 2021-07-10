@@ -30,7 +30,7 @@ class EditDialogFragment: BaseDialogFragmentv1(), BaseFragment {
 
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<FrameCashBinding>(layoutInflater, R.layout.frame_cash, null, false)
-        val data = getParcel<CashViewItem>()
+        val data = getParcel<CashViewItem>()?.copy()
         binding.viewItem = data
         baseDialogBinding.viewListener = editDialogViewModel
         editDialogViewModel.setData(data?: CashViewItem())
@@ -51,7 +51,7 @@ class EditDialogFragment: BaseDialogFragmentv1(), BaseFragment {
         if(close)this.dismiss()
     }
 
-    fun onCategories(list: ArrayList<String>){
+    private fun onCategories(list: ArrayList<String>){
         custom_searchlist.list = list
     }
 }

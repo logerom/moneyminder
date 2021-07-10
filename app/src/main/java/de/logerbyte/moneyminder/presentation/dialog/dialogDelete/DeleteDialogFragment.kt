@@ -21,11 +21,6 @@ class DeleteDialogFragment: BaseDialogFragmentv1(), BaseFragment {
     @Inject
     lateinit var expenseRepo: ExpenseRepo
 
-    private lateinit var adapterCallback: AdapterCallBack
-    var cashItemId: Long = 0L
-
-    // todo x: lateinit property deleteDialogViewModel has not been initialized
-
     override fun viewContent(bundle: Bundle?): View {
         val binding = DataBindingUtil.inflate<DialogDeleteBinding>(layoutInflater, R.layout.dialog_delete, null, false)
         deleteDialogViewModel.vmData = getParcel<CashViewItem>()?:CashViewItem()
