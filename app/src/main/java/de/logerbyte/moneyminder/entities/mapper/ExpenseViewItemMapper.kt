@@ -20,34 +20,34 @@ class ExpenseViewItemMapper @Inject constructor(
      */
     override fun map(from: List<ExpenseEntity>): List<ExpenseListViewItem> {
         val viewItemList = ArrayList<ExpenseListViewItem>()
-        var cashInMonth = 0.0
-
-        // Todo x: Calculate portion expense and argue portion text to CashViewItem
+        var cashInMonth = 0.00
 
         for (expenseIndex in from.indices) {
-            val expense = from[expenseIndex]
-            val localDate = parseLocalDate(expense)
-            val portion = calculatePortion(expense.cashInEuro, expense.person)
+            val expenseAmount = from[expenseIndex]
+            val expenseDate = parseLocalDate(expenseAmount)
+            val expensePerPerson = calculatePortion(expenseAmount.cashInEuro, expenseAmount.person)
 
-            if(expenseIndex == 0)
-                viewItemList.add(setCashItem(expense,portion.toString()))
+            if(expenseIndex == 0) {
+                viewItemList.add(setCashItem(expenseAmount,expensePerPerson.toString()))
+                cashInMonth += expensePerPerson
+            }
 
             if (hasNext(expenseIndex, from)) {
-                val expense1 = from[expenseIndex + 1]
-                val nextLocalDate = parseLocalDate(expense1)
-                val portionNext = calculatePortion(expense1.cashInEuro, expense1.person)
+                val nextExpenseAmount = from[expenseIndex + 1]
+                val nextExpenseDate = parseLocalDate(nextExpenseAmount)
+                val nextExpensePerPerson = calculatePortion(nextExpenseAmount.cashInEuro, nextExpenseAmount.person)
 
-                if (isExpenseInSameMonth(localDate, nextLocalDate)) {
-                    viewItemList.add(setCashItem(expense1, portionNext.toString()))
-                    cashInMonth += portionNext
+                if (isExpenseInSameMonth(expenseDate, nextExpenseDate)) {
+                    viewItemList.add(setCashItem(nextExpenseAmount, nextExpensePerPerson.toString()))
+                    cashInMonth += nextExpensePerPerson
                 } else {
                     viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth, BUDGET))
-                    viewItemList.add(setCashItem(expense1, portionNext.toString()))
-                    cashInMonth = 0.0
+                    cashInMonth = nextExpensePerPerson
+                    viewItemList.add(setCashItem(nextExpenseAmount, nextExpensePerPerson.toString()))
                 }
             } else {
                 viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth, BUDGET))
-                cashInMonth = 0.0
+                cashInMonth = 0.00
             }
         }
         return viewItemList
@@ -60,6 +60,7 @@ class ExpenseViewItemMapper @Inject constructor(
             expense1.cashName,
             expense1.cashInEuro.toString(),
             expense1.category,
+            expense1.person.toString(),
             portion
         )
 

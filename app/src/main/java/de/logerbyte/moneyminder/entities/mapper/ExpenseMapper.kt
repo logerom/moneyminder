@@ -10,6 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class ExpenseMapper @Inject constructor(): BaseMapper<CashViewItem, ExpenseEntity> {
     override fun map(from: CashViewItem): ExpenseEntity {
-        return ExpenseEntity(null, from.cashNameField.get().textOrBlank(), from.cashCategoryField.get().textOrBlank(), from.cashDateField.get().textOrBlank(), DigitUtil.commaToDot(from.cashAmountField.get()).toDouble(), from.cashPersonField.get().textOrBlank())
+        return ExpenseEntity(null, from.cashNameField.get().textOrBlank(), from.cashCategoryField.get().textOrBlank(),
+            from.cashDateField.get().textOrBlank(), DigitUtil.commaToDot(from.cashAmountField.get()).toDouble(), from.cashPersonField.get()?.toInt()?:1)
     }
 }

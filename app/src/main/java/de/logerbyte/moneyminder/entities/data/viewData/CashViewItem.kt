@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.BuildConfig
+import de.logerbyte.moneyminder.entities.util.DigitUtil
 
 data class CashViewItem(
     val cashId: Long = 0,
@@ -11,15 +12,17 @@ data class CashViewItem(
     private val cashName: String = "",
     private val cashAmount: String = "",
     private val cashCategory: String = "",
-    private val cashPerson: String = ""
+    private val cashPerson: String = "",
+    val cashPortionPerPerson: String = ""
 ): ExpenseListViewItem, Parcelable {
+
+    // Todo x: Style CashAmount with Brackets
 
     var cashPersonField=ObservableField<String>()
     val cashCategoryField=ObservableField<String>()
     val cashAmountField=ObservableField<String>()
     val cashNameField=ObservableField<String>()
     val cashDateField = ObservableField<String>()
-    val expensePortionText: String
 
     init {
         cashDateField.set(if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate)
@@ -27,11 +30,10 @@ data class CashViewItem(
         cashAmountField.set(if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount)
         cashCategoryField.set(if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory)
         cashPersonField.set(if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson)
-        expensePortionText = calculatePortion()
     }
 
     private fun calculatePortion(): String {
-        val amount: Double = cashAmountField.get()?.toDouble() ?: 0.0
+        val amount: Double = cashAmountField.get()?.let { DigitUtil.commaToDot(it).toDouble() } ?: 0.0
         val portion: Double = try {
             amount.div(cashPersonField.get()?.toInt() ?: 1)
         } catch (e: ArithmeticException) {

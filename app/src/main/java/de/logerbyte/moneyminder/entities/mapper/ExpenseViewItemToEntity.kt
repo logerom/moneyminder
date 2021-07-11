@@ -10,4 +10,4 @@ import de.logerbyte.moneyminder.entities.util.DigitUtil
 fun CashViewItem.map()
     = ExpenseEntity(cashId, cashNameField.get().textOrBlank(), cashCategoryField.get().textOrBlank(),
                     cashDateField.get().textOrBlank(), cashAmountField.get().textOrBlank().toDouble(),
-                    cashPersonField.get().textOrBlank())
+                    cashPersonField.get()?.toInt()?:1)
