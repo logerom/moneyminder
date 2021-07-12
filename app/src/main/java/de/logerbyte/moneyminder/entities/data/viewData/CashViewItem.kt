@@ -16,7 +16,7 @@ data class CashViewItem(
     val cashPortionPerPerson: String = ""
 ): ExpenseListViewItem, Parcelable {
 
-    // Todo x: Style CashAmount with Brackets
+    // Todo x: Add Cashback field in MonthSummaryLine and overall summaryLine
 
     var cashPersonField=ObservableField<String>()
     val cashCategoryField=ObservableField<String>()

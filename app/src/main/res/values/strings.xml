@@ -16,4 +16,5 @@
     <string name="savedEntryItem">Gespart:</string>
     <string name="person">Person</string>
     <string name="wont_delete_title">Wirklich löschen?</string>
+    <string name="cashback">Cashback</string>
 </resources>

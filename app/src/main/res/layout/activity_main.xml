@@ -4,16 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="viewModel"
-            type="de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewModel" />
-
         <variable
             name="viewListener"
             type="de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewListener" />
-
-        <import type="de.logerbyte.moneyminder.entities.util.DigitUtil" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -24,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginBottom="8dp"
             tools:context=".presentation.activityCashSummary.CashSummaryActivity">
 
             <androidx.appcompat.widget.Toolbar
@@ -54,73 +48,8 @@
                 android:layout_marginBottom="8dp"
                 android:background="@android:color/black" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_label_spend_money"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/spend_money_label" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        tools:text="@{DigitUtil.doubleToString(viewModel.totalExpenses)}" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/budget" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        tools:text="@{viewModel.totalBudget}" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/saved" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        tools:text="@{DigitUtil.doubleToString(viewModel.totalSaving)}"
-                        android:textColor="@{viewModel.totalSaving &lt; 0 ? @android:color/holo_red_dark : @android:color/holo_green_dark}" />
-                </LinearLayout>
-
-            </LinearLayout>
-
+            <include
+                 layout="@layout/summary_line"/>
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
