@@ -4,8 +4,9 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="de.logerbyte.moneyminder.presentation.activityCashSummary.CashSummaryViewModel" />
+            name="viewItem"
+            type="de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem" />
+
         <import type="de.logerbyte.moneyminder.entities.util.DigitUtil"/>
     </data>
 
@@ -31,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="@{viewModel.totalBudget}" />
+                android:text="@{String.valueOf(viewItem.budget)}" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="@{DigitUtil.doubleToString(viewModel.totalExpenses)}" />
+                android:text="@{DigitUtil.doubleToString(viewItem.allCosts)}" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="@{DigitUtil.doubleToString(viewModel.totalExpenses)}" />
+                android:text="@{DigitUtil.doubleToString(viewItem.cashBack)}"/>
         </LinearLayout>
 
         <LinearLayout
@@ -90,8 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="@{DigitUtil.doubleToString(viewModel.totalSaving)}"
-                android:textColor="@{viewModel.totalSaving &lt; 0 ? @android:color/holo_red_dark : @android:color/holo_green_dark}" />
+                android:text="@{DigitUtil.doubleToString(viewItem.savings)}"
+                android:textColor="@{viewItem.savings &lt; 0 ? @android:color/holo_red_dark : @android:color/holo_green_dark}" />
         </LinearLayout>
 
 </LinearLayout>

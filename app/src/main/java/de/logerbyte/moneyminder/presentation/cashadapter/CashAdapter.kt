@@ -10,7 +10,7 @@ import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
 import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewType
 import de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
-import de.logerbyte.moneyminder.databinding.AdapterEntryPlusSummaryBinding
+import de.logerbyte.moneyminder.databinding.SummaryLineBinding
 
 
 /**
@@ -45,7 +45,7 @@ class CashAdapter(val adapterCallbackV1: AdapterCallbackV1) : RecyclerView.Adapt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if(viewType == ExpenseListViewType.DAY_ITEM.ordinal)
             DayExpenseViewHolder(DataBindingUtil.inflate(layoutInflater, R.layout.adapter_entry,parent,false))
-        else MonthExpenseViewHolder(DataBindingUtil.inflate(layoutInflater, R.layout.adapter_entry_plus_summary,parent,false))
+        else MonthExpenseViewHolder(DataBindingUtil.inflate(layoutInflater, R.layout.summary_line,parent,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -63,7 +63,7 @@ class CashAdapter(val adapterCallbackV1: AdapterCallbackV1) : RecyclerView.Adapt
         }
     }
 
-    inner class MonthExpenseViewHolder(val binding: AdapterEntryPlusSummaryBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class MonthExpenseViewHolder(val binding: SummaryLineBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(viewItem: SummaryMonthViewItem){
             binding.viewItem = viewItem
         }

@@ -12,68 +12,80 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class ExpenseViewItemMapper @Inject constructor(
-        val sdf: SimpleDateFormat
-) : BaseMapper<List<ExpenseEntity>, List<ExpenseListViewItem>> {
+        val sdf: SimpleDateFormat) : BaseMapper<List<ExpenseEntity>, List<ExpenseListViewItem>> {
+
+    companion object { const val firstExpense = 0 }
 
     /**
      * Adds a summary line after all expenses in month
      */
     override fun map(from: List<ExpenseEntity>): List<ExpenseListViewItem> {
         val viewItemList = ArrayList<ExpenseListViewItem>()
-        var cashInMonth = 0.00
+        var totalCashback = 0.00
+        var totalExpense = 0.00
 
         for (expenseIndex in from.indices) {
-            val expenseAmount = from[expenseIndex]
-            val expenseDate = parseLocalDate(expenseAmount)
-            val expensePerPerson = calculatePortion(expenseAmount.cashInEuro, expenseAmount.person)
+            val expense = from[expenseIndex]
+            val expenseId = expense.id
+            val expenseLocaleDate = parseLocalDate(expense)
+            val expenseDate = expense.cashDate
+            val expenseName = expense.cashName
+            val expenseCategory = expense.category
+            val expenseCash = expense.cashInEuro
+            val expensePerson = expense.person
+            val expenseCashback = calculateCashback(expenseCash, expensePerson)
 
-            if(expenseIndex == 0) {
-                viewItemList.add(setCashItem(expenseAmount,expensePerPerson.toString()))
-                cashInMonth += expensePerPerson
+            if(expenseIndex == firstExpense) {
+                viewItemList.add(
+                    CashViewItem(expenseId?:0, expenseDate, expenseName, expenseCash.toString(), expenseCategory, expensePerson.toString(), expenseCashback.toString()))
+                totalExpense += expense.cashInEuro
+                totalCashback += expenseCashback
             }
 
-            if (hasNext(expenseIndex, from)) {
-                val nextExpenseAmount = from[expenseIndex + 1]
-                val nextExpenseDate = parseLocalDate(nextExpenseAmount)
-                val nextExpensePerPerson = calculatePortion(nextExpenseAmount.cashInEuro, nextExpenseAmount.person)
+            if (isNextExpense(expenseIndex, from)) {
+                val nextExpense = from[expenseIndex + 1]
+                val nextExpenseId = nextExpense.id
+                val nextExpenseLocaleDate = parseLocalDate(nextExpense)
+                val nextExpenseDate = nextExpense.cashDate
+                val nextExpenseName = nextExpense.cashName
+                val nextExpenseCategory = nextExpense.category
+                val nextExpenseCash = nextExpense.cashInEuro
+                val nextExpensePerson = nextExpense.person
+                val nextExpenseCashback = calculateCashback(nextExpense.cashInEuro, nextExpense.person)
 
-                if (isExpenseInSameMonth(expenseDate, nextExpenseDate)) {
-                    viewItemList.add(setCashItem(nextExpenseAmount, nextExpensePerPerson.toString()))
-                    cashInMonth += nextExpensePerPerson
+                if (isNextExpenseInSameMonth(expenseLocaleDate, nextExpenseLocaleDate)) {
+                    viewItemList.add(
+                        CashViewItem(nextExpenseId?:0, nextExpenseDate, nextExpenseName, nextExpenseCash.toString(), nextExpenseCategory, nextExpensePerson.toString(), nextExpenseCashback.toString()))
+                    totalExpense += nextExpenseCash
+                    totalCashback += nextExpenseCashback
                 } else {
-                    viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth, BUDGET))
-                    cashInMonth = nextExpensePerPerson
-                    viewItemList.add(setCashItem(nextExpenseAmount, nextExpensePerPerson.toString()))
+                    viewItemList.add(
+                        SummaryMonthViewItem(totalExpense,BUDGET - totalExpense, BUDGET,totalCashback))
+                    viewItemList.add(
+                        CashViewItem(nextExpenseId?:0, nextExpenseDate, nextExpenseName, nextExpenseCash.toString(), nextExpenseCategory, nextExpensePerson.toString(), nextExpenseCashback.toString()))
+                    totalExpense = nextExpenseCash
+                    totalCashback = nextExpenseCashback
                 }
             } else {
-                viewItemList.add(SummaryMonthViewItem(cashInMonth, BUDGET - cashInMonth, BUDGET))
-                cashInMonth = 0.00
+                viewItemList.add(
+                    SummaryMonthViewItem(totalExpense,BUDGET - totalExpense, BUDGET,totalCashback))
+                totalExpense = 0.00
+                totalCashback = 0.00
             }
         }
         return viewItemList
     }
 
-    private fun setCashItem(expense1: ExpenseEntity, portion: String) =
-        CashViewItem(
-            expense1.id ?: 0,
-            expense1.cashDate,
-            expense1.cashName,
-            expense1.cashInEuro.toString(),
-            expense1.category,
-            expense1.person.toString(),
-            portion
-        )
-
-    private fun calculatePortion(holeCash: Double, person: Int): Double {
+    private fun calculateCashback(holeCash: Double, person: Int): Double {
         return try {
-            holeCash.div(person)
+            val cashForOnePerson: Double = holeCash.div(person)
+            holeCash - cashForOnePerson
         } catch (e: ArithmeticException) {
-            return 0.00
+            return holeCash
         }
     }
 
-
-    private fun isExpenseInSameMonth(
+    private fun isNextExpenseInSameMonth(
         localDate: LocalDate,
         nextLocalDate: LocalDate
     ) = localDate.month == nextLocalDate.month
@@ -81,5 +93,5 @@ class ExpenseViewItemMapper @Inject constructor(
     private fun parseLocalDate(expense: ExpenseEntity) =
         LocalDate.parse(expense.cashDate, DateTimeFormatter.ofPattern(DATE_PATTERN))
 
-    private fun hasNext(expenseIndex: Int, from: List<ExpenseEntity>) = expenseIndex + 1 < from.size
+    private fun isNextExpense(expenseIndex: Int, from: List<ExpenseEntity>) = expenseIndex + 1 < from.size
 }

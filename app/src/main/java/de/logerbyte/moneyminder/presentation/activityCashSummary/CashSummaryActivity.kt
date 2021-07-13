@@ -18,6 +18,7 @@ import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
+import de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallbackV1
 import de.logerbyte.moneyminder.presentation.cashadapter.CashAdapter
@@ -118,7 +119,9 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
 
     private fun bindContentView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding?.viewModel = cashSummaryViewModel
+//        Todo x: set ViewItemDisplayModel
+        val summaryMonthViewItem = SummaryMonthViewItem(0.00, 0.00, 0,0.00)
+        binding?.incSummaryLine?.viewItem = summaryMonthViewItem
         binding?.viewListener = this
     }
 

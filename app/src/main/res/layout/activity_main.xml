@@ -49,7 +49,8 @@
                 android:background="@android:color/black" />
 
             <include
-                 layout="@layout/summary_line"/>
+                android:id="@+id/inc_summary_line"
+                layout="@layout/summary_line"/>
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

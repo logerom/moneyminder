@@ -13,7 +13,7 @@ data class CashViewItem(
     private val cashAmount: String = "",
     private val cashCategory: String = "",
     private val cashPerson: String = "",
-    val cashPortionPerPerson: String = ""
+    val cashback: String = ""
 ): ExpenseListViewItem, Parcelable {
 
     // Todo x: Add Cashback field in MonthSummaryLine and overall summaryLine
