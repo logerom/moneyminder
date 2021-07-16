@@ -42,7 +42,7 @@ class AddCashDialogFragment: BaseDialogFragmentv1(), BaseFragment{
 
     private fun handleInput(it: Boolean?) {
         it?.also {
-            if(it) dismiss() else context.showToastAlert("Input not correct") }
+            if(it) dismiss() else context.showToastAlert("Date Input not correct") }
     }
 
     private fun setListCategories(it: List<String>) {

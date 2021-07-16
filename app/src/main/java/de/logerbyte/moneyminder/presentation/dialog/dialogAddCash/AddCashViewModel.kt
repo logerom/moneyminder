@@ -2,7 +2,7 @@ package de.logerbyte.moneyminder.presentation.dialog.dialogAddCash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import de.logerbyte.moneyminder.domain.Verification
+import de.logerbyte.moneyminder.domain.Validator
 import de.logerbyte.moneyminder.domain.textOrBlank
 import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.domain.database.ExpenseRepo
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class AddCashViewModel @Inject constructor(
     expenseRepo: ExpenseRepo,
     expenseMapper: ExpenseMapper,
-    val verification: Verification) : CashViewModel(expenseRepo, expenseMapper), BaseDialogViewListener {
+    val validator: Validator) : CashViewModel(expenseRepo, expenseMapper), BaseDialogViewListener {
 
     private val _isInputCorrect = MutableLiveData<Boolean>()
     val isInputCorrect :LiveData<Boolean> = _isInputCorrect
@@ -29,7 +29,7 @@ class AddCashViewModel @Inject constructor(
     }
 
     private fun isInputCorrect(cashViewItem: CashViewItem) =
-        verification.isDateTextCorrect(cashViewItem.cashDateField.get().textOrBlank())
+        validator.isDateTextCorrect(cashViewItem.cashDateField.get().textOrBlank())
 
     override fun onClickCancel() {
         _closeDialog.value = true

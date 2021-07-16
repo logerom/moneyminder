@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Verification @Inject constructor(){
+class Validator @Inject constructor(){
 
     fun isDateTextCorrect(date: String): Boolean {
         try {
