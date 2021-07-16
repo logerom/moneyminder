@@ -6,14 +6,13 @@
 
         <variable
             name="vmCashItem"
-            type="de.logerbyte.moneyminder.cashOverview.cashadapter.DayExpenseViewModel" />
+            type="de.logerbyte.moneyminder.entities.data.viewData.CashViewItem" />
     </data>
 
     <LinearLayout
         android:id="@+id/ll_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{vmCashItem::onCashItemClicked}"
         android:orientation="horizontal"
         android:padding="2dp"
         android:layout_margin="2dp">
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashDate}"
+            android:text="@{vmCashItem.cashDateField}"
             tools:text="01.01.18"/>
 
         <TextView
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashName}"
+            android:text="@{vmCashItem.cashNameField}"
             tools:text="Arbeitsausflug"/>
 
         <TextView
@@ -42,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashCategory}"
+            android:text="@{vmCashItem.cashCategoryField}"
             tools:text="Kategory"/>
 
         <TextView
@@ -51,14 +50,35 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@={vmCashItem.cashInEuro}"
+            android:text="@{vmCashItem.cashAmountField}"
+            tools:text="0,00"/>
+
+        <TextView
+            android:id="@+id/tv_money_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            tools:text="1"
+            android:text="@{vmCashItem.cashPersonField}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CB:"/>
+        <TextView
+            android:id="@+id/tv_cash_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{vmCashItem.cashback}"
             tools:text="0,00"/>
 
         <ImageButton
+            android:id="@+id/bu_delete"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:scaleType="center"
-            android:background="@android:drawable/ic_menu_delete"
-            android:onClick="@{() -> vmCashItem.onCashItemDeleteClicked(vmCashItem.entryId)}"/>
+            android:background="@android:drawable/ic_menu_delete"/>
     </LinearLayout>
 </layout>

@@ -9,6 +9,7 @@
 /captures
 .externalNativeBuild
 **/release
+**/debug
 
 #Windows
 .idea/

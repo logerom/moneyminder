@@ -4,15 +4,16 @@ apply plugin: 'kotlin-kapt'
 apply from: 'jacoco.gradle'
 apply plugin: 'com.adarshr.test-logger'
 apply plugin: 'kotlin-android-extensions'
+apply from: "../artifacts.gradle"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "de.logerbyte.moneyminder"
-        minSdkVersion 24
-        targetSdkVersion 28
-        versionCode 300
-        versionName "3.0.0"
+        minSdkVersion 26
+        targetSdkVersion 30
+        versionCode 400
+        versionName "4.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
@@ -27,8 +28,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dataBinding {
-        enabled = true
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures{
+        dataBinding = true // for data binding
+        viewBinding = true // for view binding
     }
 
     buildTypes {
@@ -47,13 +53,13 @@ android {
     productFlavors {
         development {
             dimension "version"
-            applicationIdSuffix ".free"
-            versionNameSuffix "-free"
+            applicationIdSuffix ".development"
+            versionNameSuffix "-development"
         }
         production {
             dimension "version"
-            applicationIdSuffix ".paid"
-            versionNameSuffix "-paid"
+            applicationIdSuffix ".production"
+            versionNameSuffix "-production"
         }
     }
 
@@ -91,6 +97,11 @@ dependencies {
     implementation 'androidx.room:room-rxjava2:2.2.5'
     kapt 'androidx.room:room-compiler:2.2.5'
     debugImplementation "com.amitshekhar.android:debug-db:${rootProject.ext.roomDatabase}"
+
+    // Livedata
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
 
     // reactive
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="de.logerbyte.moneyminder.cashOverview.addCashDialog.AddCashViewModel" />
+            type="de.logerbyte.moneyminder.presentation.dialog.dialogAddCash.AddCashViewModel" />
     </data>
 
     <LinearLayout

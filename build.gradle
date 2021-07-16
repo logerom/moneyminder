@@ -45,4 +45,5 @@ ext {
     daggerVersion = '2.23.2'
     flexboxVersion = "2.0.1"
     rxKotlin =  "2.4.0"
+    archLifecycleVersion = '2.2.0-rc02'
 }
