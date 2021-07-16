@@ -4,13 +4,13 @@
     <data>
         <variable
             name="vm"
-            type="de.logerbyte.moneyminder.cashOverview.menu.MenuVm" />
+            type="de.logerbyte.moneyminder.presentation.custom.settingsPopupWindow.SettingsPopupViewModel" />
 
         <variable
             name="listener"
             type="de.logerbyte.moneyminder.cashOverview.menu.MenuItemsClicked" />
 
-        <import type="de.logerbyte.moneyminder.util.DigitUtil" />
+        <import type="de.logerbyte.moneyminder.entities.util.DigitUtil" />
     </data>
 <LinearLayout
     android:layout_width="@dimen/menu_width"

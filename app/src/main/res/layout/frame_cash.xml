@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="de.logerbyte.moneyminder.cashOverview.viewModels.CashViewModel" />
+            name="viewItem"
+            type="de.logerbyte.moneyminder.entities.data.viewData.CashViewItem" />
     </data>
 
     <LinearLayout
@@ -29,14 +29,13 @@
                 android:id="@+id/et_date"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:afterTextChanged="@{viewModel::onDateTextChanged}"
                 android:digits="0123456789."
                 android:hint="dd.mm.yy"
-                android:inputType="number"
+                android:inputType="date"
                 android:singleLine="true"
                 android:nextFocusDown="@id/et_cash_name"
                 android:maxLength="8"
-                android:text="@={viewModel.cashDate}" />
+                android:text="@={viewItem.cashDateField}" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,14 +56,14 @@
                 android:layout_height="48dp"
                 android:singleLine="true"
                 android:hint="Ausgabe"
-                android:text="@={viewModel.cashName}" />
+                android:text="@={viewItem.cashNameField}" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="5"
-            android:orientation="horizontal">≤
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,11 +73,11 @@
 
             // todo-SW: two way binding with attributset
 
-            <de.logerbyte.moneyminder.compoundView.searchcategoryList.SearchListView
+            <de.logerbyte.moneyminder.presentation.custom.searchCategoryView.SearchListView
                 android:id="@+id/custom_searchlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                searchText="@={viewModel.cashCategory}" />
+                searchText="@={viewItem.cashCategoryField}" />
 
         </LinearLayout>
 
@@ -98,9 +97,33 @@
                 android:id="@+id/et_cash_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
+                android:inputType="number"
                 android:digits="0123456789,"
                 android:hint="0,00"
-                android:text="@={viewModel.cashAmount}" />
+                android:text="@={viewItem.cashAmountField}" />
         </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/tv_person"
+                    android:text="@string/person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <EditText
+                    android:id="@+id/et_person"
+                    android:text="@={viewItem.cashPersonField}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_weight="1"/>
+            </TableRow>
+
+        </TableLayout>
+
     </LinearLayout>
 </layout>
