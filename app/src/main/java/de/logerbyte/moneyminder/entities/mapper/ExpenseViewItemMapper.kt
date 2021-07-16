@@ -68,7 +68,7 @@ class ExpenseViewItemMapper @Inject constructor(
                 }
             } else {
                 viewItemList.add(
-                    SummaryMonthViewItem(totalExpense,BUDGET - totalExpense, BUDGET,totalCashback))
+                    SummaryMonthViewItem(totalExpense,BUDGET - totalExpense - totalCashback, BUDGET,totalCashback))
                 totalExpense = 0.00
                 totalCashback = 0.00
             }
