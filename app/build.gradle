@@ -5,8 +5,17 @@ apply from: 'jacoco.gradle'
 apply plugin: 'com.adarshr.test-logger'
 apply plugin: 'kotlin-android-extensions'
 apply from: "../artifacts.gradle"
+apply from: './keystore.gradle'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file(keystore.storeFile)
+            storePassword keystore.storePassword
+            keyAlias keystore.keyAlias
+            keyPassword keystore.keyPassword
+        }
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "de.logerbyte.moneyminder"
@@ -20,7 +29,7 @@ android {
         testOptions {
             execution 'ANDROIDX_TEST_ORCHESTRATOR'
         }
-
+        signingConfig signingConfigs.debug
     }
 
     compileOptions {
