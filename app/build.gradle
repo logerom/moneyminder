@@ -49,6 +49,20 @@ android {
         }
     }
 
+    flavorDimensions "version"
+    productFlavors {
+        development {
+            dimension "version"
+            applicationIdSuffix ".development"
+            versionNameSuffix "-development"
+        }
+        production {
+            dimension "version"
+            applicationIdSuffix ".production"
+            versionNameSuffix "-production"
+        }
+    }
+
     // Max Error lines for Kotlin
     kapt {
         javacOptions {
