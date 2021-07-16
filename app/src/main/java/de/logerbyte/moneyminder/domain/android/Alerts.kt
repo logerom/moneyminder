@@ -1,4 +1,4 @@
-package de.logerbyte.moneyminder.domain
+package de.logerbyte.moneyminder.domain.android
 
 import android.content.Context
 import android.widget.Toast
