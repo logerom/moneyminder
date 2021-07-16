@@ -11,6 +11,8 @@ import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewType
 import de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem
 import de.logerbyte.moneyminder.databinding.AdapterEntryBinding
 import de.logerbyte.moneyminder.databinding.SummaryLineBinding
+import de.logerbyte.moneyminder.domain.android.setVisibilityWithFeature
+import de.logerbyte.moneyminder.entities.FeatureFlag
 
 
 /**
@@ -66,6 +68,8 @@ class CashAdapter(val adapterCallbackV1: AdapterCallbackV1) : RecyclerView.Adapt
     inner class MonthExpenseViewHolder(val binding: SummaryLineBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(viewItem: SummaryMonthViewItem){
             binding.viewItem = viewItem
+            setVisibilityWithFeature(binding.llBudget, FeatureFlag.BUDGET)
+            setVisibilityWithFeature(binding.llSaving, FeatureFlag.BUDGET)
         }
     }
 }

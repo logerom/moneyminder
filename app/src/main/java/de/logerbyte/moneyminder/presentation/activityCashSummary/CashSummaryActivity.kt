@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -18,6 +19,7 @@ import de.logerbyte.moneyminder.entities.data.viewData.CashViewItem
 import de.logerbyte.moneyminder.entities.data.viewData.ExpenseListViewItem
 import de.logerbyte.moneyminder.databinding.ActivityMainBinding
 import de.logerbyte.moneyminder.databinding.MenuSettingsBinding
+import de.logerbyte.moneyminder.domain.android.setVisibilityWithFeature
 import de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem
 import de.logerbyte.moneyminder.presentation.BaseFragment
 import de.logerbyte.moneyminder.presentation.cashadapter.AdapterCallbackV1
@@ -26,6 +28,8 @@ import de.logerbyte.moneyminder.presentation.dialog.dialogDelete.DeleteDialogFra
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 import javax.inject.Named
+import de.logerbyte.moneyminder.entities.FeatureFlag
+import kotlinx.android.synthetic.main.summary_line.*
 
 class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSummaryViewListener {
     private lateinit var settingsWindowDelegator: SettingsPopupWindow
@@ -46,11 +50,17 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindContentView()
+        viewBinding()
+        handleFeatureFlag()
         initActionBar()
         initPopUp()
         setUpRecyclerView()
         initLiveData()
+    }
+
+    private fun handleFeatureFlag() {
+        setVisibilityWithFeature(inc_summary_line, FeatureFlag.BUDGET)
+        setVisibilityWithFeature(seperate_line, FeatureFlag.BUDGET)
     }
 
     private fun setUpRecyclerView() {
@@ -94,7 +104,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.meun_activity_main, menu)
-        return true
+        return FeatureFlag.BUDGET
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -117,7 +127,7 @@ class CashSummaryActivity : DaggerAppCompatActivity(), AdapterCallbackV1, CashSu
         }
     }
 
-    private fun bindContentView() {
+    private fun viewBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 //        Todo x: set ViewItemDisplayModel
         val summaryMonthViewItem = SummaryMonthViewItem(0.00, 0.00, 0,0.00)

@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.ObservableField
 import de.logerbyte.moneyminder.BuildConfig
+import de.logerbyte.moneyminder.entities.FeatureFlag
 import de.logerbyte.moneyminder.entities.util.DigitUtil
 
 data class CashViewItem(
@@ -25,11 +26,11 @@ data class CashViewItem(
     val cashDateField = ObservableField<String>()
 
     init {
-        cashDateField.set(if(BuildConfig.DEBUG && cashDate.isBlank()) "11.11.11" else cashDate)
-        cashNameField.set(if(BuildConfig.DEBUG && cashName.isBlank()) "Burger" else cashName)
-        cashAmountField.set(if(BuildConfig.DEBUG && cashAmount.isBlank()) "1,11" else cashAmount)
-        cashCategoryField.set(if(BuildConfig.DEBUG && cashCategory.isBlank()) "essen" else cashCategory)
-        cashPersonField.set(if(BuildConfig.DEBUG && cashPerson.isBlank()) "1" else cashPerson)
+        cashDateField.set(if(FeatureFlag.CASH_ITEM_FILLED && cashDate.isBlank()) "11.11.11" else cashDate)
+        cashNameField.set(if(FeatureFlag.CASH_ITEM_FILLED && cashName.isBlank()) "Burger" else cashName)
+        cashAmountField.set(if(FeatureFlag.CASH_ITEM_FILLED && cashAmount.isBlank()) "1,11" else cashAmount)
+        cashCategoryField.set(if(FeatureFlag.CASH_ITEM_FILLED && cashCategory.isBlank()) "essen" else cashCategory)
+        cashPersonField.set(if(FeatureFlag.CASH_ITEM_FILLED && cashPerson.isBlank()) "1" else cashPerson)
     }
 
     private fun calculatePortion(): String {

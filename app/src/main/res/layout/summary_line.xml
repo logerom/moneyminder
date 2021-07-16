@@ -8,6 +8,8 @@
             type="de.logerbyte.moneyminder.entities.data.viewData.SummaryMonthViewItem" />
 
         <import type="de.logerbyte.moneyminder.entities.util.DigitUtil"/>
+        <import type="de.logerbyte.moneyminder.entities.FeatureFlag"/>
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
@@ -17,6 +19,7 @@
         android:weightSum="4">
 
         <LinearLayout
+            android:id="@+id/ll_budget"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -76,6 +79,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_saving"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
