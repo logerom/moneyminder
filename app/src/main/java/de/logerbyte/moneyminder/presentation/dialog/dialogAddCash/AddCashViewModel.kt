@@ -32,6 +32,6 @@ class AddCashViewModel @Inject constructor(
         verification.isDateTextCorrect(cashViewItem.cashDateField.get().textOrBlank())
 
     override fun onClickCancel() {
-        TODO("Not yet implemented")
+        _closeDialog.value = true
     }
 }

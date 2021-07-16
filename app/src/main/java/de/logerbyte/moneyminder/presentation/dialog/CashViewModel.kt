@@ -17,8 +17,8 @@ open class CashViewModel(
     var cashViewItem = CashViewItem()
     private val _categoryList = MutableLiveData<List<String>>()
     val categoryList: LiveData<List<String>> = _categoryList
-    private var _isSaved  = MutableLiveData<Boolean>()
-    var isSaved: LiveData<Boolean> = _isSaved
+    protected var _closeDialog  = MutableLiveData<Boolean>()
+    var closeDialog: LiveData<Boolean> = _closeDialog
 
     init {
         loadViewCategories()
@@ -35,6 +35,6 @@ open class CashViewModel(
         expenseRepo
             .insertCashItemIntoDB(expenseMapper.map(cashViewItem))
             .subscribeOn(Schedulers.io())
-            .subscribe(Consumer { _isSaved.postValue(true)})
+            .subscribe(Consumer { _closeDialog.postValue(true)})
     }
 }

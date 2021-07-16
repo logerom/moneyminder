@@ -61,7 +61,7 @@ class CashAdapter(val adapterCallbackV1: AdapterCallbackV1) : RecyclerView.Adapt
         fun bind(viewItem: CashViewItem){
             binding.vmCashItem = viewItem
             binding.buDelete.setOnClickListener {adapterCallbackV1.onDeleteItemClicked(viewItem) }
-            binding.llItem.setOnClickListener { adapterCallbackV1.onItemClicked(viewItem) }
+            if(FeatureFlag.EDIT_CASH) binding.llItem.setOnClickListener { adapterCallbackV1.onItemClicked(viewItem) }
         }
     }
 
